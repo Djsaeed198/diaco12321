@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# موتورهای جستجوی هوش مصنوعی و کراولرهای بین‌المللی ۲۰۲۶
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://www.dia-co.ir/sitemap.xml

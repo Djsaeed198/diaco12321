@@ -1,0 +1,220 @@
+import React, { useState } from 'react';
+import {
+  CheckCircle2,
+  Clock,
+  ArrowRight,
+  ArrowLeft,
+  ChevronDown,
+  PhoneCall,
+  Check,
+  Copy,
+  Sparkles,
+  Search,
+  ShieldCheck,
+  Building2,
+  Scale,
+  Award,
+  Euro,
+  FileCheck2,
+} from 'lucide-react';
+import { useSeo } from '../../../hooks/useSeo';
+
+interface Props {
+  onBackToHome: () => void;
+  onOpenAssessment: () => void;
+  onNavigateToCountry?: (countryKey: string) => void;
+}
+
+export const JobSeekerNorwayPage: React.FC<Props> = ({
+  onBackToHome,
+  onOpenAssessment,
+}) => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  useSeo({
+    title: 'ویزای جستجوی کار نروژ ۲۰۲۶ | اقامت ۶ ماهه کاریابی اسکاندیناوی (Skilled Job Seeker)',
+    description:
+      'راهنمای کامل ویزای کاریابی نروژ ۲۰۲۶ برای نیروهای ماهر (Skilled Worker Job Seeker)؛ مدارک دانشگاهی مورد تایید اداره مهاجرت نروژ (UDI)، اثبات تمکن مالی کرون نروژ و تبدیل به اقامت دائم کاری با دیاکو.',
+    canonical: '/guides/jobseeker-norway',
+    ogType: 'article',
+    ogImage:
+      'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
+    keywords: [
+      'ویزای جستجوی کار نروژ',
+      'کاریابی در نروژ ۲۰۲۶',
+      'Norway Skilled Job Seeker Visa',
+      'اداره مهاجرت نروژ UDI',
+      'معادل سازی مدارک نروژ NOKUT',
+      'اقامت کاری اسلو نروژ',
+    ],
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          '@id': 'https://www.dia-co.ir/guides/jobseeker-norway#article',
+          headline: 'راهنمای جامع ویزای جستجوی کار نروژ ۲۰۲۶ ویژه نیروهای متخصص',
+          description:
+            'بررسی قوانین اداره مهاجرت نروژ (UDI) برای متقاضیان ماهر، شروط تمکن مالی ۶ ماهه به کرون نروژ (NOK) و فرآیند تبدیل به اقامت کاری پایدار پس از اخذ جاب‌آفر.',
+          image: [
+            'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
+          ],
+          author: {
+            '@type': 'Organization',
+            name: 'هلدینگ مهاجرتی دیاکو',
+            url: 'https://www.dia-co.ir/',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'هلدینگ مهاجرتی دیاکو',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://www.dia-co.ir/logo.png',
+            },
+          },
+          datePublished: '2026-01-01',
+          dateModified: '2026-10-25',
+          inLanguage: 'fa-IR',
+        },
+      ],
+    },
+  });
+
+  return (
+    <div className="min-h-screen bg-[#061a21] text-white pt-24 pb-16 font-sans" dir="rtl">
+      <div className="container mx-auto px-4 md:px-8 mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <button
+            type="button"
+            onClick={onBackToHome}
+            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-amber-400 hover:text-amber-300 transition cursor-pointer"
+          >
+            <ArrowRight className="h-4 w-4" />
+            بازگشت به صفحه اصلی
+          </button>
+          <div className="flex items-center gap-2 text-xs text-slate-300">
+            <span>خدمات مهاجرتی دیاکو</span>
+            <span>/</span>
+            <span>ویزای جستجوی کار</span>
+            <span>/</span>
+            <span className="text-amber-300 font-bold">ویزای جستجوی کار نروژ</span>
+          </div>
+        </div>
+      </div>
+
+      <section className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-xs font-bold text-blue-300 mb-4">
+              <Search className="h-4 w-4 text-blue-400" />
+              UDI Skilled Worker — ویزای کاریابی نروژ ۲۰۲۶
+            </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-white mb-6">
+              ویزای جستجوی کار نروژ ۲۰۲۶{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-300 to-blue-400">
+                (Norway Job Seeker)
+              </span>
+            </h1>
+            <p className="text-sm md:text-base text-slate-200 leading-relaxed mb-8 text-justify">
+              نروژ با درآمد سرانه فوق‌العاده بالا، سطح رفاه بی‌نظیر و اقتصاد متکی بر نفت، گاز، صنایع دریایی و فناوری،
+              یکی از جذاب‌ترین مقاصد برای مهندسان، متخصصان IT و کادر فنی است. ویزای جستجوی کار نروژ به فارغ‌التحصیلان
+              دانشگاهی واجد شرایط اجازه می‌دهد به مدت ۶ ماه در خاک نروژ اقامت داشته و مستقیماً با کارفرمایان اسلو، برگن
+              و استاوانگر مصاحبه کنند.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
+                <div className="text-lg font-black text-amber-300">۶ ماه اقامت</div>
+                <div className="text-[11px] text-slate-300 mt-1">فرصت جستجوی مستقیم در نروژ</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
+                <div className="text-lg font-black text-blue-300">حقوق‌های بالا</div>
+                <div className="text-[11px] text-slate-300 mt-1">بالاترین میانگین دستمزد اروپا</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-center">
+                <div className="text-lg font-black text-emerald-400">زبان انگلیسی</div>
+                <div className="text-[11px] text-slate-300 mt-1">رواج کامل انگلیسی در شرکت‌ها</div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={onOpenAssessment}
+                className="rounded-2xl bg-[#f5a623] px-6 py-3.5 text-xs sm:text-sm font-black text-[#082833] shadow-glow hover:brightness-110 transition cursor-pointer"
+              >
+                ارزیابی شرایط کاریابی در نروژ
+              </button>
+              <a
+                href="https://wa.me/989197340829"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-xs sm:text-sm font-bold text-white hover:bg-white/10 transition inline-flex items-center gap-2"
+              >
+                <PhoneCall className="h-4 w-4 text-emerald-400" />
+                مشاوره مستقیم با وکلای دیاکو
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80"
+                alt="نروژ اسلو ویزای جستجوی کار"
+                className="w-full h-80 sm:h-96 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-transparent to-transparent" />
+              <div className="absolute bottom-4 right-4 left-4 rounded-2xl bg-black/70 backdrop-blur-md p-4 border border-white/10">
+                <div className="flex items-center gap-2 text-xs font-bold text-blue-300">
+                  <Building2 className="h-4 w-4" />
+                  اداره مهاجرت نروژ (UDI)
+                </div>
+                <p className="text-[11px] text-slate-300 mt-1">
+                  تاییدیه ارزیابی مدارک توسط مرکز HK-dir (سابقاً NOKUT) و اثبات تمکن مالی معادل حدود ۱۳۰,۰۰۰ کرون در حساب بانکی
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* پرسش‌های متداول */}
+      <section className="container mx-auto px-4 md:px-8 mb-16">
+        <h2 className="text-xl md:text-2xl font-black text-white mb-6 text-center">
+          پرسش‌های متداول کاریابی نروژ
+        </h2>
+        <div className="max-w-3xl mx-auto space-y-3">
+          {[
+            {
+              q: 'آیا دارندگان ویزای جستجوی کار نروژ اجازه کار پاره‌وقت دارند؟',
+              a: 'خیر. این ویزا صرفاً برای شرکت در جلسات مصاحبه و یافتن کار تمام‌وقت است و دارنده آن مجاز به اشتغال موقت در طول این ۶ ماه نیست.',
+            },
+            {
+              q: 'آیا پس از یافتن جاب‌آفر می‌توان در نروژ ماندگار شد؟',
+              a: 'بله. با دریافت پیشنهاد شغلی تمام‌وقت متناسب با مدرک تحصیلی و حداقل حقوق مصوب، پرونده بلافاصله در پلیس نروژ به اقامت کاری نیروی ماهر (Skilled Worker) تبدیل می‌شود.',
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                className="w-full flex items-center justify-between p-4 text-right text-xs md:text-sm font-bold text-white hover:text-amber-300 transition cursor-pointer"
+              >
+                <span>{item.q}</span>
+                <ChevronDown className={`h-4 w-4 ${openFaq === idx ? 'rotate-180 text-amber-400' : ''}`} />
+              </button>
+              {openFaq === idx && (
+                <div className="p-4 pt-0 text-xs md:text-sm text-slate-300 leading-relaxed border-t border-white/5">
+                  {item.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default JobSeekerNorwayPage;

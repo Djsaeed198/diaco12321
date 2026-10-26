@@ -1,0 +1,209 @@
+{
+  "$schema": "https://diaco-immigration.example/schemas/app-config.v1.json",
+  "version": "2.0.0",
+  "id": "diaco-immigration-portal",
+  "name": "Remix هلدینگ بین‌المللی دیاکو",
+  "nameEn": "Diaco Immigration Holding",
+  "shortName": "دیاکو | Diaco",
+  "slug": "diaco-immigration",
+  "type": "web-application",
+  "category": "immigration-services",
+  "description": "پرتال جامع و سامانه ارزیابی هوشمند مهاجرت به اروپا و اتریش - هلدینگ بین‌المللی دیاکو. ارزیابی تخصصی تمکن مالی، ویزای کاری، تحصیلی و سرمایه‌گذاری با تکیه بر مشاوران خبره و هوش مصنوعی.",
+  "descriptionEn": "Diaco International Immigration Holding — Comprehensive portal and smart assessment platform for European and Austrian immigration, including financial, work, study, and investment pathways.",
+  "slogan": "مسیر مطمئن مهاجرت به اروپا",
+  "sloganEn": "Your trusted path to Europe",
+  "language": {
+    "default": "fa",
+    "direction": "rtl",
+    "supported": [
+      "fa",
+      "en"
+    ],
+    "locales": {
+      "fa": {
+        "label": "فارسی",
+        "dir": "rtl",
+        "font": "Vazirmatn"
+      },
+      "en": {
+        "label": "English",
+        "dir": "ltr",
+        "font": "Inter"
+      }
+    }
+  },
+  "theme": {
+    "colorScheme": "dark",
+    "primaryColor": "#f5a623",
+    "backgroundColor": "#0b2933",
+    "accentColor": "#0e3846"
+  },
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "optionalCapabilities": [
+    "MAJOR_CAPABILITY_CLIENT_SIDE_STORAGE",
+    "MAJOR_CAPABILITY_FILE_UPLOAD",
+    "MAJOR_CAPABILITY_PDF_EXPORT",
+    "MAJOR_CAPABILITY_MULTI_LANGUAGE",
+    "MAJOR_CAPABILITY_PWA_OFFLINE"
+  ],
+  "features": {
+    "smartAssessment": {
+      "enabled": true,
+      "paths": [
+        "financial",
+        "work",
+        "study",
+        "investment"
+      ],
+      "aiModel": "gemini-2.5-pro",
+      "language": [
+        "fa",
+        "en",
+        "de"
+      ]
+    },
+    "consultation": {
+      "enabled": true,
+      "channels": [
+        "online",
+        "phone",
+        "in-person"
+      ]
+    },
+    "documentManagement": {
+      "enabled": true,
+      "maxFileSizeMB": 20,
+      "allowedTypes": [
+        "pdf",
+        "jpg",
+        "png",
+        "docx"
+      ]
+    },
+    "caseTracking": {
+      "enabled": true,
+      "realtime": true
+    },
+    "analytics": {
+      "enabled": true,
+      "provider": "internal",
+      "privacyFirst": true
+    }
+  },
+  "seo": {
+    "title": "هلدینگ بین‌المللی دیاکو | مهاجرت هوشمند به اروپا و اتریش",
+    "titleTemplate": "%s | دیاکو",
+    "keywords": [
+      "مهاجرت به اتریش",
+      "ویزای کاری اروپا",
+      "تمکن مالی",
+      "مهاجرت تحصیلی",
+      "سرمایه‌گذاری در اروپا",
+      "هلدینگ دیاکو",
+      "Austria immigration",
+      "Europe work visa",
+      "Diaco Holding"
+    ],
+    "canonicalUrl": "https://www.dia-co.ir/",
+    "robots": {
+      "index": true,
+      "follow": true,
+      "maxSnippet": -1,
+      "maxImagePreview": "large"
+    },
+    "openGraph": {
+      "type": "website",
+      "siteName": "هلدینگ مهاجرتی دیاکو",
+      "locale": "fa_IR",
+      "alternateLocale": [
+        "en_US",
+        "de_AT"
+      ],
+      "image": {
+        "url": "https://www.dia-co.ir/og-cover.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "هلدینگ مهاجرتی دیاکو"
+      }
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "site": "@diaco_holding"
+    }
+  },
+  "organization": {
+    "legalName": "هلدینگ مهاجرتی دیاکو",
+    "legalNameEn": "Diaco Immigration Holding",
+    "foundingDate": "2015",
+    "logo": "https://www.dia-co.ir/logo.png",
+    "contact": {
+      "email": "info@dia-co.ir",
+      "phone": "+98-21-91693955",
+      "address": {
+        "country": "AT",
+        "city": "Vienna",
+        "street": "—"
+      }
+    },
+    "social": {
+      "instagram": "https://instagram.com/diaco_holding",
+      "linkedin": "https://linkedin.com/company/diaco-holding",
+      "telegram": "https://t.me/diaco_holding",
+      "youtube": "https://youtube.com/@diaco_holding"
+    }
+  },
+  "accessibility": {
+    "wcagLevel": "AA",
+    "supportsReducedMotion": true,
+    "supportsHighContrast": true,
+    "keyboardNavigable": true
+  },
+  "security": {
+    "httpsOnly": true,
+    "contentSecurityPolicy": "default-src \u0027self\u0027; img-src \u0027self\u0027 data: https:; script-src \u0027self\u0027 \u0027wasm-unsafe-eval\u0027",
+    "dataPrivacy": {
+      "gdprCompliant": true,
+      "cookieConsent": true,
+      "dataRetentionDays": 365
+    }
+  },
+  "performance": {
+    "preferredRendering": "server-first",
+    "imageOptimization": true,
+    "lazyLoadBelowFold": true,
+    "cacheStrategy": "stale-while-revalidate"
+  },
+  "integrations": {
+    "analytics": [
+      "google-analytics-4",
+      "plausible"
+    ],
+    "crm": "hubspot",
+    "payments": [
+      "stripe",
+      "zarinpal"
+    ],
+    "calendar": "google-calendar",
+    "notifications": [
+      "email",
+      "sms",
+      "telegram-bot"
+    ]
+  },
+  "metadata": {
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2026-09-29T00:00:00Z",
+    "author": "Diaco Tech Team",
+    "license": "proprietary",
+    "tags": [
+      "immigration",
+      "austria",
+      "europe",
+      "legal-tech",
+      "ai-assessment"
+    ]
+  }
+}
