@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import {
   CheckCircle2, Clock, ArrowRight, ChevronDown, PhoneCall,
@@ -406,7 +407,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
 
               <div className="lg:col-span-5">
                 <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                  <img
+                  <OptimizedImage
                     src="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=80"
                     srcSet="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=80 1200w"
                     sizes="(max-width: 768px) 100vw, 500px"
@@ -505,7 +506,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             <div className="rounded-3xl border border-white/10 bg-white/[0.03] overflow-hidden">
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="relative h-64 md:h-auto overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={activeCityData.image}
                     alt={activeCityData.alt}
                     width={800} height={600} loading="lazy" decoding="async"
@@ -590,7 +591,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             </p>
 
             <figure className="overflow-hidden rounded-2xl border border-white/10 mb-6">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80"
                 alt="کلاس درس زبان انگلیسی در هلند — دوره فاندیشن و آمادگی آیلتس"
                 width={1200} height={675} loading="lazy" decoding="async"
@@ -640,7 +641,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             </p>
 
             <figure className="overflow-hidden rounded-2xl border border-white/10 mb-6">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
                 alt="ویزای MVV هلند — مدارک و تمکن مالی IND ۲۰۲۶"
                 width={1200} height={675} loading="lazy" decoding="async"
@@ -683,7 +684,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             </h2>
 
             <figure className="overflow-hidden rounded-2xl border border-white/10 mb-6">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80"
                 alt="کار دانشجویی در هلند — کافه و فروشگاه، ۱۶ ساعت در هفته"
                 width={1200} height={675} loading="lazy" decoding="async"
@@ -714,7 +715,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             </h2>
 
             <figure className="overflow-hidden rounded-2xl border border-white/10 mb-6">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80"
                 alt="فارغ‌التحصیلان هلند — Zoekjaar و مسیر کاریابی"
                 width={1200} height={675} loading="lazy" decoding="async"
@@ -757,7 +758,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
             <div className="rounded-3xl border border-orange-400/20 bg-orange-500/5 p-6 md:p-8">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-orange-400/30 shrink-0">
-                  <img
+                  <OptimizedImage
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
                     alt="سارا — دانشجوی ایرانی در هلند، داستان واقعی دوره زبان"
                     width={200} height={200} loading="lazy" decoding="async"

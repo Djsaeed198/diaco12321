@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -427,7 +428,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
             {/* تصویر هیرو — میلان */}
             <div className="lg:col-span-5">
               <figure className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-2xl aspect-[16/9] w-full">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -874,7 +875,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
               </p>
 
               <figure className="mt-5 overflow-hidden rounded-2xl border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 800px"

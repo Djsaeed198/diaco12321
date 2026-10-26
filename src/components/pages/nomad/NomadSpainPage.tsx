@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -271,7 +272,7 @@ export const NomadSpainPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1000&q=80"
                 alt="دیجیتال نوماد اسپانیا - کار از راه دور در بارسلونا با لپ‌تاپ و نمای دریای مدیترانه"
                 width={1000}
@@ -354,7 +355,7 @@ export const NomadSpainPage: React.FC<Props> = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
                 alt="حداقل درآمد ویزای دیجیتال نوماد اسپانیا ۲۰۲۶ - ماشین‌حساب و اسناد مالی به یورو"
                 width={800}
@@ -379,7 +380,7 @@ export const NomadSpainPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-indigo-950/40 via-slate-900/60 to-[#061a21] border border-indigo-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                 alt="رژیم مالیاتی بکهام اسپانیا - فرم‌های مالیاتی Modelo 149 و نرخ ۲۴ درصد"
                 width={800}
@@ -470,7 +471,7 @@ export const NomadSpainPage: React.FC<Props> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
                 alt="درخواست اقامت UGE مادرید - ساختمان دولتی و فرآیند اداری ویزای نوماد اسپانیا"
                 width={800}
@@ -481,7 +482,7 @@ export const NomadSpainPage: React.FC<Props> = ({
               />
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
                 alt="مدارک ویزای دیجیتال نوماد اسپانیا - پاسپورت و فرم‌های رسمی"
                 width={800}
@@ -588,7 +589,7 @@ export const NomadSpainPage: React.FC<Props> = ({
               </ul>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80"
                 alt="الحاق خانواده ویزای دیجیتال نوماد اسپانیا - خانواده در ساحل اسپانیا"
                 width={800}

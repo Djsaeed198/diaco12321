@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React from 'react';
 import {
   CheckCircle2,
@@ -126,7 +127,7 @@ export const BusinessNetherlandsPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <div className="relative mx-auto aspect-[16/9] w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1000&q=80"
                   srcSet="https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=600&q=75 600w, https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1000&q=80 1000w"
                   sizes="(max-width: 768px) 100vw, 500px"

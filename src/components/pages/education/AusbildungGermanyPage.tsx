@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -481,7 +482,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -720,7 +721,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — اسناد و برنامه‌ریزی مالی */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"
@@ -829,7 +830,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — زندگی در آلمان */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"

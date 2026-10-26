@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -317,7 +318,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1000&q=80"
                 alt="ویزای هنرمندان برلین ۲۰۲۶ - حقیقت سخت‌گیری LEA و مسیر واقعی"
                 width={1000}
@@ -470,7 +471,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                   alt="هزینه واقعی ویزای هنرمندان برلین - درآمد €۱,۱۰۰ و پس‌انداز €۹,۰۰۰"
                   width={800}
@@ -520,7 +521,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-purple-950/40 via-slate-900/60 to-[#061a21] border border-purple-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80"
                 alt="داستان واقعی هنرمند آمریکایی در برلین - از نیویورک تا Neukölln"
                 width={800}
@@ -631,7 +632,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
                 alt="KSK آلمان ۲۰۲۶ - نرخ ۴.۹ درصد و پوشش ۵۰ درصد بیمه هنرمندان"
                 width={800}

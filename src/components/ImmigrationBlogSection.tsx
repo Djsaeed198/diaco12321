@@ -1,3 +1,4 @@
+import OptimizedImage from './OptimizedImage';
 import React, { useState, useMemo, useEffect, useRef, useId } from 'react';
 import {
   ShieldCheck, CheckCircle2, Scale, Lock, UserCheck,
@@ -1780,7 +1781,7 @@ const categories = [
             >
               {/* Featured Image */}
               <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
-                <img
+                <OptimizedImage
                   src={post.image.src}
                   alt={post.image.alt}
                   width={post.image.width}

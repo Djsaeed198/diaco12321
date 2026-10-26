@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -449,7 +450,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <figure className="relative mx-auto aspect-[16/9] w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80"
                   srcSet="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=75 600w, https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80 1000w"
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -699,7 +700,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — کارائیب */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"
@@ -820,7 +821,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — پاسپورت و سفر */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1523592121529-f6dde35f079e?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"

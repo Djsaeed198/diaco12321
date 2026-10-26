@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -328,7 +329,7 @@ export const SpainBlueCardPage: React.FC<Props> = ({
             {/* تصویر بهینه‌شده LCP با فچ بااولویت بالا و نسبت ابعاد صریح (CLS: 0) */}
             <div className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-2xl aspect-[16/9] w-full">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 500px"

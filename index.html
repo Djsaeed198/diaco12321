@@ -281,17 +281,11 @@
     <!-- ==========================================================
          5) 性能优化：字体预加载、图片优先、Core Web Vitals
          ========================================================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://www.dia-co.ir" />
-
-    <!-- 字体：预加载+异步加载，避免FOIT -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" />
-    </noscript>
+    <link rel="preload" as="font" href="/fonts/vazirmatn-v1-variable.ttf" type="font/ttf" crossorigin />
+    <link rel="preload" as="image"
+      href="/.netlify/images?url=%2Fimages%2Fbanner-diaco-1790696346659.jpg&amp;w=1200&amp;fm=avif&amp;q=80"
+      imagesrcset="/.netlify/images?url=%2Fimages%2Fbanner-diaco-1790696346659.jpg&amp;w=400&amp;fm=avif&amp;q=80 400w, /.netlify/images?url=%2Fimages%2Fbanner-diaco-1790696346659.jpg&amp;w=800&amp;fm=avif&amp;q=80 800w, /.netlify/images?url=%2Fimages%2Fbanner-diaco-1790696346659.jpg&amp;w=1200&amp;fm=avif&amp;q=80 1200w"
+      imagesizes="(max-width: 1280px) 100vw, 1280px" fetchpriority="high" />
 
     <!-- 图标与清单 -->
     <link rel="icon" href="/favicon.ico" sizes="any" />

@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   Calendar,
@@ -329,7 +330,7 @@ export const BlogPostPage: React.FC<Props> = ({
         <div className="container mx-auto px-4 md:px-8 max-w-4xl space-y-8">
           {/* تصویر شاخص */}
           <div className="rounded-3xl overflow-hidden border border-white/15 shadow-2xl relative">
-            <img
+            <OptimizedImage
               src={post.image.src}
               alt={post.image.alt}
               width={post.image.width}
@@ -512,8 +513,11 @@ export const BlogPostPage: React.FC<Props> = ({
                     className="group rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
                   >
                     <div className="aspect-[16/9] overflow-hidden bg-black/40">
-                      <img
+                      <OptimizedImage
                         src={rPost.image.src}
+                    width={rPost.image.width}
+                    height={rPost.image.height}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                         alt={rPost.image.alt}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"

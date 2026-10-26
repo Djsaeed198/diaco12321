@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/vazirmatn-v1-variable.ttf') format('truetype');
+}
+
 /* ============================================
    🎨 تعریف توکن‌های طراحی (Tailwind v4)
    ============================================ */

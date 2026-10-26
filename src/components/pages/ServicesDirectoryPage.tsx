@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   Briefcase,
@@ -364,7 +365,7 @@ export const ServicesDirectoryPage: React.FC<Props> = ({
             >
               <div>
                 <div className="relative aspect-[16/9] overflow-hidden bg-slate-800">
-                  <img
+                  <OptimizedImage
                     src={service.image}
                     alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

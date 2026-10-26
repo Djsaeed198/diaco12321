@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -338,7 +339,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
                 alt="دانشگاه علوم پزشکی وین MedUni Wien - تحصیل پزشکی در اتریش"
                 width={1000}
@@ -510,7 +511,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                   alt="ساختار آزمون MedAT ۲۰۲۶ - منابع BMS KFF TV SEK برای آمادگی"
                   width={800}
@@ -549,7 +550,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-sky-950/40 via-slate-900/60 to-[#061a21] border border-sky-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
                 alt="تقویم ثبت‌نام و آزمون MedAT ۲۰۲۶ - برنامه‌ریزی و مدارک"
                 width={800}
@@ -650,7 +651,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
                   alt="شهریه تحصیل پزشکی در اتریش برای دانشجویان غیر اتحادیه اروپا - €۷۵۲.۹۲ در ترم"
                   width={800}
@@ -684,7 +685,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
         <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
                 alt="دوره آمادگی MedAT در وین - گروه مطالعه و منابع آزمون پزشکی اتریش"
                 width={800}

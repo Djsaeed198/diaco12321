@@ -1,3 +1,4 @@
+import OptimizedImage from './OptimizedImage';
 import React, { useState } from 'react';
 import logoImg from '../assets/images/diaco-small.png';
 
@@ -68,8 +69,11 @@ export const DiacoLogo: React.FC<Props> = ({
   }
 
   return (
-    <img
+    <OptimizedImage
       src={logoImg}
+      sizes={`${size}px`}
+      loading="eager"
+      fetchPriority="auto"
       alt="لوگوی هلدینگ مهاجرتی دیاکو"
       width={size}
       height={size}

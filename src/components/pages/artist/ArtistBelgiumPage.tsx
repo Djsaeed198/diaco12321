@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -315,7 +316,7 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1559113202-c916b8e44373?auto=format&fit=crop&w=1000&q=80"
                 alt="هنرمندان بلژیک Kunstwerkattest و Professional Card - بروکسل"
                 width={1000}
@@ -472,7 +473,7 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                 alt="آستانه درآمد Kunstwerkattest بلژیک €۱۳,۵۴۶ در ۵ سال"
                 width={800}
@@ -496,7 +497,7 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-sky-950/40 via-slate-900/60 to-[#061a21] border border-sky-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80"
                 alt="هنرمندان表演 بلژیک - حداقل حقوق €۳,۰۸۶ در ماه ۲۰۲۶"
                 width={800}

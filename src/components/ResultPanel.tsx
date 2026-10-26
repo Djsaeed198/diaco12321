@@ -1,6 +1,4 @@
 import React, { useState, useRef } from 'react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas-pro';
 import type { ImmigrationPlan, UserProfile } from '../types';
 import { toPersianDigits } from '../utils/persian';
 import DynamicDocumentChecklist from './DynamicDocumentChecklist';
@@ -205,6 +203,11 @@ export const ResultPanel: React.FC<Props> = ({ plan, profile, onRestart }) => {
     try {
       setIsGeneratingPdf(true);
       setPdfSuccess(false);
+
+      const [{ default: jsPDF }, { default: html2canvas }] = await Promise.all([
+        import('jspdf'),
+        import('html2canvas-pro'),
+      ]);
 
       // ایجاد رندرینگ دقیق از المان گزارش
       const canvas = await html2canvas(reportRef.current, {
