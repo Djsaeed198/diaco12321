@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2, Clock, ArrowRight, ChevronDown, PhoneCall,
@@ -265,7 +266,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1000&q=80" alt="ویزای هنرمندان اسپانیا ۲۰۲۶ - تفاوت UGE و Autónomo" width={1000} height={750} loading="eager" decoding="async" fetchPriority="high" className="w-full h-80 sm:h-96 object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1000&q=80" alt="ویزای هنرمندان اسپانیا ۲۰۲۶ - تفاوت UGE و Autónomo" width={1000} height={750} loading="eager" decoding="async" fetchPriority="high" className="w-full h-80 sm:h-96 object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-transparent to-transparent" />
               <div className="absolute bottom-4 right-4 left-4 rounded-2xl bg-black/70 backdrop-blur-md p-4 border border-white/10">
                 <div className="flex items-center gap-2 text-xs font-bold text-orange-300">
@@ -378,7 +379,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="آستانه مالی ویزای هنرمندان اسپانیا ۲۰۲۶ - IPREM ۶۰۰ یورو" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+                <OptimizedImage src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="آستانه مالی ویزای هنرمندان اسپانیا ۲۰۲۶ - IPREM ۶۰۰ یورو" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
                 <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">IPREM ۲۰۲۶: €۶۰۰/ماه | UGE: ۱۵۰٪ | Autónomo: ۴۰۰٪</div>
               </div>
               <div className="p-4 rounded-xl bg-white/5 border border-white/10">
@@ -399,7 +400,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-orange-950/40 via-slate-900/60 to-[#061a21] border border-orange-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80" alt="داستان واقعی هنرمند ایرانی در اسپانیا - انتخاب مسیر اشتباه ویزا" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=800&q=80" alt="داستان واقعی هنرمند ایرانی در اسپانیا - انتخاب مسیر اشتباه ویزا" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
               <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">تجربه واقعی: انتخاب مسیر اشتباه، ۶ ماه تأخیر</div>
             </div>
             <div className="order-1 lg:order-2">
@@ -437,7 +438,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
               <p className="text-[11px] text-slate-400 mt-3 leading-relaxed">* برخی تسهیلات Estatuto (مانند تعریف ۲۵ روزه) می‌تواند در ارزیابی پرونده UGE یا Autónomo کمک‌کننده باشد، اما مسیر قانونی را تغییر نمی‌دهد.</p>
             </div>
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Estatuto del Artista اسپانیا ۲۰۲۶ - چارچوب حمایتی نه ویزا" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80" alt="Estatuto del Artista اسپانیا ۲۰۲۶ - چارچوب حمایتی نه ویزا" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
               <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">Estatuto = حمایت اجتماعی | Ley 14/2013 و Autónomo = مسیر ویزا</div>
             </div>
           </div>

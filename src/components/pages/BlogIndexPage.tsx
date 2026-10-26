@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo, useEffect } from 'react';
 import {
   Search,
@@ -462,10 +463,13 @@ export const BlogIndexPage: React.FC<Props> = ({
                 </div>
 
                 <div className="lg:col-span-5 h-64 lg:h-full relative overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={featuredPost.image.src}
+                    width={featuredPost.image.width}
+                    height={featuredPost.image.height}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                     alt={featuredPost.image.alt}
-                    loading="lazy"
+                    loading="eager"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#0c3440] via-transparent to-transparent opacity-80" />
@@ -508,8 +512,11 @@ export const BlogIndexPage: React.FC<Props> = ({
               >
                 {/* تصویر شاخص با نشان‌ها */}
                 <div className="relative aspect-[16/9] overflow-hidden bg-slate-800">
-                  <img
+                  <OptimizedImage
                     src={post.image.src}
+                    width={post.image.width}
+                    height={post.image.height}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                     alt={post.image.alt}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

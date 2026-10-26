@@ -1,3 +1,4 @@
+import OptimizedImage from './OptimizedImage';
 import React, { useMemo, useState, useId } from 'react';
 import {
   ShieldCheck, CheckCircle2, Scale, Lock, UserCheck, ExternalLink,
@@ -400,7 +401,7 @@ export const VisaSuccessSection: React.FC = () => {
 
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden bg-[#0a2731]">
-                    <img
+                    <OptimizedImage
                       src={
                         COUNTRY_META[item.country]?.image ||
                         'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80'

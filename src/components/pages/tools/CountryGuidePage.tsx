@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   Globe2,
@@ -391,8 +392,10 @@ export const CountryGuidePage: React.FC<Props> = ({
         <div className="rounded-3xl bg-[#0a2731] border border-white/15 overflow-hidden shadow-2xl">
           {/* هدر کارت با تصویر بنر */}
           <div className="relative h-64 sm:h-80 w-full overflow-hidden">
-            <img
+            <OptimizedImage
               src={activeCountry.heroImage}
+              loading="eager"
+              fetchPriority="high"
               alt={activeCountry.name}
               className="w-full h-full object-cover"
             />

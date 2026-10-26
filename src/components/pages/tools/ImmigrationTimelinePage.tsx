@@ -1,3 +1,4 @@
+import { imageUrl } from '../../../utils/images';
 import React, { useState, useMemo } from 'react';
 import {
   Clock,
@@ -394,7 +395,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
               {/* پس‌زمینه هدر روش */}
               <div
                 className="absolute inset-0 opacity-10 bg-cover bg-center pointer-events-none"
-                style={{ backgroundImage: `url(${countryHeroImages[selectedCountryId]})` }}
+                style={{ backgroundImage: `url(${imageUrl(countryHeroImages[selectedCountryId], 1200)})` }}
               />
 
               <div className="relative z-10">

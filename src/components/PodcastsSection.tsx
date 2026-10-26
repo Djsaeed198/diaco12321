@@ -1,3 +1,4 @@
+import OptimizedImage from './OptimizedImage';
 import React, { useState, useMemo, useEffect, useRef, useCallback, useId } from 'react';
 import {
   Play, Pause, SkipBack, SkipForward, Headphones, Clock,
@@ -162,7 +163,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ ep, isPlaying, onTogglePlay }
     >
       {/* Cover */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
-        <img
+        <OptimizedImage
           src={ep.cover.src}
           alt={ep.cover.alt}
           width={ep.cover.width}
@@ -439,8 +440,11 @@ export const PodcastsSection: React.FC = () => {
           <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-amber-400/40 bg-gradient-to-l from-amber-400/15 via-amber-400/5 to-transparent p-3 backdrop-blur-sm">
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                <img
+                <OptimizedImage
                   src={playingEpisode.cover.src}
+                    width={playingEpisode.cover.width}
+                    height={playingEpisode.cover.height}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                   alt=""
                   className="h-full w-full object-cover"
                 />

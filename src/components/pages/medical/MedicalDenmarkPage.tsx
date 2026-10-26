@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -429,7 +430,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -651,7 +652,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — بیمارستان کپنهاگ */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"

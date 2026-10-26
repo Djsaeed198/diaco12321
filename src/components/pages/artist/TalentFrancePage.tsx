@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2, Clock, ArrowRight, ChevronDown, PhoneCall,
@@ -269,7 +270,7 @@ export const TalentFrancePage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=80" alt="پاسپورت تلنت هنری فرانسه ۲۰۲۶ - ۴ سال اقامت و تله ۵۰۷ ساعت" width={1000} height={750} loading="eager" decoding="async" fetchPriority="high" className="w-full h-80 sm:h-96 object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=80" alt="پاسپورت تلنت هنری فرانسه ۲۰۲۶ - ۴ سال اقامت و تله ۵۰۷ ساعت" width={1000} height={750} loading="eager" decoding="async" fetchPriority="high" className="w-full h-80 sm:h-96 object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-transparent to-transparent" />
               <div className="absolute bottom-4 right-4 left-4 rounded-2xl bg-black/70 backdrop-blur-md p-4 border border-white/10">
                 <div className="flex items-center gap-2 text-xs font-bold text-blue-300">
@@ -322,7 +323,7 @@ export const TalentFrancePage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-red-950/40 via-slate-900/60 to-[#061a21] border border-red-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="گروه Gangbé Brass Band بنین - اخراج از فرانسه با وجود پاسپورت تلنت ۲۰۲۶" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+              <OptimizedImage src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="گروه Gangbé Brass Band بنین - اخراج از فرانسه با وجود پاسپورت تلنت ۲۰۲۶" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
               <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">Gangbé Brass Band — ۶ موسیقیدان، ۴ سال در فرانسه، حالا OQTF</div>
             </div>
             <div className="order-1 lg:order-2">
@@ -371,7 +372,7 @@ export const TalentFrancePage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="آستانه درآمد پاسپورت تلنت فرانسه ۲۰۲۶ - ۷۰٪ SMIC = ۱۳۰۶ یورو" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+                <OptimizedImage src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="آستانه درآمد پاسپورت تلنت فرانسه ۲۰۲۶ - ۷۰٪ SMIC = ۱۳۰۶ یورو" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
                 <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">۷۰٪ SMIC = €۱,۳۰۶.۹۱/ماه | ۵۱٪ از هنر | هزینه €۳۵۰</div>
               </div>
               <div className="p-4 rounded-xl bg-white/5 border border-white/10">

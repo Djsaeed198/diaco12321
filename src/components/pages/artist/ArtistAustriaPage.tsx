@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -325,7 +326,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1000&q=80"
                 alt="اقامت هنرمندی اتریش NAG §43a - وین پایتخت هنر اروپا"
                 width={1000}
@@ -407,7 +408,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                   alt="قانون NAG §43a اتریش - شرایط اقامت هنرمندان ۲۰۲۶"
                   width={800}
@@ -444,7 +445,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
         <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
                 alt="حداقل درآمد اقامت هنرمندی اتریش €۱,۳۰۸ در ماه ۲۰۲۶"
                 width={800}
@@ -558,7 +559,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
                 alt="مدرک زبان A1 برای اقامت هنرمندی اتریش - شرایط豁免"
                 width={800}

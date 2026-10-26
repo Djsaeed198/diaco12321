@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   Newspaper,
@@ -345,7 +346,7 @@ export const VisaNewsPage: React.FC<Props> = ({
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                   {/* تصویر خبر */}
                   <div className="lg:col-span-4 h-52 lg:h-auto relative overflow-hidden bg-slate-800">
-                    <img
+                    <OptimizedImage
                       src={news.image}
                       alt={news.title}
                       className="w-full h-full object-cover"

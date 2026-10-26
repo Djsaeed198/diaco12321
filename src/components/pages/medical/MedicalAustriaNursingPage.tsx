@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -425,7 +426,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80"
                   srcSet="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80 1200w"
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -651,7 +652,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — محیط بیمارستان */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"
@@ -773,7 +774,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
 
             {/* تصویر ویژه — FH Campus Wien / آموزش */}
             <figure className="overflow-hidden rounded-2xl border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
                 srcSet="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80 600w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80 1200w"
                 sizes="(max-width: 768px) 100vw, 800px"

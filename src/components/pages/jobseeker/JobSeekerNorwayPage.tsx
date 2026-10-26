@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -159,7 +160,7 @@ export const JobSeekerNorwayPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage loading="eager" fetchPriority="high"
                 src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1000&q=80"
                 alt="نروژ اسلو ویزای جستجوی کار"
                 className="w-full h-80 sm:h-96 object-cover"

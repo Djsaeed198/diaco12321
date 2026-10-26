@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   Home,
@@ -536,7 +537,7 @@ export const AfterArrivalPage: React.FC<Props> = ({
             {/* تصویر شاخص و ویترین خدمات */}
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden border border-white/20 shadow-2xl group">
-                <img
+                <OptimizedImage
                   src={AFTER_ARRIVAL_IMAGES.hero.src}
                   alt={AFTER_ARRIVAL_IMAGES.hero.alt}
                   width={AFTER_ARRIVAL_IMAGES.hero.width}
@@ -662,7 +663,7 @@ export const AfterArrivalPage: React.FC<Props> = ({
               {/* تصویر مرتبط با رکن */}
               <div className="lg:col-span-5">
                 <div className="rounded-3xl overflow-hidden border border-white/20 shadow-xl relative group">
-                  <img
+                  <OptimizedImage
                     src={
                       selectedPillar.id === 'housing'
                         ? AFTER_ARRIVAL_IMAGES.housing.src

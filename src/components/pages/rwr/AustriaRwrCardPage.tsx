@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -314,7 +315,7 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-gradient-to-b from-[#0b2f3d] to-[#07242e] shadow-2xl p-6">
               <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden mb-6">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1000&q=80"
                   alt="وین اتریش - کارت قرمز-سفید-قرمز و فرصت‌های شغلی"
                   width={1000}
@@ -681,7 +682,7 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
               </div>
 
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                   alt="فرآیند درخواست RWR Card اتریش - مدارک و فرم‌های MA35"
                   width={800}
@@ -802,7 +803,7 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
             </div>
 
             <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
                 alt="مشاغل دارای کمبود نیرو اتریش ۲۰۲۶ - IT و مهندسی"
                 width={800}

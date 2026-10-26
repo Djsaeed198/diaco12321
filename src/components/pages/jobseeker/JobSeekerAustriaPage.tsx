@@ -1,3 +1,4 @@
+import OptimizedImage from '../../OptimizedImage';
 import React, { useState } from 'react';
 import {
   CheckCircle2,
@@ -283,7 +284,7 @@ export const JobSeekerAustriaPage: React.FC<Props> = ({
 
           <div className="lg:col-span-5">
             <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1000&q=80"
                 alt="ویزای جستجوی کار اتریش - وین و فرصت‌های شغلی نخبگان"
                 width={1000}
@@ -438,7 +439,7 @@ export const JobSeekerAustriaPage: React.FC<Props> = ({
 
             <div className="space-y-4">
               <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
+                <OptimizedImage
                   src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                   alt="جدول امتیازات ویزای جستجوی کار اتریش - محاسبه ۷۰ امتیاز AMS"
                   width={800}
@@ -475,7 +476,7 @@ export const JobSeekerAustriaPage: React.FC<Props> = ({
         <div className="bg-gradient-to-br from-emerald-950/40 via-slate-900/60 to-[#061a21] border border-emerald-400/20 rounded-3xl p-6 md:p-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="order-2 lg:order-1 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
                 alt="قانون جدید ۲۰۲۶ ماندن در اتریش پس از یافتن کار - پارلمان و مدارک رسمی"
                 width={800}

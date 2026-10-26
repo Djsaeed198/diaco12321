@@ -1,0 +1,32 @@
+[images]
+  remote_images = ['https://images\.unsplash\.com/.*']
+
+# SPA routes and HTML revalidate in browsers; Netlify may serve stale HTML
+# while fetching a fresh copy. Asset rules below override the browser policy.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Netlify-CDN-Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+
+# Vite emits fingerprinted bundles and imported images into /assets.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# These pre-existing public images have mutable names, unlike Vite assets.
+[[headers]]
+  for = "/assets/aistudio/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/images/banner-diaco-1790696346659.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/vazirmatn-v1-variable.ttf"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

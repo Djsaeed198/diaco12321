@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -428,7 +429,7 @@ export const AustriaBlueCardPage: React.FC<Props> = ({
 
             <div className="lg:col-span-5">
               <figure className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 shadow-2xl aspect-[16/9] w-full">
-                <img
+                <OptimizedImage
                   src={AUSTRIA_IMAGES.hero.src}
                   srcSet={AUSTRIA_IMAGES.hero.srcSet}
                   sizes="(max-width: 768px) 100vw, 500px"
@@ -639,7 +640,7 @@ export const AustriaBlueCardPage: React.FC<Props> = ({
           </div>
 
           <figure className="mb-6 rounded-2xl overflow-hidden border border-white/10">
-            <img
+            <OptimizedImage
               src={AUSTRIA_IMAGES.salary.src}
               alt={AUSTRIA_IMAGES.salary.alt}
               width={AUSTRIA_IMAGES.salary.width}
@@ -731,7 +732,7 @@ export const AustriaBlueCardPage: React.FC<Props> = ({
         </div>
 
         <figure className="mb-6 rounded-2xl overflow-hidden border border-white/10">
-          <img
+          <OptimizedImage
             src={AUSTRIA_IMAGES.documents.src}
             alt={AUSTRIA_IMAGES.documents.alt}
             width={AUSTRIA_IMAGES.documents.width}

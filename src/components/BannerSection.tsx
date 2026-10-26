@@ -1,5 +1,6 @@
+import OptimizedImage from './OptimizedImage';
 import React, { useState } from 'react';
-import bannerImg from '../assets/images/banner_diaco_master_1790696346659.jpg';
+const bannerImg = '/images/banner-diaco-1790696346659.jpg';
 
 interface Props {
   onOpenAssessment?: () => void;
@@ -19,8 +20,13 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
           <div className="relative w-full overflow-hidden select-none">
             {/* تصویر مستر بنر دقیقاً طبق فایل banner-diaco.jpg ارسالی */}
             <div className="relative group cursor-pointer" onClick={() => setImageModalOpen(true)}>
-              <img
+              <OptimizedImage
+                loading="eager"
+                fetchPriority="high"
                 src={bannerImg}
+                width={2542}
+                height={677}
+                sizes="(max-width: 1280px) 100vw, 1280px"
                 alt="هلدینگ مهاجرتی دیاکو - با بیش از ۲۰ سال تجربه موفق"
                 className="w-full h-auto object-cover max-h-[460px] sm:max-h-[500px] md:max-h-[560px] transition-transform duration-700 group-hover:scale-[1.01]"
               />
@@ -152,8 +158,11 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
             >
               ✕
             </button>
-            <img
+            <OptimizedImage
               src={bannerImg}
+                width={2542}
+                height={677}
+                sizes="(max-width: 1280px) 100vw, 1280px"
               alt="بنر دیاکو"
               className="w-full h-auto rounded-2xl shadow-2xl border-2 border-white/20"
             />

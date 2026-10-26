@@ -1,3 +1,4 @@
+import OptimizedImage from '../OptimizedImage';
 import React, { useState, useMemo } from 'react';
 import {
   CheckCircle2,
@@ -545,7 +546,7 @@ export const GermanBlueCardPage: React.FC<Props> = ({
 
             {/* 🖼️ 英雄区图片 — LCP 图片，使用 eager + high priority */}
             <figure className="mt-12 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-              <img
+              <OptimizedImage
                 src={IMAGES.hero.src}
                 alt={IMAGES.hero.alt}
                 width={IMAGES.hero.width}
@@ -1010,7 +1011,7 @@ export const GermanBlueCardPage: React.FC<Props> = ({
 
             {/* 🖼️ 薪资对比区配图 */}
             <figure className="mb-6 rounded-2xl overflow-hidden border border-white/10">
-              <img
+              <OptimizedImage
                 src={IMAGES.salary.src}
                 alt={IMAGES.salary.alt}
                 width={IMAGES.salary.width}
@@ -1356,7 +1357,7 @@ export const GermanBlueCardPage: React.FC<Props> = ({
 
           {/* 🖼️ 文档区配图 */}
           <figure className="mb-8 rounded-2xl overflow-hidden border border-white/10">
-            <img
+            <OptimizedImage
               src={IMAGES.documents.src}
               alt={IMAGES.documents.alt}
               width={IMAGES.documents.width}
