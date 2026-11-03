@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bannerImg from '../assets/images/banner_diaco_master_1790696346659.jpg';
+import bannerImg from '../assets/images/banner_diaco_master_v3.png';
 
 interface Props {
   onOpenAssessment?: () => void;
@@ -9,12 +9,12 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
   const [imageModalOpen, setImageModalOpen] = useState(false);
 
   return (
-    <section className="relative bg-[#06181f] py-3 sm:py-5 border-b border-white/10" dir="rtl">
+    <section className="relative bg-transparent pt-4 pb-2 sm:pt-6 sm:pb-3" dir="rtl">
       <div className="container mx-auto px-2 sm:px-4 md:px-6">
         {/* ========================================================
             بنر پانورامیک اختصاصی و رسمی هلدینگ دیاکو (Banner-Diaco)
            ======================================================== */}
-        <div className="relative overflow-hidden rounded-3xl border-2 border-white/20 bg-gradient-to-r from-slate-100 via-white to-slate-100 shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl border-2 border-white/80 bg-white shadow-xl">
           {/* محفظه بنر با تصویر وکتور/رسمی */}
           <div className="relative w-full overflow-hidden select-none">
             {/* تصویر مستر بنر دقیقاً طبق فایل banner-diaco.jpg ارسالی */}
@@ -26,22 +26,7 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
               />
 
               {/* لایه ناوبری هوشمند روی بنر جهت ارائه لینک‌های تعاملی */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent flex flex-col justify-between p-3 sm:p-5 md:p-6 opacity-95 group-hover:opacity-100 transition-opacity">
-                {/* ردیف بالای بنر: دکمه بزرگ‌نمایی */}
-                <div className="flex items-center justify-end">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setImageModalOpen(true);
-                    }}
-                    className="rounded-xl bg-black/60 hover:bg-black/80 text-white border border-white/20 px-3 py-1 text-[10px] font-bold backdrop-blur-sm transition flex items-center gap-1 cursor-pointer"
-                  >
-                    <span>🔍</span>
-                    <span>مشاهده کیفیت کامل</span>
-                  </button>
-                </div>
-
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent flex flex-col justify-end p-3 sm:p-5 md:p-6 opacity-95 group-hover:opacity-100 transition-opacity">
                 {/* ردیف پایین بنر: دکمه‌های سریع مطابق تصویر ارسالی */}
                 <div className="flex flex-wrap items-center justify-between gap-3 pt-3">
                   {/* دکمه‌های رنگی ویژه (ارزیابی آنلاین، تلفن، واتساپ ۲۴/۷) */}

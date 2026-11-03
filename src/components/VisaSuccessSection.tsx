@@ -275,21 +275,21 @@ export const VisaSuccessSection: React.FC = () => {
     <section
       id="success"
       dir="rtl"
-      className="relative overflow-hidden bg-[#061a21] py-16 sm:py-20"
+      className="relative overflow-hidden bg-[#07242e] py-16 sm:py-20 border-t border-white/10"
       aria-labelledby={`${sectionId}-title`}
     >
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
       {/* Background blobs */}
-      <div className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-24 left-0 h-96 w-96 rounded-full bg-[#0e7490]/20 blur-[130px]" />
+      <div className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/5 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-24 left-0 h-96 w-96 rounded-full bg-[#0e7490]/10 blur-[130px]" />
 
       <div className="relative container mx-auto px-4 md:px-8">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl md:p-10">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-2xl md:p-10 backdrop-blur-xl">
 
           {/* ===== Header ===== */}
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-[11px] font-bold tracking-wide text-amber-300">
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-[11px] font-bold tracking-wide text-amber-300 shadow-2xs">
               <ShieldCheck className="h-3.5 w-3.5" />
               {allCases.length} پرونده موفق در {countries.length} کشور | بازبینی: ۲۰۲۶-۱۰-۲۵
             </span>
@@ -297,7 +297,7 @@ export const VisaSuccessSection: React.FC = () => {
               نمونه ویزاها و کارت‌های اقامت موفق دیاکو در {countries.length} کشور
             </h2>
             <p className="mt-3 max-w-2xl text-xs leading-6 text-slate-300 sm:text-sm">
-              <strong className="text-amber-200">خلاصه:</strong> دیاکو با{' '}
+              <strong className="text-amber-300">خلاصه:</strong> دیاکو با{' '}
               <strong className="text-white">+۲,۰۰۰ پرونده موفق</strong> در {countries.length} کشور
               ({countries.join('، ')}) و پوشش{' '}
               <strong className="text-white">+۴۰ مسیر مهاجرتی</strong>، شفاف‌ترین کارنامه حقوقی را
@@ -318,17 +318,17 @@ export const VisaSuccessSection: React.FC = () => {
                     role="tab"
                     aria-selected={active}
                     onClick={() => handleCountryChange(key)}
-                    className={`group inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
+                    className={`group inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition-all cursor-pointer shadow-2xs ${
                       active
-                        ? 'border-[#f5a623]/60 bg-gradient-to-l from-[#f5a623]/25 to-transparent text-white shadow-glow'
-                        : 'border-white/10 bg-white/[0.03] text-slate-400 hover:border-white/25 hover:text-white'
+                        ? 'border-[#f5a623] bg-[#f5a623] text-[#082833] font-black ring-1 ring-[#f5a623]/30'
+                        : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10 hover:text-white'
                     }`}
                   >
                     <span className="text-base leading-none">{meta.flag}</span>
                     <span>{key}</span>
                     <span
                       className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                        active ? 'bg-[#f5a623]/20 text-amber-200' : 'bg-white/5 text-slate-500'
+                        active ? 'bg-[#082833] text-[#f5a623]' : 'bg-white/10 text-slate-400'
                       }`}
                     >
                       {getCountryCount(key)}
@@ -396,10 +396,10 @@ export const VisaSuccessSection: React.FC = () => {
                 className="group relative cursor-pointer"
               >
                 <div className="pointer-events-none absolute -inset-px rounded-[24px] bg-gradient-to-br from-[#f5a623]/70 via-[#f5a623]/10 to-[#0e7490]/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#08222b] transition-transform duration-500 group-hover:-translate-y-1.5 shadow-lg">
+                <div className="relative h-full overflow-hidden rounded-[24px] border border-white/10 bg-[#08222b] transition-transform duration-500 group-hover:-translate-y-1.5 shadow-xl hover:shadow-2xl">
 
                   {/* Image */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-[#0a2731]">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
                     <img
                       src={
                         COUNTRY_META[item.country]?.image ||
@@ -410,9 +410,9 @@ export const VisaSuccessSection: React.FC = () => {
                       height={375}
                       loading="lazy"
                       decoding="async"
-                      className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#08222b] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
                     {/* Country tag */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-md">
@@ -421,35 +421,35 @@ export const VisaSuccessSection: React.FC = () => {
                     </div>
 
                     {/* Verified badge */}
-                    <div className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-1 backdrop-blur-md border border-emerald-400/30">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                      <span className="text-[9px] font-bold text-emerald-300">تأییدشده</span>
+                    <div className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-emerald-500/80 text-white px-2 py-1 backdrop-blur-md">
+                      <CheckCircle2 className="h-3 w-3" />
+                      <span className="text-[9px] font-bold">تأییدشده</span>
                     </div>
 
                     {/* Case ref + year */}
                     <div className="absolute bottom-3 right-3 left-3 flex items-end justify-between">
-                      <div className="rounded-lg bg-black/70 px-2 py-1 backdrop-blur-sm border border-white/10">
-                        <span className="text-[8px] text-slate-400 block">Case Ref</span>
+                      <div className="rounded-lg bg-black/75 px-2 py-1 backdrop-blur-sm border border-white/10">
+                        <span className="text-[8px] text-slate-300 block">Case Ref</span>
                         <span className="text-[10px] font-mono font-bold text-amber-300" dir="ltr">
                           {item.caseReference}
                         </span>
                       </div>
-                      <span className="text-[10px] font-bold text-white/80">{item.year}</span>
+                      <span className="text-[10px] font-bold text-white bg-black/60 px-2 py-0.5 rounded-md">{item.year}</span>
                     </div>
                   </div>
 
                   {/* Footer */}
-                  <div className="border-t border-white/10 bg-white/[0.02] p-3.5">
-                    <span className="inline-block rounded-full bg-[#0e7490]/20 px-2 py-0.5 text-[9px] font-bold text-[#7fd3e0] mb-1.5">
+                  <div className="border-t border-white/10 bg-[#08222b] p-3.5">
+                    <span className="inline-block rounded-full bg-amber-400/15 border border-amber-400/30 px-2 py-0.5 text-[9px] font-bold text-amber-300 mb-1.5">
                       {item.method}
                     </span>
-                    <h3 className="truncate text-xs font-bold text-white">{item.title}</h3>
+                    <h3 className="truncate text-xs font-bold text-white group-hover:text-amber-300">{item.title}</h3>
                     <p className="mt-0.5 text-[10px] text-slate-400 flex items-center gap-1.5">
                       <UserCheck className="h-3 w-3 text-emerald-400" />
                       {item.legalReviewer.split(' ')[0]} {item.legalReviewer.split(' ')[1]}
                     </p>
                     <div className="mt-2 flex items-center justify-between text-[10px]">
-                      <span className="text-slate-500 truncate">{item.issuanceAuthority}</span>
+                      <span className="text-slate-400 truncate">{item.issuanceAuthority}</span>
                       <span className="text-[#f5a623] font-bold group-hover:underline flex items-center gap-0.5 shrink-0">
                         جزئیات <ExternalLink className="h-2.5 w-2.5" />
                       </span>
@@ -462,20 +462,20 @@ export const VisaSuccessSection: React.FC = () => {
 
           {/* ===== Country Stats (همیشه نمایش) ===== */}
           <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
-              <p className="text-lg font-black text-amber-300">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
+              <p className="text-lg font-black text-amber-400">
                 {filtered.length.toLocaleString('fa-IR')}
               </p>
               <p className="text-[10px] text-slate-400 mt-1">پرونده در {activeCountry}</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
-              <p className="text-lg font-black text-emerald-300">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
+              <p className="text-lg font-black text-emerald-400">
                 {(methodsForCountry.length - 1).toLocaleString('fa-IR')}
               </p>
               <p className="text-[10px] text-slate-400 mt-1">مسیر مهاجرتی</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
-              <p className="text-lg font-black text-[#0e7490]">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
+              <p className="text-lg font-black text-cyan-400">
                 {new Set(filtered.map((c) => c.year)).size.toLocaleString('fa-IR')}
               </p>
               <p className="text-[10px] text-slate-400 mt-1">سال صدور</p>

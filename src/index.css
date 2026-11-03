@@ -56,8 +56,8 @@
     font-family: var(--font-sans);
     font-feature-settings: 'ss01', 'ss02', 'kern', 'liga';
     font-variant-ligatures: common-ligatures;
-    background-color: var(--color-brand-deep);
-    color: var(--color-brand-light);
+    background-color: #f3f6f9;
+    color: #0b2933;
     min-height: 100dvh;
     overflow-x: hidden;
   }
@@ -292,6 +292,33 @@
   ::-webkit-scrollbar-corner {
     background: var(--color-brand-deep);
   }
+}
+
+/* ============================================
+   🏛️ پس‌زمینه سنگ مرمر لوکس و ابری دیاکو (Diaco Luxury Marble Canvas)
+   مطابق تصویر ارسالی کاربر (image_501541bf.png)
+   دارای بافت ابری نرم، رگه‌های نقره‌ای مرمر و هایلایت‌های درخشان
+   ============================================ */
+.diaco-marble-canvas {
+  background-color: #f2f5f8;
+  background-image:
+    radial-gradient(ellipse 90% 65% at 12% 18%, rgba(255, 255, 255, 0.95) 0%, transparent 60%),
+    radial-gradient(ellipse 85% 55% at 88% 22%, rgba(212, 224, 236, 0.7) 0%, transparent 60%),
+    radial-gradient(ellipse 75% 65% at 50% 48%, rgba(255, 255, 255, 0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 85% 75% at 18% 78%, rgba(200, 214, 228, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse 95% 65% at 85% 82%, rgba(214, 226, 238, 0.75) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 55% at 50% 92%, rgba(236, 244, 250, 0.85) 0%, transparent 55%),
+    linear-gradient(135deg, #f8fafc 0%, #edf2f7 25%, #e2e8f0 50%, #ebf0f5 75%, #f8fafc 100%);
+  position: relative;
+}
+
+.diaco-marble-veins-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  overflow: hidden;
 }
 
 /* ============================================

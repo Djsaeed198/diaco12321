@@ -1630,6 +1630,15 @@ interface Props {
   onNavigateToBlog?: () => void;
 }
 
+export type BlogSortOption = 'default' | 'popular' | 'read_time' | 'alphabetical';
+
+const BLOG_SORT_OPTIONS: { id: BlogSortOption; label: string; icon: string }[] = [
+  { id: 'default', label: 'جدیدترین مقالات', icon: '⚡' },
+  { id: 'popular', label: 'پربازدیدترین', icon: '🔥' },
+  { id: 'read_time', label: 'طولانی‌ترین تحلیل‌ها', icon: '⏱' },
+  { id: 'alphabetical', label: 'الفبایی (الف - ی)', icon: '🔤' },
+];
+
 export const ImmigrationBlogSection: React.FC<Props> = ({
   onOpenAssessment,
   onNavigateToPost,
@@ -1637,10 +1646,36 @@ export const ImmigrationBlogSection: React.FC<Props> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('austria');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [sortBy, setSortBy] = useState<BlogSortOption>('default');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoplay, setIsAutoplay] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const [desktopCardsCount, setDesktopCardsCount] = useState<3 | 4>(4);
+  const [windowWidth, setWindowWidth] = useState<number>(
+    typeof window !== 'undefined' ? window.innerWidth : 1280
+  );
   const [activeArticle, setActiveArticle] = useState<BlogPost | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
   const sectionId = useId();
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // محاسبه تعداد کارت‌های قابل نمایش بر اساس درخواست کاربر:
+  // در نمایشگر بزرگ 4 یا 3 تا کارت، در تبلت 2 تا، و برای موبایل 1 کارت
+  const visibleCount = useMemo(() => {
+    if (windowWidth < 768) return 1; // موبایل: ۱ کارت
+    if (windowWidth < 1024) return 2; // تبلت: ۲ کارت
+    if (windowWidth < 1280) return 3; // نمایشگر متوسط: ۳ کارت
+    return desktopCardsCount; // نمایشگر بزرگ دسکتاپ: ۴ یا ۳ کارت
+  }, [windowWidth, desktopCardsCount]);
 
 const categories = [
   { id: 'austria', label: 'اتریش (NAG)' },
@@ -1666,6 +1701,68 @@ const categories = [
       return matchesCategory && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
+
+  // سورت مقالات
+  const sortedPosts = useMemo(() => {
+    const list = [...filteredPosts];
+    switch (sortBy) {
+      case 'popular':
+        return list.sort((a, b) => (b.views || 0) - (a.views || 0));
+      case 'read_time':
+        return list.sort((a, b) => parseInt(b.readTime) - parseInt(a.readTime));
+      case 'alphabetical':
+        return list.sort((a, b) => a.title.localeCompare(b.title, 'fa'));
+      default:
+        return list;
+    }
+  }, [filteredPosts, sortBy]);
+
+  const maxIndex = Math.max(0, sortedPosts.length - visibleCount);
+
+  // ریست ایندکس با تغییر دسته‌بندی، جستجو، سورت یا سایز صفحه
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [selectedCategory, searchQuery, sortBy, visibleCount]);
+
+  // چرخش اتوماتیک اسلایدر با مکث روی هاور
+  useEffect(() => {
+    if (!isAutoplay || isPaused || sortedPosts.length <= visibleCount) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isAutoplay, isPaused, sortedPosts.length, visibleCount, maxIndex]);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (diff > 40) {
+        handleNext();
+      } else if (diff < -40) {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+    setIsPaused(false);
+  };
 
   const jsonLd = useMemo(() => generateBlogSchema(BLOG_POSTS), []);
 
@@ -1758,102 +1855,307 @@ const categories = [
           ))}
         </div>
 
-        {/* ===== Grid ===== */}
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.length === 0 && (
-            <div className="col-span-full rounded-3xl border border-slate-200 bg-slate-50 p-12 text-center">
-              <p className="text-sm font-bold text-slate-600">
-                مقاله‌ای در این دسته یا با این جستجو یافت نشد.
-              </p>
-              <p className="mt-2 text-xs text-slate-400">
-                لطفاً دسته دیگری را انتخاب کنید یا عبارت جستجو را تغییر دهید.
-              </p>
+        {/* نوار کنترل اسلایدر مقالات، سورتینگ و تعداد کارت‌ها */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 bg-slate-50 border border-slate-200 rounded-2xl p-3 sm:p-4 shadow-xs">
+          {/* بخش سورت شدن مقالات */}
+          <div className="flex items-center gap-2 flex-wrap text-xs">
+            <span className="text-[#082833] font-bold flex items-center gap-1">
+              <span>⇅</span>
+              <span>سورت مقالات:</span>
+            </span>
+            <div className="flex items-center gap-1 flex-wrap">
+              {BLOG_SORT_OPTIONS.map((opt) => {
+                const isSelected = sortBy === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setSortBy(opt.id)}
+                    className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition flex items-center gap-1 cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#082833] text-amber-300 shadow-md font-black'
+                        : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
+                    }`}
+                  >
+                    <span>{opt.icon}</span>
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
             </div>
-          )}
+          </div>
 
-          {filteredPosts.map((post) => (
-            <article
-              key={post.id}
-              itemScope
-              itemType="https://schema.org/BlogPosting"
-              className="group flex flex-col rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-[#f5a623] hover:shadow-xl"
-            >
-              {/* Featured Image */}
-              <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
-                <img
-                  src={post.image.src}
-                  alt={post.image.alt}
-                  width={post.image.width}
-                  height={post.image.height}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  itemProp="image"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                <span className="absolute top-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-md">
-                  {post.categoryLabel}
-                </span>
-                <span className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-bold text-slate-700">
-                  <Clock className="h-3 w-3" /> {post.readTime}
-                </span>
+          {/* کنترل‌های اسلایدر و تنظیمات نمایش در دسکتاپ */}
+          <div className="flex items-center gap-2.5 flex-wrap justify-between sm:justify-end w-full sm:w-auto">
+            {/* کلید تغییر تعداد کارت در دسکتاپ (۳ یا ۴ تایی) */}
+            {windowWidth >= 1280 && (
+              <div className="hidden xl:flex items-center gap-1 bg-white border border-slate-200 p-1 rounded-xl text-[11px]">
+                <span className="text-slate-500 px-1.5 font-medium">نمایش دسکتاپ:</span>
+                <button
+                  type="button"
+                  onClick={() => setDesktopCardsCount(4)}
+                  className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                    desktopCardsCount === 4
+                      ? 'bg-[#082833] text-amber-300 font-black'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                  title="نمایش ۴ مقاله در نمایشگر بزرگ"
+                >
+                  ۴ کارت
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDesktopCardsCount(3)}
+                  className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                    desktopCardsCount === 3
+                      ? 'bg-[#082833] text-amber-300 font-black'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                  title="نمایش ۳ مقاله در نمایشگر بزرگ"
+                >
+                  ۳ کارت
+                </button>
               </div>
+            )}
 
-              <div className="p-5 flex flex-col flex-1">
-                {/* Answer-First */}
-                <p className="answer-first text-[11px] leading-6 text-slate-600 bg-amber-50/60 border border-amber-100 rounded-xl p-3 mb-3" itemProp="description">
-                  {post.answerFirst}
-                </p>
+            {/* نشانگر اسلاید فعلی */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-slate-600 font-bold bg-white px-2.5 py-1.5 rounded-xl border border-slate-200">
+                مقاله {sortedPosts.length > 0 ? currentIndex + 1 : 0} تا {Math.min(currentIndex + visibleCount, sortedPosts.length)} از {sortedPosts.length}
+              </span>
 
-                <h3 className="text-sm font-black leading-snug text-[#082833] group-hover:text-amber-600 transition-colors" itemProp="headline">
-                  {post.title}
-                </h3>
+              {/* دکمه توقف / فعال‌سازی پخش خودکار */}
+              <button
+                type="button"
+                onClick={() => setIsAutoplay(!isAutoplay)}
+                className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition flex items-center gap-1.5 cursor-pointer ${
+                  isAutoplay && !isPaused
+                    ? 'border-emerald-500/40 text-emerald-700 bg-emerald-50'
+                    : 'border-slate-300 text-slate-600 bg-white hover:bg-slate-100'
+                }`}
+                title={isAutoplay ? 'توقف اسلایدر خودکار' : 'فعال‌سازی اسلایدر خودکار'}
+              >
+                <span className={`inline-block h-2 w-2 rounded-full ${isAutoplay && !isPaused ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`} />
+                <span>{isAutoplay && !isPaused ? 'خودکار فعال' : 'متوقف'}</span>
+              </button>
 
-                {/* Tags */}
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <span key={tag} className="rounded-lg bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Author + CTA */}
-                <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0">
-                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#082833] text-white text-sm" aria-hidden="true">
-                      {post.author.avatar}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[10px] font-bold text-[#082833] truncate" itemProp="author">{post.author.name}</p>
-                      <p className="text-[9px] text-slate-500 truncate">{post.author.credentials}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (onNavigateToPost) onNavigateToPost(post.slug);
-                        else setActiveArticle(post);
-                      }}
-                      className="rounded-xl bg-amber-400 hover:bg-amber-300 px-3 py-1.5 text-[10px] font-black text-[#082833] transition shadow-xs cursor-pointer inline-flex items-center gap-1"
-                    >
-                      صفحه اختصاصی <ArrowRight className="h-3 w-3" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveArticle(post)}
-                      className="rounded-xl bg-slate-100 hover:bg-slate-200 px-2 py-1.5 text-[10px] font-bold text-slate-700 transition cursor-pointer"
-                      title="مرور سریع"
-                    >
-                      مرور سریع
-                    </button>
-                  </div>
-                </div>
+              {/* دکمه‌های ناوبری قبلی و بعدی */}
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-[#082833] hover:text-amber-300 text-[#082833] border border-slate-300 flex items-center justify-center text-sm font-black transition cursor-pointer shadow-xs"
+                  title="مقاله قبلی"
+                  aria-label="مقاله قبلی"
+                >
+                  →
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="w-8 h-8 rounded-xl bg-white hover:bg-[#082833] hover:text-amber-300 text-[#082833] border border-slate-300 flex items-center justify-center text-sm font-black transition cursor-pointer shadow-xs"
+                  title="مقاله بعدی"
+                  aria-label="مقاله بعدی"
+                >
+                  ←
+                </button>
               </div>
-            </article>
-          ))}
+            </div>
+          </div>
         </div>
+
+        {/* کانتینر اسلایدر اتوماتیک به جای گرید استاتیک */}
+        {sortedPosts.length === 0 ? (
+          <div className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-12 text-center">
+            <p className="text-sm font-bold text-slate-600">
+              مقاله‌ای در این دسته یا با این جستجو یافت نشد.
+            </p>
+            <p className="mt-2 text-xs text-slate-400">
+              لطفاً دسته دیگری را انتخاب کنید یا عبارت جستجو را تغییر دهید.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedCategory('austria');
+                setSearchQuery('');
+                setSortBy('default');
+              }}
+              className="mt-4 rounded-xl bg-[#082833] text-amber-300 px-4 py-2 text-xs font-black cursor-pointer shadow-sm"
+            >
+              نمایش مقالات اتریش
+            </button>
+          </div>
+        ) : (
+          <div
+            className="relative mt-8 group/blogslider"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* دکمه شناور قبلی (سمت راست در RTL) */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white hover:bg-[#082833] hover:text-amber-300 text-[#082833] border border-slate-300 shadow-xl flex items-center justify-center text-base font-black transition-all opacity-80 group-hover/blogslider:opacity-100 hover:scale-110 cursor-pointer backdrop-blur-md"
+              title="مقاله قبلی"
+              aria-label="مقاله قبلی"
+            >
+              →
+            </button>
+
+            {/* دکمه شناور بعدی (سمت چپ در RTL) */}
+            <button
+              type="button"
+              onClick={handleNext}
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white hover:bg-[#082833] hover:text-amber-300 text-[#082833] border border-slate-300 shadow-xl flex items-center justify-center text-base font-black transition-all opacity-80 group-hover/blogslider:opacity-100 hover:scale-110 cursor-pointer backdrop-blur-md"
+              title="مقاله بعدی"
+              aria-label="مقاله بعدی"
+            >
+              ←
+            </button>
+
+            {/* تراک اسلایدر با انیمیشن روان و تنظیم دقیق پهنای کارت بر اساس دستگاه */}
+            <div className="overflow-hidden rounded-3xl" dir="ltr">
+              <div
+                className="flex transition-transform duration-500 ease-out"
+                style={{
+                  transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
+                }}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {sortedPosts.map((post) => (
+                  <div
+                    key={post.id}
+                    style={{ width: `${100 / visibleCount}%` }}
+                    className="shrink-0 p-2 sm:p-2.5 h-full"
+                    dir="rtl"
+                  >
+                    <article
+                      itemScope
+                      itemType="https://schema.org/BlogPosting"
+                      className="group flex flex-col h-full rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-[#f5a623] hover:shadow-xl"
+                    >
+                      {/* Featured Image */}
+                      <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 shrink-0">
+                        <img
+                          src={post.image.src}
+                          alt={post.image.alt}
+                          width={post.image.width}
+                          height={post.image.height}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          itemProp="image"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                        <span className="absolute top-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur-md">
+                          {post.categoryLabel}
+                        </span>
+                        <span className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-bold text-slate-700">
+                          <Clock className="h-3 w-3" /> {post.readTime}
+                        </span>
+                      </div>
+
+                      <div className="p-5 flex flex-col flex-1 justify-between">
+                        <div>
+                          {/* Answer-First */}
+                          <p className="answer-first text-[11px] leading-6 text-slate-600 bg-amber-50/60 border border-amber-100 rounded-xl p-3 mb-3 line-clamp-3" itemProp="description">
+                            {post.answerFirst}
+                          </p>
+
+                          <h3 className="text-sm font-black leading-snug text-[#082833] group-hover:text-amber-600 transition-colors line-clamp-2" itemProp="headline">
+                            <a
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => {
+                                if (!e.ctrlKey && !e.metaKey) {
+                                  e.preventDefault();
+                                  if (onNavigateToPost) onNavigateToPost(post.slug);
+                                  else window.location.pathname = `/blog/${post.slug}`;
+                                }
+                              }}
+                              className="hover:underline"
+                            >
+                              {post.title}
+                            </a>
+                          </h3>
+
+                          {/* Tags */}
+                          <div className="mt-3 flex flex-wrap gap-1.5">
+                            {post.tags.slice(0, 3).map((tag) => (
+                              <span key={tag} className="rounded-lg bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-600">
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Author + CTA */}
+                        <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#082833] text-white text-sm" aria-hidden="true">
+                              {post.author.avatar}
+                            </span>
+                            <div className="min-w-0">
+                              <p className="text-[10px] font-bold text-[#082833] truncate" itemProp="author">{post.author.name}</p>
+                              <p className="text-[9px] text-slate-500 truncate">{post.author.credentials}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <a
+                              href={`/blog/${post.slug}`}
+                              onClick={(e) => {
+                                if (!e.ctrlKey && !e.metaKey) {
+                                  e.preventDefault();
+                                  if (onNavigateToPost) onNavigateToPost(post.slug);
+                                  else window.location.pathname = `/blog/${post.slug}`;
+                                }
+                              }}
+                              className="rounded-xl bg-amber-400 hover:bg-amber-300 px-3 py-1.5 text-[10px] font-black text-[#082833] transition shadow-xs cursor-pointer inline-flex items-center gap-1"
+                            >
+                              صفحه اختصاصی <ArrowRight className="h-3 w-3" />
+                            </a>
+                            <button
+                              type="button"
+                              onClick={() => setActiveArticle(post)}
+                              className="rounded-xl bg-slate-100 hover:bg-slate-200 px-2 py-1.5 text-[10px] font-bold text-slate-700 transition cursor-pointer"
+                              title="مرور سریع"
+                            >
+                              مرور سریع
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* نقاط نشانگر صفحه (Pagination Dots) */}
+            {maxIndex > 0 && (
+              <div className="mt-6 flex items-center justify-center gap-1.5">
+                {Array.from({ length: maxIndex + 1 }).map((_, idx) => {
+                  const isActive = currentIndex === idx;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setCurrentIndex(idx)}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? 'w-8 bg-[#082833] shadow-md'
+                          : 'w-2 bg-slate-300 hover:bg-slate-400'
+                      }`}
+                      aria-label={`اسلاید ${idx + 1}`}
+                      title={`مشاهده اسلاید ${idx + 1}`}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* ===== Newsletter ===== */}
         <div className="mt-14 rounded-3xl bg-gradient-to-r from-[#082833] via-[#0d3644] to-[#082833] p-6 sm:p-10 text-white shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6">

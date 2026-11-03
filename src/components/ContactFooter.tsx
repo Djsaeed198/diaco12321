@@ -28,7 +28,11 @@ const TOPIC_PREFERENCES = [
   { id: 'investment', label: 'سرمایه‌گذاری و ملک', icon: '👑' },
 ];
 
-export const ContactFooter: React.FC = () => {
+export interface ContactFooterProps {
+  onNavigateToPage?: (page: any) => void;
+}
+
+export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }) => {
   const [email, setEmail] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('austria-resident');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -758,6 +762,184 @@ export const ContactFooter: React.FC = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* ============================================================
+            نقشه لینک‌دهی داخلی، خوشه‌های سئو و صفحات ستون (Pillar & Clusters)
+           ============================================================ */}
+        <div className="mt-14 rounded-3xl border border-white/10 bg-[#061e27] p-6 md:p-8 backdrop-blur-md">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-white/10 pb-4 mb-6">
+            <div className="flex items-center gap-2.5">
+              <span className="text-xl">🗺️</span>
+              <div>
+                <h3 className="text-sm md:text-base font-black text-amber-300">
+                  راهنمای دسترسی سریع به خوشه‌های خدمات مهاجرتی و حقوقی اروپا ۲۰۲۶
+                </h3>
+                <p className="text-[11px] text-slate-300">
+                  دسترسی مستقیم به صفحات مرجع، شرایط حقوقی و تحلیل‌های کنسولی رسمی هلدینگ دیاکو
+                </p>
+              </div>
+            </div>
+            <a
+              href="/sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-bold text-amber-400 hover:text-white flex items-center gap-1 bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-xl border border-white/10 transition self-start sm:self-auto shrink-0"
+            >
+              <span>نقشه رسمی سایت (sitemap.xml)</span>
+              <span>↗</span>
+            </a>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-xs">
+            {/* ستون ۱: قطب اتریش (Austria Pillar) */}
+            <div className="space-y-2.5">
+              <h4 className="font-black text-white text-xs border-r-2 border-[#f5a623] pr-2 flex items-center gap-1">
+                <span>🇦🇹</span>
+                <span>دپارتمان اقامت و وکالت اتریش</span>
+              </h4>
+              <ul className="space-y-1.5 text-[11px] text-slate-300">
+                {[
+                  { page: 'financial-austria', label: 'اقامت تمکن مالی اتریش (NAG §44)' },
+                  { page: 'austria-rwr', label: 'کارت قرمز-سفید-قرمز اتریش (RWR Card)' },
+                  { page: 'austria-blue-card', label: 'بلوکارت اتریش ۲۰۲۶' },
+                  { page: 'startup-austria', label: 'ویزای استارت‌آپ اتریش' },
+                  { page: 'business-austria', label: 'ثبت شرکت و بیزینس در اتریش' },
+                  { page: 'realestate-austria', label: 'خرید ملک در وین و گراتس' },
+                  { page: 'artist-austria', label: 'اقامت هنرمندان و نخبگان اتریش' },
+                  { page: 'medical-austria-nursing', label: 'کادر درمان و پرستاری اتریش' },
+                  { page: 'academic-austria', label: 'تحصیل در دانشگاه‌های دولتی اتریش' },
+                ].map((item) => (
+                  <li key={item.page}>
+                    <a
+                      href={`/${item.page}`}
+                      onClick={(e) => {
+                        if (!e.ctrlKey && !e.metaKey) {
+                          e.preventDefault();
+                          if (onNavigateToPage) onNavigateToPage(item.page);
+                          else window.location.pathname = `/${item.page}`;
+                        }
+                      }}
+                      className="hover:text-amber-300 hover:underline transition-colors block py-0.5"
+                    >
+                      • {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* ستون ۲: آلمان و بلوکارت اتحادیه اروپا */}
+            <div className="space-y-2.5">
+              <h4 className="font-black text-white text-xs border-r-2 border-emerald-400 pr-2 flex items-center gap-1">
+                <span>🇩🇪</span>
+                <span>بلوکارت و کاریابی اروپا</span>
+              </h4>
+              <ul className="space-y-1.5 text-[11px] text-slate-300">
+                {[
+                  { page: 'german-blue-card', label: 'بلوکارت آلمان ۲۰۲۶ (حداقل حقوق €۴۸,۳۰۰)' },
+                  { page: 'jobseeker-germany', label: 'کارت شانس آلمان (Chancenkarte)' },
+                  { page: 'medical-germany', label: 'پزشکان و کادر درمان آلمان' },
+                  { page: 'ausbildung-germany', label: 'دوره‌های کارآموزی آوسبیلدونگ آلمان' },
+                  { page: 'startup-germany', label: 'ویزای کارآفرینی و استارت‌آپ آلمان' },
+                  { page: 'spain-blue-card', label: 'بلوکارت اسپانیا ۲۰۲۶' },
+                  { page: 'italy-blue-card', label: 'بلوکارت ایتالیا ۲۰۲۶' },
+                  { page: 'hungary-blue-card', label: 'بلوکارت مجارستان' },
+                  { page: 'jobseeker-norway', label: 'ویزای جستجوی کار نروژ' },
+                ].map((item) => (
+                  <li key={item.page}>
+                    <a
+                      href={`/${item.page}`}
+                      onClick={(e) => {
+                        if (!e.ctrlKey && !e.metaKey) {
+                          e.preventDefault();
+                          if (onNavigateToPage) onNavigateToPage(item.page);
+                          else window.location.pathname = `/${item.page}`;
+                        }
+                      }}
+                      className="hover:text-amber-300 hover:underline transition-colors block py-0.5"
+                    >
+                      • {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* ستون ۳: سرمایه‌گذاری، گلدن ویزا و پاسپورت */}
+            <div className="space-y-2.5">
+              <h4 className="font-black text-white text-xs border-r-2 border-cyan-400 pr-2 flex items-center gap-1">
+                <span>🏛️</span>
+                <span>تمکن مالی، گلدن ویزا و شهروندی</span>
+              </h4>
+              <ul className="space-y-1.5 text-[11px] text-slate-300">
+                {[
+                  { page: 'financial-spain', label: 'تمکن مالی (Non-Lucrative) اسپانیا' },
+                  { page: 'financial-france', label: 'اقامت خودحمایتی فرانسه' },
+                  { page: 'realestate-greece', label: 'خرید ملک و گلدن ویزای یونان' },
+                  { page: 'business-dubai', label: 'ثبت شرکت و اقامت طلایی دبی' },
+                  { page: 'citizenship-dominica', label: 'پاسپورت دومینیکا در کمتر از ۶ ماه' },
+                  { page: 'citizenship-turkey', label: 'شهروندی ترکیه با سرمایه‌گذاری ملکی' },
+                  { page: 'nomad-spain', label: 'ویزای دیجیتال نوماد اسپانیا' },
+                  { page: 'nomad-dubai', label: 'ویزای فریلنسری و نوماد دبی' },
+                  { page: 'realestate-france', label: 'سرمایه‌گذاری ملکی در فرانسه' },
+                ].map((item) => (
+                  <li key={item.page}>
+                    <a
+                      href={`/${item.page}`}
+                      onClick={(e) => {
+                        if (!e.ctrlKey && !e.metaKey) {
+                          e.preventDefault();
+                          if (onNavigateToPage) onNavigateToPage(item.page);
+                          else window.location.pathname = `/${item.page}`;
+                        }
+                      }}
+                      className="hover:text-amber-300 hover:underline transition-colors block py-0.5"
+                    >
+                      • {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* ستون ۴: ابزارها، راهنماها و خدمات استقرار */}
+            <div className="space-y-2.5">
+              <h4 className="font-black text-white text-xs border-r-2 border-purple-400 pr-2 flex items-center gap-1">
+                <span>⚡</span>
+                <span>سامانه‌ها و ابزارهای هوشمند</span>
+              </h4>
+              <ul className="space-y-1.5 text-[11px] text-slate-300">
+                {[
+                  { page: 'after-arrival', label: 'خدمات پس از ورود (After-Arrival) اروپا' },
+                  { page: 'blog', label: 'بانک مقالات و بخشنامه‌های ۲۰۲۶' },
+                  { page: 'services', label: 'کاتالوگ جامع خدمات دیاکو' },
+                  { page: 'interactive-map', label: 'نقشه تعاملی پرونده‌های موفق' },
+                  { page: 'success-cases', label: 'گالری ویزاها و کارت‌های اقامت' },
+                  { page: 'job-search', label: 'بانک مشاغل پرتقاضای اروپا' },
+                  { page: 'country-guide', label: 'راهنمای مقایسه هزینه‌ها و کشورها' },
+                  { page: 'visa-news', label: 'اتاق خبر تغییرات ویزا و شنگن' },
+                  { page: 'online-consult', label: 'رزرو وقت مشاوره با وکیل رسمی' },
+                ].map((item) => (
+                  <li key={item.page}>
+                    <a
+                      href={`/${item.page}`}
+                      onClick={(e) => {
+                        if (!e.ctrlKey && !e.metaKey) {
+                          e.preventDefault();
+                          if (onNavigateToPage) onNavigateToPage(item.page);
+                          else window.location.pathname = `/${item.page}`;
+                        }
+                      }}
+                      className="hover:text-amber-300 hover:underline transition-colors block py-0.5"
+                    >
+                      • {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 

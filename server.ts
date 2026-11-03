@@ -6,6 +6,7 @@ import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
+import { injectSeoToHtml, getPageSeo } from './server/seoRenderer.ts';
 
 dotenv.config();
 
@@ -323,6 +324,36 @@ app.get('/api/newsletter/subscribers', (_req, res) => {
   }
 });
 
+// ============================================================
+// 🤖 Technical SEO Endpoints: robots.txt & sitemap.xml
+// ============================================================
+app.get('/robots.txt', (_req, res) => {
+  const robotsPath = path.join(__dirname, 'public', 'robots.txt');
+  if (fs.existsSync(robotsPath)) {
+    res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.sendFile(robotsPath);
+  }
+  res.type('text/plain').send('User-agent: *\nAllow: /\nSitemap: https://www.dia-co.ir/sitemap.xml\n');
+});
+
+app.get('/sitemap.xml', (_req, res) => {
+  const sitemapPath = path.join(__dirname, 'public', 'sitemap.xml');
+  if (fs.existsSync(sitemapPath)) {
+    res.setHeader('Content-Type', 'application/xml; charset=UTF-8');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.sendFile(sitemapPath);
+  }
+  res.status(404).type('text/plain').send('Sitemap not found');
+});
+
+// Endpoint to inspect and audit resolved SEO metadata for any route
+app.get('/api/seo/inspect', (req, res) => {
+  const targetPath = (req.query.path as string) || '/';
+  const seo = getPageSeo(targetPath);
+  return res.json({ success: true, path: targetPath, seo });
+});
+
 async function startServer() {
   const isProduction = process.env.NODE_ENV === 'production';
 
@@ -330,15 +361,51 @@ async function startServer() {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: 'spa',
+      appType: 'custom',
     });
     app.use(vite.middlewares);
+
+    // Dynamic Server-Side HTML Rendering in Dev:
+    // Transforms HTML with Vite and injects route-specific SEO meta tags, canonical, and initial semantic HTML
+    app.use('*', async (req, res, next) => {
+      const url = req.originalUrl;
+      // Skip API routes, Vite internals, and static assets
+      if (
+        url.startsWith('/api') ||
+        url.startsWith('/@') ||
+        url.startsWith('/node_modules') ||
+        (url.includes('.') && !url.endsWith('.html'))
+      ) {
+        return next();
+      }
+
+      try {
+        const templatePath = path.resolve(__dirname, 'index.html');
+        let template = fs.readFileSync(templatePath, 'utf-8');
+        template = await vite.transformIndexHtml(url, template);
+        const html = injectSeoToHtml(template, url);
+        res.status(200).set({ 'Content-Type': 'text/html; charset=UTF-8' }).end(html);
+      } catch (e) {
+        vite.ssrFixStacktrace(e as Error);
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(__dirname, 'dist');
     if (fs.existsSync(distPath)) {
-      app.use(express.static(distPath));
-      app.get('*', (_req, res) => {
-        res.sendFile(path.join(distPath, 'index.html'));
+      app.use(express.static(distPath, { index: false }));
+      app.get('*', (req, res, next) => {
+        const url = req.originalUrl;
+        if (url.startsWith('/api') || (url.includes('.') && !url.endsWith('.html'))) {
+          return next();
+        }
+        const templatePath = path.join(distPath, 'index.html');
+        if (fs.existsSync(templatePath)) {
+          const rawHtml = fs.readFileSync(templatePath, 'utf-8');
+          const html = injectSeoToHtml(rawHtml, url);
+          return res.status(200).set({ 'Content-Type': 'text/html; charset=UTF-8' }).end(html);
+        }
+        return res.sendFile(path.join(distPath, 'index.html'));
       });
     }
   }

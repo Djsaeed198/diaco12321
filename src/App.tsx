@@ -19,10 +19,10 @@ import HeroSection from './components/HeroSection';
 import ServicesSection from './components/ServicesSection';
 import FormCategoriesSection from './components/FormCategoriesSection';
 import SuccessMetricsSection from './components/SuccessMetricsSection';
+import CaseSuccessMap from './components/CaseSuccessMap';
 import InteractiveCaseMap from './components/InteractiveCaseMap';
 import VisaSuccessSection from './components/VisaSuccessSection';
 import PodcastsSection from './components/PodcastsSection';
-import StoriesSection from './components/StoriesSection';
 import AboutSection from './components/AboutSection';
 import FloatingActionBar from './components/FloatingActionBar';
 import ContactFooter from './components/ContactFooter';
@@ -38,6 +38,7 @@ import OrganizationSchema from './seo/OrganizationSchema';
 import { calculateAssessment } from './utils/scoring';
 import { INITIAL_PROFILE, type UserProfile, type ImmigrationPlan } from './types';
 import type { PageType } from './components/Header';
+import { getStoredLanguage, setStoredLanguage, type Language } from './utils/i18n';
 
 /* ============================================================
    Lazy Loaded Pages
@@ -510,6 +511,19 @@ export const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showAssessmentModal, setShowAssessmentModal] = useState(false);
   const [activeFeatureModal, setActiveFeatureModal] = useState<string | null>(null);
+  const [lang, setLang] = useState<Language>(() => getStoredLanguage());
+
+  const handleToggleLang = useCallback((newLang?: Language) => {
+    setLang((prev) => {
+      const next = newLang ?? (prev === 'fa' ? 'en' : 'fa');
+      setStoredLanguage(next);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    setStoredLanguage(lang);
+  }, [lang]);
 
   const assessmentRef = useRef<HTMLDivElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
@@ -666,7 +680,7 @@ export const App: React.FC = () => {
   /* ---------- 404 Render ---------- */
   if (notFound) {
     return (
-      <div dir="rtl" className="flex min-h-screen flex-col bg-[#0b2933] font-sans">
+      <div dir={lang === 'fa' ? 'rtl' : 'ltr'} className="flex min-h-screen flex-col bg-[#f3f6f9] font-sans">
         <Header
           onOpenAssessment={openAssessment}
           currentPage={currentPage}
@@ -674,8 +688,11 @@ export const App: React.FC = () => {
           onNavigateToCountry={navigateToCountry}
           onNavigateToBlueCard={navigateToCountry}
           onNavigateToPage={navigateToPage}
+          onNavigateToBlogPost={navigateToBlogPost}
+          lang={lang}
+          onToggleLanguage={handleToggleLang}
         />
-        <main className="flex-grow pt-16 lg:pt-24">
+        <main id="main-content" className="flex-grow pt-16 lg:pt-24">
           <NotFoundPage onBackToHome={navigateToHome} />
         </main>
         <ContactFooter />
@@ -685,7 +702,7 @@ export const App: React.FC = () => {
 
   /* ---------- Main Render ---------- */
   return (
-    <div dir="rtl" className="flex min-h-screen flex-col bg-[#0b2933] text-slate-800 font-sans">
+    <div dir={lang === 'fa' ? 'rtl' : 'ltr'} className="flex min-h-screen flex-col bg-[#f3f6f9] text-slate-800 font-sans">
       <OrganizationSchema />
 
       <Header
@@ -695,6 +712,9 @@ export const App: React.FC = () => {
         onNavigateToCountry={navigateToCountry}
         onNavigateToBlueCard={navigateToCountry}
         onNavigateToPage={navigateToPage}
+        onNavigateToBlogPost={navigateToBlogPost}
+        lang={lang}
+        onToggleLanguage={handleToggleLang}
       />
 
       <main id="main-content" className="flex-grow pt-16 lg:pt-24">
@@ -1060,12 +1080,43 @@ export const App: React.FC = () => {
             {/* Home */}
             {currentPage === 'home' && (
               <>
-                <BannerSection onOpenAssessment={openAssessment} />
-                <HeroSection
-                  onOpenAssessment={openAssessment}
-                  onSelectFeature={handleSelectFeature}
-                  onNavigateToPage={navigateToPage}
-                />
+                {/* بخش مشترک پس‌زمینه مرمر لوکس ابری مطابق با تصویر ارسالی کاربر */}
+                <div className="relative diaco-marble-canvas overflow-hidden border-b border-slate-200/60">
+                  {/* بافت رگه‌های طبیعی سنگ مرمر کارارا و مه ابری با فیلتر SVG فاکتورال نویز */}
+                  <div className="diaco-marble-veins-overlay">
+                    <svg className="w-full h-full min-h-[900px]" xmlns="http://www.w3.org/2000/svg">
+                      <filter id="diaco-marble-pattern">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.0035 0.002" numOctaves="5" seed="18" result="noise" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="35" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+                        <feColorMatrix type="matrix" values="
+                          0.33 0.33 0.33 0 0
+                          0.33 0.33 0.33 0 0
+                          0.33 0.33 0.33 0 0
+                          0    0    0    1 0" />
+                        <feComponentTransfer>
+                          <feFuncR type="linear" slope="0.65" intercept="0.35" />
+                          <feFuncG type="linear" slope="0.65" intercept="0.35" />
+                          <feFuncB type="linear" slope="0.70" intercept="0.33" />
+                        </feComponentTransfer>
+                      </filter>
+                      <rect width="100%" height="100%" filter="url(#diaco-marble-pattern)" fill="#cbd5e1" />
+                    </svg>
+                  </div>
+
+                  {/* الگوهای ابری و درخشش ارگانیک ملایم روی مرمر */}
+                  <div className="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-white/70 blur-[100px] pointer-events-none" />
+                  <div className="absolute top-1/3 -left-20 h-96 w-96 rounded-full bg-slate-300/30 blur-[120px] pointer-events-none" />
+                  <div className="absolute bottom-10 right-1/3 h-80 w-80 rounded-full bg-white/80 blur-[90px] pointer-events-none" />
+
+                  <div className="relative z-10">
+                    <BannerSection onOpenAssessment={openAssessment} />
+                    <HeroSection
+                      onOpenAssessment={openAssessment}
+                      onSelectFeature={handleSelectFeature}
+                      onNavigateToPage={navigateToPage}
+                    />
+                  </div>
+                </div>
 
                 {showAssessmentModal && (
                   <section
@@ -1132,10 +1183,10 @@ export const App: React.FC = () => {
 
                 <FormCategoriesSection onOpenAssessment={openAssessment} />
                 <SuccessMetricsSection />
+                <CaseSuccessMap onOpenAssessment={openAssessment} onNavigateToPage={navigateToPage} />
                 <InteractiveCaseMap onOpenAssessment={openAssessment} onNavigateToPage={navigateToPage} />
                 <VisaSuccessSection />
                 <PodcastsSection />
-                <StoriesSection />
                 <ImmigrationBlogSection
                   onOpenAssessment={openAssessment}
                   onNavigateToPost={navigateToBlogPost}
@@ -1149,7 +1200,7 @@ export const App: React.FC = () => {
         </ErrorBoundary>
       </main>
 
-      <ContactFooter />
+      <ContactFooter onNavigateToPage={navigateToPage} />
       <SupportButton />
       <BackToTop />
 

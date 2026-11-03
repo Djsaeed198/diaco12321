@@ -7,7 +7,7 @@ interface Props {
 
 export const FormCategoriesSection: React.FC<Props> = ({ onOpenAssessment }) => {
   return (
-    <section id="form-cats" className="bg-[#0b2933] py-14" dir="rtl">
+    <section id="form-cats" className="bg-[#eef3f7] py-14 border-t border-slate-200/80" dir="rtl">
       <div className="container mx-auto px-4 md:px-8">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft md:p-8">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-5">

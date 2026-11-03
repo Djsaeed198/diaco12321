@@ -63,10 +63,19 @@ export const useSeo = (config: SeoConfig) => {
     }
     if (config.robots) setMeta('name', 'robots', config.robots);
 
-    // ===== Open Graph =====
-    const canonical = config.canonical
-      ? `${BASE_URL}${config.canonical}`
-      : `${BASE_URL}${window.location.pathname}`;
+    // ===== Canonical & Open Graph URL =====
+    let canonical = '';
+    if (config.canonical) {
+      if (config.canonical.startsWith('http://') || config.canonical.startsWith('https://')) {
+        canonical = config.canonical.split('#')[0];
+      } else {
+        const cleanPath = config.canonical.startsWith('/') ? config.canonical : `/${config.canonical}`;
+        canonical = `${BASE_URL}${cleanPath.split('#')[0]}`;
+      }
+    } else {
+      const cleanPath = window.location.pathname.replace(/\/+$/, '') || '/';
+      canonical = `${BASE_URL}${cleanPath}`;
+    }
 
     setLink('canonical', canonical);
     setMeta('property', 'og:title', config.title);

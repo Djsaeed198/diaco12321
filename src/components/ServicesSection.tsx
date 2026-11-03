@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { DIACO_SERVICES, type DiacoServiceCategory } from '../constants/content';
 
 const FILTER_GROUPS = [
@@ -8,6 +8,21 @@ const FILTER_GROUPS = [
   { id: 'business_group', label: 'ثبت شرکت و استارت‌آپ', keys: ['business', 'startup'] },
   { id: 'wealth_group', label: 'تمکن مالی، ملک و شهروندی', keys: ['personal', 'realestate', 'citizenship'] },
   { id: 'artist_group', label: 'هنرمندان و نخبگان', keys: ['artist'] },
+];
+
+export type ServiceSortOption =
+  | 'default'
+  | 'popular'
+  | 'countries_desc'
+  | 'subservices_desc'
+  | 'alphabetical';
+
+const SORT_OPTIONS: { id: ServiceSortOption; label: string; icon: string }[] = [
+  { id: 'default', label: 'پیش‌فرض دیاکو', icon: '⚡' },
+  { id: 'popular', label: 'پرمخاطب‌ترین', icon: '🔥' },
+  { id: 'countries_desc', label: 'بیشترین کشورها', icon: '🌍' },
+  { id: 'subservices_desc', label: 'بیشترین تنوع روش‌ها', icon: '📑' },
+  { id: 'alphabetical', label: 'الفبایی (الف - ی)', icon: '🔤' },
 ];
 
 const AFTER_ARRIVAL_SERVICES = [
@@ -36,12 +51,38 @@ export const ServicesSection: React.FC<Props> = ({
 }) => {
   const [activeGroup, setActiveGroup] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<ServiceSortOption>('default');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoplay, setIsAutoplay] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const [desktopCardsCount, setDesktopCardsCount] = useState<3 | 4>(4);
+  const [windowWidth, setWindowWidth] = useState<number>(
+    typeof window !== 'undefined' ? window.innerWidth : 1280
+  );
   const [selectedSubService, setSelectedSubService] = useState<{
     serviceTitle: string;
     subTitle: string;
     tag?: string;
     countries: string[];
   } | null>(null);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // محاسبه ریسپانسیو تعداد کارت‌های قابل نمایش:
+  // در نمایشگر بزرگ 4 یا 3 تا کارت، در تبلت 2 تا، و در موبایل 1 کارت
+  const visibleCount = useMemo(() => {
+    if (windowWidth < 768) return 1; // موبایل: ۱ کارت
+    if (windowWidth < 1024) return 2; // تبلت: ۲ کارت
+    if (windowWidth < 1280) return 3; // نمایشگر متوسط: ۳ کارت
+    return desktopCardsCount; // نمایشگر بزرگ: ۴ یا ۳ کارت
+  }, [windowWidth, desktopCardsCount]);
 
   const filteredServices = useMemo(() => {
     return DIACO_SERVICES.filter((service) => {
@@ -71,23 +112,109 @@ export const ServicesSection: React.FC<Props> = ({
     });
   }, [activeGroup, searchQuery]);
 
+  // اعمال سورت بر روی خدمات
+  const sortedServices = useMemo(() => {
+    const list = [...filteredServices];
+    switch (sortBy) {
+      case 'alphabetical':
+        return list.sort((a, b) => a.title.localeCompare(b.title, 'fa'));
+      case 'countries_desc':
+        return list.sort((a, b) => b.countries.length - a.countries.length);
+      case 'subservices_desc':
+        return list.sort((a, b) => b.subServices.length - a.subServices.length);
+      case 'popular': {
+        const priorityOrder = [
+          'srv-bluecard',
+          'srv-medical',
+          'srv-personal',
+          'srv-business',
+          'srv-work',
+          'srv-courses',
+          'srv-startup',
+          'srv-realestate',
+          'srv-citizenship',
+          'srv-education',
+          'srv-artist',
+          'srv-nomad',
+        ];
+        return list.sort((a, b) => {
+          const aIndex = priorityOrder.indexOf(a.id);
+          const bIndex = priorityOrder.indexOf(b.id);
+          if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+          if (aIndex !== -1) return -1;
+          if (bIndex !== -1) return 1;
+          return 0;
+        });
+      }
+      default:
+        return list;
+    }
+  }, [filteredServices, sortBy]);
+
+  const maxIndex = Math.max(0, sortedServices.length - visibleCount);
+
+  // ریست ایندکس با تغییر فیلتر، سورت یا تغییر سایز کارت‌ها
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [activeGroup, searchQuery, sortBy, visibleCount]);
+
+  // اسلایدر خودکار
+  useEffect(() => {
+    if (!isAutoplay || isPaused || sortedServices.length <= visibleCount) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isAutoplay, isPaused, sortedServices.length, visibleCount, maxIndex]);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const diff = touchStartX.current - touchEndX.current;
+      if (diff > 40) {
+        handleNext();
+      } else if (diff < -40) {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+    setIsPaused(false);
+  };
+
   return (
-    <section id="services" className="relative overflow-hidden bg-[#061a21] py-20 sm:py-24" dir="rtl">
+    <section id="services" className="relative overflow-hidden bg-[#07242e] py-20 sm:py-24 text-slate-300 border-t border-white/10" dir="rtl">
       {/* جلوه‌های نوری محیطی */}
-      <div className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-24 left-0 h-96 w-96 rounded-full bg-[#0e7490]/20 blur-[130px]" />
+      <div className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/5 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-24 left-0 h-96 w-96 rounded-full bg-[#0e7490]/10 blur-[130px]" />
 
       <div className="relative container mx-auto px-4 md:px-8">
         {/* سربرگ بخش با عنوان رسمی و شعار درخواستی دیاکو */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold tracking-wide text-amber-300">
+          <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-bold tracking-wide text-amber-300">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#f5a623]" />
             ۱۲ دپارتمان تخصصی حقوقی و بین‌المللی
           </span>
           <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-white">
             خدمات مهاجرتی دیاکو
           </h2>
-          <p className="mt-3 text-sm sm:text-base font-bold text-amber-300/90 leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base font-bold text-amber-300 leading-relaxed">
             «دیاکو؛ همراه شما در تمام مراحل اخذ ویزا، پذیرش و اقامت»
           </p>
           <p className="mt-1 text-xs text-slate-300 max-w-xl mx-auto">
@@ -109,8 +236,8 @@ export const ServicesSection: React.FC<Props> = ({
                   onClick={() => setActiveGroup(group.id)}
                   className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-[#f5a623] text-[#082833] shadow-glow font-black'
-                      : 'bg-white/[0.05] text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                      ? 'bg-[#f5a623] text-[#082833] shadow-md font-black'
+                      : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10 shadow-2xs'
                   }`}
                 >
                   {group.label}
@@ -126,7 +253,7 @@ export const ServicesSection: React.FC<Props> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="جستجوی کشور یا خدمت (مثال: آلمان، بلوکارت)..."
-              className="w-full rounded-xl border border-white/15 bg-black/40 pr-9 pl-3 py-2 text-xs text-white placeholder-slate-400 focus:border-[#f5a623] focus:outline-none"
+              className="w-full rounded-xl border border-white/20 bg-white/10 pr-9 pl-3 py-2 text-xs text-white placeholder-slate-400 focus:border-[#f5a623] focus:outline-none shadow-2xs"
             />
             <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">
               🔍
@@ -143,71 +270,243 @@ export const ServicesSection: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* گرید ۱۲ خدمت تخصصی دیاکو */}
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredServices.map((service) => (
-            <article
-              key={service.id}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-6 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#f5a623]/40 hover:shadow-[0_20px_60px_-20px_rgba(245,166,35,0.25)]"
+        {/* نوار کنترل اسلایدر، سورتینگ و گزینه‌های نمایش */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 bg-white/[0.03] border border-white/10 rounded-2xl p-3 sm:p-4 backdrop-blur-md">
+          {/* بخش سورت شدن هوشمند */}
+          <div className="flex items-center gap-2 flex-wrap text-xs">
+            <span className="text-amber-300 font-bold flex items-center gap-1">
+              <span>⇅</span>
+              <span>سورت بر اساس:</span>
+            </span>
+            <div className="flex items-center gap-1 flex-wrap">
+              {SORT_OPTIONS.map((opt) => {
+                const isSelected = sortBy === opt.id;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setSortBy(opt.id)}
+                    className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition flex items-center gap-1 cursor-pointer ${
+                      isSelected
+                        ? 'bg-[#f5a623] text-[#082833] shadow-glow font-black'
+                        : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                    }`}
+                  >
+                    <span>{opt.icon}</span>
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* کنترل‌های اسلایدر و تعداد کارت‌ها در دسکتاپ */}
+          <div className="flex items-center gap-2.5 flex-wrap justify-between sm:justify-end w-full sm:w-auto">
+            {/* انتخاب ۳ یا ۴ کارت در نمایشگر بزرگ دسکتاپ */}
+            {windowWidth >= 1280 && (
+              <div className="hidden xl:flex items-center gap-1 bg-black/40 border border-white/10 p-1 rounded-xl text-[11px]">
+                <span className="text-slate-400 px-1.5 font-medium">نمایش دسکتاپ:</span>
+                <button
+                  type="button"
+                  onClick={() => setDesktopCardsCount(4)}
+                  className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                    desktopCardsCount === 4
+                      ? 'bg-amber-400 text-[#071f26] font-black'
+                      : 'text-slate-300 hover:text-white'
+                  }`}
+                  title="نمایش ۴ کارت در نمایشگر بزرگ"
+                >
+                  ۴ کارت
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDesktopCardsCount(3)}
+                  className={`px-2.5 py-1 rounded-lg font-bold transition cursor-pointer ${
+                    desktopCardsCount === 3
+                      ? 'bg-amber-400 text-[#071f26] font-black'
+                      : 'text-slate-300 hover:text-white'
+                  }`}
+                  title="نمایش ۳ کارت در نمایشگر بزرگ"
+                >
+                  ۳ کارت
+                </button>
+              </div>
+            )}
+
+            {/* نشانگر اسلاید فعلی */}
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] text-slate-300 font-medium bg-black/40 px-2.5 py-1.5 rounded-xl border border-white/10">
+                کارت {sortedServices.length > 0 ? currentIndex + 1 : 0} تا {Math.min(currentIndex + visibleCount, sortedServices.length)} از {sortedServices.length}
+              </span>
+
+              {/* دکمه توقف / فعال‌سازی پخش خودکار */}
+              <button
+                type="button"
+                onClick={() => setIsAutoplay(!isAutoplay)}
+                className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold border transition flex items-center gap-1.5 cursor-pointer ${
+                  isAutoplay && !isPaused
+                    ? 'border-emerald-500/40 text-emerald-300 bg-emerald-500/10'
+                    : 'border-white/15 text-slate-300 bg-white/5 hover:bg-white/10'
+                }`}
+                title={isAutoplay ? 'توقف اسلایدر خودکار' : 'فعال‌سازی اسلایدر خودکار'}
+              >
+                <span className={`inline-block h-2 w-2 rounded-full ${isAutoplay && !isPaused ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500'}`} />
+                <span>{isAutoplay && !isPaused ? 'خودکار فعال' : 'متوقف'}</span>
+              </button>
+
+              {/* دکمه‌های ناوبری قبلی و بعدی */}
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#f5a623] hover:text-[#082833] text-white border border-white/15 flex items-center justify-center text-sm font-black transition cursor-pointer"
+                  title="خدمت قبلی"
+                  aria-label="خدمت قبلی"
+                >
+                  →
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="w-8 h-8 rounded-xl bg-white/10 hover:bg-[#f5a623] hover:text-[#082833] text-white border border-white/15 flex items-center justify-center text-sm font-black transition cursor-pointer"
+                  title="خدمت بعدی"
+                  aria-label="خدمت بعدی"
+                >
+                  ←
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* کانتینر اسلایدر اتوماتیک و ریسپانسیو دیاکو */}
+        {sortedServices.length === 0 ? (
+          <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-12 text-center">
+            <span className="text-4xl">🔍</span>
+            <h3 className="mt-3 text-lg font-bold text-white">خدمتی با این مشخصات یافت نشد</h3>
+            <p className="mt-1 text-xs text-slate-400">
+              لطفاً فیلترهای جستجو یا دسته‌بندی را تغییر دهید.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setActiveGroup('all');
+                setSearchQuery('');
+                setSortBy('default');
+              }}
+              className="mt-4 rounded-xl bg-[#f5a623] px-4 py-2 text-xs font-black text-[#082833] cursor-pointer"
             >
-              {/* افکت هاور */}
+              نمایش همه خدمات
+            </button>
+          </div>
+        ) : (
+          <div
+            className="relative mt-8 group/slider"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* دکمه شناور قبلی (سمت راست در RTL) */}
+            <button
+              type="button"
+              onClick={handlePrev}
+              className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#082833]/90 hover:bg-[#f5a623] hover:text-[#082833] text-white border border-amber-400/40 shadow-xl flex items-center justify-center text-base font-black transition-all opacity-80 group-hover/slider:opacity-100 hover:scale-110 cursor-pointer backdrop-blur-md"
+              title="خدمت قبلی"
+              aria-label="خدمت قبلی"
+            >
+              →
+            </button>
+
+            {/* دکمه شناور بعدی (سمت چپ در RTL) */}
+            <button
+              type="button"
+              onClick={handleNext}
+              className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-[#082833]/90 hover:bg-[#f5a623] hover:text-[#082833] text-white border border-amber-400/40 shadow-xl flex items-center justify-center text-base font-black transition-all opacity-80 group-hover/slider:opacity-100 hover:scale-110 cursor-pointer backdrop-blur-md"
+              title="خدمت بعدی"
+              aria-label="خدمت بعدی"
+            >
+              ←
+            </button>
+
+            {/* تراک اسلایدر با انیمیشن روان و تنظیم دقیق پهنای کارت بر اساس دستگاه */}
+            <div className="overflow-hidden rounded-3xl" dir="ltr">
               <div
-                className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className="flex transition-transform duration-500 ease-out"
                 style={{
-                  background: `linear-gradient(135deg, ${service.accentColor}25, transparent 60%)`,
+                  transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
                 }}
-              />
-
-              <div className="relative">
-                {/* سربرگ کارت: آیکون و نشان */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="grid h-13 w-13 place-items-center rounded-2xl bg-white/[0.08] text-2xl shadow-inner border border-white/10 group-hover:scale-110 transition-transform"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
+                {sortedServices.map((service) => (
+                  <div
+                    key={service.id}
+                    style={{ width: `${100 / visibleCount}%` }}
+                    className="shrink-0 p-2 sm:p-2.5 h-full"
+                    dir="rtl"
                   >
-                    {service.icon}
-                  </span>
-                  <span
-                    className="rounded-full px-3 py-1 text-[10px] font-bold"
-                    style={{
-                      backgroundColor: `${service.accentColor}20`,
-                      color: service.accentColor,
-                      border: `1px solid ${service.accentColor}40`,
-                    }}
-                  >
-                    {service.badge}
-                  </span>
-                </div>
+                    <article
+                      key={service.id}
+                      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#08222b] p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#f5a623]/60 hover:shadow-2xl"
+                    >
+                      {/* افکت هاور */}
+                      <div
+                        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        style={{
+                          background: `linear-gradient(135deg, ${service.accentColor}25, transparent 60%)`,
+                        }}
+                      />
 
-                {/* عنوان و توضیحات اصلی */}
-                <h3 className="mt-4 text-base sm:text-lg font-black text-white group-hover:text-amber-300 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-xs leading-6 text-slate-300 text-justify font-medium">
-                  {service.description}
-                </p>
+                      <div className="relative">
+                        {/* سربرگ کارت: آیکون و نشان */}
+                        <div className="flex items-center justify-between">
+                          <span
+                            className="grid h-13 w-13 place-items-center rounded-2xl bg-white/10 text-2xl shadow-2xs border border-white/15 group-hover:scale-110 transition-transform"
+                          >
+                            {service.icon}
+                          </span>
+                          <span
+                            className="rounded-full px-3 py-1 text-[10px] font-bold"
+                            style={{
+                              backgroundColor: `${service.accentColor}20`,
+                              color: service.accentColor,
+                              border: `1px solid ${service.accentColor}40`,
+                            }}
+                          >
+                            {service.badge}
+                          </span>
+                        </div>
 
-                {/* کشورهای تحت پوشش */}
-                <div className="mt-4 pt-3 border-t border-white/10">
-                  <p className="text-[10px] font-bold text-slate-400 mb-1.5">کشورهای مقصد:</p>
-                  <div className="flex flex-wrap gap-1">
-                    {service.countries.map((c) => (
-                      <span
-                        key={c}
-                        className="rounded-lg bg-white/[0.06] border border-white/10 px-2 py-0.5 text-[10px] text-slate-200 font-medium"
-                      >
-                        {c}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                        {/* عنوان و توضیحات اصلی */}
+                        <h3 className="mt-4 text-base sm:text-lg font-black text-white group-hover:text-amber-300 transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="mt-2 text-xs leading-6 text-slate-300 text-justify font-medium">
+                          {service.description}
+                        </p>
 
-                {/* فهرست زیرخدمات و راهنماهای مرتبط */}
-                <div className="mt-4 pt-3 border-t border-white/10">
-                  <p className="text-[10px] font-bold text-amber-300 mb-2 flex items-center justify-between">
-                    <span>زیرخدمات و مسیرهای اختصاصی:</span>
-                    <span className="text-[9px] text-slate-400 font-normal">کلیک برای جزئیات</span>
-                  </p>
-                  <ul className="space-y-1.5">
+                        {/* کشورهای تحت پوشش */}
+                        <div className="mt-4 pt-3 border-t border-white/10">
+                          <p className="text-[10px] font-bold text-slate-400 mb-1.5">کشورهای مقصد:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {service.countries.map((c) => (
+                              <span
+                                key={c}
+                                className="rounded-lg bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-300 font-medium"
+                              >
+                                {c}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* فهرست زیرخدمات و راهنماهای مرتبط */}
+                        <div className="mt-4 pt-3 border-t border-white/10">
+                          <p className="text-[10px] font-bold text-amber-300 mb-2 flex items-center justify-between">
+                            <span>زیرخدمات و مسیرهای اختصاصی:</span>
+                            <span className="text-[9px] text-slate-400 font-normal">کلیک برای جزئیات</span>
+                          </p>
+                          <ul className="space-y-1.5">
                     {service.subServices.map((sub, sIdx) => {
                       let dedicatedPage: PageType | null = null;
                       let dedicatedCountryKey: 'germany' | 'spain' | 'italy' | 'austria' | 'hungary' | null = null;
@@ -389,47 +688,60 @@ export const ServicesSection: React.FC<Props> = ({
 
                       return (
                         <li key={sIdx}>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              if (dedicatedPage) {
-                                if (onNavigateToPage) {
-                                  onNavigateToPage(dedicatedPage);
-                                } else if (dedicatedCountryKey && onNavigateToBlueCard) {
-                                  onNavigateToBlueCard(dedicatedCountryKey);
-                                } else {
-                                  window.location.hash = `#${dedicatedPage}`;
+                          {hasDedicatedPage ? (
+                            <a
+                              href={`/${dedicatedPage}`}
+                              onClick={(e) => {
+                                if (!e.ctrlKey && !e.metaKey) {
+                                  e.preventDefault();
+                                  if (onNavigateToPage) {
+                                    onNavigateToPage(dedicatedPage!);
+                                  } else if (dedicatedCountryKey && onNavigateToBlueCard) {
+                                    onNavigateToBlueCard(dedicatedCountryKey);
+                                  } else {
+                                    window.location.pathname = `/${dedicatedPage}`;
+                                  }
                                 }
-                              } else {
+                              }}
+                              className="w-full flex items-center justify-between rounded-xl px-2.5 py-1.5 text-[11px] transition text-right group/sub cursor-pointer bg-amber-400/15 hover:bg-amber-400/25 text-amber-200 border border-amber-400/40 shadow-2xs"
+                            >
+                              <span className="font-semibold flex items-center gap-1.5">
+                                <span className="text-[#f5a623] text-xs">▸</span>
+                                <span>{sub.title}</span>
+                                <span className="mr-1 rounded bg-[#f5a623] text-[#082833] px-1 py-0.2 text-[8px] font-black">
+                                  صفحه اختصاصی
+                                </span>
+                              </span>
+                              {sub.tag && (
+                                <span className="text-[9px] text-amber-200 font-medium bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-400/40">
+                                  {sub.tag}
+                                </span>
+                              )}
+                            </a>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => {
                                 setSelectedSubService({
                                   serviceTitle: service.title,
                                   subTitle: sub.title,
                                   tag: sub.tag,
                                   countries: service.countries,
                                 });
-                              }
-                            }}
-                            className={`w-full flex items-center justify-between rounded-xl px-2.5 py-1.5 text-[11px] transition text-right group/sub cursor-pointer ${
-                              hasDedicatedPage
-                                ? 'bg-gradient-to-l from-amber-500/15 to-amber-400/5 hover:from-amber-500/25 hover:to-amber-400/15 text-white border border-amber-400/40 shadow-[0_0_12px_rgba(245,166,35,0.15)] ring-1 ring-amber-400/20'
-                                : 'bg-black/25 hover:bg-white/10 text-slate-200 hover:text-white border border-transparent hover:border-white/10'
-                            }`}
-                          >
-                            <span className="font-semibold flex items-center gap-1.5">
-                              <span className="text-[#f5a623] text-xs">▸</span>
-                              <span>{sub.title}</span>
-                              {hasDedicatedPage && (
-                                <span className="mr-1 rounded bg-[#f5a623] text-[#082833] px-1 py-0.2 text-[8px] font-black">
-                                  صفحه اختصاصی
+                              }}
+                              className="w-full flex items-center justify-between rounded-xl px-2.5 py-1.5 text-[11px] transition text-right group/sub cursor-pointer bg-white/5 hover:bg-white/10 text-slate-200 hover:text-white border border-white/10"
+                            >
+                              <span className="font-semibold flex items-center gap-1.5">
+                                <span className="text-[#f5a623] text-xs">▸</span>
+                                <span>{sub.title}</span>
+                              </span>
+                              {sub.tag && (
+                                <span className="text-[9px] text-amber-200 font-medium bg-amber-500/20 px-1.5 py-0.5 rounded border border-amber-400/40">
+                                  {sub.tag}
                                 </span>
                               )}
-                            </span>
-                            {sub.tag && (
-                              <span className="text-[9px] text-amber-300/80 font-normal bg-white/5 px-1.5 py-0.5 rounded">
-                                {sub.tag}
-                              </span>
-                            )}
-                          </button>
+                            </button>
+                          )}
                         </li>
                       );
                     })}
@@ -442,69 +754,92 @@ export const ServicesSection: React.FC<Props> = ({
                 <button
                   type="button"
                   onClick={() => onSelectService?.(service.title)}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-2.5 text-xs font-bold text-white transition-all duration-300 hover:border-[#f5a623] hover:bg-[#f5a623] hover:text-[#082833] cursor-pointer"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 py-2.5 text-xs font-bold text-white transition-all duration-300 hover:border-[#f5a623] hover:bg-[#f5a623] hover:text-[#082833] cursor-pointer shadow-2xs"
                 >
                   <span>درخواست ارزیابی {service.title}</span>
                   <span>←</span>
                 </button>
               </div>
             </article>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* نقاط نشانگر صفحه (Pagination Dots) */}
+    {maxIndex > 0 && (
+      <div className="mt-6 flex items-center justify-center gap-1.5">
+        {Array.from({ length: maxIndex + 1 }).map((_, idx) => {
+          const isActive = currentIndex === idx;
+          return (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setCurrentIndex(idx)}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                isActive
+                  ? 'w-8 bg-[#f5a623] shadow-glow'
+                  : 'w-2 bg-white/20 hover:bg-white/40'
+              }`}
+              aria-label={`اسلاید ${idx + 1}`}
+              title={`مشاهده اسلاید ${idx + 1}`}
+            />
+          );
+        })}
+      </div>
+    )}
+  </div>
+)}
 
         {/* خدمات پس از ورود */}
-        <div className="mt-20 rounded-3xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl md:p-8">
+        <div className="mt-20 rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-2xl md:p-8 backdrop-blur-xl">
           <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-<h3 className="text-lg font-black text-white sm:text-xl">
-  خدمات پس از ورود (After-Arrival Services) در اروپا
-</h3>
+              <h3 className="text-lg font-black text-white sm:text-xl">
+                خدمات پس از ورود (After-Arrival Services) در اروپا
+              </h3>
               <p className="mt-1 text-[11px] text-slate-300 sm:text-xs">
                 همراهی در تمام مراحل استقرار قانونی و اداری جهت راحتی و آرامش خاطر متقاضیان و خانواده‌ها
               </p>
             </div>
-<span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[10px] font-bold text-emerald-300">
-  پشتیبانی در سراسر اروپا
-</span>
+            <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-bold text-emerald-300">
+              پشتیبانی در سراسر اروپا
+            </span>
           </div>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {AFTER_ARRIVAL_SERVICES.map((item) => (
-              <div
+              <a
                 key={item.title}
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  if (onNavigateToPage) {
-                    onNavigateToPage('after-arrival');
-                  } else {
-                    window.location.hash = '#after-arrival';
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
+                href="/after-arrival"
+                onClick={(e) => {
+                  if (!e.ctrlKey && !e.metaKey) {
                     e.preventDefault();
-                    if (onNavigateToPage) onNavigateToPage('after-arrival');
+                    if (onNavigateToPage) {
+                      onNavigateToPage('after-arrival');
+                    } else {
+                      window.location.pathname = '/after-arrival';
+                    }
                   }
                 }}
-                className="group flex flex-col justify-between rounded-2xl border border-white/[0.09] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-4.5 transition-all duration-300 hover:border-amber-400/60 hover:bg-white/[0.08] hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(245,166,35,0.25)] cursor-pointer"
+                className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 p-4.5 transition-all duration-300 hover:border-amber-400/60 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
               >
                 <div className="flex items-start gap-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/[0.08] text-xl border border-white/10 group-hover:scale-110 group-hover:bg-amber-400/20 transition-all duration-300">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 text-xl border border-white/15 shadow-2xs group-hover:scale-110 group-hover:bg-amber-400/20 transition-all duration-300">
                     {item.icon}
                   </span>
                   <div>
                     <p className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
                       {item.title}
                     </p>
-                    <p className="mt-1 text-[10px] leading-4 text-slate-300">{item.desc}</p>
+                    <p className="mt-1 text-[10px] leading-4 text-slate-400">{item.desc}</p>
                   </div>
                 </div>
-                <div className="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[9px] font-bold text-amber-300/80 group-hover:text-amber-300">
+                <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[9px] font-bold text-amber-300 group-hover:text-amber-200">
                   <span>راهنمای استقرار ۲۰۲۶</span>
                   <span className="transition-transform duration-200 group-hover:-translate-x-1">صفحه اختصاصی ←</span>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
@@ -523,20 +858,23 @@ export const ServicesSection: React.FC<Props> = ({
               ))}
             </div>
 
-            <button
-              type="button"
-              onClick={() => {
-                if (onNavigateToPage) {
-                  onNavigateToPage('after-arrival');
-                } else {
-                  onSelectService?.('خدمات پس از ورود');
+            <a
+              href="/after-arrival"
+              onClick={(e) => {
+                if (!e.ctrlKey && !e.metaKey) {
+                  e.preventDefault();
+                  if (onNavigateToPage) {
+                    onNavigateToPage('after-arrival');
+                  } else {
+                    window.location.pathname = '/after-arrival';
+                  }
                 }
               }}
               className="group inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-gradient-to-l from-amber-500/20 to-amber-400/10 px-5 py-2.5 text-xs font-black text-amber-300 transition-all duration-300 hover:border-amber-400 hover:bg-amber-400 hover:text-slate-950 shadow-glow cursor-pointer"
             >
               <span>مشاهده صفحه و راهنمای کامل خدمات پس از ورود ۲۰۲۶</span>
               <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

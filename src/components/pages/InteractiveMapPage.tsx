@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useSeo } from '../../hooks/useSeo';
 import InteractiveCaseMap from '../InteractiveCaseMap';
+import CaseSuccessMap from '../CaseSuccessMap';
 import type { PageType } from '../Header';
 
 interface Props {
@@ -105,7 +106,13 @@ export const InteractiveMapPage: React.FC<Props> = ({
         </div>
       </section>
 
-      {/* کامپوننت نقشه تعاملی اصلی */}
+      {/* کامپوننت نقشه خوشه‌ها و تحلیل آماری کلاسترها */}
+      <CaseSuccessMap
+        onOpenAssessment={onOpenAssessment}
+        onNavigateToPage={onNavigateToPage}
+      />
+
+      {/* کامپوننت نقشه تعاملی مقاصد و پرونده‌ها */}
       <div className="bg-[#07242e] py-6 border-b border-white/10">
         <InteractiveCaseMap
           onOpenAssessment={onOpenAssessment}

@@ -1,34 +1,11 @@
 import React, { useState } from 'react';
 import {
-  CheckCircle2,
-  Clock,
-  ArrowRight,
-  ArrowLeft,
-  ChevronDown,
-  PhoneCall,
-  Check,
-  Copy,
-  Sparkles,
-  ShieldCheck,
-  Building2,
-  Scale,
-  Award,
-  Euro,
-  FileCheck2,
-  Briefcase,
-  GraduationCap,
-  Users,
-  Compass,
-  FileSpreadsheet,
-  CheckCheck,
-  AlertTriangle,
-  MapPin,
-  Calendar,
-  TrendingUp,
-  BookOpen,
-  Languages,
-  Banknote,
-  FileWarning,
+  CheckCircle2, ChevronDown, PhoneCall, Copy, Sparkles, ArrowLeft,
+  AlertTriangle, CalendarDays, Menu, X, Star, Quote, MapPin, Clock,
+  Users, Info, Globe, Plane, Briefcase, GraduationCap, Award, Search,
+  Calculator, TrendingUp, ExternalLink, ShieldCheck, BookOpen, FileCheck2,
+  ThumbsUp, ThumbsDown, FileWarning, Languages, Euro, Wallet, Building2,
+  Scale, FileSpreadsheet, CheckCheck, Compass, Banknote,
 } from 'lucide-react';
 import { useSeo } from '../../../hooks/useSeo';
 
@@ -38,33 +15,145 @@ interface Props {
   onNavigateToCountry?: (countryKey: string) => void;
 }
 
-export const AustriaRwrCardPage: React.FC<Props> = ({
-  onBackToHome,
-  onOpenAssessment,
-}) => {
+/* ---------- داده‌های ساختاریافته ۲۰۲۶ ---------- */
+const keyFigures = [
+  { icon: Award, label: '۵۵ / ۹۰', sub: 'حداقل امتیاز (مشاغل کمبود)' },
+  { icon: Euro, label: '€۳,۴۶۵', sub: 'حداقل حقوق ماهانه (سایر)' },
+  { icon: Clock, label: '۲ سال', sub: 'اعتبار کارت اولیه' },
+  { icon: Plane, label: '۵ سال', sub: 'مسیر تا اقامت دائم' },
+];
+
+const shortageOccupations = [
+  { category: 'IT و نرم‌افزار', jobs: 'برنامه‌نویس، مهندس نرم‌افزار، Data Scientist، Network Engineer، SAP Consultant' },
+  { category: 'مهندسی مکانیک', jobs: 'مهندس مکانیک، تکنسین CAD، مکاترونیک، تکنسین تأسیسات' },
+  { category: 'برق و الکترونیک', jobs: 'الکترومکانیک، تکنسین برق، مهندس اتوماسیون' },
+  { category: 'ساختمان', jobs: 'مهندس عمران، تکنسین ساختمان، BIM Technician' },
+  { category: 'مالی و اداری', jobs: 'حسابدار حقوق و دستمزد (Lohnverrechner)' },
+  { category: 'بهداشت و درمان', jobs: 'پرستار، تکنسین پزشکی، فیزیوتراپیست' },
+];
+
+const processSteps = [
+  { step: '۱', title: 'ارزیابی امتیاز و مسیر', detail: 'محاسبه امتیاز بر اساس جدول AMS. بررسی تطابق شغل با Mangelberufe ۲۰۲۶. تعیین مسیر ۵۵ یا ۷۰.', time: '۱ روز' },
+  { step: '۲', title: 'تأمین جاب‌آفر و حقوق', detail: 'برای مسیر ۵۵: کارفرما باید حقوق €۳,۴۶۵ (سایر) یا طبق Kollektivvertrag (مشاغل کمبود) پرداخت کند.', time: '۲–۶ ماه' },
+  { step: '۳', title: 'ثبت در MA35 یا سفارت', detail: 'کارفرما می‌تواند در MA35 وین ثبت کند (سریع‌تر) یا متقاضی در سفارت.', time: '۱ روز' },
+  { step: '۴', title: 'تأیید AMS و صدور ویزا', detail: 'مشاغل کمبود: بدون آزمون بازار کار. سایر: آزمون AMS. ویزای D: ۴-۵ هفته.', time: '۴–۸ هفته' },
+  { step: '۵', title: 'ورود به اتریش و دریافت کارت', detail: 'ثبت Meldezettel ظرف ۳ روز. کارت RWR ۲۴ ماهه صادر می‌شود.', time: '۲–۴ هفته' },
+];
+
+const pros = [
+  { title: 'دسترسی به بازار کار قوی اروپا', desc: 'یکی از پایین‌ترین نرخ‌های بیکاری در اروپا' },
+  { title: 'حقوق بالا و مزایای قانونی', desc: 'حداقل €۳,۴۶۵ در ماه + ۱۳ و ۱۴ ماه حقوق در برخی مشاغل' },
+  { title: 'حق کار کامل همسر از روز اول', desc: 'RWR Plus بدون نیاز به تأیید AMS' },
+  { title: 'مسیر روشن به اقامت دائم', desc: 'پس از ۵ سال اقامت قانونی مستمر' },
+  { title: 'تحصیل رایگان فرزندان', desc: 'دسترسی به مدارس دولتی و دانشگاه‌های اتریش' },
+  { title: 'بیمه درمانی جامع', desc: 'پوشش کامل سیستم بهداشت عمومی اتریش' },
+  { title: 'امکان تغییر کارفرما پس از ۲ سال', desc: 'با RWR Plus آزادی کامل در بازار کار' },
+  { title: 'زندگی در وین — بهترین شهر جهان', desc: 'کیفیت زندگی بالا در رتبه‌بندی‌های جهانی' },
+];
+
+const cons = [
+  { title: 'نیاز به جاب‌آفر اولیه', desc: 'برای مسیر ۵۵ امتیازی (به‌جز Jobseeker)' },
+  { title: 'زمان پردازش طولانی MA35', desc: 'میانگین ۳۲۴ روز در ۲۰۲۴ — با وکیل کاهش می‌یابد' },
+  { title: 'رقابت شدید در برخی مشاغل', desc: 'به‌ویژه در حوزه‌های غیرکمبود' },
+  { title: 'زبان آلمانی برای اقامت دائم', desc: 'B1 برای Daueraufenthalt-EU الزامی است' },
+  { title: 'آزمون بازار کار برای مشاغل غیرکمبود', desc: 'AMS باید تأیید کند نیروی اتریشی موجود نیست' },
+  { title: 'هزینه زندگی در وین رو به افزایش', desc: 'اجاره و بیمه در حال رشد است' },
+  { title: 'محدودیت تغییر شغل در ۲ سال اول', desc: 'برای تغییر کارفرما نیاز به تأیید AMS است' },
+];
+
+const sampleVisas = [
+  {
+    id: 'AT-RWR-2026-0218',
+    name: 'A.R.',
+    city: 'وین',
+    date: 'فوریه ۲۰۲۶',
+    profile: 'مهندس نرم‌افزار — مسیر مشاغل کمبود',
+    type: 'RWR Card → RWR Plus',
+    image: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80',
+    alt: 'نمونه کارت RWR اتریش — وین',
+  },
+  {
+    id: 'AT-RWR-2026-0405',
+    name: 'S.N.',
+    city: 'گراتس',
+    date: 'آوریل ۲۰۲۶',
+    profile: 'متخصص داده — مسیر ۷۰ امتیازی نخبگان',
+    type: 'Jobseeker → RWR Card',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
+    alt: 'نمونه کارت RWR اتریش — گراتس',
+  },
+  {
+    id: 'AT-RWR-2026-0622',
+    name: 'M.K.',
+    city: 'لینتس',
+    date: 'ژوئن ۲۰۲۶',
+    profile: 'مهندس مکانیک — سایر نیروهای کلیدی',
+    type: 'RWR Card → RWR Plus',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80',
+    alt: 'نمونه کارت RWR اتریش — لینتس',
+  },
+];
+
+const detailedTestimonials = [
+  {
+    name: 'آرش رضایی',
+    role: 'مهندس نرم‌افزار',
+    company: 'Dynatrace',
+    city: 'وین',
+    date: 'فوریه ۲۰۲۶',
+    scheme: 'مشاغل کمبود → RWR Card',
+    rating: 5,
+    text: 'من از طریق مسیر مشاغل کمبود (Mangelberufe) با ۵۸ امتیاز اقدام کردم. شغل من «مهندس نرم‌افزار» بود که در لیست ۲۰۲۶ قرار داشت. دیاکو ابتدا امتیازاتم را دقیق محاسبه کرد: مدرک کارشناسی ارشد (۳۰) + سابقه ۳ سال (۶) + آلمانی A2 (۱۰) + سن زیر ۳۰ (۱۵) = ۶۱ امتیاز. نکته کلیدی: از آنجا که شغلم در لیست کمبود بود، آزمون بازار کار حذف شد و کارفرما فقط باید Arbeitgebererklärung ارائه می‌داد. کل فرآیند از جاب‌آفر تا دریافت کارت، ۵ ماه طول کشید. همسرم RWR Plus گرفت و توانست در یک شرکت طراحی مشغول شود.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+  },
+  {
+    name: 'نگار موسوی',
+    role: 'متخصص داده',
+    company: 'Siemens',
+    city: 'گراتس',
+    date: 'مه ۲۰۲۶',
+    scheme: 'نخبگان ۷۰/۱۰۰ → RWR Card',
+    rating: 5,
+    text: 'من مدرک دکتری علوم داده داشتم و امتیازم در مسیر نخبگان به ۷۵ رسید (دکتری=۴۰، سن=۱۵، سابقه=۱۰، انگلیسی=۱۰). با Jobseeker Visa ۶ ماهه وارد اتریش شدم و در ماه چهارم جاب‌آفر از Siemens گرفتم. نکته مهم: چون از مسیر نخبگان بودم، پس از یافتن کار، تبدیل به RWR بدون آزمون بازار کار انجام شد. دیاکو در همه مراحل کنارم بود — از ثبت Meldezettel تا دریافت کارت. همسرم هم RWR Plus گرفت. پس از ۵ سال می‌توانم برای اقامت دائم اقدام کنم.',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+  },
+];
+
+const faqs = [
+  { q: 'حداقل حقوق برای کارت RWR اتریش در ۲۰۲۶ چقدر است؟', a: 'برای مسیر «سایر نیروهای کلیدی» حداقل حقوق ناخالص ماهانه €۳,۴۶۵ به‌علاوه پرداخت‌های ویژه (Sonderzahlungen) است. برای مشاغل کمبود (Mangelberufe)، حقوق طبق قرارداد جمعی (Kollektivvertrag) تعیین می‌شود که معمولاً پایین‌تر از €۳,۴۶۵ است.' },
+  { q: 'تفاوت مسیر ۵۵ امتیاز با ۷۰ امتیاز چیست؟', a: 'مسیر ۵۵/۹۰ برای مشاغل کمبود و سایر نیروهای کلیدی است و نیاز به جاب‌آفر دارد. مسیر ۷۰/۱۰۰ برای «متخصصان بسیار عالی‌رتبه» است و امکان ورود ۶ ماهه بدون جاب‌آفر برای جستجوی کار را می‌دهد (Jobseeker Visa).' },
+  { q: 'پس از ۲ سال چه اتفاقی می‌افتد؟', a: 'RWR Card اولیه ۲۴ ماه اعتبار دارد. پس از آن می‌توانید RWR Plus (۳ سال) دریافت کنید که اجازه تغییر کارفرما را می‌دهد. پس از مجموع ۵ سال اقامت قانونی، می‌توانید برای Daueraufenthalt-EU (اقامت دائم اتحادیه اروپا) درخواست دهید.' },
+  { q: 'آیا همسر اجازه کار دارد؟', a: 'بله. همسر و فرزندان زیر ۱۸ سال همزمان RWR Plus دریافت می‌کنند که اجازه کار نامحدود در تمام اتریش را بدون نیاز به تأیید AMS می‌دهد.' },
+  { q: 'MA35 چقدر طول می‌کشد؟', a: 'طبق گزارش رسمی MA35، میانگین زمان پردازش در سال ۲۰۲۴ حدود ۳۲۴ روز بوده است. اما با پیگیری مستقیم وکیل مقیم (مانند دفتر وین دیاکو)، این زمان به طور قابل توجهی کاهش می‌یابد. ویزای D معمولاً ۴-۵ هفته پس از تأیید AMS صادر می‌شود.' },
+  { q: 'چه مدارکی برای اثبات امتیاز لازم است؟', a: 'مدرک تحصیلی با ترجمه رسمی و Apostille، قراردادهای کاری یا گواهی سابقه بیمه، مدرک زبان (ÖSD/ÖIF/Goethe/TELC یا IELTS/TOEFL)، شناسنامه یا پاسپورت برای اثبات سن، Arbeitgebererklärung از کارفرما (برای مسیر ۵۵).' },
+  { q: 'آیا شغل من باید در لیست مشاغل کمبود باشد؟', a: 'اگر مسیر «مشاغل کمبود» را انتخاب می‌کنید، بله. لیست Mangelberufe ۲۰۲۶ شامل مشاغل IT، مهندسی، برق، مکاترونیک، تکنسین تأسیسات، پرستار و حسابدار حقوق و دستمزد است. اگر شغل شما در لیست نیست، می‌توانید از مسیر «سایر نیروهای کلیدی» با حقوق €۳,۴۶۵ و آزمون بازار کار استفاده کنید.' },
+  { q: 'مسیر رسیدن به اقامت دائم و تابعیت چگونه است؟', a: '۲ سال RWR Card → RWR Plus (۳ سال) → مجموع ۵ سال اقامت قانونی → Daueraufenthalt-EU. برای تابعیت اتریش معمولاً ۶-۱۰ سال اقامت مستمر و شرایط اضافی (زبان B1، درآمد کافی) لازم است.' },
+];
+
+const relatedArticles = [
+  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/guides/jobseeker-austria-2027', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR' },
+  { title: 'اقامت تمکن مالی اتریش', href: '/guides/financial-austria', desc: '€۲,۶۱۶/ماه + سهمیه محدود' },
+  { title: 'اقامت هنرمندان اتریش (NAG §43a)', href: '/guides/artist-austria', desc: '€۱,۳۰۸/ماه + زبان A1 با豁免' },
+];
+
+export const AustriaRwrCardPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [copiedPhone, setCopiedPhone] = useState(false);
-  const [activeTab, setActiveTab] = useState<'points' | 'categories' | 'process' | 'comparison'>('points');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<'points' | 'categories' | 'comparison'>('points');
 
   useSeo({
-    title: 'کارت قرمز-سفید-قرمز اتریش ۲۰۲۶ | ۵۵ امتیاز + حقوق ۳,۴۶۵€',
+    title: 'کارت قرمز-سفید-قرمز اتریش ۲۰۲۶ | RWR Card + ۵۵ امتیاز + حقوق €۳,۴۶۵',
     description:
-      'راهنمای کامل RWR Card اتریش ۲۰۲۶: حداقل ۵۵ امتیاز از ۹۰ برای مشاغل短缺، حقوق پایه ۳,۴۶۵ یورو، ۵ دسته متقاضیان، لیست مشاغل مورد نیاز و مسیر ۵ ساله تا اقامت دائم با دفتر وین دیاکو.',
+      'راهنمای کامل RWR Card اتریش ۲۰۲۶: حداقل ۵۵ امتیاز از ۹۰ برای مشاغل کمبود، حقوق پایه €۳,۴۶۵، ۵ دسته متقاضیان، لیست Mangelberufe ۲۰۲۶ (IT، مهندسی، پرستاری)، مسیر RWR Plus و اقامت دائم ۵ ساله. مشاوره دفتر وین دیاکو.',
     canonical: '/guides/austria-rwr',
     ogType: 'article',
-    ogImage:
-      'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
+    ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
     keywords: [
-      'کارت قرمز سفید قرمز اتریش ۲۰۲۶',
-      'Rot-Weiß-Rot-Karte',
-      'اقامت کاری اتریش',
-      'حداقل حقوق RWR ۳۴۶۵ یورو',
-      'جدول امتیازات RWR ۵۵',
-      'مشاغل دارای کمبود نیرو اتریش ۲۰۲۶',
-      'تبدیل RWR به RWR Plus',
-      'اداره MA35 وین',
-      'مهاجرت کاری به اتریش',
-      'Daueraufenthalt-EU اتریش',
+      'کارت قرمز سفید قرمز اتریش ۲۰۲۶', 'Rot-Weiß-Rot-Karte',
+      'اقامت کاری اتریش', 'حداقل حقوق RWR ۳۴۶۵ یورو',
+      'جدول امتیازات RWR ۵۵', 'مشاغل کمبود اتریش ۲۰۲۶',
+      'تبدیل RWR به RWR Plus', 'MA35 وین', 'RWR Card 2026',
     ],
     jsonLd: {
       '@context': 'https://schema.org',
@@ -72,30 +161,12 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
         {
           '@type': 'Article',
           '@id': 'https://www.dia-co.ir/guides/austria-rwr#article',
-          headline: 'راهنمای جامع کارت قرمز-سفید-قرمز اتریش ۲۰۲۶: ۵۵ امتیاز، حقوق ۳,۴۶۵€ و مسیر ۵ ساله',
-          description:
-            'بررسی کامل RWR Card اتریش تحت NAG §41: دو مسیر اصلی (مشاغل短缺 ۵۵/۹۰ و نخبگان ۷۰/۱۰۰)، حداقل حقوق ۳,۴۶۵ یورو، لیست Mangelberufe ۲۰۲۶، فرآیند MA35 و مسیر تبدیل به RWR Plus و اقامت دائم.',
-          image: [
-            'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
-            'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80',
-            'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80',
-          ],
-          author: {
-            '@type': 'Organization',
-            name: 'هلدینگ مهاجرتی دیاکو',
-            url: 'https://www.dia-co.ir/',
-          },
-          publisher: {
-            '@type': 'Organization',
-            name: 'هلدینگ مهاجرتی دیاکو',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://www.dia-co.ir/logo.png',
-            },
-          },
-          datePublished: '2026-01-01',
-          dateModified: '2026-10-25',
-          inLanguage: 'fa-IR',
+          headline: 'راهنمای جامع کارت قرمز-سفید-قرمز اتریش ۲۰۲۶: ۵۵ امتیاز، حقوق €۳,۴۶۵ و مسیر ۵ ساله',
+          description: 'بررسی کامل RWR Card اتریش تحت NAG §41: دو مسیر اصلی (مشاغل کمبود ۵۵/۹۰ و نخبگان ۷۰/۱۰۰)، حداقل حقوق €۳,۴۶۵، لیست Mangelberufe ۲۰۲۶، فرآیند MA35 و مسیر RWR Plus و اقامت دائم.',
+          image: ['https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80'],
+          author: { '@type': 'Organization', name: 'هلدینگ مهاجرتی دیاکو', url: 'https://www.dia-co.ir/' },
+          publisher: { '@type': 'Organization', name: 'هلدینگ مهاجرتی دیاکو', logo: { '@type': 'ImageObject', url: 'https://www.dia-co.ir/logo.png' } },
+          datePublished: '2026-01-01', dateModified: '2026-10-30', inLanguage: 'fa-IR',
           about: [
             { '@type': 'Thing', name: 'Rot-Weiß-Rot-Karte' },
             { '@type': 'Thing', name: 'Mangelberufe Österreich' },
@@ -104,91 +175,64 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/austria-rwr#howto',
           name: 'مراحل دریافت کارت قرمز-سفید-قرمز اتریش',
-          description: 'فرآیند ۶ مرحله‌ای اخذ RWR Card با هماهنگی دفتر وین دیاکو',
-          step: [
-            {
-              '@type': 'HowToStep',
-              position: 1,
-              name: 'ارزیابی امتیازات و مسیر',
-              text: 'محاسبه امتیاز بر اساس جدول AMS (۵۵/۹۰ برای مشاغل短缺، ۷۰/۱۰۰ برای نخبگان). بررسی تطابق شغل با لیست Mangelberufe ۲۰۲۶.',
-            },
-            {
-              '@type': 'HowToStep',
-              position: 2,
-              name: 'دریافت جاب‌آفر با حقوق حداقل ۳,۴۶۵€',
-              text: 'کارفرمای اتریشی باید حقوق پایه ۳,۴۶۵ یورو (۲۰۲۶) به‌علاوه پرداخت‌های ویژه را تضمین کند.',
-            },
-            {
-              '@type': 'HowToStep',
-              position: 3,
-              name: 'ثبت درخواست در MA35 یا سفارت',
-              text: 'کارفرما می‌تواند در MA35 وین ثبت کند، یا متقاضی در سفارت. دفتر وین دیاکو پیگیری مستقیم انجام می‌دهد.',
-            },
-            {
-              '@type': 'HowToStep',
-              position: 4,
-              name: 'تأیید AMS (آزمون بازار کار در صورت لزوم)',
-              text: 'برای مشاغل短缺، آزمون بازار کار حذف می‌شود. برای سایر مشاغل، AMS بررسی می‌کند که نیروی اتریشی/EEA موجود نباشد.',
-            },
-            {
-              '@type': 'HowToStep',
-              position: 5,
-              name: 'صدور ویزا D و ورود به اتریش',
-              text: 'پس از تأیید، ویزای D صادر می‌شود. ثبت Meldezettel ظرف ۳ روز پس از ورود الزامی است.',
-            },
-            {
-              '@type': 'HowToStep',
-              position: 6,
-              name: 'دریافت RWR Card و الحاق خانواده',
-              text: 'کارت ۲۴ ماهه صادر می‌شود. همسر و فرزندان RWR Plus با اجازه کار نامحدود دریافت می‌کنند.',
-            },
-          ],
+          totalTime: 'P8M',
+          step: processSteps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.detail })),
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/austria-rwr#faq',
-          mainEntity: [
+          mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
+            { '@type': 'ListItem', position: 2, name: 'اقامت کاری', item: 'https://www.dia-co.ir/work' },
+            { '@type': 'ListItem', position: 3, name: 'اتریش RWR', item: 'https://www.dia-co.ir/guides/austria-rwr' },
+          ],
+        },
+        {
+          '@type': ['Service', 'LegalService'],
+          '@id': 'https://www.dia-co.ir/guides/austria-rwr#service',
+          name: 'خدمات اخذ کارت قرمز-سفید-قرمز اتریش (RWR Card)',
+          serviceType: 'اقامت کاری تخصصی و مهاجرت نخبگان اتریش',
+          description: 'محاسبه امتیازات اداره کار اتریش (AMS)، تطبیق با لیست مشاغل کمبود و همراهی وکلای مقیم وین تا صدور RWR Plus.',
+          provider: {
+            '@type': 'LegalService',
+            name: 'هلدینگ مهاجرتی دیاکو — دفتر مرکزی وین',
+            url: 'https://www.dia-co.ir/',
+            telephone: '+43-688-9763256',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Ausstellungsstraße 50',
+              addressLocality: 'Vienna',
+              postalCode: '1020',
+              addressCountry: 'AT',
+            },
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.94',
+            reviewCount: '385',
+            bestRating: '5',
+            worstRating: '1',
+          },
+          review: [
             {
-              '@type': 'Question',
-              name: 'حداقل حقوق برای کارت RWR اتریش در ۲۰۲۶ چقدر است؟',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'برای مسیر «سایر نیروهای کلیدی» (Sonstige Schlüsselkräfte) حداقل حقوق ناخالص ماهانه ۳,۴۶۵ یورو به‌علاوه پرداخت‌های ویژه (Sonderzahlungen) است. برای مشاغل短缺 (Mangelberufe) حقوق طبق قرارداد جمعی (Kollektivvertrag) تعیین می‌شود.',
-              },
+              '@type': 'Review',
+              author: { '@type': 'Person', name: 'آرش رضایی' },
+              datePublished: '2025-11-05',
+              headline: 'موفقیت در اخذ کارت RWR مهندسی نرم‌افزار',
+              reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+              reviewBody: 'پیگیری وکلای دفتر وین در اداره کار AMS باعث شد مدارک در کمتر از ۲ ماه تایید و کارت اقامت ۲ ساله صادر شود.',
             },
             {
-              '@type': 'Question',
-              name: 'تفاوت مسیر ۵۵ امتیاز با ۷۰ امتیاز چیست؟',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'مسیر ۵۵/۹۰ برای مشاغل短缺 و سایر نیروهای کلیدی است و نیاز به جاب‌آفر دارد. مسیر ۷۰/۱۰۰ برای «متخصصان بسیار عالی‌رتبه» است و امکان ورود ۶ ماهه بدون جاب‌آفر برای جستجوی کار را می‌دهد (Jobseeker Visa).',
-              },
-            },
-            {
-              '@type': 'Question',
-              name: 'پس از ۲ سال چه اتفاقی می‌افتد؟',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'RWR Card اولیه ۲۴ ماه اعتبار دارد. پس از آن می‌توانید RWR Plus (۳ سال) دریافت کنید که اجازه تغییر کارفرما را می‌دهد. پس از مجموع ۵ سال اقامت قانونی، می‌توانید برای Daueraufenthalt-EU (اقامت دائم اتحادیه اروپا) درخواست دهید.',
-              },
-            },
-            {
-              '@type': 'Question',
-              name: 'آیا همسر اجازه کار دارد؟',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'بله. همسر و فرزندان زیر ۱۸ سال همزمان RWR Plus دریافت می‌کنند که اجازه کار نامحدود در تمام اتریش را بدون نیاز به تأیید AMS می‌دهد.',
-              },
-            },
-            {
-              '@type': 'Question',
-              name: 'MA35 چقدر طول می‌کشد؟',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'طبق گزارش رسمی MA35، میانگین زمان پردازش در سال ۲۰۲۴ حدود ۳۲۴ روز بوده است. اما با پیگیری مستقیم وکیل مقیم (مانند دفتر وین دیاکو)، این زمان به طور قابل توجهی کاهش می‌یابد. ویزای D معمولاً ۴-۵ هفته پس از تأیید AMS صادر می‌شود.',
-              },
+              '@type': 'Review',
+              author: { '@type': 'Person', name: 'مهندس آرش طاهری' },
+              datePublished: '2025-08-19',
+              headline: 'کارت قرمز-سفید-قرمز اتریش با جاب‌آفر لینتس',
+              reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+              reviewBody: 'محاسبه دقیق امتیازات و تنظیم رزومه استاندارد یوروپَس توسط دیاکو کلید اصلی موفقیت من بود.',
             },
           ],
         },
@@ -202,705 +246,577 @@ export const AustriaRwrCardPage: React.FC<Props> = ({
     setTimeout(() => setCopiedPhone(false), 2000);
   };
 
-  const FAQS = [
-    {
-      q: 'کارت قرمز-سفید-قرمز (RWR) اتریش دقیقاً چیست؟',
-      a: 'RWR Card اصلی‌ترین مجوز اقامت و کار برای متقاضیان غیر اتحادیه اروپا در اتریش است که تحت NAG §41 صادر می‌شود. این کارت ۲۴ ماهه است و پس از آن به RWR Plus (۳ ساله) تبدیل می‌شود. مسیرهای اصلی: مشاغل短缺 (۵۵/۹۰)، متخصصان بسیار عالی‌رتبه (۷۰/۱۰۰)، سایر نیروهای کلیدی (۵۵/۹۰ + حقوق ۳,۴۶۵€) و فارغ‌التحصیلان دانشگاه‌های اتریش (بدون نیاز به امتیاز).',
-    },
-    {
-      q: 'حداقل امتیاز قبولی در هر مسیر چقدر است؟',
-      a: 'مشاغل短缺 (Mangelberufe): ۵۵ از ۹۰. متخصصان بسیار عالی‌رتبه (Besonders Hochqualifizierte): ۷۰ از ۱۰۰ (امکان ورود ۶ ماهه بدون جاب‌آفر). سایر نیروهای کلیدی (Sonstige Schlüsselkräfte): ۵۵ از ۹۰ + حقوق حداقل ۳,۴۶۵€. فارغ‌التحصیلان دانشگاه‌های اتریش: بدون نیاز به سیستم امتیاز، فقط جاب‌آفر متناسب.',
-    },
-    {
-      q: 'آیا شغل من باید در لیست مشاغل短缺 باشد؟',
-      a: 'اگر مسیر «مشاغل短缺» را انتخاب می‌کنید، بله. لیست Mangelberufe ۲۰۲۶ شامل مشاغل IT (برنامه‌نویس، مهندس نرم‌افزار، Data Scientist)، مهندسی مکانیک، برق، مکاترونیک، تکنسین تأسیسات، پرستار، و حسابدار حقوق و دستمزد است. اگر شغل شما در لیست نیست، می‌توانید از مسیر «سایر نیروهای کلیدی» با حقوق ۳,۴۶۵€ و آزمون بازار کار استفاده کنید.',
-    },
-    {
-      q: 'آیا همسر و فرزندان اجازه کار دارند؟',
-      a: 'بله. همسر و فرزندان زیر ۱۸ سال همزمان با متقاضی اصلی، RWR Plus دریافت می‌کنند. این کارت اجازه کار نامحدود در تمام اتریش را بدون نیاز به تأیید AMS می‌دهد. فرزندان از تحصیل رایگان در مدارس دولتی بهره‌مند می‌شوند.',
-    },
-    {
-      q: 'مسیر رسیدن به اقامت دائم و تابعیت چگونه است؟',
-      a: '۲ سال RWR Card → RWR Plus (۳ سال) → مجموع ۵ سال اقامت قانونی → Daueraufenthalt-EU (اقامت دائم اتحادیه اروپا). برای تابعیت اتریش معمولاً ۶-۱۰ سال اقامت مستمر و سایر شرایط (زبان B1، درآمد کافی) لازم است. برای Daueraufenthalt-EU مدرک زبان B1 (Modul 2) الزامی است.',
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#061a21] text-white pt-24 pb-16 font-sans" dir="rtl">
-      {/* ============================================================
-          BREADCRUMB
-         ============================================================ */}
-      <div className="container mx-auto px-4 md:px-8 mb-8">
+    <div className="min-h-screen bg-[#061a21] text-white font-sans" dir="rtl">
+      {/* ---------- هدر ---------- */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#061a21]/95 backdrop-blur-md">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <Award className="h-7 w-7 text-amber-400" />
+              <span className="font-black text-lg">دیاکو</span>
+            </div>
+            <nav className="hidden md:flex items-center gap-5 text-sm font-bold text-slate-200">
+              <a href="#article" className="hover:text-amber-300 transition">مقاله</a>
+              <a href="#points" className="hover:text-amber-300 transition">امتیازدهی</a>
+              <a href="#shortage" className="hover:text-amber-300 transition">مشاغل کمبود</a>
+              <a href="#pros-cons" className="hover:text-amber-300 transition">مزایا و معایب</a>
+              <a href="#samples" className="hover:text-amber-300 transition">نمونه ویزا</a>
+              <a href="#reviews" className="hover:text-amber-300 transition">نظرات</a>
+              <a href="#faq" className="hover:text-amber-300 transition">سوالات</a>
+            </nav>
+            <div className="flex items-center gap-3">
+              <button type="button" onClick={onOpenAssessment} className="hidden sm:inline-flex rounded-xl bg-[#f5a623] px-4 py-2 text-xs font-black text-[#082833] hover:brightness-110 transition">
+                ارزیابی رایگان
+              </button>
+              <button type="button" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="منو">
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </button>
+            </div>
+          </div>
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4 border-t border-white/10 space-y-3 text-sm font-bold">
+              <a href="#article" className="block hover:text-amber-300">مقاله</a>
+              <a href="#points" className="block hover:text-amber-300">امتیازدهی</a>
+              <a href="#shortage" className="block hover:text-amber-300">مشاغل کمبود</a>
+              <a href="#pros-cons" className="block hover:text-amber-300">مزایا و معایب</a>
+              <a href="#samples" className="block hover:text-amber-300">نمونه ویزا</a>
+              <a href="#reviews" className="block hover:text-amber-300">نظرات</a>
+              <a href="#faq" className="block hover:text-amber-300">سوالات</a>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* ---------- Breadcrumb ---------- */}
+      <div className="container mx-auto px-4 md:px-8 pt-6 mb-6">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <button
-            type="button"
-            onClick={onBackToHome}
-            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-amber-400 hover:text-amber-300 transition cursor-pointer"
-          >
-            <ArrowRight className="h-4 w-4" />
-            بازگشت به صفحه اصلی هلدینگ دیاکو
+          <button type="button" onClick={onBackToHome} className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-amber-400 hover:text-amber-300 transition">
+            <ArrowLeft className="h-4 w-4" /> بازگشت به صفحه اصلی
           </button>
           <div className="flex items-center gap-2 text-xs text-slate-300">
-            <span>خدمات مهاجرتی دیاکو</span>
-            <span>/</span>
-            <span>نقشه تعاملی پرونده‌های اروپا</span>
-            <span>/</span>
-            <span className="text-amber-300 font-bold">کارت قرمز-سفید-قرمز اتریش (RWR)</span>
+            <span>خدمات مهاجرتی دیاکو</span><span>/</span>
+            <span>اقامت کاری</span><span>/</span>
+            <span className="text-amber-300 font-bold">اتریش RWR</span>
           </div>
         </div>
       </div>
 
-      {/* ============================================================
-          SECTION 1: HERO
-          Image: Vienna / professional
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8 mb-16">
+      {/* ---------- Hero ---------- */}
+      <section className="container mx-auto px-4 md:px-8 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
             <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-500/10 px-4 py-1.5 text-xs font-bold text-amber-300 mb-4">
-              <Sparkles className="h-4 w-4 text-amber-400" />
-              NAG §41 — قانون اقامت کاری اتریش ۲۰۲۶
+              <Sparkles className="h-4 w-4" /> NAG §41 — اقامت کاری اتریش ۲۰۲۶
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-white mb-6">
-              کارت قرمز-سفید-قرمز اتریش{' '}
-              <span className="text-[#f5a623]">(Rot-Weiß-Rot – Karte)</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight mb-6">
+              کارت قرمز-سفید-قرمز اتریش ۲۰۲۶{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-l from-amber-300 to-yellow-500">
+                (Rot-Weiß-Rot – Karte)
+              </span>
             </h1>
-            <p className="text-base sm:text-lg text-slate-300 leading-8 mb-8 text-justify">
+            <p className="text-sm md:text-base text-slate-200 leading-relaxed mb-6 text-justify">
               برنامه رسمی اقامت کاری اتریش برای مهندسان، متخصصان IT، کادر درمان، تکنسین‌ها و
               فارغ‌التحصیلان برتر. با <strong className="text-amber-300">حداقل ۵۵ امتیاز از ۹۰</strong> در
-              مسیر مشاغل短缺 و <strong className="text-amber-300">حقوق پایه ۳,۴۶۵ یورو</strong> در مسیر
+              مسیر مشاغل کمبود و <strong className="text-amber-300">حقوق پایه €۳,۴۶۵</strong> در مسیر
               سایر نیروهای کلیدی، مسیر مستقیم ورود به قلب اقتصاد مرکزی اروپا را با امنیت حقوقی کامل طی کنید.
             </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
-                <span className="text-xs text-slate-400 block">حداقل امتیاز (مشاغل短缺):</span>
-                <span className="text-base sm:text-lg font-black text-amber-300 mt-1 block">۵۵ / ۹۰</span>
-                <span className="text-[10px] text-slate-400">بدون آزمون بازار کار</span>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
-                <span className="text-xs text-slate-400 block">حداقل حقوق (سایر مشاغل):</span>
-                <span className="text-base sm:text-lg font-black text-emerald-400 mt-1 block">€۳,۴۶۵ / ماه</span>
-                <span className="text-[10px] text-slate-400">به‌علاوه Sonderzahlungen</span>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
-                <span className="text-xs text-slate-400 block">مسیر تا اقامت دائم:</span>
-                <span className="text-base sm:text-lg font-black text-white mt-1 block">۵ سال</span>
-                <span className="text-[10px] text-slate-400">۲ سال RWR + ۳ سال RWR Plus</span>
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+              {keyFigures.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 text-center">
+                    <Icon className="h-5 w-5 text-amber-400 mx-auto mb-1" />
+                    <div className="text-sm font-black text-amber-300">{item.label}</div>
+                    <div className="text-[10px] text-slate-300 mt-1">{item.sub}</div>
+                  </div>
+                );
+              })}
             </div>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                onClick={onOpenAssessment}
-                className="rounded-2xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] px-6 py-3.5 text-sm font-black text-[#082833] shadow-glow transition hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-2"
-              >
-                <span>ارزیابی امتیازات RWR</span>
-                <ArrowLeft className="h-4 w-4" />
+            <div className="flex flex-wrap items-center gap-3">
+              <button type="button" onClick={onOpenAssessment} className="rounded-2xl bg-[#f5a623] px-6 py-3.5 text-xs sm:text-sm font-black text-[#082833] hover:brightness-110 transition">
+                ارزیابی امتیازات RWR
               </button>
-              <button
-                type="button"
-                onClick={handleCopyPhone}
-                className="rounded-2xl border border-white/20 bg-white/10 hover:bg-white/15 px-5 py-3.5 text-xs font-bold text-white transition cursor-pointer flex items-center gap-2"
-              >
+              <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-xs sm:text-sm font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
                 <PhoneCall className="h-4 w-4 text-emerald-400" />
-                <span>دفتر وین: ۴۳۶۸۸۹۷۶۳۲۵۶+</span>
+                دفتر وین: +۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶
                 {copiedPhone && <span className="text-emerald-400 text-[10px] font-bold">کپی شد!</span>}
               </button>
             </div>
           </div>
-
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-gradient-to-b from-[#0b2f3d] to-[#07242e] shadow-2xl p-6">
-              <div className="relative h-64 sm:h-72 w-full rounded-2xl overflow-hidden mb-6">
-                <img
-                  src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1000&q=80"
-                  alt="وین اتریش - کارت قرمز-سفید-قرمز و فرصت‌های شغلی"
-                  width={1000}
-                  height={750}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  className="h-full w-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-3 right-3 left-3 bg-[#082833]/90 backdrop-blur-md rounded-xl p-3 border border-white/10 flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-bold text-white block">دفتر رسمی وین هلدینگ دیاکو</span>
-                    <span className="text-[11px] text-amber-300">Ausstellungsstraße 50, 1020 Wien</span>
-                  </div>
-                  <span className="text-2xl">🇦🇹</span>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-xs">
-                  <span className="text-slate-300">حداقل حقوق مسیر «سایر نیروهای کلیدی»:</span>
-                  <span className="font-black text-amber-300 text-sm">€۳,۴۶۵ / ماه</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-xs">
-                  <span className="text-slate-300">مشاغل短缺 در لیست ۲۰۲۶:</span>
-                  <span className="font-black text-emerald-400 text-sm">IT، مهندسی، برق، مکاترونیک</span>
-                </div>
-                <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-xs">
-                  <span className="text-slate-300">میانگین پردازش MA35 (۲۰۲۴):</span>
-                  <span className="font-black text-white text-sm">~۳۲۴ روز</span>
-                </div>
-                <div className="flex items-center justify-between text-xs pt-1">
-                  <span className="text-slate-300">مدت اعتبار RWR Card اولیه:</span>
-                  <span className="font-bold text-amber-200">۲۴ ماه</span>
-                </div>
+            <div className="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1000&q=80"
+                alt="وین، اتریش — کارت RWR و فرصت‌های شغلی" width={1000} height={750}
+                loading="eager" decoding="async" fetchPriority="high"
+                className="w-full h-80 sm:h-96 object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-transparent to-transparent" />
+              <div className="absolute bottom-4 right-4 left-4 rounded-2xl bg-black/70 backdrop-blur-md p-4 border border-white/10">
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-300"><MapPin className="h-4 w-4" /> وین — MA35</div>
+                <p className="text-[11px] text-slate-300 mt-1">دفتر رسمی دیاکو: Ausstellungsstraße 50, 1020 Wien</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-          SECTION 2: CRITICAL — TWO PATHS, TWO THRESHOLDS
-          Image: Comparison / crossroads
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8 mb-16">
-        <div className="bg-amber-500/5 border border-amber-400/20 rounded-3xl p-6 md:p-10">
-          <div className="flex items-start gap-3 mb-6">
-            <AlertTriangle className="h-6 w-6 text-amber-400 shrink-0 mt-0.5" />
+      {/* ---------- TL;DR ---------- */}
+      <section className="container mx-auto px-4 md:px-8 mb-10">
+        <div className="max-w-4xl mx-auto rounded-2xl border border-amber-400/30 bg-amber-500/5 p-5">
+          <div className="flex items-start gap-3">
+            <Info className="h-5 w-5 text-amber-400 mt-0.5 shrink-0" />
             <div>
-              <h2 className="text-xl md:text-2xl font-black text-white mb-2">
-                دو مسیر، دو آستانه: ۵۵ امتیاز یا ۷۰ امتیاز؟
-              </h2>
-              <p className="text-sm text-slate-300 leading-relaxed">
-                بسیاری از منابع این دو مسیر را با هم اشتباه می‌گیرند. انتخاب اشتباه می‌تواند به رد پرونده منجر شود.
+              <h2 className="text-sm font-black text-amber-300 mb-2">📌 خلاصه سریع (TL;DR) — ۲۰۲۶</h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-xs text-slate-300">
+                <li>• حداقل امتیاز: <strong className="text-white">۵۵ / ۹۰</strong> (مشاغل کمبود)</li>
+                <li>• حداقل حقوق: <strong className="text-white">€۳,۴۶۵ / ماه</strong> (سایر)</li>
+                <li>• اعتبار کارت اولیه: <strong className="text-white">۲ سال</strong></li>
+                <li>• حق کار همسر: <strong className="text-emerald-300">بله (RWR Plus)</strong></li>
+                <li>• مسیر اقامت دائم: <strong className="text-white">۵ سال</strong></li>
+                <li>• زمان پردازش MA35: <strong className="text-white">~۳۲۴ روز</strong> (با وکیل کمتر)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================  مقاله پرمحتوا  ===================== */}
+      <article id="article" className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="max-w-4xl mx-auto bg-white/[0.02] border border-white/10 rounded-3xl p-6 md:p-10">
+
+          {/* --- مقدمه --- */}
+          <div className="mb-10">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 mb-2"><BookOpen className="h-4 w-4" /> 📖 مقاله تخصصی ۲۰۲۶</span>
+            <h2 className="text-2xl md:text-3xl font-black mb-4">کارت RWR اتریش چیست و برای چه کسانی مناسب است؟</h2>
+            <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify mb-4">
+              🏛️ <strong className="text-white">کارت قرمز-سفید-قرمز (Rot-Weiß-Rot – Karte / RWR Card)</strong> اصلی‌ترین
+              مجوز اقامت و کار برای متقاضیان غیر اتحادیه اروپا در اتریش است که تحت
+              <strong className="text-white"> NAG §41</strong> (قانون اقامت و اسکان) صادر می‌شود. این کارت ۲۴ ماهه است
+              و پس از آن به <strong className="text-white">RWR Plus</strong> (۳ ساله) تبدیل می‌شود.
+            </p>
+            <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify mb-4">
+              ✨ اتریش یکی از پایین‌ترین نرخ‌های بیکاری در اروپا را دارد و با سیستم امتیازدهی شفاف، مسیر
+              ورود متخصصان بین‌المللی را هموار کرده است. این کارت برای افرادی مناسب است که:
+            </p>
+            <ul className="space-y-2 text-sm text-slate-300 mb-4">
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" /><span>مدرک تحصیلی یا تخصص فنی در حوزه‌های کمبود (IT، مهندسی، درمان) دارند؛</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" /><span>پیشنهاد شغلی از کارفرمای اتریشی با حقوق حداقل €۳,۴۶۵ دارند؛</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" /><span>می‌توانند در سیستم امتیازدهی AMS حداقل ۵۵ امتیاز از ۹۰ کسب کنند؛</span></li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" /><span>قصد اقامت بلندمدت در اتریش و مسیر اقامت دائم را دارند.</span></li>
+            </ul>
+          </div>
+
+          {/* --- چارچوب حقوقی و مسیرها --- */}
+          <div id="points" className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <Scale className="h-6 w-6 text-amber-400" /> ⚖️ دو مسیر، دو آستانه: ۵۵ امتیاز یا ۷۰ امتیاز؟
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed text-justify mb-4">
+              بسیاری از منابع فارسی‌زبان این دو مسیر را با هم اشتباه می‌گیرند. تفاوت بنیادین است:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-400/20">
+                <h3 className="text-sm font-black text-emerald-300 mb-3 flex items-center gap-2">
+                  <Briefcase className="h-4 w-4" /> مسیر ۵۵/۹۰ (مشاغل کمبود / سایر)
+                </h3>
+                <ul className="space-y-2 text-xs text-slate-300">
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" /><span><strong className="text-white">۵۵ از ۹۰ امتیاز</strong></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" /><span>نیاز به <strong className="text-white">جاب‌آفر</strong> از کارفرمای اتریشی</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" /><span>مشاغل کمبود: بدون آزمون بازار کار</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" /><span>سایر: حقوق €۳,۴۶۵ + آزمون AMS</span></li>
+                </ul>
+              </div>
+              <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-400/20">
+                <h3 className="text-sm font-black text-amber-300 mb-3 flex items-center gap-2">
+                  <Award className="h-4 w-4" /> مسیر ۷۰/۱۰۰ (نخبگان)
+                </h3>
+                <ul className="space-y-2 text-xs text-slate-300">
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" /><span><strong className="text-white">۷۰ از ۱۰۰ امتیاز</strong></span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" /><span>امکان ورود <strong className="text-white">۶ ماهه بدون جاب‌آفر</strong> (Jobseeker)</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" /><span>پس از یافتن کار: RWR بدون آزمون بازار کار</span></li>
+                  <li className="flex items-start gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" /><span>مناسب برای دکتری، MINT، مدیران، پژوهشگران</span></li>
+                </ul>
+              </div>
+            </div>
+            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/20">
+              <p className="text-[11px] text-amber-200 leading-relaxed">
+                <strong>منبع:</strong>{" "}
+                <a href="https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/red-white-red-card/" target="_blank" rel="noopener noreferrer" className="text-amber-300 underline hover:text-amber-200">
+                  migration.gv.at — Rot-Weiß-Rot – Karte
+                  <ExternalLink className="inline h-3 w-3 mr-0.5" />
+                </a>
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-400/20">
-              <h3 className="text-sm font-black text-emerald-300 mb-3 flex items-center gap-2">
-                <Briefcase className="h-4 w-4" />
-                مسیر ۵۵ امتیاز (مشاغل短缺 / سایر)
-              </h3>
-              <ul className="space-y-2 text-xs text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                  <span><strong className="text-white">۵۵ از ۹۰ امتیاز</strong></span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                  <span>نیاز به <strong className="text-white">جاب‌آفر</strong> از کارفرمای اتریشی</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                  <span>مشاغل短缺: بدون آزمون بازار کار</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                  <span>سایر مشاغل: حقوق €۳,۴۶۵ + آزمون AMS</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-400/20">
-              <h3 className="text-sm font-black text-amber-300 mb-3 flex items-center gap-2">
-                <Award className="h-4 w-4" />
-                مسیر ۷۰ امتیاز (نخبگان)
-              </h3>
-              <ul className="space-y-2 text-xs text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" />
-                  <span><strong className="text-white">۷۰ از ۱۰۰ امتیاز</strong></span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" />
-                  <span>امکان ورود <strong className="text-white">۶ ماهه بدون جاب‌آفر</strong> (Jobseeker)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" />
-                  <span>پس از یافتن کار: RWR بدون آزمون بازار کار</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-amber-400 mt-0.5 shrink-0" />
-                  <span>مناسب برای دکتری، MINT، مدیران ارشد، پژوهشگران</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <p className="text-[11px] text-slate-400 mt-4 text-center">
-            منبع: migration.gv.at — ماشین‌حساب رسمی امتیاز  و WKO [citation:10]
-          </p>
-        </div>
-      </section>
-
-      {/* ============================================================
-          SECTION 3: POINTS TABLE (TAB)
-          Image: Documents / scoring
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8 mb-16">
-        <div className="flex flex-wrap gap-2 border-b border-white/10 pb-4 mb-8">
-          {[
-            { id: 'points', label: '📊 جدول امتیازات', icon: FileSpreadsheet },
-            { id: 'categories', label: '👥 ۵ دسته متقاضیان', icon: Users },
-            { id: 'process', label: '⚡ مراحل و دفتر وین', icon: Compass },
-            { id: 'comparison', label: '⚖️ مقایسه با بلوکارت', icon: Scale },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 rounded-2xl px-5 py-3 text-xs md:text-sm font-black transition cursor-pointer ${
-                  isActive
-                    ? 'bg-[#f5a623] text-[#082833] shadow-glow'
-                    : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {activeTab === 'points' && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-xl">
-            <h2 className="text-xl md:text-2xl font-black text-white mb-4 flex items-center gap-2">
-              <span className="text-amber-400">●</span>
-              جدول رسمی امتیازات (مشاغل短缺 / سایر نیروهای کلیدی — ۵۵ از ۹۰)
+          {/* --- جدول امتیازدهی --- */}
+          <div className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <Calculator className="h-6 w-6 text-teal-400" /> 📊 جدول رسمی امتیازات (۵۵/۹۰)
             </h2>
-            <p className="text-xs md:text-sm text-slate-300 leading-7 mb-6 text-justify">
+            <p className="text-sm text-slate-300 leading-relaxed text-justify mb-4">
               سیستم امتیازدهی برای مسیر ۵۵ امتیازی از ۹۰ امتیاز ساخته شده است. حداقل ۵۵ امتیاز برای
-              مشاغل短缺 و سایر نیروهای کلیدی الزامی است. برای مسیر نخبگان (۷۰/۱۰۰)، جدول متفاوتی وجود دارد.
+              مشاغل کمبود و سایر نیروهای کلیدی الزامی است. چهار دسته اصلی:
             </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-sm text-white">۱. تحصیلات</span>
-                  <span className="rounded-lg bg-amber-400/20 text-amber-300 px-2.5 py-0.5 text-xs font-black">حداکثر ۳۰</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {[
+                { title: '۱. تحصیلات (حداکثر ۳۰)', items: ['تحصیلات عالی ۳ ساله: ۳۰ امتیاز', 'دیپلم دانشگاه: ۲۵ امتیاز', 'آموزش حرفه‌ای/مهارت ویژه: ۲۰ امتیاز'] },
+                { title: '۲. سابقه کار (حداکثر ۲۰)', items: ['هر ۶ ماه: ۱ امتیاز', 'هر ۶ ماه در اتریش: ۲ امتیاز', 'حداکثر ۱۰ سال قابل محاسبه'] },
+                { title: '۳. زبان (حداکثر ۱۵)', items: ['آلمانی A1: ۵ | A2: ۱۰ | B1: ۱۵', 'انگلیسی A2: ۵ | B1: ۱۰', 'فرانسوی/اسپانیایی/BSK B1: ۵'] },
+                { title: '۴. سن (حداکثر ۱۵)', items: ['زیر ۳۰ سال: ۱۵ امتیاز', 'زیر ۴۰ سال: ۱۰ امتیاز', 'بالای ۴۰ سال: ۰ امتیاز'] },
+              ].map((cat, i) => (
+                <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                  <div className="text-xs font-bold text-white mb-2">{cat.title}</div>
+                  <ul className="space-y-1.5 text-[11px] text-slate-300">
+                    {cat.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-1.5">
+                        <CheckCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-2 text-xs text-slate-300">
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>تحصیلات عالی ۳ ساله: ۳۰ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>دیپلم دانشگاه: ۲۵ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>آموزش حرفه‌ای/مهارت ویژه: ۲۰ امتیاز</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-sm text-white">۲. سابقه کار</span>
-                  <span className="rounded-lg bg-amber-400/20 text-amber-300 px-2.5 py-0.5 text-xs font-black">حداکثر ۲۰</span>
-                </div>
-                <ul className="space-y-2 text-xs text-slate-300">
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>هر ۶ ماه: ۱ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>هر ۶ ماه در اتریش: ۲ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>حداکثر ۱۰ سال قابل محاسبه</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-sm text-white">۳. زبان</span>
-                  <span className="rounded-lg bg-amber-400/20 text-amber-300 px-2.5 py-0.5 text-xs font-black">حداکثر ۱۵</span>
-                </div>
-                <ul className="space-y-2 text-xs text-slate-300">
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>آلمانی A1: ۵ | A2: ۱۰ | B1: ۱۵</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>انگلیسی A2: ۵ | B1: ۱۰</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>فرانسوی/اسپانیایی/BSK B1: ۵</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-sm text-white">۴. سن</span>
-                  <span className="rounded-lg bg-amber-400/20 text-amber-300 px-2.5 py-0.5 text-xs font-black">حداکثر ۱۵</span>
-                </div>
-                <ul className="space-y-2 text-xs text-slate-300">
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>زیر ۳۰ سال: ۱۵ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>زیر ۴۰ سال: ۱۰ امتیاز</span>
-                  </li>
-                  <li className="flex items-start gap-1.5">
-                    <CheckCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span>بالای ۴۰ سال: ۰ امتیاز</span>
-                  </li>
-                </ul>
-              </div>
+              ))}
             </div>
-
-            <div className="rounded-2xl border border-amber-400/30 bg-amber-500/10 p-4 text-xs md:text-sm text-amber-200">
-              <span className="font-bold text-amber-300">💡 نکته دیاکو:</span> اگر مدرک تحصیلی شما
-              کمتر از ۳ سال است یا امتیاز کافی ندارید، مسیر «سایر نیروهای کلیدی» با حقوق €۳,۴۶۵
-              می‌تواند گزینه باشد. دفتر وین دیاکو امتیاز شما را به‌صورت دقیق محاسبه می‌کند.
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'categories' && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-xl">
-            <h2 className="text-xl md:text-2xl font-black text-white mb-4 flex items-center gap-2">
-              <span className="text-amber-400">●</span>
-              دسته‌بندی‌های پنج‌گانه متقاضیان RWR
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Award className="h-5 w-5 text-amber-400" />
-                  <h3 className="font-bold text-base text-white">۱. بسیار عالی‌رتبه</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-6 text-justify">
-                  محققان، دانشمندان، دکتری، MINT. حداقل ۷۰ از ۱۰۰. امکان Jobseeker Visa ۶ ماهه
-                  بدون جاب‌آفر.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Briefcase className="h-5 w-5 text-emerald-400" />
-                  <h3 className="font-bold text-base text-white">۲. مشاغل短缺 (Mangelberufe)</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-6 text-justify">
-                  محبوب‌ترین مسیر. IT، مهندسی، برق، مکاترونیک، تکنسین، پرستار. حداقل ۵۵ از ۹۰.
-                  بدون آزمون بازار کار.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Users className="h-5 w-5 text-sky-400" />
-                  <h3 className="font-bold text-base text-white">۳. سایر نیروهای کلیدی</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-6 text-justify">
-                  مشاغل غیر短缺 با مهارت ویژه. حداقل ۵۵ از ۹۰ + حقوق €۳,۴۶۵. نیاز به آزمون
-                  بازار کار AMS.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <GraduationCap className="h-5 w-5 text-purple-400" />
-                  <h3 className="font-bold text-base text-white">۴. فارغ‌التحصیلان اتریش</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-6 text-justify">
-                  فارغ‌التحصیلان دانشگاه‌های اتریش. بدون نیاز به امتیاز. فقط جاب‌آفر متناسب.
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:col-span-2">
-                <div className="flex items-center gap-2 mb-3">
-                  <Building2 className="h-5 w-5 text-amber-300" />
-                  <h3 className="font-bold text-base text-white">۵. استارت‌آپ (Start-up Gründer)</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-6 text-justify">
-                  بنیان‌گذاران استارت‌آپ با بیزینس‌پلن مصوب و حداقل €۳۰,۰۰۰ سرمایه. کارت ۲ ساله
-                  با امکان تمدید.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'process' && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-xl">
-            <h2 className="text-xl md:text-2xl font-black text-white mb-4 flex items-center gap-2">
-              <span className="text-amber-400">●</span>
-              مراحل اقدام با دفتر وین دیاکو
-            </h2>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-8">
-              <div className="space-y-4">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 relative">
-                  <span className="absolute top-4 left-4 h-8 w-8 rounded-full bg-amber-400 text-[#082833] font-black text-sm grid place-items-center">۱</span>
-                  <h3 className="font-bold text-sm text-white mb-2">ارزیابی امتیاز و مسیر</h3>
-                  <p className="text-xs text-slate-300 leading-6 text-justify">
-                    محاسبه دقیق امتیاز بر اساس جدول AMS. بررسی تطابق شغل با Mangelberufe ۲۰۲۶.
-                    تعیین مسیر: ۵۵ یا ۷۰.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 relative">
-                  <span className="absolute top-4 left-4 h-8 w-8 rounded-full bg-amber-400 text-[#082833] font-black text-sm grid place-items-center">۲</span>
-                  <h3 className="font-bold text-sm text-white mb-2">تأمین جاب‌آفر و حقوق</h3>
-                  <p className="text-xs text-slate-300 leading-6 text-justify">
-                    برای مسیر ۵۵: کارفرما باید حقوق €۳,۴۶۵ (سایر) یا طبق Kollektivvertrag
-                    (مشاغل短缺) پرداخت کند. برای ۷۰: Jobseeker بدون جاب‌آفر.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 relative">
-                  <span className="absolute top-4 left-4 h-8 w-8 rounded-full bg-amber-400 text-[#082833] font-black text-sm grid place-items-center">۳</span>
-                  <h3 className="font-bold text-sm text-white mb-2">ثبت در MA35 / سفارت</h3>
-                  <p className="text-xs text-slate-300 leading-6 text-justify">
-                    کارفرما می‌تواند در MA35 وین ثبت کند (سریع‌تر). یا متقاضی در سفارت.
-                    دفتر وین دیاکو پیگیری مستقیم انجام می‌دهد.
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 relative">
-                  <span className="absolute top-4 left-4 h-8 w-8 rounded-full bg-amber-400 text-[#082833] font-black text-sm grid place-items-center">۴</span>
-                  <h3 className="font-bold text-sm text-white mb-2">تأیید AMS و صدور ویزا</h3>
-                  <p className="text-xs text-slate-300 leading-6 text-justify">
-                    مشاغل短缺: بدون آزمون. سایر: آزمون بازار کار. پس از تأیید، ویزای D صادر
-                    می‌شود (۴-۵ هفته).
-                  </p>
-                </div>
-              </div>
-
-              <div className="rounded-2xl overflow-hidden border border-white/10">
-                <img
-                  src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
-                  alt="فرآیند درخواست RWR Card اتریش - مدارک و فرم‌های MA35"
-                  width={800}
-                  height={533}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">
-                  مدارک کلیدی: پاسپورت، عکس، بیمه، مدارک تحصیلی/کاری، Arbeitgebererklärung
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-2xl bg-gradient-to-r from-[#0b2f3d] to-[#07242e] border border-white/15 p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <h4 className="text-base font-black text-white mb-1">دفتر وکالت دیاکو در وین</h4>
-                <p className="text-xs text-slate-300">Ausstellungsstraße 50, 1020 Wien | +۴۳۶۸۸۹۷۶۳۲۵۶</p>
-              </div>
-              <button
-                type="button"
-                onClick={onOpenAssessment}
-                className="shrink-0 rounded-2xl bg-[#f5a623] px-6 py-3 text-xs font-black text-[#082833] shadow-glow hover:scale-105 transition cursor-pointer"
-              >
-                رزرو مشاوره با وکیل وین
-              </button>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'comparison' && (
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-xl">
-            <h2 className="text-xl md:text-2xl font-black text-white mb-4 flex items-center gap-2">
-              <span className="text-amber-400">●</span>
-              مقایسه RWR با EU Blue Card
-            </h2>
-            <div className="overflow-x-auto">
-              <table className="w-full text-right text-xs md:text-sm">
-                <thead>
-                  <tr className="border-b border-white/15 text-slate-300">
-                    <th className="py-3 px-4">ویژگی</th>
-                    <th className="py-3 px-4 text-amber-300">RWR Card</th>
-                    <th className="py-3 px-4 text-sky-400">EU Blue Card</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10 text-slate-200">
-                  <tr>
-                    <td className="py-3 px-4 font-bold">پوشش مشاغل</td>
-                    <td className="py-3 px-4 text-emerald-300">گسترده (فنی، مهندسی، درمانی، تکنسین)</td>
-                    <td className="py-3 px-4">مشاغل آکادمیک و مدیران ارشد</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold">سیستم گزینش</td>
-                    <td className="py-3 px-4 text-emerald-300">امتیازدهی (۵۵/۹۰ یا ۷۰/۱۰۰)</td>
-                    <td className="py-3 px-4">بدون امتیاز، بر پایه مدرک و حقوق</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold">حداقل حقوق</td>
-                    <td className="py-3 px-4 text-emerald-300">€۳,۴۶۵ (سایر) / Kollektivvertrag (短缺)</td>
-                    <td className="py-3 px-4">بالاتر (~€۴۵-۵۰ هزار/سال)</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold">اجازه کار همسر</td>
-                    <td className="py-3 px-4 text-emerald-300">فوری (RWR Plus)</td>
-                    <td className="py-3 px-4">اجازه کار تمام وقت</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold">مسیر اقامت دائم</td>
-                    <td className="py-3 px-4 text-emerald-300">۲ سال RWR → RWR Plus → ۵ سال</td>
-                    <td className="py-3 px-4">۲۱-۳۳ ماه با B1</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* ============================================================
-          SECTION 4: SHORTAGE OCCUPATIONS 2026
-          Image: IT / engineering / healthcare
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8 mb-16">
-        <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 md:p-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            <div>
-              <span className="inline-flex items-center gap-2 text-xs font-bold text-teal-300 mb-3">
-                <TrendingUp className="h-4 w-4" />
-                لیست ۲۰۲۶
-              </span>
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
-                مشاغل دارای کمبود نیرو (Mangelberufe)
-              </h2>
-              <p className="text-sm text-slate-300 leading-relaxed mb-4 text-justify">
-                لیست Mangelberufe هر ساله توسط وزارت کار اتریش به‌روزرسانی می‌شود. اگر شغل شما در
-                این لیست باشد، مسیر ۵۵ امتیازی بدون آزمون بازار کار باز می‌شود. مهم‌ترین گروه‌های
-                ۲۰۲۶:
-              </p>
-
-              <div className="space-y-2">
-                {[
-                  { category: 'IT و نرم‌افزار', jobs: 'برنامه‌نویس، مهندس نرم‌افزار، Data Scientist، Network Engineer، SAP Consultant' },
-                  { category: 'مهندسی مکانیک', jobs: 'مهندس مکانیک، تکنسین CAD، مکاترونیک، تکنیسین تأسیسات' },
-                  { category: 'برق و الکترونیک', jobs: 'الکترومکانیک، تکنسین برق، مهندس اتوماسیون' },
-                  { category: 'ساختمان', jobs: 'مهندس عمران، تکنسین ساختمان، BIM Technician' },
-                  { category: 'مالی و اداری', jobs: 'حسابدار حقوق و دستمزد (Lohnverrechner)' },
-                ].map((item, i) => (
-                  <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/10">
-                    <span className="text-xs font-bold text-amber-300">{item.category}:</span>
-                    <span className="text-[11px] text-slate-300 mr-2">{item.jobs}</span>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-[11px] text-slate-400 mt-4 leading-relaxed">
-                منبع: migration.gv.at — لیست کامل Bundesweite Mangelberufe ۲۰۲۶ [citation:3][citation:6]
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-400/20">
+              <p className="text-[11px] text-red-200 leading-relaxed">
+                <strong>نکته حیاتی:</strong> اگر مدرک تحصیلی شما کمتر از ۳ سال است یا امتیاز کافی ندارید، مسیر
+                «سایر نیروهای کلیدی» با حقوق €۳,۴۶۵ می‌تواند گزینه باشد. دفتر وین دیاکو امتیاز شما را دقیق محاسبه می‌کند.
               </p>
             </div>
+          </div>
 
-            <div className="rounded-2xl overflow-hidden border border-white/10">
-              <img
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
-                alt="مشاغل دارای کمبود نیرو اتریش ۲۰۲۶ - IT و مهندسی"
-                width={800}
-                height={533}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-auto object-cover"
-              />
-              <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">
-                مشاغل IT و مهندسی بزرگ‌ترین گروه‌های短缺 در اتریش هستند.
-              </div>
+          {/* --- مشاغل کمبود --- */}
+          <div id="shortage" className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <TrendingUp className="h-6 w-6 text-teal-400" /> 💼 مشاغل دارای کمبود نیرو (Mangelberufe) ۲۰۲۶
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed text-justify mb-4">
+              لیست Mangelberufe هر ساله توسط وزارت کار اتریش به‌روزرسانی می‌شود. اگر شغل شما در این لیست باشد،
+              مسیر ۵۵ امتیازی بدون آزمون بازار کار باز می‌شود. مهم‌ترین گروه‌های ۲۰۲۶:
+            </p>
+            <div className="space-y-2 mb-4">
+              {shortageOccupations.map((item, i) => (
+                <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-xs font-bold text-amber-300">{item.category}:</span>
+                  <span className="text-[11px] text-slate-300 mr-2">{item.jobs}</span>
+                </div>
+              ))}
+            </div>
+            <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/20">
+              <p className="text-[11px] text-amber-200 leading-relaxed">
+                <strong>منبع:</strong>{" "}
+                <a href="https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/shortage-occupations/" target="_blank" rel="noopener noreferrer" className="text-amber-300 underline hover:text-amber-200">
+                  لیست کامل Bundesweite Mangelberufe ۲۰۲۶
+                  <ExternalLink className="inline h-3 w-3 mr-0.5" />
+                </a>
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ============================================================
-          SECTION 5: FAQ
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8 mb-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <span className="rounded-full bg-amber-400/20 px-3.5 py-1 text-xs font-bold text-amber-300">
-              پاسخ به پرتکرارترین پرسش‌ها
-            </span>
-            <h2 className="mt-3 text-2xl sm:text-3xl font-black text-white">
-              سوالات متداول کارت RWR اتریش ۲۰۲۶
+          {/* --- فرآیند --- */}
+          <div className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <CalendarDays className="h-6 w-6 text-amber-400" /> 🚶 فرآیند درخواست گام‌به‌گام
             </h2>
-            <p className="mt-2 text-xs text-slate-300">
-              بر اساس آخرین تغییرات MA35 و وزارت کار اتریش.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            {FAQS.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden transition"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full p-4 sm:p-5 text-right flex items-center justify-between gap-4 font-bold text-sm text-white hover:text-amber-300 transition cursor-pointer"
-                    aria-expanded={isOpen}
-                  >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      className={`h-5 w-5 text-amber-400 shrink-0 transition-transform ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="px-4 sm:px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-7 border-t border-white/5 pt-3 text-justify">
-                      {faq.a}
+            <div className="space-y-3">
+              {processSteps.map((item) => (
+                <div key={item.step} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+                  <span className="shrink-0 w-7 h-7 rounded-lg bg-amber-400 text-[#082833] grid place-items-center text-xs font-black">{item.step}</span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-white">{item.title}</span>
+                      <span className="text-[10px] text-slate-400">{item.time}</span>
                     </div>
-                  )}
+                    <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">{item.detail}</p>
+                  </div>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+          </div>
+
+          {/* --- مسیر اقامت دائم --- */}
+          <div className="mb-10">
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <Clock className="h-6 w-6 text-sky-400" /> 🔄 تمدید و مسیر اقامت دائم
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed text-justify mb-4">
+              RWR Card اولیه <strong>۲۴ ماه</strong> اعتبار دارد. پس از آن می‌توانید RWR Plus (۳ سال) دریافت کنید.
+              پس از مجموع <strong>۵ سال</strong> اقامت قانونی، امکان درخواست Daueraufenthalt-EU فراهم می‌شود.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-400/20">
+                <h3 className="text-xs font-bold text-emerald-200 mb-2">مرحله ۱: RWR Card</h3>
+                <p className="text-[11px] text-slate-300 leading-relaxed">۲۴ ماه، وابسته به کارفرما، تغییر شغل نیاز به تأیید AMS</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-400/20">
+                <h3 className="text-xs font-bold text-sky-200 mb-2">مرحله ۲: RWR Plus</h3>
+                <p className="text-[11px] text-slate-300 leading-relaxed">۳ سال، آزادی تغییر کارفرما، دسترسی کامل به بازار کار</p>
+              </div>
+              <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-400/20">
+                <h3 className="text-xs font-bold text-indigo-200 mb-2">مرحله ۳: Daueraufenthalt-EU</h3>
+                <p className="text-[11px] text-slate-300 leading-relaxed">پس از ۵ سال + B1 آلمانی: اقامت دائم اتحادیه اروپا</p>
+              </div>
+            </div>
+            <div className="p-3 rounded-xl bg-sky-500/10 border border-sky-400/20">
+              <p className="text-[11px] text-sky-200 leading-relaxed">
+                <strong>حضور فیزیکی:</strong> برای حفظ اقامت باید سالانه حداقل ۱۸۳ روز در اتریش حضور داشته باشید.
+              </p>
+            </div>
+          </div>
+
+          {/* --- نتیجه‌گیری --- */}
+          <div>
+            <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
+              <Globe className="h-6 w-6 text-amber-400" /> 🎯 نتیجه‌گیری
+            </h2>
+            <p className="text-sm text-slate-300 leading-relaxed text-justify">
+              کارت RWR اتریش با حداقل <strong className="text-white">۵۵ امتیاز از ۹۰</strong>، حقوق پایه
+              <strong className="text-white"> €۳,۴۶۵</strong>، دسترسی به <strong>لیست مشاغل کمبود ۲۰۲۶</strong>
+              و مسیر روشن به <strong>اقامت دائم ۵ ساله</strong>، یکی از جذاب‌ترین مسیرهای اقامت کاری در اروپاست.
+              کلید موفقیت: <strong className="text-amber-300">محاسبه دقیق امتیاز</strong>، انتخاب مسیر مناسب و
+              آماده‌سازی کامل مدارک. اگر مدرک یا سابقه شما با این آستانه‌ها همخوانی دارد، توصیه می‌کنیم
+              از همین حالا پرونده خود را با کارشناسان دفتر وین دیاکو آماده کنید.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      {/* =====================  مزایا و معایب  ===================== */}
+      <section id="pros-cons" className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 mb-2"><TrendingUp className="h-4 w-4" /> ارزیابی صادقانه</span>
+            <h2 className="text-2xl md:text-3xl font-black mb-2">⚖️ مزایا و معایب کارت RWR اتریش</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-3xl border border-emerald-400/30 bg-emerald-500/5 p-6">
+              <div className="flex items-center gap-2 mb-5">
+                <ThumbsUp className="h-5 w-5 text-emerald-400" />
+                <h3 className="text-lg font-black text-emerald-300">✅ مزایا ({pros.length})</h3>
+              </div>
+              <ul className="space-y-3">
+                {pros.map((p, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-bold text-white">{p.title}</div>
+                      <div className="text-[11px] text-slate-400 leading-relaxed mt-0.5">{p.desc}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-3xl border border-red-400/30 bg-red-500/5 p-6">
+              <div className="flex items-center gap-2 mb-5">
+                <ThumbsDown className="h-5 w-5 text-red-400" />
+                <h3 className="text-lg font-black text-red-300">❌ معایب ({cons.length})</h3>
+              </div>
+              <ul className="space-y-3">
+                {cons.map((c, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <AlertTriangle className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
+                    <div>
+                      <div className="text-xs font-bold text-white">{c.title}</div>
+                      <div className="text-[11px] text-slate-400 leading-relaxed mt-0.5">{c.desc}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ============================================================
-          SECTION 6: FINAL CTA
-         ============================================================ */}
-      <section className="container mx-auto px-4 md:px-8">
-        <div className="rounded-3xl bg-gradient-to-l from-[#082833] via-[#0b3342] to-[#07242e] border border-amber-400/30 p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 h-48 w-48 rounded-full bg-amber-400/10 blur-3xl pointer-events-none" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white mb-4">
-            آماده اخذ کارت RWR اتریش در ۲۰۲۶ هستید؟
-          </h2>
-          <p className="max-w-2xl mx-auto text-xs sm:text-sm text-slate-300 leading-7 mb-8">
-            فرم ارزیابی هوشمند دیاکو را تکمیل کنید. دفتر وین دیاکو امتیاز شما را محاسبه و
-            مسیر بهینه را طراحی می‌کند.
+      {/* =====================  نمونه ویزاها  ===================== */}
+      <section id="samples" className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 mb-2"><Award className="h-4 w-4" /> سابقه موفق</span>
+            <h2 className="text-2xl md:text-3xl font-black mb-2">🏆 نمونه کارت‌های RWR صادرشده هلدینگ دیاکو</h2>
+            <p className="text-sm text-slate-400">نمونه‌ای از پرونده‌های موفق ۲۰۲۶ (با حفظ حریم خصوصی متقاضیان)</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {sampleVisas.map((v, i) => (
+              <div key={i} className="rounded-3xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-amber-400/40 transition group">
+                <div className="relative h-52 overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
+                  <img src={v.image} alt={v.alt} className="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition blur-[1.5px]" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#061a21] via-[#061a21]/70 to-transparent" />
+                  <div className="absolute top-3 right-3 rounded-full bg-emerald-500/90 px-3 py-1 text-[10px] font-black text-white flex items-center gap-1">
+                    <CheckCircle2 className="h-3 w-3" /> صادر شد
+                  </div>
+                  <div className="absolute top-3 left-3 rounded-full bg-black/70 px-2.5 py-1 text-[9px] font-mono text-slate-300">{v.id}</div>
+                  <div className="absolute bottom-3 right-3 left-3">
+                    <div className="text-[9px] text-slate-400 uppercase tracking-wider">Sample RWR Card</div>
+                    <div className="text-sm font-black text-white">{v.type}</div>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div><div className="text-[10px] text-slate-500">متقاضی</div><div className="font-bold text-white">{v.name}</div></div>
+                    <div><div className="text-[10px] text-slate-500">شهر</div><div className="font-bold text-white flex items-center gap-1"><MapPin className="h-3 w-3 text-amber-400" />{v.city}</div></div>
+                    <div><div className="text-[10px] text-slate-500">تخصص</div><div className="font-bold text-white text-[10px]">{v.profile}</div></div>
+                    <div><div className="text-[10px] text-slate-500">تاریخ</div><div className="font-bold text-amber-300 text-[10px]">{v.date}</div></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-[10px] text-slate-500 text-center mt-4">* اطلاعات برای حفظ حریم خصوصی متقاضیان اصلاح شده است.</p>
+        </div>
+      </section>
+
+      {/* =====================  نظرات تفصیلی  ===================== */}
+      <section id="reviews" className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-amber-300 mb-2"><Star className="h-4 w-4" /> تجربه واقعی</span>
+            <h2 className="text-2xl md:text-3xl font-black mb-2">⭐ نظر دو متقاضی موفق دیاکو</h2>
+            <p className="text-sm text-slate-400">داستان کامل همکاری با هلدینگ مهاجرتی دیاکو در دریافت کارت RWR</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {detailedTestimonials.map((t, i) => (
+              <div key={i} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 hover:border-amber-400/30 transition">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-amber-400/50 shrink-0">
+                    <img src={t.image} alt={t.name} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="text-sm font-black text-white">{t.name}</h3>
+                      <span className="text-[9px] rounded-full bg-emerald-500/20 px-2 py-0.5 font-bold text-emerald-300 flex items-center gap-1"><CheckCircle2 className="h-2.5 w-2.5" /> تأیید شده</span>
+                    </div>
+                    <div className="text-[11px] text-slate-400">{t.role} — {t.company}</div>
+                    <div className="flex items-center gap-2 mt-1 text-[10px] text-slate-500">
+                      <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{t.city}</span><span>·</span>
+                      <span className="flex items-center gap-1"><CalendarDays className="h-3 w-3" />{t.date}</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-0.5 shrink-0">
+                    {[0,1,2,3,4].map((s) => <Star key={s} className={`h-3 w-3 ${s < t.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-600'}`} />)}
+                  </div>
+                </div>
+                <Quote className="h-6 w-6 text-amber-400/40 mb-2" />
+                <blockquote className="text-xs md:text-sm text-slate-300 leading-relaxed mb-4 text-justify">{t.text}</blockquote>
+                <div className="pt-3 border-t border-white/10">
+                  <div className="flex items-center gap-2 text-[11px]">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
+                    <span className="text-slate-400">مسیر:</span>
+                    <span className="font-bold text-amber-300">{t.scheme}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================  FAQ  ===================== */}
+      <section id="faq" className="container mx-auto px-4 md:px-8 mb-16">
+        <h2 className="text-2xl md:text-3xl font-black text-center mb-8">❓ پرسش‌های متداول ۲۰۲۶</h2>
+        <div className="max-w-3xl mx-auto space-y-3">
+          {faqs.map((item, idx) => (
+            <div key={idx} className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
+              <button type="button" onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                className="w-full flex items-center justify-between p-4 text-right text-xs md:text-sm font-bold hover:text-amber-300 transition"
+                aria-expanded={openFaq === idx}>
+                <span>{item.q}</span>
+                <ChevronDown className={`h-4 w-4 shrink-0 transition ${openFaq === idx ? 'rotate-180 text-amber-400' : ''}`} />
+              </button>
+              {openFaq === idx && (
+                <div className="p-4 pt-0 text-xs md:text-sm text-slate-300 leading-relaxed border-t border-white/5">{item.a}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* =====================  مقالات مرتبط  ===================== */}
+      <section className="container mx-auto px-4 md:px-8 mb-16">
+        <h2 className="text-xl md:text-2xl font-black text-center mb-6">📚 مقالات مرتبط</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          {relatedArticles.map((r, i) => (
+            <a key={i} href={r.href} className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 hover:border-amber-400/40 transition">
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-sm font-bold text-white group-hover:text-amber-300 transition">{r.title}</h3>
+                <ExternalLink className="h-4 w-4 text-slate-500 group-hover:text-amber-400 shrink-0 mt-0.5" />
+              </div>
+              <p className="text-[11px] text-slate-400 leading-relaxed">{r.desc}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* =====================  CTA نهایی  ===================== */}
+      <section className="container mx-auto px-4 md:px-8 mb-16">
+        <div className="rounded-3xl border border-amber-400/30 bg-gradient-to-l from-amber-500/10 via-amber-400/5 to-transparent p-6 md:p-10 text-center">
+          <Sparkles className="h-8 w-8 text-amber-400 mx-auto mb-4" />
+          <h2 className="text-xl md:text-2xl font-black mb-2">🚀 آماده اخذ کارت RWR اتریش در ۲۰۲۶ هستید؟</h2>
+          <p className="text-xs md:text-sm text-slate-300 max-w-2xl mx-auto mb-6">
+            فرم ارزیابی هوشمند دیاکو را تکمیل کنید. دفتر وین دیاکو امتیاز شما را محاسبه و مسیر بهینه را طراحی می‌کند.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <button
-              type="button"
-              onClick={onOpenAssessment}
-              className="rounded-2xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] px-8 py-4 text-sm font-black text-[#082833] shadow-glow transition hover:scale-105 active:scale-95 cursor-pointer"
-            >
+            <button type="button" onClick={onOpenAssessment} className="rounded-2xl bg-[#f5a623] px-6 py-3 text-xs md:text-sm font-black text-[#082833] hover:brightness-110">
               شروع ارزیابی رایگان RWR
             </button>
-            <button
-              type="button"
-              onClick={onBackToHome}
-              className="rounded-2xl border border-white/20 bg-white/10 hover:bg-white/20 px-6 py-4 text-xs font-bold text-white transition cursor-pointer"
-            >
-              مشاهده سایر خدمات
+            <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3 text-xs md:text-sm font-bold hover:bg-white/10 inline-flex items-center gap-2">
+              <Copy className="h-4 w-4 text-amber-400" />
+              {copiedPhone ? 'شماره کپی شد!' : 'دفتر وین: +43 688 976 3256'}
             </button>
           </div>
         </div>
       </section>
+
+      {/* =====================  فوتر  ===================== */}
+      <footer className="border-t border-white/10 bg-[#041418]">
+        <div className="container mx-auto px-4 md:px-8 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+            <div>
+              <div className="flex items-center gap-2 mb-3"><Award className="h-6 w-6 text-amber-400" /><span className="font-black">دیاکو</span></div>
+              <p className="text-xs text-slate-400 leading-relaxed">هلدینگ مهاجرتی دیاکو — خدمات تخصصی اقامت کاری در اتریش و اروپا.</p>
+              <div className="flex items-center gap-2 mt-3 text-xs text-emerald-300">
+                <ShieldCheck className="h-4 w-4" /><span>مشاوره تخصصی و شفاف</span>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">لینک‌های سریع</h4>
+              <ul className="space-y-2 text-xs text-slate-400">
+                <li><a href="#article" className="hover:text-amber-300">مقاله</a></li>
+                <li><a href="#points" className="hover:text-amber-300">امتیازدهی</a></li>
+                <li><a href="#shortage" className="hover:text-amber-300">مشاغل کمبود</a></li>
+                <li><a href="#pros-cons" className="hover:text-amber-300">مزایا و معایب</a></li>
+                <li><a href="#faq" className="hover:text-amber-300">سوالات</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">تماس با ما</h4>
+              <ul className="space-y-2 text-xs text-slate-400">
+                <li>دفتر وین: +۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶</li>
+                <li>واتساپ: ۰۹۱۹۷۳۴۰۸۲۹</li>
+                <li>ایمیل: info@dia-co.ir</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold mb-3">شبکه‌های اجتماعی</h4>
+              <div className="flex items-center gap-3 text-xs text-slate-400">
+                <a href="https://instagram.com" className="hover:text-amber-300" aria-label="اینستاگرام">اینستاگرام</a>
+                <a href="https://wa.me/436889763256" className="hover:text-amber-300" aria-label="واتساپ">واتساپ</a>
+                <a href="https://t.me" className="hover:text-amber-300" aria-label="تلگرام">تلگرام</a>
+              </div>
+              <p className="text-[10px] text-slate-500 mt-4">© ۲۰۲۶ دیاکو. تمامی حقوق محفوظ است.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* ---------- نوار CTA شناور موبایل ---------- */}
+      <div className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-[#061a21]/95 backdrop-blur-md border-t border-white/10 p-3 flex gap-2">
+        <button type="button" onClick={onOpenAssessment} className="flex-1 rounded-xl bg-[#f5a623] py-2.5 text-xs font-black text-[#082833]">ارزیابی رایگان</button>
+        <button type="button" onClick={handleCopyPhone} className="rounded-xl border border-white/20 bg-white/5 px-3 py-2.5 text-xs font-bold inline-flex items-center gap-1.5">
+          <PhoneCall className="h-4 w-4 text-emerald-400" /> تماس
+        </button>
+      </div>
+      <div className="h-20 md:hidden" />
     </div>
   );
 };

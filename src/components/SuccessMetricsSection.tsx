@@ -130,17 +130,17 @@ export const SuccessMetricsSection: React.FC = () => {
     <section
       ref={sectionRef}
       id="metrics"
-      className="relative overflow-hidden bg-gradient-to-b from-[#061a21] via-[#07242e] to-[#061a21] py-16 sm:py-20 text-white"
+      className="relative overflow-hidden bg-[#07242e] py-16 sm:py-20 text-slate-300 border-t border-white/10"
       dir="rtl"
     >
       {/* هاله‌های نور پس‌زمینه */}
-      <div className="pointer-events-none absolute top-1/4 right-1/4 h-96 w-96 rounded-full bg-[#f5a623]/10 blur-[130px]" />
-      <div className="pointer-events-none absolute bottom-1/4 left-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-[130px]" />
+      <div className="pointer-events-none absolute top-1/4 right-1/4 h-96 w-96 rounded-full bg-[#f5a623]/5 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-1/4 left-1/4 h-96 w-96 rounded-full bg-cyan-500/5 blur-[130px]" />
 
       <div className="container mx-auto px-4 md:px-8 relative">
         {/* سربرگ بخش */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 shadow-inner">
+          <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-xs font-bold text-amber-300 shadow-2xs">
             <span className="h-2 w-2 rounded-full bg-[#f5a623] animate-ping" />
             شاخص‌های کلیدی عملکرد (KPIs)
           </span>
@@ -164,15 +164,15 @@ export const SuccessMetricsSection: React.FC = () => {
             return (
               <div
                 key={item.id}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#f5a623]/40 hover:shadow-2xl"
+                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#08222b] p-6 shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-[#f5a623]/60 hover:shadow-2xl"
               >
                 {/* افکت گرادیان حاشیه هنگام هاور */}
-                <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-[#f5a623]/20 via-transparent to-cyan-500/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute -inset-px rounded-3xl bg-gradient-to-br from-[#f5a623]/10 via-transparent to-cyan-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 <div className="relative">
                   {/* آیکون و درصد شاخص */}
                   <div className="flex items-center justify-between">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/[0.07] text-2xl shadow-inner group-hover:scale-110 transition-transform">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-2xl shadow-2xs border border-white/15 group-hover:scale-110 transition-transform">
                       {item.icon}
                     </span>
                     <span
@@ -196,7 +196,7 @@ export const SuccessMetricsSection: React.FC = () => {
                       {formattedNum}
                     </span>
                     {item.suffix && (
-                      <span className="text-lg font-bold text-slate-300">{item.suffix}</span>
+                      <span className="text-lg font-bold text-slate-400">{item.suffix}</span>
                     )}
                   </div>
 
@@ -204,7 +204,7 @@ export const SuccessMetricsSection: React.FC = () => {
                     {item.label}
                   </h3>
 
-                  <p className="mt-1 text-[11px] leading-5 text-slate-400">
+                  <p className="mt-1 text-[11px] leading-5 text-slate-300">
                     {item.description}
                   </p>
 
@@ -226,7 +226,7 @@ export const SuccessMetricsSection: React.FC = () => {
         </div>
 
         {/* بخش دیتا ویژوالایزیشن نموداری تفکیک روش‌ها */}
-        <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-8 backdrop-blur-xl shadow-xl">
+        <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.04] p-6 md:p-8 shadow-2xl backdrop-blur-xl">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             {/* ستون راست: نمودار میله‌ای مقایسه‌ای */}
             <div className="lg:col-span-7 space-y-4">
@@ -253,7 +253,7 @@ export const SuccessMetricsSection: React.FC = () => {
                       </div>
                     </div>
                     {/* نوار افقی پیشرفت */}
-                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                    <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
                       <div
                         className="h-full rounded-full bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] transition-all duration-1000"
                         style={{

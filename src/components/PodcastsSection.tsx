@@ -154,10 +154,10 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ ep, isPlaying, onTogglePlay }
       }}
       aria-label={`${isPlaying ? 'توقف' : 'پخش'} ${ep.title}`}
       aria-pressed={isPlaying}
-      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white text-right transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+      className={`group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border bg-white text-right transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${
         isPlaying
-          ? 'border-amber-400 shadow-xl shadow-amber-500/20 ring-2 ring-amber-400/40'
-          : 'border-white/10 shadow-md hover:border-amber-300/60 hover:shadow-xl'
+          ? 'border-amber-500 shadow-xl shadow-amber-500/20 ring-2 ring-amber-400/40'
+          : 'border-slate-200/80 shadow-md hover:border-amber-300/80 hover:shadow-xl'
       }`}
     >
       {/* Cover */}
@@ -213,7 +213,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ ep, isPlaying, onTogglePlay }
 
       {/* Info */}
       <div className="flex flex-1 flex-col p-3">
-        <h3 className="line-clamp-2 text-xs font-black leading-snug text-[#0b2933]">
+        <h3 className="line-clamp-2 text-xs font-black leading-snug text-[#0b2933] group-hover:text-amber-700">
           {ep.title}
         </h3>
 
@@ -222,7 +222,7 @@ const PodcastCard: React.FC<PodcastCardProps> = ({ ep, isPlaying, onTogglePlay }
           <span className="truncate">{ep.speaker}</span>
         </p>
 
-        <div className="mt-2 flex items-center justify-between border-t border-slate-100 pt-2 text-[10px] font-bold text-slate-500">
+        <div className="mt-2 flex items-center justify-between border-t border-slate-100 pt-2 text-[10px] font-bold text-slate-400">
           <span className="inline-flex items-center gap-1">
             <Clock className="h-3 w-3 text-amber-600" />
             {ep.duration}
@@ -366,29 +366,29 @@ export const PodcastsSection: React.FC = () => {
       id="podcasts"
       dir="rtl"
       aria-labelledby={`${sectionId}-title`}
-      className="relative overflow-hidden bg-gradient-to-b from-[#07252e] via-[#0a1f28] to-[#07252e] py-20 text-white"
+      className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#edf2f7] to-[#f8fafc] py-20 text-slate-800 border-t border-slate-200/80"
     >
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
       {/* Background glows */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f5a623]/10 blur-[140px]" />
-      <div className="pointer-events-none absolute top-20 right-0 -z-10 h-96 w-96 rounded-full bg-[#0e7490]/15 blur-[120px]" />
+      <div className="pointer-events-none absolute top-20 right-0 -z-10 h-96 w-96 rounded-full bg-[#0e7490]/5 blur-[120px]" />
 
       <div className="container mx-auto px-4 md:px-8">
         {/* ===== Header ===== */}
         <header className="mx-auto max-w-2xl text-center">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 shadow-inner">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-50 px-4 py-1.5 text-xs font-bold text-amber-800 shadow-2xs">
             <Radio className="h-3.5 w-3.5" />
             رادیو مهاجرت دیاکو | {PODCAST_EPISODES.length} اپیزود اختصاصی
           </div>
           <h2
             id={`${sectionId}-title`}
-            className="text-2xl font-black tracking-tight text-white sm:text-3xl md:text-4xl"
+            className="text-2xl font-black tracking-tight text-[#082833] sm:text-3xl md:text-4xl"
           >
             شنیدنی‌های تخصصی قوانین اقامت اروپا ۲۰۲۶
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-xs font-medium leading-relaxed text-slate-300 sm:text-sm">
-            <strong className="text-amber-200">خلاصه:</strong> {PODCAST_EPISODES.length} پادکست تحلیلی درباره اتریش، آلمان، هلند، اسپانیا، یونان، فرانسه، انگلستان، مجارستان و دومینیکا — توسط وکلای مقیم وین، آتن و برلین.
+          <p className="mx-auto mt-3 max-w-xl text-xs font-medium leading-relaxed text-slate-600 sm:text-sm">
+            <strong className="text-amber-800">خلاصه:</strong> {PODCAST_EPISODES.length} پادکست تحلیلی درباره اتریش، آلمان، هلند، اسپانیا، یونان، فرانسه، انگلستان، مجارستان و دومینیکا — توسط وکلای مقیم وین، آتن و برلین.
           </p>
           <div className="mx-auto mt-4 h-1.5 w-24 rounded-full bg-gradient-to-r from-[#fed871] to-[#f5a623]" />
         </header>
@@ -408,14 +408,14 @@ export const PodcastsSection: React.FC = () => {
                   key={cat.id}
                   type="button"
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`rounded-full border px-3.5 py-1.5 text-[11px] font-bold transition-all cursor-pointer ${
+                  className={`rounded-full border px-3.5 py-1.5 text-[11px] font-bold transition-all cursor-pointer shadow-2xs ${
                     active
-                      ? 'border-[#f5a623]/60 bg-gradient-to-l from-[#f5a623]/25 to-transparent text-amber-200 shadow-md'
-                      : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/25 hover:text-white'
+                      ? 'border-[#f5a623] bg-amber-50 text-amber-950 font-black'
+                      : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   {cat.label}
-                  <span className="mr-1.5 opacity-60">{count.toLocaleString('fa-IR')}</span>
+                  <span className="mr-1.5 text-slate-400">{count.toLocaleString('fa-IR')}</span>
                 </button>
               );
             })}
@@ -427,16 +427,16 @@ export const PodcastsSection: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="جستجو در عنوان، توضیحات یا تگ‌ها..."
-              className="w-full rounded-2xl border border-white/15 bg-white/5 py-2.5 pr-10 pl-4 text-xs font-semibold text-white placeholder-slate-400 focus:border-[#f5a623] focus:bg-white/10 focus:outline-none"
+              className="w-full rounded-2xl border border-slate-300 bg-white py-2.5 pr-10 pl-4 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:border-[#f5a623] focus:outline-none shadow-2xs"
               aria-label="جستجو در پادکست‌ها"
             />
-            <Search className="absolute right-3.5 top-2.5 h-4 w-4 text-slate-500" />
+            <Search className="absolute right-3.5 top-2.5 h-4 w-4 text-slate-400" />
           </div>
         </div>
 
         {/* ===== Currently Playing Bar ===== */}
         {playingEpisode && (
-          <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-amber-400/40 bg-gradient-to-l from-amber-400/15 via-amber-400/5 to-transparent p-3 backdrop-blur-sm">
+          <div className="mx-auto mt-6 max-w-4xl rounded-2xl border border-amber-300 bg-gradient-to-l from-amber-50 via-white to-amber-50/50 p-3 shadow-md">
             <div className="flex items-center gap-3">
               <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
                 <img
@@ -444,14 +444,14 @@ export const PodcastsSection: React.FC = () => {
                   alt=""
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40" />
+                <div className="absolute inset-0 bg-black/20" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 text-[10px] font-black text-amber-300">
+                <div className="flex items-center gap-1.5 text-[10px] font-black text-amber-700">
                   <Headphones className="h-3 w-3" />
                   در حال پخش
                 </div>
-                <p className="truncate text-xs font-bold text-white">
+                <p className="truncate text-xs font-black text-[#082833]">
                   {playingEpisode.title}
                 </p>
               </div>
@@ -460,7 +460,7 @@ export const PodcastsSection: React.FC = () => {
                   {[40, 70, 30, 90, 50, 80, 45].map((h, i) => (
                     <span
                       key={i}
-                      className="w-0.5 animate-pulse rounded-full bg-amber-400"
+                      className="w-0.5 animate-pulse rounded-full bg-amber-500"
                       style={{ height: `${h * 0.2}px`, animationDelay: `${i * 0.1}s` }}
                     />
                   ))}
@@ -468,7 +468,7 @@ export const PodcastsSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setPlayingId(null)}
-                  className="grid h-9 w-9 place-items-center rounded-xl bg-amber-400 text-[#0b2933] shadow-md transition hover:scale-105"
+                  className="grid h-9 w-9 place-items-center rounded-xl bg-amber-500 text-slate-950 shadow-md transition hover:scale-105"
                   aria-label="توقف پخش"
                 >
                   <Pause className="h-4 w-4" />
@@ -490,7 +490,7 @@ export const PodcastsSection: React.FC = () => {
           >
             {/* Autoplay progress */}
             {isAutoplayActive && !isPaused && totalPages > 1 && (
-              <div className="mb-4 h-1 w-full overflow-hidden rounded-full bg-white/10">
+              <div className="mb-4 h-1 w-full overflow-hidden rounded-full bg-slate-200">
                 <div
                   key={`${currentPage}-${activeCategory}`}
                   className="h-full bg-gradient-to-l from-[#fed871] to-[#f5a623]"
@@ -505,7 +505,7 @@ export const PodcastsSection: React.FC = () => {
               onClick={goPrev}
               disabled={totalPages <= 1}
               aria-label="صفحه قبلی"
-              className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 translate-x-1/2 place-items-center rounded-2xl border border-white/20 bg-[#0b2933]/90 text-white shadow-xl backdrop-blur-md transition-all hover:bg-[#f5a623] hover:text-[#0b2933] disabled:cursor-not-allowed disabled:opacity-30 sm:-right-6 sm:grid lg:-right-8"
+              className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 translate-x-1/2 place-items-center rounded-2xl border border-slate-200 bg-white text-[#082833] shadow-xl backdrop-blur-md transition-all hover:bg-[#f5a623] hover:text-[#0b2933] disabled:cursor-not-allowed disabled:opacity-30 sm:-right-6 sm:grid lg:-right-8"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -516,7 +516,7 @@ export const PodcastsSection: React.FC = () => {
               onClick={goNext}
               disabled={totalPages <= 1}
               aria-label="صفحه بعدی"
-              className="absolute left-0 top-1/2 z-20 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border border-white/20 bg-[#0b2933]/90 text-white shadow-xl backdrop-blur-md transition-all hover:bg-[#f5a623] hover:text-[#0b2933] disabled:cursor-not-allowed disabled:opacity-30 sm:-left-6 sm:grid lg:-left-8"
+              className="absolute left-0 top-1/2 z-20 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border border-slate-200 bg-white text-[#082833] shadow-xl backdrop-blur-md transition-all hover:bg-[#f5a623] hover:text-[#0b2933] disabled:cursor-not-allowed disabled:opacity-30 sm:-left-6 sm:grid lg:-left-8"
             >
               <ChevronRight className="h-5 w-5 rotate-180" />
             </button>
@@ -545,19 +545,19 @@ export const PodcastsSection: React.FC = () => {
                 type="button"
                 onClick={goPrev}
                 disabled={totalPages <= 1}
-                className="grid h-10 w-10 place-items-center rounded-xl border border-white/20 bg-white/10 text-white disabled:opacity-30"
+                className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 disabled:opacity-30"
                 aria-label="قبلی"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
-              <span className="text-[11px] font-bold text-slate-400">
+              <span className="text-[11px] font-bold text-slate-500">
                 {`${(currentPage + 1).toLocaleString('fa-IR')} از ${totalPages.toLocaleString('fa-IR')}`}
               </span>
               <button
                 type="button"
                 onClick={goNext}
                 disabled={totalPages <= 1}
-                className="grid h-10 w-10 place-items-center rounded-xl border border-white/20 bg-white/10 text-white disabled:opacity-30"
+                className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 disabled:opacity-30"
                 aria-label="بعدی"
               >
                 <ChevronRight className="h-4 w-4 rotate-180" />
@@ -576,16 +576,16 @@ export const PodcastsSection: React.FC = () => {
                     className={`rounded-full transition-all duration-300 cursor-pointer ${
                       currentPage === idx
                         ? 'h-2.5 w-6 bg-[#f5a623] shadow-md shadow-amber-500/50'
-                        : 'h-2 w-2 bg-white/30 hover:bg-white/60'
+                        : 'h-2 w-2 bg-slate-300 hover:bg-slate-400'
                     }`}
                   />
                 ))
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-bold text-slate-400">
+                  <span className="text-[11px] font-bold text-slate-500">
                     صفحه {currentPage + 1} از {totalPages}
                   </span>
-                  <div className="h-1.5 w-32 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-1.5 w-32 overflow-hidden rounded-full bg-slate-200">
                     <div
                       className="h-full bg-gradient-to-l from-[#fed871] to-[#f5a623] transition-all duration-300"
                       style={{ width: `${((currentPage + 1) / totalPages) * 100}%` }}
@@ -602,8 +602,8 @@ export const PodcastsSection: React.FC = () => {
                 onClick={() => setIsAutoplayActive(!isAutoplayActive)}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[10px] font-bold transition ${
                   isAutoplayActive
-                    ? 'border-amber-400/40 bg-amber-400/15 text-amber-300'
-                    : 'border-white/15 bg-white/5 text-slate-400'
+                    ? 'border-amber-400 bg-amber-50 text-amber-800'
+                    : 'border-slate-200 bg-white text-slate-500'
                 }`}
               >
                 {isAutoplayActive ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
@@ -612,20 +612,20 @@ export const PodcastsSection: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="mx-auto mt-12 max-w-md rounded-3xl border border-white/10 bg-white/5 p-12 text-center">
-            <p className="text-sm font-bold text-slate-300">
+          <div className="mx-auto mt-12 max-w-md rounded-3xl border border-slate-200 bg-white p-12 text-center shadow-sm">
+            <p className="text-sm font-bold text-slate-600">
               اپیزودی با این فیلتر یا جستجو یافت نشد.
             </p>
           </div>
         )}
 
         {/* ===== Footer CTA ===== */}
-        <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-amber-400/30 bg-gradient-to-l from-[#f5a623]/10 via-transparent to-transparent p-6 text-center md:p-8">
-          <Headphones className="mx-auto mb-3 h-8 w-8 text-amber-400" />
-          <h3 className="mb-2 text-lg font-black text-white sm:text-xl">
+        <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-amber-400/40 bg-gradient-to-l from-[#f5a623]/15 via-white to-transparent p-6 text-center shadow-lg md:p-8">
+          <Headphones className="mx-auto mb-3 h-8 w-8 text-amber-600" />
+          <h3 className="mb-2 text-lg font-black text-[#082833] sm:text-xl">
             می‌خواهید پرونده خود را با وکلای مقیم تحلیل کنید؟
           </h3>
-          <p className="mx-auto mb-5 max-w-xl text-xs leading-6 text-slate-300">
+          <p className="mx-auto mb-5 max-w-xl text-xs leading-6 text-slate-600">
             پادکست‌ها برای اطلاع‌رسانی عمومی هستند. برای تحلیل اختصاصی پرونده، مشاوره با وکلای مقیم دیاکو را رزرو کنید.
           </p>
           <a

@@ -148,19 +148,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#08323e] via-[#0b3c4b] to-[#072d38] text-white pt-8 pb-16 md:pt-12 md:pb-20">
-      {/* پترن پس‌زمینه */}
-      <div
-        className="absolute inset-0 opacity-[0.035] pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 25% 25%, #ffffff 1px, transparent 1px), radial-gradient(circle at 75% 75%, #ffffff 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-      />
-      <div className="absolute top-10 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/10 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 left-12 h-80 w-80 rounded-full bg-[#0096b1]/15 blur-[120px] pointer-events-none" />
-
+    <section className="relative overflow-hidden bg-transparent pt-4 pb-12 md:pt-6 md:pb-16">
       <div className="relative container mx-auto px-4 md:px-8">
         <div className="grid items-start gap-8 lg:grid-cols-12">
           {/* ستون راست (متن‌ها و آمار) */}
@@ -168,7 +156,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
             {/* نشان برتر */}
             <div className="mb-4 flex items-center gap-3">
               <DiacoLogo size={52} />
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#164353] bg-[#0c2e3b] px-4 py-1.5 text-xs font-bold text-white shadow-sm">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f5a623] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[#f5a623]" />
@@ -176,69 +164,70 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
                 هلدینگ مهاجرتی دیاکو
               </span>
             </div>
-{/* تیتر اصلی */}
-<h1 className="text-3xl font-black leading-[1.35] text-white sm:text-5xl lg:text-5xl">
-  دروازه امن و تخصصی{' '}
-  <span className="text-[#f5a623] drop-shadow-sm">مهاجرت به اروپا و جهان</span>
-</h1>
 
-{/* توضیحات */}
-<p className="mt-4 text-xs sm:text-sm font-bold text-slate-200 leading-7 text-justify">
-  ارزیابی هوشمند شانس ویزا، اخذ اقامت تمکن مالی (خودحمایتی)، کارت‌های اقامت کاری و بلوکارت اروپا، ویزای تحصیلی و خرید ملک با پشتیبانی حقوقی مستقیم در سراسر اروپا.
-</p>
-<p className="mt-1 text-xs text-slate-300/80">
-  با همراهی وکلای مجرب اروپایی و کارشناسان ارشد با بیش از ۱۰ سال سابقه درخشان و ۲۰۰۰ پرونده موفق.
-</p>
+            {/* تیتر اصلی */}
+            <h1 className="text-3xl font-black leading-[1.35] text-[#082833] sm:text-5xl lg:text-5xl">
+              دروازه امن و تخصصی{' '}
+              <span className="text-[#f5a623] drop-shadow-xs">مهاجرت به اروپا و جهان</span>
+            </h1>
+
+            {/* توضیحات */}
+            <p className="mt-4 text-xs sm:text-sm font-bold text-slate-700 leading-7 text-justify">
+              ارزیابی هوشمند شانس ویزا! اخذ اقامت تمکن مالی (خودحمایتی)، کارت‌های اقامت کاری و بلوکارت، ویزای تحصیلی و خرید ملک با پشتیبانی حقوقی مستقیم در سراسر اروپا.
+            </p>
+            <p className="mt-2 text-xs sm:text-sm font-semibold text-slate-600">
+              با همراهی وکلای مجرب اروپایی و کارشناسان ارشد، با بیش از ۲۰ سال سابقه درخشان و ۹۰۰۰ پرونده موفق.
+            </p>
 
             {/* دکمه‌های اکشن */}
             <div className="mt-7 flex flex-wrap items-center gap-3 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => (onNavigateToPage ? onNavigateToPage('cost-calculator') : onSelectFeature ? onSelectFeature('cost-viz') : onOpenAssessment())}
-                className="flex items-center gap-2.5 rounded-2xl bg-[#6b21a8] hover:bg-[#581c87] px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-lg transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#6b21a8] to-[#7c3aed] hover:from-[#581c87] hover:to-[#6b21a8] px-4.5 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-lg bg-white/20 text-xs">📊</span>
+                <div className="grid h-8 w-8 place-items-center rounded-xl bg-white/20 text-sm">📊</div>
                 <div className="text-right">
                   <span className="block text-xs font-black">محاسبه‌گر آنلاین هزینه‌ها</span>
-                  <span className="block text-[10px] text-white/75 font-normal">تمکن، مسکن، وکالت و دولتی</span>
+                  <span className="block text-[10px] text-white/80 font-normal">تخمین، مستقیم وکالت و حرفه‌ای</span>
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={() => (onNavigateToPage ? onNavigateToPage('online-consult') : onSelectFeature ? onSelectFeature('online-consult') : undefined)}
-                className="flex items-center gap-2.5 rounded-2xl bg-[#059669] hover:bg-[#047857] px-4 py-3 text-xs sm:text-sm font-bold text-white shadow-lg transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="flex items-center gap-2.5 rounded-2xl bg-[#059669] hover:bg-[#047857] px-4.5 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-lg bg-white/20 text-xs">💬</span>
+                <div className="grid h-8 w-8 place-items-center rounded-xl bg-white/20 text-sm">💬</div>
                 <div className="text-right">
                   <span className="block text-xs font-black">مشاوره حضوری و آنلاین</span>
-                  <span className="block text-[10px] text-white/75 font-normal">تهران، وین، آتن</span>
+                  <span className="block text-[10px] text-white/80 font-normal">تهران، وین، آتن</span>
                 </div>
               </button>
 
               <button
                 type="button"
                 onClick={onOpenAssessment}
-                className="flex items-center gap-2.5 rounded-2xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] px-4 py-3 text-xs sm:text-sm font-black text-[#082833] shadow-glow transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="flex items-center gap-2.5 rounded-2xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] hover:from-[#fce08b] hover:to-[#f5a623] px-4.5 py-3 text-xs sm:text-sm font-black text-[#082833] shadow-md transition hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span className="grid h-7 w-7 place-items-center rounded-lg bg-[#082833]/20 text-xs">⚡</span>
+                <div className="grid h-8 w-8 place-items-center rounded-xl bg-[#082833]/15 text-sm">⚡</div>
                 <div className="text-right">
                   <span className="block text-xs font-black">شروع ارزیابی هوشمند</span>
-                  <span className="block text-[10px] text-[#082833]/80 font-normal">تحلیل شانس ویزا</span>
+                  <span className="block text-[10px] text-[#082833]/85 font-normal">تحلیل شانس نیاز</span>
                 </div>
               </button>
             </div>
 
-            {/* آمار افتخارات */}
-            <div className="mt-8 grid w-full grid-cols-2 gap-3 sm:grid-cols-4">
+            {/* آمار افتخارات مطابق تصویر */}
+            <div className="mt-8 grid w-full grid-cols-2 gap-2.5 sm:grid-cols-4">
               {HERO_STATS.map((stat, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl border border-white/15 bg-white/[0.08] p-4 text-center backdrop-blur-md transition hover:border-[#f5a623]/40 hover:bg-white/[0.12]"
+                  className="rounded-2xl border border-[#164353] bg-[#0c2e3b] p-3.5 text-center shadow-sm transition hover:border-[#f5a623]/60"
                 >
                   <p className="text-2xl sm:text-3xl font-black text-[#f5a623]">{stat.value}</p>
                   <p className="mt-1 text-xs font-bold text-white">{stat.label}</p>
-                  <p className="mt-0.5 text-[10px] text-white/70">{stat.note}</p>
+                  {stat.note && <p className="mt-0.5 text-[10px] text-slate-300">{stat.note}</p>}
                 </div>
               ))}
             </div>
@@ -246,7 +235,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
 
           {/* ========================================================
               ستون چپ: گرید ۱۲ عددی اختصاصی فیچرهای هوشمند دیاکو
-              مطابق دقیق با طرح و چیدمان تصویر ارسالی کاربر
+              روی کارت‌های سفید لوکس با حاشیه ظریف بر بستر سنگ مرمر
              ======================================================== */}
           <div className="lg:col-span-6 flex flex-col gap-3">
             <div className="grid grid-cols-2 gap-3 sm:gap-3.5">
@@ -255,10 +244,10 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
                   key={card.id}
                   type="button"
                   onClick={() => handleCardClick(card.id)}
-                  className="group flex flex-col items-center justify-between rounded-2xl sm:rounded-3xl border border-white/30 bg-[#d4e7ee] hover:bg-[#e0eff5] p-3.5 sm:p-4.5 text-center shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-teal-400/50 cursor-pointer min-h-[120px] sm:min-h-[135px]"
+                  className="group flex flex-col items-center justify-between rounded-2xl sm:rounded-3xl border border-white/80 bg-white/95 hover:bg-white p-3.5 sm:p-4.5 text-center shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-teal-500/40 cursor-pointer min-h-[120px] sm:min-h-[135px]"
                 >
                   {/* آیکون در بالا وسط با پس‌زمینه لطیف */}
-                  <div className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-2xl bg-white/70 text-[#165566] transition-transform duration-300 group-hover:scale-110 shadow-xs">
+                  <div className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-2xl bg-[#edf4f7] text-[#0d4554] transition-transform duration-300 group-hover:scale-110 shadow-2xs">
                     {renderCardIcon(card.id)}
                   </div>
 
@@ -267,7 +256,7 @@ export const HeroSection: React.FC<Props> = ({ onOpenAssessment, onSelectFeature
                     <h4 className="text-xs sm:text-sm font-black text-[#082933] transition-colors group-hover:text-teal-900">
                       {card.title}
                     </h4>
-                    <p className="mt-1 text-[10px] sm:text-[11px] font-semibold text-[#285563] leading-4 sm:leading-4.5 line-clamp-2">
+                    <p className="mt-1 text-[10px] sm:text-[11px] font-semibold text-slate-500 leading-4 sm:leading-4.5 line-clamp-2">
                       {card.description}
                     </p>
                   </div>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Calendar,
   Clock,
@@ -44,6 +44,26 @@ export const BlogPostPage: React.FC<Props> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [readingProgress, setReadingProgress] = useState(0);
+
+  // محاسبه داینامیک درصد مطالعه همگام با اسکرول کاربر
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        const currentScroll = window.scrollY;
+        const progress = Math.min(100, Math.max(0, (currentScroll / scrollHeight) * 100));
+        setReadingProgress(progress);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // یافتن مقاله بر اساس slug
   const post = useMemo<BlogPost | undefined>(() => {
@@ -53,10 +73,43 @@ export const BlogPostPage: React.FC<Props> = ({
     );
   }, [slug]);
 
-  // مقالات مرتبط (همان دسته‌بندی یا موضوعات مشترک)
+  // استخراج پویا و هوشمند ۳ مقاله مرتبط بر اساس دسته‌بندی مقاله فعلی، برچسب‌ها و لینک‌سازی داخلی
   const relatedPosts = useMemo<BlogPost[]>(() => {
     if (!post) return [];
-    return BLOG_POSTS.filter((p) => p.slug !== post.slug && (p.category === post.category || p.tags.some((t) => post.tags.includes(t)))).slice(0, 3);
+
+    // ۱. مقالات مرتبط با اولویت هم‌دسته‌بندی (به‌جز مقاله در حال مشاهده)
+    const sameCategory = BLOG_POSTS.filter(
+      (p) => (p.slug !== post.slug && p.id !== post.id) && p.category === post.category
+    );
+
+    // ۲. مقالات با برچسب‌های مشترک
+    const sharedTags = BLOG_POSTS.filter(
+      (p) =>
+        p.slug !== post.slug &&
+        p.id !== post.id &&
+        p.category !== post.category &&
+        p.tags.some((t) => post.tags.includes(t))
+    );
+
+    // ۳. سایر مقالات پرطرفدار و آموزنده دیاکو
+    const others = BLOG_POSTS.filter(
+      (p) =>
+        p.slug !== post.slug &&
+        p.id !== post.id &&
+        p.category !== post.category &&
+        !p.tags.some((t) => post.tags.includes(t))
+    ).sort((a, b) => b.views - a.views);
+
+    // ادغام با اولویت دسته‌بندی و حذف تکراری‌ها
+    const combined = [...sameCategory, ...sharedTags, ...others];
+    const uniqueMap = new Map<string, BlogPost>();
+    combined.forEach((item) => {
+      if (!uniqueMap.has(item.slug)) {
+        uniqueMap.set(item.slug, item);
+      }
+    });
+
+    return Array.from(uniqueMap.values()).slice(0, 3);
   }, [post]);
 
   const handleCopyLink = () => {
@@ -191,11 +244,36 @@ export const BlogPostPage: React.FC<Props> = ({
   }
 
   return (
-    <article className="min-h-screen bg-[#061a21] text-slate-200 selection:bg-amber-400 selection:text-slate-900" dir="rtl">
+    <article className="min-h-screen bg-[#061a21] text-slate-200 selection:bg-amber-400 selection:text-slate-900 relative" dir="rtl">
       {/* ============================================================
-          نوار ناوبری بالا و بردکرامب (Breadcrumb)
+          نوار باریک و ظریف پیشرفت مطالعه در بالاترین لایه (Reading Progress Bar)
          ============================================================ */}
-      <div className="border-b border-white/10 bg-[#07242e]/90 backdrop-blur-md sticky top-16 z-30">
+      <div
+        className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-slate-900/60 backdrop-blur-xs pointer-events-none"
+        role="progressbar"
+        aria-valuenow={Math.round(readingProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="میزان پیشرفت مطالعه مقاله"
+      >
+        <div
+          className="h-full bg-gradient-to-l from-amber-400 via-[#f5a623] to-sky-400 shadow-[0_0_10px_rgba(245,166,35,0.7)] transition-all duration-150 ease-out"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
+
+      {/* ============================================================
+          نوار ناوبری بالا و بردکرامب (Breadcrumb) همراه با ردگیری اسکرول
+         ============================================================ */}
+      <div className="border-b border-white/10 bg-[#07242e]/95 backdrop-blur-md sticky top-16 z-30 shadow-md">
+        {/* خط پیشرفت هماهنگ روی نوار چسبان */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/5 pointer-events-none overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-l from-amber-400 to-[#f5a623] transition-all duration-150 ease-out"
+            style={{ width: `${readingProgress}%` }}
+          />
+        </div>
+
         <div className="container mx-auto px-4 md:px-8 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2 overflow-x-auto py-1 max-w-full">
             <button
@@ -220,6 +298,12 @@ export const BlogPostPage: React.FC<Props> = ({
             <span className="rounded bg-white/10 px-2 py-0.5 text-amber-300 font-bold shrink-0">
               {post.categoryLabel}
             </span>
+
+            {/* درصد مطالعه در نمایشگرهای متوسط و بزرگ */}
+            <div className="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md mr-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#f5a623] animate-pulse" />
+              <span>{Math.round(readingProgress)}٪ مطالعه شد</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
@@ -480,27 +564,40 @@ export const BlogPostPage: React.FC<Props> = ({
           </div>
 
           {/* ============================================================
-              مقالات مرتبط (Related Articles)
+              مقالات و راهنماهای مرتبط (Related Articles based on Category)
              ============================================================ */}
           {relatedPosts.length > 0 && (
-            <section className="pt-10 border-t border-white/10 space-y-5">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-black text-white">مقالات و راهنماهای مرتبط</h3>
+            <section className="pt-12 border-t border-white/10 space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-300 bg-amber-400/10 px-3 py-1 rounded-full mb-2">
+                    <Sparkles className="h-3.5 w-3.5 text-amber-400" />
+                    <span>مطالب پیشنهادی مرتبط با دسته‌بندی {post.categoryLabel}</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-white">
+                    مقالات و راهنماهای تکمیلی
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    تحلیل‌های حقوقی هم‌راستا با این مقاله برای تصمیم‌گیری آگاهانه و تقویت پرونده مهاجرتی شما
+                  </p>
+                </div>
                 <button
                   type="button"
                   onClick={() => {
                     if (onBackToBlog) onBackToBlog();
                     else onBackToHome();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="text-xs font-bold text-amber-300 hover:text-amber-200 transition"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-amber-300 hover:text-amber-200 transition shrink-0 cursor-pointer self-start sm:self-center"
                 >
-                  مشاهده همه مقالات ←
+                  <span>مشاهده همه مقالات وبلاگ</span>
+                  <ArrowLeft className="h-4 w-4" />
                 </button>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-5 sm:grid-cols-3">
                 {relatedPosts.map((rPost) => (
-                  <div
+                  <article
                     key={rPost.id}
                     onClick={() => {
                       if (onNavigateToPost) {
@@ -508,29 +605,61 @@ export const BlogPostPage: React.FC<Props> = ({
                       } else {
                         window.location.pathname = `/blog/${rPost.slug}`;
                       }
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="group rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                    className="group rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] overflow-hidden hover:border-amber-400/40 hover:-translate-y-1.5 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-xl"
                   >
-                    <div className="aspect-[16/9] overflow-hidden bg-black/40">
-                      <img
-                        src={rPost.image.src}
-                        alt={rPost.image.alt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
+                    <div>
+                      {/* تصویر مقاله */}
+                      <div className="aspect-[16/9] overflow-hidden bg-black/50 relative">
+                        <img
+                          src={rPost.image.src}
+                          alt={rPost.image.alt}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                        <div className="absolute top-2.5 right-2.5">
+                          <span className="text-[10px] font-black text-slate-900 bg-amber-400/95 backdrop-blur-xs px-2.5 py-0.5 rounded-full shadow-sm">
+                            {rPost.categoryLabel}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* محتوای کارت */}
+                      <div className="p-4 space-y-2.5">
+                        <div className="flex items-center gap-3 text-[11px] text-slate-400">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3 text-amber-400" />
+                            <span>{rPost.readTime}</span>
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3 text-slate-500" />
+                            <span>{rPost.date}</span>
+                          </span>
+                        </div>
+
+                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-2 leading-snug">
+                          {rPost.title}
+                        </h4>
+
+                        <p className="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">
+                          {rPost.excerpt || rPost.answerFirst}
+                        </p>
+                      </div>
                     </div>
-                    <div className="p-3.5 space-y-2">
-                      <span className="text-[10px] font-bold text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded-full">
-                        {rPost.categoryLabel}
+
+                    {/* فوتر کارت و نویسنده حقوقی */}
+                    <div className="p-4 pt-0 border-t border-white/5 mt-2 flex items-center justify-between text-[11px]">
+                      <span className="text-slate-400 flex items-center gap-1">
+                        <span>{rPost.author.name}</span>
                       </span>
-                      <h4 className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors line-clamp-2">
-                        {rPost.title}
-                      </h4>
-                      <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
-                        {rPost.excerpt}
-                      </p>
+                      <span className="font-bold text-amber-400 group-hover:translate-x-[-3px] transition-transform flex items-center gap-0.5">
+                        <span>مطالعه مقاله</span>
+                        <ArrowLeft className="h-3 w-3 inline" />
+                      </span>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             </section>

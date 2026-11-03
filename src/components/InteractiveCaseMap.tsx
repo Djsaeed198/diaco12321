@@ -289,30 +289,30 @@ export const InteractiveCaseMap: React.FC<Props> = ({ onOpenAssessment, onNaviga
   }, []);
 
   return (
-    <section id="interactive-map" className="relative scroll-mt-24 overflow-hidden bg-[#07242e] py-16 text-white md:py-24">
+    <section id="interactive-map" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-[#f8fafc] via-[#edf2f7] to-[#f8fafc] py-16 text-slate-800 md:py-24 border-t border-slate-200/80">
       {/* پترن پس‌زمینه */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 25% 25%, #ffffff 1px, transparent 1px), radial-gradient(circle at 75% 75%, #ffffff 1px, transparent 1px)',
+            'radial-gradient(circle at 25% 25%, #082833 1px, transparent 1px), radial-gradient(circle at 75% 75%, #082833 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
       />
-      <div className="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-[#f5a623]/10 blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-10 -left-20 h-96 w-96 rounded-full bg-[#0096b1]/15 blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-[#f5a623]/5 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-10 -left-20 h-96 w-96 rounded-full bg-[#0096b1]/5 blur-[130px] pointer-events-none" />
 
       <div className="relative container mx-auto px-4 md:px-8">
         {/* تیتر و مقدمه */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-white/10 px-4 py-1.5 text-xs font-bold text-amber-300 backdrop-blur-md">
+          <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-50 px-4 py-1.5 text-xs font-bold text-amber-800 shadow-2xs">
             <span>🗺️</span>
             سامانه رصد وکلای دیاکو در پایتخت‌های اروپا
           </span>
-          <h2 className="mt-4 text-2xl font-black sm:text-4xl text-white">
+          <h2 className="mt-4 text-2xl font-black sm:text-4xl text-[#082833]">
             نقشه تعاملی ویزاها و مقاصد رسمی <span className="text-[#f5a623]">هلدینگ بین‌المللی دیاکو</span>
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-7">
+          <p className="mt-3 text-xs sm:text-sm text-slate-600 leading-7">
             با کلیک بر روی هر کشور در نقشه، اطلاعات جغرافیایی، پرونده‌های اخذ شده، نرخ قبولی، دفاتر حقوقی و سریع‌ترین روش‌های اقامتی حوزه شینگن را بررسی کنید.
           </p>
         </div>
@@ -326,17 +326,17 @@ export const InteractiveCaseMap: React.FC<Props> = ({ onOpenAssessment, onNaviga
                 key={dest.id}
                 type="button"
                 onClick={() => setSelectedId(dest.id)}
-                className={`flex flex-none items-center gap-2 rounded-2xl border px-3.5 py-2 text-xs font-bold transition cursor-pointer ${
+                className={`flex flex-none items-center gap-2 rounded-2xl border px-3.5 py-2 text-xs font-bold transition cursor-pointer shadow-2xs ${
                   isSelected
-                    ? 'border-[#f5a623] bg-[#f5a623] text-[#082833] shadow-glow scale-105'
-                    : 'border-white/15 bg-white/5 text-white hover:bg-white/10'
+                    ? 'border-[#f5a623] bg-[#f5a623] text-[#082833] shadow-md scale-105'
+                    : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-100'
                 }`}
               >
                 <span className="text-base">{dest.flag}</span>
                 <span>{dest.name}</span>
                 <span
                   className={`rounded-full px-1.5 py-0.5 text-[10px] font-black ${
-                    isSelected ? 'bg-[#082833] text-[#f5a623]' : 'bg-white/10 text-slate-300'
+                    isSelected ? 'bg-[#082833] text-[#f5a623]' : 'bg-slate-100 text-slate-700'
                   }`}
                 >
                   +{toPersianDigits(dest.visasGranted)}
@@ -793,7 +793,7 @@ export const InteractiveCaseMap: React.FC<Props> = ({ onOpenAssessment, onNaviga
           {/* ========================================================
               پنل اطلاعات کشور انتخاب‌شده (Destination Details Panel)
              ======================================================== */}
-          <div className="lg:col-span-5 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-xl">
+          <div className="lg:col-span-5 rounded-3xl border border-white/10 bg-gradient-to-br from-[#08222b] via-[#0b2f3d] to-[#07242e] p-6 shadow-2xl relative overflow-hidden">
             {/* سربرگ کارت کشور */}
             <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
               <div>
