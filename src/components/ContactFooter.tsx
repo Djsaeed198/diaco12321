@@ -30,9 +30,10 @@ const TOPIC_PREFERENCES = [
 
 export interface ContactFooterProps {
   onNavigateToPage?: (page: any) => void;
+  onNavigateToBlogPost?: (slug: string) => void;
 }
 
-export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }) => {
+export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, onNavigateToBlogPost }) => {
   const [email, setEmail] = useState('');
   const [selectedTopic, setSelectedTopic] = useState('austria-resident');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -804,20 +805,22 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }
                   { page: 'financial-austria', label: 'اقامت تمکن مالی اتریش (NAG §44)' },
                   { page: 'austria-rwr', label: 'کارت قرمز-سفید-قرمز اتریش (RWR Card)' },
                   { page: 'austria-blue-card', label: 'بلوکارت اتریش ۲۰۲۶' },
-                  { page: 'startup-austria', label: 'ویزای استارت‌آپ اتریش' },
+                  { page: 'startup-austria', label: 'ویزای استارت‌آپ اتریش (۵۰ هزار یورو)' },
+                  { page: 'blog/austria-startup-visa', label: 'مقاله جامع ویزای استارتاپ اتریش ۲۰۲۶', blogSlug: 'austria-startup-visa' },
                   { page: 'business-austria', label: 'ثبت شرکت و بیزینس در اتریش' },
                   { page: 'realestate-austria', label: 'خرید ملک در وین و گراتس' },
                   { page: 'artist-austria', label: 'اقامت هنرمندان و نخبگان اتریش' },
                   { page: 'medical-austria-nursing', label: 'کادر درمان و پرستاری اتریش' },
                   { page: 'academic-austria', label: 'تحصیل در دانشگاه‌های دولتی اتریش' },
-                ].map((item) => (
+                ].map((item: { page: string; label: string; blogSlug?: string }) => (
                   <li key={item.page}>
                     <a
                       href={`/${item.page}`}
                       onClick={(e) => {
                         if (!e.ctrlKey && !e.metaKey) {
                           e.preventDefault();
-                          if (onNavigateToPage) onNavigateToPage(item.page);
+                          if (item.blogSlug && onNavigateToBlogPost) onNavigateToBlogPost(item.blogSlug);
+                          else if (onNavigateToPage) onNavigateToPage(item.page);
                           else window.location.pathname = `/${item.page}`;
                         }
                       }}
@@ -841,8 +844,10 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }
                   { page: 'german-blue-card', label: 'بلوکارت آلمان ۲۰۲۶ (حداقل حقوق €۴۸,۳۰۰)' },
                   { page: 'jobseeker-germany', label: 'کارت شانس آلمان (Chancenkarte)' },
                   { page: 'medical-germany', label: 'پزشکان و کادر درمان آلمان' },
+                  { page: 'germany-nursing-assistant-visa', label: 'ویزای کار کمک پرستاری آلمان (۲۰۲۶–۲۰۲۷)' },
                   { page: 'ausbildung-germany', label: 'دوره‌های کارآموزی آوسبیلدونگ آلمان' },
                   { page: 'startup-germany', label: 'ویزای کارآفرینی و استارت‌آپ آلمان' },
+                  { page: 'degree-recognition-for-immigration', label: 'معادل‌سازی مدرک تحصیلی (ZAB / Anabin / WES)' },
                   { page: 'spain-blue-card', label: 'بلوکارت اسپانیا ۲۰۲۶' },
                   { page: 'italy-blue-card', label: 'بلوکارت ایتالیا ۲۰۲۶' },
                   { page: 'hungary-blue-card', label: 'بلوکارت مجارستان' },
@@ -878,12 +883,13 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }
                   { page: 'financial-spain', label: 'تمکن مالی (Non-Lucrative) اسپانیا' },
                   { page: 'financial-france', label: 'اقامت خودحمایتی فرانسه' },
                   { page: 'realestate-greece', label: 'خرید ملک و گلدن ویزای یونان' },
+                  { page: 'immigration-through-company-registration', label: 'مهاجرت از طریق ثبت شرکت (اروپا و دبی)' },
                   { page: 'business-dubai', label: 'ثبت شرکت و اقامت طلایی دبی' },
                   { page: 'citizenship-dominica', label: 'پاسپورت دومینیکا در کمتر از ۶ ماه' },
                   { page: 'citizenship-turkey', label: 'شهروندی ترکیه با سرمایه‌گذاری ملکی' },
                   { page: 'nomad-spain', label: 'ویزای دیجیتال نوماد اسپانیا' },
-                  { page: 'nomad-dubai', label: 'ویزای فریلنسری و نوماد دبی' },
-                  { page: 'realestate-france', label: 'سرمایه‌گذاری ملکی در فرانسه' },
+                  { page: 'migrate-with-1-billion-toman', label: 'مهاجرت با بودجه ۱ میلیارد تومان (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'netherlands-study-visa', label: 'مهاجرت تحصیلی به هلند ۲۰۲۶' },
                 ].map((item) => (
                   <li key={item.page}>
                     <a
@@ -908,18 +914,32 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage }
             <div className="space-y-2.5">
               <h4 className="font-black text-white text-xs border-r-2 border-purple-400 pr-2 flex items-center gap-1">
                 <span>⚡</span>
-                <span>سامانه‌ها و ابزارهای هوشمند</span>
+                <span>سامانه‌ها و راهنماهای جامع ۲۰۲۶–۲۰۲۷</span>
               </h4>
               <ul className="space-y-1.5 text-[11px] text-slate-300">
                 {[
+                  { page: 'best-countries-to-immigrate-to', label: 'بهترین کشور برای مهاجرت (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'countries-we-do-not-recommend-for-immigration', label: 'کشورهایی که توصیه نمی‌کنیم (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'germany-vs-austria-immigration-comparison', label: 'مقایسه آلمان یا اتریش (۶ معیار ۲۰۲۶–۲۰۲۷)' },
+                  { page: 'easiest-countries-to-immigrate-2027', label: 'راحت‌ترین کشور برای مهاجرت ۲۰۲۷' },
+                  { page: 'cheapest-european-countries-to-immigrate', label: 'ارزان‌ترین کشورهای اروپایی (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'real-cost-of-immigration-hidden-fees', label: 'هزینه واقعی و هزینه‌های پنهان مهاجرت' },
+                  { page: 'why-my-visa-was-rejected-10-real-reasons', label: '۱۰ دلیل واقعی ریجکتی ویزا و رفع ریجکتی' },
+                  { page: 'why-some-wait-5-years-for-immigration-case-studies', label: 'چرا بعضی‌ها ۵ سال در صف می‌مانند؟ (۴ پرونده)' },
+                  { page: 'iranian-immigration-map-statistics', label: 'نقشه آماری مهاجرت ایرانیان (۲۰۲۵–۲۰۲۷)' },
+                  { page: 'visa-approval-rate-for-iranians-by-country', label: 'نرخ موفقیت ویزا به تفکیک کشور (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'single-vs-married-immigration-which-is-easier', label: 'مهاجرت مجردها در مقابل متأهل‌ها (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'immigration-for-artists-and-musicians', label: 'مهاجرت هنرمندان و اهالی موسیقی (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'best-digital-nomad-visas-income-tax-comparison', label: 'ویزای نومد دیجیتال و مقایسه مالیاتی (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'complete-immigration-document-checklist', label: 'چک‌لیست ۳۰ سند کلیدی مهاجرت (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'global-visa-rules-changes', label: 'قوانین جدید ویزاهای جهان (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'immigration-without-language-certificate', label: 'مهاجرت بدون مدرک زبان (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'immigration-with-high-school-diploma', label: 'مهاجرت با مدرک دیپلم (۲۰۲۶–۲۰۲۷)' },
+                  { page: 'language-college-visa', label: 'مهاجرت از طریق کالج زبان (۲۰۲۶–۲۰۲۷)' },
                   { page: 'after-arrival', label: 'خدمات پس از ورود (After-Arrival) اروپا' },
                   { page: 'blog', label: 'بانک مقالات و بخشنامه‌های ۲۰۲۶' },
                   { page: 'services', label: 'کاتالوگ جامع خدمات دیاکو' },
                   { page: 'interactive-map', label: 'نقشه تعاملی پرونده‌های موفق' },
-                  { page: 'success-cases', label: 'گالری ویزاها و کارت‌های اقامت' },
-                  { page: 'job-search', label: 'بانک مشاغل پرتقاضای اروپا' },
-                  { page: 'country-guide', label: 'راهنمای مقایسه هزینه‌ها و کشورها' },
-                  { page: 'visa-news', label: 'اتاق خبر تغییرات ویزا و شنگن' },
                   { page: 'online-consult', label: 'رزرو وقت مشاوره با وکیل رسمی' },
                 ].map((item) => (
                   <li key={item.page}>

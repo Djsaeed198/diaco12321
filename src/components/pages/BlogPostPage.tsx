@@ -120,103 +120,136 @@ export const BlogPostPage: React.FC<Props> = ({
     }
   };
 
-  // داده‌های ساختاریافته Schema.org برای سئو و AIO
+  // داده‌های ساختاریافته Schema.org برای سئو و AIO/GEO
   const structuredData = useMemo(() => {
     if (!post) return {};
     const pageUrl = `https://www.dia-co.ir/blog/${post.slug}`;
 
+    const graph: Record<string, any>[] = [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${pageUrl}#article`,
+        isPartOf: {
+          '@type': 'WebPage',
+          '@id': pageUrl,
+          url: pageUrl,
+          name: post.seoTitle || post.title,
+        },
+        headline: post.title,
+        description: post.seoDescription || post.excerpt || post.answerFirst,
+        image: {
+          '@type': 'ImageObject',
+          url: post.image.src,
+          width: post.image.width,
+          height: post.image.height,
+        },
+        datePublished: post.dateModified || '2026-01-01',
+        dateModified: post.dateModified || new Date().toISOString().split('T')[0],
+        inLanguage: 'fa-IR',
+        mainEntityOfPage: pageUrl,
+        author: {
+          '@type': 'Organization',
+          name: post.author.name,
+          url: post.author.profileUrl || 'https://www.dia-co.ir/',
+        },
+        ...(post.reviewer
+          ? {
+              reviewedBy: {
+                '@type': 'Organization',
+                name: post.reviewer.name,
+                url: 'https://www.dia-co.ir/',
+              },
+            }
+          : {}),
+        publisher: {
+          '@type': 'Organization',
+          '@id': 'https://www.dia-co.ir/#organization',
+          name: 'هلدینگ مهاجرتی دیاکو',
+          url: 'https://www.dia-co.ir/',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://www.dia-co.ir/logo.png',
+          },
+        },
+        citation: (post.officialSources && post.officialSources.length > 0
+          ? post.officialSources
+          : [post.officialSource]
+        ).map((s) => s.url),
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: ['.speakable-aio-answer', '#article-faq-container'],
+        },
+        keywords: post.tags.join(', '),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'صفحه اصلی',
+            item: 'https://www.dia-co.ir/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'اخبار و مقالات مهاجرتی',
+            item: 'https://www.dia-co.ir/blog',
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.categoryLabel,
+            item: 'https://www.dia-co.ir/blog',
+          },
+          {
+            '@type': 'ListItem',
+            position: 4,
+            name: post.title,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${pageUrl}#faq`,
+        mainEntity: (post.fullArticle.faq || []).map((faq) => ({
+          '@type': 'Question',
+          name: faq.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.a,
+          },
+        })),
+      },
+    ];
+
+    if (post.fullArticle.howToSteps && post.fullArticle.howToSteps.length > 0) {
+      graph.push({
+        '@type': 'HowTo',
+        '@id': `${pageUrl}#howto`,
+        name: post.title,
+        description: post.answerFirst,
+        step: post.fullArticle.howToSteps.map((s, idx) => ({
+          '@type': 'HowToStep',
+          position: idx + 1,
+          name: s.name,
+          text: s.text,
+        })),
+      });
+    }
+
     return {
       '@context': 'https://schema.org',
-      '@graph': [
-        {
-          '@type': 'BlogPosting',
-          '@id': `${pageUrl}#article`,
-          isPartOf: {
-            '@type': 'WebPage',
-            '@id': pageUrl,
-            url: pageUrl,
-            name: post.title,
-          },
-          headline: post.title,
-          description: post.excerpt || post.answerFirst,
-          image: {
-            '@type': 'ImageObject',
-            url: post.image.src,
-            width: post.image.width,
-            height: post.image.height,
-          },
-          datePublished: post.dateModified || '2026-01-01',
-          dateModified: post.dateModified || new Date().toISOString().split('T')[0],
-          inLanguage: 'fa',
-          mainEntityOfPage: pageUrl,
-          author: {
-            '@type': 'Person',
-            name: post.author.name,
-            jobTitle: post.author.role,
-            description: post.author.credentials,
-          },
-          publisher: {
-            '@type': 'Organization',
-            name: 'هلدینگ مهاجرتی دیاکو',
-            url: 'https://www.dia-co.ir/',
-            logo: {
-              '@type': 'ImageObject',
-              url: 'https://www.dia-co.ir/logo.png',
-            },
-          },
-          speakable: {
-            '@type': 'SpeakableSpecification',
-            cssSelector: ['.speakable-aio-answer', '#article-faq-container'],
-          },
-          keywords: post.tags.join(', '),
-        },
-        {
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            {
-              '@type': 'ListItem',
-              position: 1,
-              name: 'صفحه اصلی',
-              item: 'https://www.dia-co.ir/',
-            },
-            {
-              '@type': 'ListItem',
-              position: 2,
-              name: 'اخبار و مقالات مهاجرتی',
-              item: 'https://www.dia-co.ir/#blog',
-            },
-            {
-              '@type': 'ListItem',
-              position: 3,
-              name: post.categoryLabel,
-              item: `https://www.dia-co.ir/category/${post.category}`,
-            },
-            {
-              '@type': 'ListItem',
-              position: 4,
-              name: post.title,
-              item: pageUrl,
-            },
-          ],
-        },
-        {
-          '@type': 'FAQPage',
-          mainEntity: (post.fullArticle.faq || []).map((faq) => ({
-            '@type': 'Question',
-            name: faq.q,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.a,
-            },
-          })),
-        },
-      ],
+      '@graph': graph,
     };
   }, [post]);
 
   useSeo({
-    title: post ? `${post.title} | وبلاگ حقوقی دیاکو` : 'وبلاگ تخصصی مهاجرت | دیاکو',
-    description: post ? (post.excerpt || post.answerFirst).slice(0, 160) : 'مقالات و اخبار مهاجرتی اروپا.',
+    title: post ? post.seoTitle || `${post.title} | وبلاگ حقوقی دیاکو` : 'وبلاگ تخصصی مهاجرت | دیاکو',
+    description: post
+      ? (post.seoDescription || post.excerpt || post.answerFirst).slice(0, 175)
+      : 'مقالات و اخبار مهاجرتی اروپا.',
     keywords: post ? post.tags : ['مهاجرت', 'اتریش', 'اروپا'],
     canonical: post ? `https://www.dia-co.ir/blog/${post.slug}` : 'https://www.dia-co.ir/',
     ogImage: post ? post.image.src : 'https://www.dia-co.ir/og-cover.jpg',
@@ -368,38 +401,68 @@ export const BlogPostPage: React.FC<Props> = ({
             {post.title}
           </h1>
 
-          {/* اطلاعات نویسنده و مرجع قانونی */}
+          {/* اطلاعات نویسنده، بازبین تخصصی و منابع مرجع قانونی (E-E-A-T) */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-2xl border border-white/15 bg-white/[0.04] p-4 backdrop-blur-xl">
-            <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#082833] border border-amber-400/30 text-2xl shadow-inner">
+            <div className="flex items-start gap-3">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#082833] border border-amber-400/30 text-2xl shadow-inner">
                 {post.author.avatar}
               </span>
-              <div>
-                <div className="flex items-center gap-2">
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="font-bold text-white text-sm">{post.author.name}</span>
                   <span className="rounded bg-emerald-500/20 text-emerald-300 text-[10px] px-2 py-0.5 font-bold border border-emerald-500/30">
-                    نویسنده تاییدشده
+                    تاییدشده E-E-A-T
                   </span>
+                  {post.author.profileUrl && (
+                    <a
+                      href={post.author.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] text-cyan-400 hover:underline inline-flex items-center gap-0.5"
+                    >
+                      <span>پروفایل رسمی</span>
+                      <ExternalLink className="h-2.5 w-2.5" />
+                    </a>
+                  )}
                 </div>
-                <p className="text-xs text-slate-300 mt-0.5">{post.author.credentials} • {post.author.office}</p>
+                <p className="text-xs text-slate-300">{post.author.credentials} • {post.author.office}</p>
+                {post.reviewer && (
+                  <p className="text-[11px] text-amber-300/90 flex flex-wrap items-center gap-1.5">
+                    <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                    <span>بازبینی تخصصی: {post.reviewer.name}</span>
+                    {post.reviewer.address && (
+                      <span className="text-slate-400 font-mono text-[10px]" dir="ltr">
+                        ({post.reviewer.address})
+                      </span>
+                    )}
+                  </p>
+                )}
               </div>
             </div>
 
             {post.legalReference && (
-              <div className="text-left sm:text-right text-[11px] font-mono text-amber-300/90 border-t sm:border-t-0 sm:border-r border-white/10 pt-2 sm:pt-0 sm:pr-4">
-                <span className="text-slate-400 block font-sans text-[10px]">مستند رسمی قانون:</span>
-                <span dir="ltr">{post.legalReference}</span>
-                {post.officialSource && (
-                  <a
-                    href={post.officialSource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 mt-1 font-sans text-[10px]"
-                  >
-                    <span>منبع: {post.officialSource.label}</span>
-                    <ExternalLink className="h-2.5 w-2.5" />
-                  </a>
-                )}
+              <div className="text-left sm:text-right text-[11px] font-mono text-amber-300/90 border-t sm:border-t-0 sm:border-r border-white/10 pt-2 sm:pt-0 sm:pr-4 space-y-1">
+                <span className="text-slate-400 block font-sans text-[10px]">مستند رسمی قانون و آخرین به‌روزرسانی ({post.date}):</span>
+                <span dir="ltr" className="block">{post.legalReference}</span>
+                <div className="flex flex-wrap gap-2 font-sans text-[10px] pt-0.5">
+                  {(post.officialSources && post.officialSources.length > 0
+                    ? post.officialSources
+                    : post.officialSource
+                    ? [post.officialSource]
+                    : []
+                  ).map((src) => (
+                    <a
+                      key={src.url}
+                      href={src.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-400/20"
+                    >
+                      <span>{src.label}</span>
+                      <ExternalLink className="h-2.5 w-2.5" />
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -407,7 +470,7 @@ export const BlogPostPage: React.FC<Props> = ({
       </header>
 
       {/* ============================================================
-          بدنه اصلی مقاله + پاسخ صریح AIO و سئو
+          بدنه اصلی مقاله + پاسخ صریح AIO و ساختار GEO
          ============================================================ */}
       <main className="py-12">
         <div className="container mx-auto px-4 md:px-8 max-w-4xl space-y-8">
@@ -427,56 +490,250 @@ export const BlogPostPage: React.FC<Props> = ({
             </div>
           </div>
 
-          {/* کادر برجسته پاسخ سریع هوش مصنوعی (AIO Core Answer Box) */}
+          {/* کادر برجسته پاسخ سریع هوش مصنوعی (BLUF / AIO Core Answer Box) */}
           <section className="speakable-aio-answer rounded-3xl border border-amber-400/40 bg-gradient-to-br from-amber-500/15 via-[#07242e] to-black/60 p-6 md:p-8 backdrop-blur-xl shadow-xl">
             <div className="flex items-center gap-2.5 text-amber-300 font-black text-sm sm:text-base mb-3">
               <Sparkles className="h-5 w-5 text-amber-400 shrink-0" />
-              <span>پاسخ مستقیم و خلاصه کلیدی (AI Overview & Direct Answer)</span>
+              <span>خلاصه اجرایی و پاسخ سریع (BLUF / AI Overview)</span>
             </div>
             <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-medium">
               {post.answerFirst}
             </p>
           </section>
 
-          {/* متن مقدمه تحلیلی */}
-          <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 leading-7 text-xs sm:text-sm text-slate-200 text-justify">
-            <h2 className="text-base sm:text-lg font-black text-white mb-3 flex items-center gap-2">
-              <BookOpen className="h-4 w-4 text-amber-400" />
-              <span>مقدمه حقوقی و تحلیل ۲۰۲۶</span>
-            </h2>
-            <p>{post.fullArticle.intro}</p>
-          </section>
-
-          {/* نکات کلیدی پرونده (Key Points) */}
-          {post.fullArticle.keyPoints && post.fullArticle.keyPoints.length > 0 && (
-            <section className="rounded-3xl border border-white/15 bg-black/40 p-6 md:p-8 space-y-4">
-              <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
-                <FileCheck2 className="h-5 w-5 text-emerald-400" />
-                <span>نکات کلیدی و الزامات اجرایی پرونده ۲۰۲۶</span>
-              </h2>
-              <ul className="space-y-3">
-                {post.fullArticle.keyPoints.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-3 text-xs leading-6 text-slate-200">
-                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-emerald-500/20 text-emerald-400 font-bold text-xs mt-0.5">
-                      ✓
-                    </span>
-                    <span>{point}</span>
+          {/* فهرست مطالب با لینک‌های پرشی استاندارد (Table of Contents) */}
+          {post.fullArticle.sections && post.fullArticle.sections.length > 0 && (
+            <nav
+              aria-label="فهرست مطالب مقاله"
+              className="rounded-2xl border border-white/15 bg-white/[0.03] p-5 sm:p-6 space-y-3"
+            >
+              <div className="flex items-center gap-2 text-sm font-black text-amber-300">
+                <BookOpen className="h-4 w-4 text-amber-400" />
+                <span>فهرست مطالب مقاله (دسترسی سریع به بخش‌ها)</span>
+              </div>
+              <ol className="grid sm:grid-cols-2 gap-2 text-xs text-slate-200 list-decimal list-inside">
+                {post.fullArticle.sections.map((sec) => (
+                  <li key={sec.id}>
+                    <a
+                      href={`#${sec.id}`}
+                      className="hover:text-amber-300 hover:underline transition-colors font-medium"
+                    >
+                      {sec.title}
+                    </a>
                   </li>
                 ))}
-              </ul>
-            </section>
+                {post.fullArticle.faq && post.fullArticle.faq.length > 0 && (
+                  <li>
+                    <a
+                      href="#article-faq-container"
+                      className="hover:text-amber-300 hover:underline transition-colors font-medium"
+                    >
+                      سوالات متداول (FAQ)
+                    </a>
+                  </li>
+                )}
+              </ol>
+            </nav>
           )}
 
-          {/* کادر توصیه مستقیم وکیل مهاجرت (Lawyer's Advice) */}
-          {post.fullArticle.lawyerAdvice && (
-            <section className="rounded-3xl border border-amber-400/50 bg-amber-400/10 p-6 md:p-8 space-y-3">
-              <div className="flex items-center gap-2 text-amber-300 font-black text-sm">
-                <Scale className="h-5 w-5 text-amber-400" />
-                <span>دیدگاه و توصیه وکیل پایه یک دادگستری دیاکو:</span>
+          {/* رندر ساختاریافته بخش‌های جامع (در صورت وجود) یا نمای استاندارد */}
+          {post.fullArticle.sections && post.fullArticle.sections.length > 0 ? (
+            <div className="space-y-8">
+              {post.fullArticle.sections.map((sec) => (
+                <section
+                  key={sec.id}
+                  id={sec.id}
+                  className="scroll-mt-32 rounded-3xl border border-white/10 bg-white/[0.025] p-6 md:p-8 space-y-5"
+                >
+                  <h2 className="text-lg sm:text-xl font-black text-white flex items-center gap-2 border-b border-white/10 pb-3">
+                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400 shrink-0" />
+                    <span>{sec.title}</span>
+                  </h2>
+
+                  {sec.bluf && (
+                    <p className="rounded-xl border border-cyan-400/25 bg-cyan-500/10 p-3.5 text-xs sm:text-sm text-cyan-100 leading-7 font-medium">
+                      {sec.bluf}
+                    </p>
+                  )}
+
+                  {sec.paragraphs &&
+                    sec.paragraphs.map((p, idx) => (
+                      <p key={idx} className="text-xs sm:text-sm text-slate-200 leading-7 text-justify">
+                        {p}
+                      </p>
+                    ))}
+
+                  {sec.bullets && sec.bullets.length > 0 && (
+                    <ul className="space-y-3">
+                      {sec.bullets.map((b, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-start gap-3 rounded-xl bg-white/[0.03] border border-white/5 p-3.5 text-xs sm:text-sm leading-7 text-slate-200"
+                        >
+                          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-emerald-500/20 text-emerald-400 font-bold text-xs mt-0.5">
+                            ✓
+                          </span>
+                          <div>
+                            {b.title && <strong className="text-amber-300 font-black">{b.title}: </strong>}
+                            <span>{b.text}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {sec.table && (
+                    <div className="overflow-x-auto rounded-2xl border border-white/15 bg-black/40">
+                      <table className="w-full text-right text-xs sm:text-sm border-collapse">
+                        <thead>
+                          <tr className="bg-amber-400/15 text-amber-300 border-b border-white/15">
+                            {sec.table.headers.map((h, i) => (
+                              <th key={i} className="p-3.5 font-black whitespace-nowrap">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/10">
+                          {sec.table.rows.map((row, rIdx) => {
+                            const isTotal = rIdx === sec.table!.rows.length - 1 && row[0].includes('مجموع');
+                            return (
+                              <tr
+                                key={rIdx}
+                                className={
+                                  isTotal
+                                    ? 'bg-emerald-500/15 text-emerald-200 font-black'
+                                    : 'hover:bg-white/[0.03] text-slate-200'
+                                }
+                              >
+                                {row.map((cell, cIdx) => (
+                                  <td
+                                    key={cIdx}
+                                    className={`p-3.5 leading-6 ${
+                                      cIdx === 0 ? 'font-bold text-white' : ''
+                                    } ${cIdx === row.length - 1 ? 'font-black text-amber-300 whitespace-nowrap' : ''}`}
+                                  >
+                                    {cell}
+                                  </td>
+                                ))}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+
+                  {sec.steps && sec.steps.length > 0 && (
+                    <div className="space-y-3">
+                      {sec.steps.map((st) => (
+                        <div
+                          key={st.step}
+                          className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/30 p-4"
+                        >
+                          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-amber-400 text-[#082833] font-black text-xs">
+                            {st.step}
+                          </span>
+                          <div className="space-y-1">
+                            <h3 className="text-xs sm:text-sm font-black text-white">{st.title}</h3>
+                            <p className="text-xs text-slate-300 leading-6 text-justify">{st.detail}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {sec.callout && (
+                    <div className="rounded-2xl border border-amber-400/50 bg-amber-400/10 p-5 space-y-2">
+                      <div className="flex items-center gap-2 text-amber-300 font-black text-xs sm:text-sm">
+                        <AlertCircle className="h-4 w-4 text-amber-400 shrink-0" />
+                        <span>{sec.callout.title}</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-amber-50 leading-7 text-justify">
+                        {sec.callout.text}
+                      </p>
+                    </div>
+                  )}
+                </section>
+              ))}
+            </div>
+          ) : (
+            <>
+              {/* متن مقدمه تحلیلی */}
+              <section className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 leading-7 text-xs sm:text-sm text-slate-200 text-justify">
+                <h2 className="text-base sm:text-lg font-black text-white mb-3 flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-amber-400" />
+                  <span>مقدمه حقوقی و تحلیل ۲۰۲۶</span>
+                </h2>
+                <p>{post.fullArticle.intro}</p>
+              </section>
+
+              {/* نکات کلیدی پرونده (Key Points) */}
+              {post.fullArticle.keyPoints && post.fullArticle.keyPoints.length > 0 && (
+                <section className="rounded-3xl border border-white/15 bg-black/40 p-6 md:p-8 space-y-4">
+                  <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                    <FileCheck2 className="h-5 w-5 text-emerald-400" />
+                    <span>نکات کلیدی و الزامات اجرایی پرونده ۲۰۲۶</span>
+                  </h2>
+                  <ul className="space-y-3">
+                    {post.fullArticle.keyPoints.map((point, idx) => (
+                      <li key={idx} className="flex items-start gap-3 rounded-xl bg-white/[0.03] p-3 text-xs leading-6 text-slate-200">
+                        <span className="grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-emerald-500/20 text-emerald-400 font-bold text-xs mt-0.5">
+                          ✓
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {/* کادر توصیه مستقیم وکیل مهاجرت (Lawyer's Advice) */}
+              {post.fullArticle.lawyerAdvice && (
+                <section className="rounded-3xl border border-amber-400/50 bg-amber-400/10 p-6 md:p-8 space-y-3">
+                  <div className="flex items-center gap-2 text-amber-300 font-black text-sm">
+                    <Scale className="h-5 w-5 text-amber-400" />
+                    <span>دیدگاه و توصیه وکیل پایه یک دادگستری دیاکو:</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-amber-100 leading-7 font-medium text-justify">
+                    «{post.fullArticle.lawyerAdvice}»
+                  </p>
+                </section>
+              )}
+            </>
+          )}
+
+          {/* لینک‌های داخلی به صفحات تخصصی و خوشه‌های موضوعی مرتبط (Internal Cluster Linking) */}
+          {post.relatedPages && post.relatedPages.length > 0 && (
+            <section className="rounded-3xl border border-cyan-400/30 bg-cyan-500/5 p-6 md:p-8 space-y-4">
+              <div className="flex items-center gap-2 text-cyan-300 font-black text-sm sm:text-base">
+                <UserCheck className="h-5 w-5 text-cyan-400 shrink-0" />
+                <span>بخش‌های تخصصی و صفحات مکمل مرتبط در پرتال دیاکو</span>
               </div>
-              <p className="text-xs sm:text-sm text-amber-100 leading-7 font-medium text-justify">
-                «{post.fullArticle.lawyerAdvice}»
-              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {post.relatedPages.map((rp) => (
+                  <a
+                    key={rp.href}
+                    href={rp.href}
+                    onClick={(e) => {
+                      if (!e.ctrlKey && !e.metaKey && rp.page && onNavigateToPage) {
+                        e.preventDefault();
+                        onNavigateToPage(rp.page as PageType);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }
+                    }}
+                    className="group rounded-2xl border border-white/10 bg-white/[0.03] hover:border-amber-400/50 hover:bg-white/[0.06] p-4 transition flex flex-col justify-between gap-2"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs sm:text-sm font-black text-white group-hover:text-amber-300 transition">
+                        {rp.title}
+                      </span>
+                      <ArrowLeft className="h-4 w-4 text-amber-400 shrink-0 group-hover:-translate-x-1 transition-transform" />
+                    </div>
+                    <p className="text-[11px] text-slate-300 leading-5">{rp.desc}</p>
+                  </a>
+                ))}
+              </div>
             </section>
           )}
 

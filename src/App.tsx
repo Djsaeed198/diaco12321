@@ -137,6 +137,28 @@ const JobSearchPage = lazy(() => import('./components/pages/tools/JobSearchPage'
 const CountryGuidePage = lazy(() => import('./components/pages/tools/CountryGuidePage'));
 const VisaNewsPage = lazy(() => import('./components/pages/tools/VisaNewsPage'));
 const OnlineConsultPage = lazy(() => import('./components/pages/tools/OnlineConsultPage'));
+const LanguageCollegeVisaPage = lazy(() => import('./components/pages/education/LanguageCollegeVisaPage'));
+const NoLanguageImmigrationPage = lazy(() => import('./components/pages/tools/NoLanguageImmigrationPage'));
+const DegreeRecognitionPage = lazy(() => import('./components/pages/tools/DegreeRecognitionPage'));
+const BestCountries2026Page = lazy(() => import('./components/pages/tools/BestCountries2026Page'));
+const GlobalVisaRules2026Page = lazy(() => import('./components/pages/tools/GlobalVisaRules2026Page'));
+const EasiestCountries2027Page = lazy(() => import('./components/pages/tools/EasiestCountries2027Page'));
+const CompanyRegistrationImmigrationPage = lazy(() => import('./components/pages/business/CompanyRegistrationImmigrationPage'));
+const GermanyNursingAssistantVisaPage = lazy(() => import('./components/pages/medical/GermanyNursingAssistantVisaPage'));
+const MigrateWith1BillionTomanPage = lazy(() => import('./components/pages/tools/MigrateWith1BillionTomanPage'));
+const RealCostHiddenFeesPage = lazy(() => import('./components/pages/tools/RealCostHiddenFeesPage'));
+const CheapestEuropeanCountriesPage = lazy(() => import('./components/pages/tools/CheapestEuropeanCountriesPage'));
+const VisaRejectionReasonsPage = lazy(() => import('./components/pages/tools/VisaRejectionReasonsPage'));
+const GermanyVsAustriaComparisonPage = lazy(() => import('./components/pages/tools/GermanyVsAustriaComparisonPage'));
+const ImmigrationWithDiplomaPage = lazy(() => import('./components/pages/tools/ImmigrationWithDiplomaPage'));
+const CountriesNotRecommendedPage = lazy(() => import('./components/pages/tools/CountriesNotRecommendedPage'));
+const WhySomeWait5YearsPage = lazy(() => import('./components/pages/tools/WhySomeWait5YearsPage'));
+const IranianImmigrationMapPage = lazy(() => import('./components/pages/tools/IranianImmigrationMapPage'));
+const VisaApprovalRatePage = lazy(() => import('./components/pages/tools/VisaApprovalRatePage'));
+const SingleVsMarriedImmigrationPage = lazy(() => import('./components/pages/tools/SingleVsMarriedImmigrationPage'));
+const ArtistsAndMusiciansImmigrationPage = lazy(() => import('./components/pages/artist/ArtistsAndMusiciansImmigrationPage'));
+const BestDigitalNomadVisasPage = lazy(() => import('./components/pages/nomad/BestDigitalNomadVisasPage'));
+const ImmigrationDocumentChecklistPage = lazy(() => import('./components/pages/tools/ImmigrationDocumentChecklistPage'));
 const AfterArrivalPage = lazy(() => import('./components/pages/AfterArrivalPage'));
 const BlogPostPage = lazy(() => import('./components/pages/BlogPostPage'));
 const BlogIndexPage = lazy(() => import('./components/pages/BlogIndexPage'));
@@ -253,6 +275,7 @@ const ROUTE_MAP: Record<string, PageType> = {
   'colleges-hungary': 'colleges-hungary',
   'language-denmark': 'language-denmark',
   'startup-canada': 'startup-canada',
+  'austria-startup-visa': 'startup-austria',
   'startup-austria': 'startup-austria',
   'startup-germany': 'startup-germany',
   'startup-france': 'startup-france',
@@ -305,6 +328,7 @@ const ROUTE_MAP: Record<string, PageType> = {
   'academic-uk': 'academic-uk',
   'academic-austria': 'academic-austria',
   'academic-austria-medical': 'academic-austria-medical',
+  'netherlands-study-visa': 'academic-netherlands',
   'academic-netherlands': 'academic-netherlands',
   'academic-hungary': 'academic-hungary',
   'academic-canada': 'academic-canada',
@@ -318,6 +342,28 @@ const ROUTE_MAP: Record<string, PageType> = {
   'country-guide': 'country-guide',
   'visa-news': 'visa-news',
   'online-consult': 'online-consult',
+  'language-college-visa': 'language-college-visa',
+  'immigration-without-language-certificate': 'immigration-without-language-certificate',
+  'degree-recognition-for-immigration': 'degree-recognition-for-immigration',
+  'best-countries-to-immigrate-to': 'best-countries-to-immigrate-to',
+  'global-visa-rules-changes': 'global-visa-rules-changes',
+  'easiest-countries-to-immigrate-2027': 'easiest-countries-to-immigrate-2027',
+  'immigration-through-company-registration': 'immigration-through-company-registration',
+  'germany-nursing-assistant-visa': 'germany-nursing-assistant-visa',
+  'migrate-with-1-billion-toman': 'migrate-with-1-billion-toman',
+  'real-cost-of-immigration-hidden-fees': 'real-cost-of-immigration-hidden-fees',
+  'cheapest-european-countries-to-immigrate': 'cheapest-european-countries-to-immigrate',
+  'why-my-visa-was-rejected-10-real-reasons': 'why-my-visa-was-rejected-10-real-reasons',
+  'germany-vs-austria-immigration-comparison': 'germany-vs-austria-immigration-comparison',
+  'immigration-with-high-school-diploma': 'immigration-with-high-school-diploma',
+  'countries-we-do-not-recommend-for-immigration': 'countries-we-do-not-recommend-for-immigration',
+  'why-some-wait-5-years-for-immigration-case-studies': 'why-some-wait-5-years-for-immigration-case-studies',
+  'iranian-immigration-map-statistics': 'iranian-immigration-map-statistics',
+  'visa-approval-rate-for-iranians-by-country': 'visa-approval-rate-for-iranians-by-country',
+  'single-vs-married-immigration-which-is-easier': 'single-vs-married-immigration-which-is-easier',
+  'immigration-for-artists-and-musicians': 'immigration-for-artists-and-musicians',
+  'best-digital-nomad-visas-income-tax-comparison': 'best-digital-nomad-visas-income-tax-comparison',
+  'complete-immigration-document-checklist': 'complete-immigration-document-checklist',
   'after-arrival': 'after-arrival',
   'after-arrival-services-europe': 'after-arrival',
   'blog': 'blog',
@@ -394,6 +440,11 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
     description:
       'راهنمای جامع کارت RWR اتریش ۲۰۲۶: ۵۵ امتیاز، حقوق €۳,۴۶۵، مسیر ۵ ساله تا اقامت دائم.',
   },
+  'startup-austria': {
+    title: 'ویزای استارتاپ اتریش ۲۰۲۶ | شرایط، هزینه و راهنمای کامل دیاکو',
+    description:
+      'راهنمای جامع ویزای استارتاپ اتریش (Rot-Weiß-Rot – Karte) در سال ۲۰۲۶. بررسی شرایط امتیازدهی، سرمایه اولیه ۵۰ هزار یورو، مراحل ثبت شرکت و مشاوره تخصصی هلدینگ دیاکو.',
+  },
   'after-arrival': {
     title: 'خدمات پس از ورود و استقرار در اروپا ۲۰۲۶ | هلدینگ دیاکو',
     description:
@@ -427,6 +478,121 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
     title: 'رادیو مهاجرت دیاکو | پادکست‌های تخصصی حقوق مهاجرت و اقامت اروپا',
     description:
       'شنیدن تحلیل‌های صوتی دست‌اول، قوانین جدید مهاجرت ۲۰۲۶، مصاحبه با وکلای اتریش و آلمان و تجربیات واقعی موکلان دیاکو.',
+  },
+  'academic-netherlands': {
+    title: 'مهاجرت تحصیلی به هلند ۲۰۲۶ | شرایط پذیرش، هزینه و ویزا | دیاکو',
+    description:
+      'راهنمای جامع مهاجرت تحصیلی به هلند در سال ۲۰۲۶. بررسی شرایط اخذ پذیرش دانشگاه‌های هلند، تمکن مالی IND (€۱,۱۳۰.۷۷ ماهانه)، هزینه‌های تحصیل و زندگی، ویزای همراه و ویزای کار جستجوی کار Zoekjaar.',
+  },
+  'language-college-visa': {
+    title: 'مهاجرت از طریق کالج زبان ۲۰۲۶-۲۰۲۷ | شرایط، هزینه و ویزا | دیاکو',
+    description:
+      'راهنمای جامع مهاجرت از طریق کالج زبان در سال‌های ۲۰۲۶ و ۲۰۲۷ در آلمان، اتریش، مجارستان و اسپانیا بدون نیاز به مدرک زبان اولیه.',
+  },
+  'immigration-without-language-certificate': {
+    title: 'مهاجرت بدون مدرک زبان ۲۰۲۶-۲۰۲۷ | روش‌های تحصیلی، کاری و سرمایه‌گذاری | دیاکو',
+    description:
+      'راهنمای جامع مهاجرت بدون مدرک زبان بین‌المللی در سال‌های ۲۰۲۶ و ۲۰۲۷ از طریق پذیرش مشروط، تمکن مالی، ثبت شرکت و کالج زبان.',
+  },
+  'degree-recognition-for-immigration': {
+    title: 'معادل‌سازی مدرک تحصیلی برای مهاجرت ۲۰۲۶-۲۰۲۷ | ZAB، Anabin، WES و هزینه | دیاکو',
+    description:
+      'راهنمای جامع معادل‌سازی و ارزیابی مدرک تحصیلی برای مهاجرت در سال‌های ۲۰۲۶ و ۲۰۲۷ در آلمان، اتریش و کانادا.',
+  },
+  'best-countries-to-immigrate-to': {
+    title: 'بهترین کشور برای مهاجرت در سال ۲۰۲۶-۲۰۲۷ | مقایسه ۵ کشور برتر | دیاکو',
+    description:
+      'بررسی بهترین کشور برای مهاجرت در سال‌های ۲۰۲۶ و ۲۰۲۷ بر اساس معیارهای کاری، تحصیلی، سرمایه‌گذاری و رفاه اجتماعی (سوئیس، کانادا، آلمان، استرالیا، امارات).',
+  },
+  'global-visa-rules-changes': {
+    title: 'قوانین جدید ویزاهای کشورهای مختلف ۲۰۲۶-۲۰۲۷ | تغییرات اروپا، کانادا و استرالیا | دیاکو',
+    description:
+      'تحلیل قوانین جدید ویزا در ۲۰۲۶ و ۲۰۲۷ شامل EES و ETIAS شینگن، بلوکارت و کارت فرصت آلمان، کارت RWR اتریش، گلدن ویزاها، کانادا و استرالیا.',
+  },
+  'easiest-countries-to-immigrate-2027': {
+    title: 'راحت‌ترین کشور برای مهاجرت در ۲۰۲۷ کجاست؟ | مقایسه ارزان‌ترین و سریع‌ترین مسیرها | دیاکو',
+    description:
+      'بررسی راحت‌ترین کشور برای مهاجرت در سال ۲۰۲۷ از نظر هزینه، مدرک زبان، سرعت صدور ویزا و شرایط اقامت در پرتغال، اسپانیا، آلمان، اتریش، مجارستان، یونان و امارات.',
+  },
+  'immigration-through-company-registration': {
+    title: 'مهاجرت از طریق ثبت شرکت ۲۰۲۶-۲۰۲۷ | انتخاب بهترین کشور و هزینه‌ها | دیاکو',
+    description:
+      'راهنمای جامع مهاجرت از طریق ثبت شرکت در سال‌های ۲۰۲۶ و ۲۰۲۷. مقایسه شرایط، حداقل سرمایه، مالیات و سرعت اخذ اقامت در اتریش، آلمان، مجارستان، اسپانیا و امارات.',
+  },
+  'germany-nursing-assistant-visa': {
+    title: 'نحوه اخذ ویزای کار کمک پرستاری آلمان ۲۰۲۶-۲۰۲۷ | شرایط، مدرک زبان و حقوق | دیاکو',
+    description:
+      'راهنمای جامع نحوه اخذ ویزای کار کمک پرستاری آلمان (Pflegehelfer) در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی معادلسازی مدرک، زبان B1/B2، آوسبیلدونگ و حقوق ماهانه.',
+  },
+  'migrate-with-1-billion-toman': {
+    title: 'با ۱ میلیارد تومان کجا می‌توانم مهاجرت کنم؟ | جدول کامل ۲۰۲۶-۲۰۲۷ | دیاکو',
+    description:
+      'راهنمای واقعی و شفاف مهاجرت با ۱ میلیارد تومان در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی مسیرهای تحصیلی، کاری و آوسبیلدونگ در آلمان، ایتالیا، اتریش و عمان.',
+  },
+  'real-cost-of-immigration-hidden-fees': {
+    title: 'هزینه واقعی مهاجرت ۲۰۲۶-۲۰۲۷ | هزینه‌های پنهانی که هیچ آژانسی نمی‌گوید | دیاکو',
+    description:
+      'بررسی صادقانه و شفاف هزینه واقعی مهاجرت در سال‌های ۲۰۲۶ و ۲۰۲۷. افشای هزینه‌های پنهان ترجمه، معادلسازی مدرک، ودیعه مسکن اروپا (Kaution) و مخارج زندگی تا اولین حقوق.',
+  },
+  'cheapest-european-countries-to-immigrate': {
+    title: 'ارزان‌ترین کشورهای اروپایی برای مهاجرت در ۲۰۲۶-۲۰۲۷ (با رتبه‌بندی واقعی) | دیاکو',
+    description:
+      'رتبه‌بندی واقعی ارزان‌ترین کشورهای اروپایی برای مهاجرت در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی هزینه تحصیل، زندگی و ویزا در ایتالیا، آلمان، اتریش، مجارستان و پرتغال.',
+  },
+  'why-my-visa-was-rejected-10-real-reasons': {
+    title: 'چرا ویزای من رد شد؟ | ۱۰ دلیل واقعی ریجکتی ویزا و راه‌های رفع آن (۲۰۲۶) | دیاکو',
+    description:
+      'بررسی ۱۰ دلیل واقعی ریجکت شدن ویزاهای شینگن، تحصیلی، کاری و سرمایه‌گذاری در سال‌های ۲۰۲۶ و ۲۰۲۷ بر اساس پرونده‌های واقعی و راهنمای رفع ریجکتی.',
+  },
+  'germany-vs-austria-immigration-comparison': {
+    title: 'آلمان یا اتریش برای مهاجرت در ۲۰۲۶-۲۰۲۷؟ | مقایسه صریح بر اساس ۶ معیار واقعی | دیاکو',
+    description:
+      'مقایسه صادقانه و بی‌پرده مهاجرت به آلمان یا اتریش در سال‌های ۲۰۲۶ و ۲۰۲۷ بر اساس ۶ معیار واقعی: حقوق، مالیات، هزینه مسکن، سرعت اخذ پاسپورت و ویزای همراه.',
+  },
+  'immigration-with-high-school-diploma': {
+    title: 'مهاجرت با مدرک دیپلم ۲۰۲۶-۲۰۲۷ | کدام کشورها واقعاً راه می‌دهند؟ | دیاکو',
+    description:
+      'راهنمای واقعی مهاجرت با مدرک دیپلم و بدون مدرک دانشگاهی در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی آوسبیلدونگ آلمان، کار فنی در اتریش، کالج زبان و ثبت شرکت.',
+  },
+  'countries-we-do-not-recommend-for-immigration': {
+    title: 'کشورهایی که مهاجرت به آن‌ها را اصلاً توصیه نمی‌کنیم (و چرا؟) — راهنمای ۲۰۲۶-۲۰۲۷ | دیاکو',
+    description:
+      'نقد صادقانه و بدون تعارف مقاصد مهاجرتی پرریسک در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی دلایل حقوقی و مالی عدم توصیه جزایر کارائیب، کشورهای غیرشینگن شرق اروپا، استرالیا و بریتانیا.',
+  },
+  'why-some-wait-5-years-for-immigration-case-studies': {
+    title: 'چرا بعضی‌ها ۵ سال در صف مهاجرت می‌مانند؟ | تحلیل ۴ پرونده واقعی (۲۰۲۶) | دیاکو',
+    description:
+      'بررسی دلایل واقعی فرسایشی شدن پروسه مهاجرت و تحلیل ۴ پرونده واقعی که ۵ سال در انتظار ماندند. چگونه زمان مهاجرت به اروپا را در سال ۲۰۲۶-۲۰۲۷ به زیر ۶ ماه برسانیم؟',
+  },
+  'iranian-immigration-map-statistics': {
+    title: 'نقشه مهاجرت ایرانیان در ۲۰۲۵ (و روندهای ۲۰۲۶-۲۰۲۷): به کدام کشورها بیشتر می‌روند؟ | دیاکو',
+    description:
+      'بررسی داده‌محور نقشه مهاجرت ایرانیان در سال ۲۰۲۵ و روندهای ۲۰۲۶–۲۰۲۷. آمار سهم اروپا (+۶۰٪)، آلمان، ایتالیا، اتریش، دبی، عمان و افت ویزای دانشجویی کانادا.',
+  },
+  'visa-approval-rate-for-iranians-by-country': {
+    title: 'نرخ موفقیت ویزا به تفکیک کشور برای ایرانیان (جدول کامل ۲۰۲۶-۲۰۲۷) | دیاکو',
+    description:
+      'بررسی دقیق نرخ موفقیت ویزای شینگن (توریستی C)، کاری آلمان و اتریش (+۹۰٪)، تحصیلی ایتالیا و اتریش، ثبت شرکت دبی (+۹۵٪)، کانادا و آمریکا برای ایرانیان در ۲۰۲۶–۲۰۲۷.',
+  },
+  'single-vs-married-immigration-which-is-easier': {
+    title: 'مهاجرت مجردها در مقابل متأهل‌ها (۲۰۲۶-۲۰۲۷) | کدام مسیر آسان‌تر است؟ | دیاکو',
+    description:
+      'مقایسه صادقانه و تخصصی مهاجرت مجردها و متأهل‌ها در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی هزینه تمکن مالی، قوانین ویزای همراه اروپا و کانادا، اجازه کار همسر و اقدام همزمان یا الحاق.',
+  },
+  'immigration-for-artists-and-musicians': {
+    title: 'مهاجرت برای هنرمندان و اهالی موسیقی (۲۰۲۶-۲۰۲۷) | کشورهایی که واقعاً حمایت می‌کنند | دیاکو',
+    description:
+      'راهنمای جامع مهاجرت هنرمندان، نوازندگان و اهالی موسیقی در سال‌های ۲۰۲۶ و ۲۰۲۷. بررسی ویزای هنرمندان آلمان (صندوق بیمه KSK)، وین اتریش، Talent Passport فرانسه و هلند.',
+  },
+  'best-digital-nomad-visas-income-tax-comparison': {
+    title: 'ویزای نومد دیجیتال ۲۰۲۶-۲۰۲۷ | جدول مقایسه درآمد و مالیات بهترین کشورها | دیاکو',
+    description:
+      'راهنمای جامع ویزای نومد دیجیتال در سال‌های ۲۰۲۶ و ۲۰۲۷. مقایسه تخصصی حداقل درآمد ماهانه، قانون بکهام اسپانیا (۲۴٪)، پرتغال D8، یونان، ایتالیا و معافیت ۰٪ دبی.',
+  },
+  'complete-immigration-document-checklist': {
+    title: 'چک‌لیست کامل مدارک مهاجرت: ۳۰ سند کلیدی که باید همین امروز آماده کنید (۲۰۲۶-۲۰۲۷) | دیاکو',
+    description:
+      'چک‌لیست کامل و گام‌به‌گام مدارک مهاجرت به اروپا و کانادا در سال‌های ۲۰۲۶ و ۲۰۲۷ شامل ۳۰ سند ضروری هویتی، تحصیلی (ZAB/ENIC)، شغلی، بیمه، مالی و زبان.',
   },
   'contact-us': {
     title: 'تماس با دفاتر هلدینگ بین‌المللی دیاکو در وین، آتن و تهران',
@@ -779,7 +945,13 @@ export const App: React.FC = () => {
               <StartupCanadaPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
             )}
             {currentPage === 'startup-austria' && (
-              <StartupAustriaPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
+              <StartupAustriaPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
             )}
             {currentPage === 'startup-germany' && (
               <StartupGermanyPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
@@ -951,7 +1123,13 @@ export const App: React.FC = () => {
               <AcademicAustriaMedicalPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
             )}
             {currentPage === 'academic-netherlands' && (
-              <AcademicNetherlandsPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
+              <AcademicNetherlandsPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
             )}
             {currentPage === 'academic-hungary' && (
               <AcademicHungaryPage onBackToHome={navigateToHome} onOpenAssessment={openAssessment} onNavigateToCountry={(k) => navigateToPage(k as PageType)} />
@@ -1005,6 +1183,204 @@ export const App: React.FC = () => {
                 onBackToHome={navigateToHome}
                 onOpenAssessment={openAssessment}
                 onNavigateToPage={navigateToPage}
+              />
+            )}
+            {currentPage === 'language-college-visa' && (
+              <LanguageCollegeVisaPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'immigration-without-language-certificate' && (
+              <NoLanguageImmigrationPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'degree-recognition-for-immigration' && (
+              <DegreeRecognitionPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'best-countries-to-immigrate-to' && (
+              <BestCountries2026Page
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'global-visa-rules-changes' && (
+              <GlobalVisaRules2026Page
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'easiest-countries-to-immigrate-2027' && (
+              <EasiestCountries2027Page
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'immigration-through-company-registration' && (
+              <CompanyRegistrationImmigrationPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'germany-nursing-assistant-visa' && (
+              <GermanyNursingAssistantVisaPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'migrate-with-1-billion-toman' && (
+              <MigrateWith1BillionTomanPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'real-cost-of-immigration-hidden-fees' && (
+              <RealCostHiddenFeesPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'cheapest-european-countries-to-immigrate' && (
+              <CheapestEuropeanCountriesPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'why-my-visa-was-rejected-10-real-reasons' && (
+              <VisaRejectionReasonsPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'germany-vs-austria-immigration-comparison' && (
+              <GermanyVsAustriaComparisonPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'immigration-with-high-school-diploma' && (
+              <ImmigrationWithDiplomaPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'countries-we-do-not-recommend-for-immigration' && (
+              <CountriesNotRecommendedPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'why-some-wait-5-years-for-immigration-case-studies' && (
+              <WhySomeWait5YearsPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'iranian-immigration-map-statistics' && (
+              <IranianImmigrationMapPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'visa-approval-rate-for-iranians-by-country' && (
+              <VisaApprovalRatePage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'single-vs-married-immigration-which-is-easier' && (
+              <SingleVsMarriedImmigrationPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'immigration-for-artists-and-musicians' && (
+              <ArtistsAndMusiciansImmigrationPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'best-digital-nomad-visas-income-tax-comparison' && (
+              <BestDigitalNomadVisasPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
+              />
+            )}
+            {currentPage === 'complete-immigration-document-checklist' && (
+              <ImmigrationDocumentChecklistPage
+                onBackToHome={navigateToHome}
+                onOpenAssessment={openAssessment}
+                onNavigateToCountry={(k) => navigateToPage(k as PageType)}
+                onNavigateToPage={(p) => navigateToPage(p as PageType)}
+                onNavigateToBlogPost={navigateToBlogPost}
               />
             )}
             {currentPage === 'after-arrival' && (
@@ -1200,7 +1576,7 @@ export const App: React.FC = () => {
         </ErrorBoundary>
       </main>
 
-      <ContactFooter onNavigateToPage={navigateToPage} />
+      <ContactFooter onNavigateToPage={navigateToPage} onNavigateToBlogPost={navigateToBlogPost} />
       <SupportButton />
       <BackToTop />
 
