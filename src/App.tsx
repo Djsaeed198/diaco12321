@@ -16,10 +16,10 @@ import React, {
 import Header from './components/Header';
 import BannerSection from './components/BannerSection';
 import HeroSection from './components/HeroSection';
+import VisaGlobeSection from './components/VisaGlobeSection';
 import ServicesSection from './components/ServicesSection';
 import FormCategoriesSection from './components/FormCategoriesSection';
 import SuccessMetricsSection from './components/SuccessMetricsSection';
-import CaseSuccessMap from './components/CaseSuccessMap';
 import InteractiveCaseMap from './components/InteractiveCaseMap';
 import VisaSuccessSection from './components/VisaSuccessSection';
 import PodcastsSection from './components/PodcastsSection';
@@ -1551,6 +1551,8 @@ export const App: React.FC = () => {
                   </section>
                 )}
 
+                <VisaGlobeSection />
+
                 <ServicesSection
                   onSelectService={() => handleSelectFeature('method-comp')}
                   onNavigateToBlueCard={navigateToCountry}
@@ -1559,7 +1561,6 @@ export const App: React.FC = () => {
 
                 <FormCategoriesSection onOpenAssessment={openAssessment} />
                 <SuccessMetricsSection />
-                <CaseSuccessMap onOpenAssessment={openAssessment} onNavigateToPage={navigateToPage} />
                 <InteractiveCaseMap onOpenAssessment={openAssessment} onNavigateToPage={navigateToPage} />
                 <VisaSuccessSection />
                 <PodcastsSection />

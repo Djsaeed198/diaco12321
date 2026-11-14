@@ -1,6 +1,11 @@
 /**
  * Google Sheets API Helper for Diaco Immigration Portal
  * Uses OAuth 2.0 access token obtained via Firebase Auth (GoogleAuthProvider with spreadsheets scope)
+ *
+ * - FIXED_SPREADSHEET_ID is the shared Diaco leads sheet.
+ * - For a shared sheet owned by Diaco (not by the end-user), the access token
+ *   must belong to an account with Editor access to that sheet, or writes should
+ *   be handled via the backend proxy (/api/newsletter) using a Service Account.
  */
 
 export interface SheetRowData {
@@ -11,8 +16,19 @@ export interface SheetRowData {
   source?: string;
 }
 
+/** شناسه شیت ثابت دیاکو */
+export const FIXED_SPREADSHEET_ID = '1GnttAb512ZXPGevBXlqmP0pXYqSfVU5dmaqlSoyelhc';
+
+/** لینک قابل مشاهده شیت ثابت */
+export const FIXED_SPREADSHEET_URL = `https://docs.google.com/spreadsheets/d/${FIXED_SPREADSHEET_ID}/edit`;
+
 const STORAGE_KEY_SHEET_ID = 'diaco_active_sheet_id';
 const STORAGE_KEY_SHEET_TITLE = 'diaco_active_sheet_title';
+const DEFAULT_TAB = 'متقاضیان خبرنامه';
+
+/* ------------------------------------------------------------------ */
+/* Storage helpers                                                    */
+/* ------------------------------------------------------------------ */
 
 export function getStoredSheetId(): string | null {
   if (typeof window === 'undefined') return null;
@@ -38,9 +54,20 @@ export function clearStoredSheetId(): void {
   localStorage.removeItem(STORAGE_KEY_SHEET_TITLE);
 }
 
-/**
- * Creates a dedicated new Google Sheet in the user's Google Drive for Diaco newsletter leads
- */
+/* ------------------------------------------------------------------ */
+/* Security helper (CSV / formula injection protection)               */
+/* ------------------------------------------------------------------ */
+
+function sanitizeCell(value: unknown): string {
+  const v = String(value ?? '').trim();
+  // Prevent Google Sheets formula injection
+  return /^[=+\-@]/.test(v) ? `'${v}` : v;
+}
+
+/* ------------------------------------------------------------------ */
+/* Create a per-user spreadsheet (kept for backwards compatibility)   */
+/* ------------------------------------------------------------------ */
+
 export async function createLeadsSpreadsheet(
   accessToken: string,
   customTitle = 'خبرنامه و متقاضیان مهاجرت دیاکو - Diaco Leads'
@@ -58,7 +85,7 @@ export async function createLeadsSpreadsheet(
       sheets: [
         {
           properties: {
-            title: 'متقاضیان خبرنامه',
+            title: DEFAULT_TAB,
             gridProperties: {
               frozenRowCount: 1,
             },
@@ -94,51 +121,72 @@ export async function createLeadsSpreadsheet(
   }
 
   const data = await response.json();
-  const spreadsheetId = data.spreadsheetId;
-  const spreadsheetUrl = data.spreadsheetUrl || `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`;
+  const spreadsheetId = data.spreadsheetId as string;
+  const spreadsheetUrl =
+    (data.spreadsheetUrl as string) ||
+    `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`;
+  const title = (data.properties?.title as string) || customTitle;
 
-  saveStoredSheetId(spreadsheetId, customTitle);
+  saveStoredSheetId(spreadsheetId, title);
 
   return {
     spreadsheetId,
     spreadsheetUrl,
-    title: customTitle,
+    title,
   };
 }
 
-/**
- * Fetches information about a spreadsheet by ID
- */
+/* ------------------------------------------------------------------ */
+/* Get spreadsheet details                                            */
+/* ------------------------------------------------------------------ */
+
 export async function getSpreadsheetDetails(
   accessToken: string,
   spreadsheetId: string
 ): Promise<{ title: string; sheets: string[] }> {
-  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=properties.title,sheets.properties.title`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await fetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=properties.title,sheets.properties.title`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
+    if (res.status === 401) {
+      throw new Error('نشست شما منقضی شده است. لطفاً دوباره وارد شوید.');
+    }
+    if (res.status === 403) {
+      throw new Error('دسترسی به شیت دیاکو وجود ندارد. لطفاً با مدیر سیستم تماس بگیرید.');
+    }
     throw new Error(err?.error?.message || 'امکان دسترسی به شیت مورد نظر وجود ندارد.');
   }
 
   const data = await res.json();
-  const title = data.properties?.title || 'Google Sheet';
-  const sheets = (data.sheets || []).map((s: any) => s.properties?.title || 'Sheet1');
+  const title = (data.properties?.title as string) || 'Google Sheet';
+  const sheets = (data.sheets || []).map(
+    (s: { properties?: { title?: string } }) => s.properties?.title || 'Sheet1'
+  );
 
   return { title, sheets };
 }
 
-/**
- * Appends a subscriber lead row to the user's Google Sheet
- */
+/* ------------------------------------------------------------------ */
+/* Core append function (defaults to FIXED_SPREADSHEET_ID)            */
+/* ------------------------------------------------------------------ */
+
 export async function appendSubscriberToGoogleSheet(
   accessToken: string,
-  spreadsheetId: string,
+  spreadsheetId: string = FIXED_SPREADSHEET_ID,
   lead: SheetRowData
 ): Promise<{ success: boolean; spreadsheetUrl: string }> {
+  if (!lead?.email || !lead.email.trim()) {
+    throw new Error('ایمیل متقاضی الزامی است.');
+  }
+
+  const targetSpreadsheetId = spreadsheetId || FIXED_SPREADSHEET_ID;
   const now = new Date();
   const jalaliDate =
     lead.jalaliDate ||
@@ -149,29 +197,27 @@ export async function appendSubscriberToGoogleSheet(
     }).format(now);
 
   const rowValues = [
-    lead.email.trim().toLowerCase(),
-    lead.topic || 'تمکن مالی اتریش',
-    jalaliDate,
-    lead.timestamp || now.toISOString(),
-    lead.source || 'پرتال دیاکو (فرم خبرنامه)',
-    'در انتظار ارتباط کارشناس',
+    sanitizeCell(lead.email.trim().toLowerCase()),
+    sanitizeCell(lead.topic || 'تمکن مالی اتریش'),
+    sanitizeCell(jalaliDate),
+    sanitizeCell(lead.timestamp || now.toISOString()),
+    sanitizeCell(lead.source || 'پرتال دیاکو (فرم خبرنامه)'),
+    sanitizeCell('در انتظار ارتباط کارشناس'),
   ];
 
-  // Try finding the first tab name
-  let targetTab = 'متقاضیان خبرنامه';
+  // Resolve tab
+  let targetTab = DEFAULT_TAB;
   try {
-    const details = await getSpreadsheetDetails(accessToken, spreadsheetId);
+    const details = await getSpreadsheetDetails(accessToken, targetSpreadsheetId);
     if (details.sheets && details.sheets.length > 0) {
-      // Pick the first sheet or 'متقاضیان خبرنامه' if exists
-      targetTab = details.sheets.includes('متقاضیان خبرنامه') ? 'متقاضیان خبرنامه' : details.sheets[0];
+      targetTab = details.sheets.includes(DEFAULT_TAB) ? DEFAULT_TAB : details.sheets[0];
     }
   } catch {
-    // fallback to Sheet1 or default
     targetTab = 'Sheet1';
   }
 
   const range = encodeURIComponent(`${targetTab}!A:F`);
-  const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
+  const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${targetSpreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
 
   const appendRes = await fetch(appendUrl, {
     method: 'POST',
@@ -185,8 +231,7 @@ export async function appendSubscriberToGoogleSheet(
   });
 
   if (!appendRes.ok) {
-    // If targetTab failed, try generic range
-    const fallbackUrl = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:F:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
+    const fallbackUrl = `https://sheets.googleapis.com/v4/spreadsheets/${targetSpreadsheetId}/values/A:F:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
     const fallbackRes = await fetch(fallbackUrl, {
       method: 'POST',
       headers: {
@@ -200,10 +245,27 @@ export async function appendSubscriberToGoogleSheet(
 
     if (!fallbackRes.ok) {
       const err = await fallbackRes.json().catch(() => ({}));
+      if (fallbackRes.status === 401) {
+        throw new Error('نشست شما منقضی شده است. لطفاً دوباره وارد شوید.');
+      }
+      if (fallbackRes.status === 403) {
+        throw new Error('اجازه نوشتن در شیت دیاکو وجود ندارد. لطفاً با مدیر سیستم تماس بگیرید.');
+      }
       throw new Error(err?.error?.message || 'خطا در ثبت ردیف در گوگل شیت.');
     }
   }
 
-  const spreadsheetUrl = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`;
+  const spreadsheetUrl = `https://docs.google.com/spreadsheets/d/${targetSpreadsheetId}/edit`;
   return { success: true, spreadsheetUrl };
+}
+
+/* ------------------------------------------------------------------ */
+/* Convenience: always write into the shared Diaco sheet              */
+/* ------------------------------------------------------------------ */
+
+export async function appendToFixedSheet(
+  accessToken: string,
+  lead: SheetRowData
+): Promise<{ success: boolean; spreadsheetUrl: string }> {
+  return appendSubscriberToGoogleSheet(accessToken, FIXED_SPREADSHEET_ID, lead);
 }

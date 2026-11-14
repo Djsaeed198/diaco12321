@@ -90,17 +90,26 @@ function normalizeAndValidatePrivateKey(rawKey: string | undefined): string | nu
   }
 }
 
+/** شناسه شیت ثابت دیاکو */
+const FIXED_SPREADSHEET_ID = '1GnttAb512ZXPGevBXlqmP0pXYqSfVU5dmaqlSoyelhc';
+const DEFAULT_SHEET_TAB = 'متقاضیان خبرنامه';
+
+function sanitizeCell(value: unknown): string {
+  const v = String(value ?? '').trim();
+  return /^[=+\-@]/.test(v) ? `'${v}` : v;
+}
+
 /**
  * Helper to obtain an authenticated Google Sheets client.
  * Supports:
  *  1. Service Account JSON file (via GOOGLE_SERVICE_ACCOUNT_KEY_PATH)
- *  2. Direct environment variables (GOOGLE_SERVICE_ACCOUNT_EMAIL & GOOGLE_PRIVATE_KEY)
+ *  2. Direct environment variables (GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SA_CLIENT_EMAIL & GOOGLE_PRIVATE_KEY/GOOGLE_SA_PRIVATE_KEY)
  */
 async function getGoogleSheetsClient() {
-  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID || process.env.SPREADSHEET_ID;
-  if (!spreadsheetId) {
-    return null;
-  }
+  const spreadsheetId =
+    process.env.GOOGLE_SHEETS_SPREADSHEET_ID ||
+    process.env.SPREADSHEET_ID ||
+    FIXED_SPREADSHEET_ID;
 
   // 1. Check if a service account key file path is provided
   const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
@@ -121,8 +130,10 @@ async function getGoogleSheetsClient() {
   }
 
   // 2. Check if credentials are provided directly in env
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY;
+  const clientEmail =
+    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_CLIENT_EMAIL;
+  const rawPrivateKey =
+    process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY;
 
   if (clientEmail && rawPrivateKey) {
     const validPrivateKey = normalizeAndValidatePrivateKey(rawPrivateKey);
@@ -168,23 +179,36 @@ async function appendEmailToGoogleSheet(
 
   const values = [
     [
-      email,
-      topic,
-      jalaliDate,
-      timestampIso,
-      'پرتال دیاکو (خبرنامه هوشمند)',
+      sanitizeCell(email.trim().toLowerCase()),
+      sanitizeCell(topic),
+      sanitizeCell(jalaliDate),
+      sanitizeCell(timestampIso),
+      sanitizeCell('پرتال دیاکو (فرم خبرنامه)'),
+      sanitizeCell('در انتظار ارتباط کارشناس'),
     ],
   ];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: 'Sheet1!A:E',
-    valueInputOption: 'USER_ENTERED',
-    insertDataOption: 'INSERT_ROWS',
-    requestBody: {
-      values,
-    },
-  });
+  try {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range: `${DEFAULT_SHEET_TAB}!A:F`,
+      valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
+      requestBody: {
+        values,
+      },
+    });
+  } catch {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range: 'A:F',
+      valueInputOption: 'USER_ENTERED',
+      insertDataOption: 'INSERT_ROWS',
+      requestBody: {
+        values,
+      },
+    });
+  }
 }
 
 // Health check endpoint
@@ -218,10 +242,13 @@ app.post('/api/newsletter', limiter, async (req, res) => {
       timestamp: nowIso,
     });
 
-    // Check if client supplied an OAuth Bearer token and spreadsheetId
+    // Check if client supplied an OAuth Bearer token and spreadsheetId (defaults to FIXED_SPREADSHEET_ID)
     const authHeader = req.headers.authorization;
     const clientBearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const clientSpreadsheetId = req.body.spreadsheetId;
+    const clientSpreadsheetId =
+      typeof req.body.spreadsheetId === 'string' && req.body.spreadsheetId.trim()
+        ? req.body.spreadsheetId.trim()
+        : FIXED_SPREADSHEET_ID;
 
     if (clientBearerToken && clientSpreadsheetId) {
       try {
@@ -232,26 +259,45 @@ app.post('/api/newsletter', limiter, async (req, res) => {
           timeZone: 'Asia/Tehran',
         }).format(now);
 
-        const appendUrl = `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(clientSpreadsheetId)}/values/A:F:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-        const sheetRes = await fetch(appendUrl, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${clientBearerToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            values: [
-              [
-                cleanEmail,
-                cleanTopic,
-                jalaliDate,
-                nowIso,
-                'پرتال دیاکو (خبرنامه اتریش‌نشین)',
-                'جدید'
-              ]
-            ]
-          })
+        const rowBody = JSON.stringify({
+          values: [
+            [
+              sanitizeCell(cleanEmail),
+              sanitizeCell(cleanTopic),
+              sanitizeCell(jalaliDate),
+              sanitizeCell(nowIso),
+              sanitizeCell('پرتال دیاکو (خبرنامه اتریش‌نشین)'),
+              sanitizeCell('در انتظار ارتباط کارشناس'),
+            ],
+          ],
         });
+
+        const tabRange = encodeURIComponent(`${DEFAULT_SHEET_TAB}!A:F`);
+        let sheetRes = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(clientSpreadsheetId)}/values/${tabRange}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${clientBearerToken}`,
+              'Content-Type': 'application/json',
+            },
+            body: rowBody,
+          }
+        );
+
+        if (!sheetRes.ok) {
+          sheetRes = await fetch(
+            `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(clientSpreadsheetId)}/values/A:F:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${clientBearerToken}`,
+                'Content-Type': 'application/json',
+              },
+              body: rowBody,
+            }
+          );
+        }
 
         if (sheetRes.ok) {
           console.log(`[Google Sheets OAuth] Successfully added subscriber: ${cleanEmail}`);
@@ -282,6 +328,7 @@ app.post('/api/newsletter', limiter, async (req, res) => {
           success: true,
           message: 'عضویت شما با موفقیت در خبرنامه دیاکو و سیستم گوگل‌شیت ثبت گردید.',
           syncedToGoogleSheet: true,
+          spreadsheetUrl: `https://docs.google.com/spreadsheets/d/${googleSheets.spreadsheetId}/edit`,
         });
       } catch (sheetError: any) {
         console.warn('[Google Sheets Sync Notice]:', sheetError?.message || sheetError);

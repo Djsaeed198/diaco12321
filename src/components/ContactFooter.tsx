@@ -11,8 +11,11 @@ import {
   setAccessToken,
 } from '../lib/firebase';
 import {
+  FIXED_SPREADSHEET_ID,
+  FIXED_SPREADSHEET_URL,
   createLeadsSpreadsheet,
   appendSubscriberToGoogleSheet,
+  appendToFixedSheet,
   getStoredSheetId,
   getStoredSheetTitle,
   saveStoredSheetId,
@@ -61,6 +64,10 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
       setCurrentSheetId(storedId);
       setCurrentSheetTitle(storedTitle || 'شیت متقاضیان دیاکو');
       setActiveSheetUrl(`https://docs.google.com/spreadsheets/d/${storedId}/edit`);
+    } else {
+      setCurrentSheetId(FIXED_SPREADSHEET_ID);
+      setCurrentSheetTitle('شیت ثابت متقاضیان دیاکو');
+      setActiveSheetUrl(FIXED_SPREADSHEET_URL);
     }
 
     const unsubscribe = initAuth(
@@ -93,24 +100,18 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
         setToken(res.accessToken);
         setAccessToken(res.accessToken);
 
-        // If no sheet is currently stored, auto-create one or fetch details
-        const existingId = getStoredSheetId();
-        if (!existingId) {
-          try {
-            setIsCreatingSheet(true);
-            const created = await createLeadsSpreadsheet(
-              res.accessToken,
-              'خبرنامه و متقاضیان مهاجرت دیاکو - Diaco Leads'
-            );
-            setCurrentSheetId(created.spreadsheetId);
-            setCurrentSheetTitle(created.title);
-            setActiveSheetUrl(created.spreadsheetUrl);
-            setSheetFeedback('شیت جدید با موفقیت در حساب گوگل شما ایجاد شد!');
-          } catch (createErr: any) {
-            console.warn('Auto create sheet skipped:', createErr);
-          } finally {
-            setIsCreatingSheet(false);
-          }
+        // Use stored custom sheet or default fixed Diaco sheet
+        const targetId = getStoredSheetId() || FIXED_SPREADSHEET_ID;
+        setCurrentSheetId(targetId);
+        setActiveSheetUrl(`https://docs.google.com/spreadsheets/d/${targetId}/edit`);
+        try {
+          const details = await getSpreadsheetDetails(res.accessToken, targetId);
+          setCurrentSheetTitle(details.title);
+          setSheetFeedback(`متصل به شیت «${details.title}»`);
+        } catch {
+          setCurrentSheetTitle(
+            targetId === FIXED_SPREADSHEET_ID ? 'شیت ثابت متقاضیان دیاکو' : 'شیت متصل‌شده'
+          );
         }
       }
     } catch (err: any) {
@@ -220,24 +221,21 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
 
     const currentToken = token || (await getAccessToken());
 
+    const sheetIdToUse = currentSheetId || FIXED_SPREADSHEET_ID;
+
     // 1. Direct Client-Side Google Sheets API Insertion (if OAuth token is available)
     if (currentToken) {
       try {
-        let sheetIdToUse = currentSheetId;
-        if (!sheetIdToUse) {
-          // Auto create a sheet on the fly
-          const created = await createLeadsSpreadsheet(currentToken);
-          sheetIdToUse = created.spreadsheetId;
-          setCurrentSheetId(created.spreadsheetId);
-          setCurrentSheetTitle(created.title);
-          spreadsheetLink = created.spreadsheetUrl;
-          setActiveSheetUrl(created.spreadsheetUrl);
-        }
-
-        const appendResult = await appendSubscriberToGoogleSheet(currentToken, sheetIdToUse, {
-          email: cleanEmail,
-          topic: topicLabel,
-        });
+        const appendResult =
+          sheetIdToUse === FIXED_SPREADSHEET_ID
+            ? await appendToFixedSheet(currentToken, {
+                email: cleanEmail,
+                topic: topicLabel,
+              })
+            : await appendSubscriberToGoogleSheet(currentToken, sheetIdToUse, {
+                email: cleanEmail,
+                topic: topicLabel,
+              });
 
         if (appendResult.success) {
           syncedToGoogle = true;
@@ -263,7 +261,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
         body: JSON.stringify({
           email: cleanEmail,
           topic: topicLabel,
-          spreadsheetId: currentSheetId,
+          spreadsheetId: sheetIdToUse,
         }),
       });
 
@@ -480,9 +478,26 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
                     </button>
                   </div>
                   {currentSheetId && (
-                    <p className="text-[10px] text-slate-400 font-mono" dir="ltr">
-                      ID فعلی: {currentSheetId}
-                    </p>
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                      <p className="text-[10px] text-slate-400 font-mono" dir="ltr">
+                        ID فعلی: {currentSheetId}
+                      </p>
+                      {currentSheetId !== FIXED_SPREADSHEET_ID && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            clearStoredSheetId();
+                            setCurrentSheetId(FIXED_SPREADSHEET_ID);
+                            setCurrentSheetTitle('شیت ثابت متقاضیان دیاکو');
+                            setActiveSheetUrl(FIXED_SPREADSHEET_URL);
+                            setSheetFeedback('اتصال به شیت ثابت دیاکو بازگردانی شد.');
+                          }}
+                          className="text-[10px] font-bold text-amber-300 hover:underline cursor-pointer"
+                        >
+                          بازگشت به شیت ثابت دیاکو
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
