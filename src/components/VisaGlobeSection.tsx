@@ -6,6 +6,9 @@ interface GlobeVisaItem {
   title: string;
   subtitle: string;
   aspect: 'portrait' | 'square';
+  width: number;
+  height: number;
+  tags: string[];
 }
 
 const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
@@ -15,6 +18,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'تحویل ویزای شنگن و اقامت زوج متقاضی',
     subtitle: 'دفتر مرکزی هلدینگ مهاجرتی دیاکو',
     aspect: 'portrait',
+    width: 578,
+    height: 960,
+    tags: ['ویزای شنگن', 'اقامت زوجین', 'پرونده موفق دیاکو', 'تحویل حضوری ویزا', 'مهاجرت اروپا'],
   },
   {
     id: 'globe-02',
@@ -22,6 +28,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'اخذ ویزا و مجوز اقامت اروپایی زوجین',
     subtitle: 'پرونده موفق مهاجرتی · تیم حقوقی دیاکو',
     aspect: 'portrait',
+    width: 578,
+    height: 960,
+    tags: ['اقامت اروپا', 'ویزای زوجین', 'تیم حقوقی دیاکو', 'اخذ مجوز اقامت', 'روادید اتحادیه اروپا'],
   },
   {
     id: 'globe-03',
@@ -29,6 +38,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'اخذ ویزای خانوادگی و الحاق کامل خانواده',
     subtitle: 'تحویل مدارک و ویزای والدین و فرزندان',
     aspect: 'portrait',
+    width: 578,
+    height: 960,
+    tags: ['ویزای خانوادگی', 'الحاق خانواده', 'اقامت والدین و فرزندان', 'پرونده هم‌زمان', 'هلدینگ دیاکو'],
   },
   {
     id: 'globe-04',
@@ -36,6 +48,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'دریافت هم‌زمان ویزای اقامت خانواده سه‌نفره',
     subtitle: 'همراهی کامل تا صدور روادید در سفارت',
     aspect: 'portrait',
+    width: 578,
+    height: 960,
+    tags: ['ویزای اقامت خانواده', 'پرونده سه‌نفره', 'صدور هم‌زمان سفارت', 'اقامت اروپا', 'گالری ویزا'],
   },
   {
     id: 'globe-05',
@@ -43,6 +58,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'صدور و تحویل موفق ویزای زوجین در دیاکو',
     subtitle: 'پیگیری تخصصی پرونده اقامت اروپا',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['تحویل ویزای زوجین', 'اقامت اروپا', 'پیگیری حقوقی', 'پرونده تاییدشده', 'دیاکو'],
   },
   {
     id: 'globe-06',
@@ -50,6 +68,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'دریافت ویزاهای خانوادگی و دو نسلی',
     subtitle: 'تحویل هم‌زمان ویزای چهار عضو خانواده',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['ویزای خانوادگی', 'ویزای دو نسلی', 'چهار عضو خانواده', 'الحاق خانواده اروپا', 'دیاکو'],
   },
   {
     id: 'globe-07',
@@ -57,6 +78,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'تحویل ویزاهای صادره بانوان متقاضی اقامت',
     subtitle: 'تشریفات تحویل مدارک · هلدینگ دیاکو',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['اقامت بانوان', 'ویزای صادره', 'تحویل مدارک سفارت', 'مهاجرت قانونی', 'هلدینگ دیاکو'],
   },
   {
     id: 'globe-08',
@@ -64,6 +88,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'تحویل هم‌زمان ویزای دو خانواده متقاضی',
     subtitle: 'پرونده‌های موفق مهاجرت به اروپا',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['مهاجرت به اروپا', 'تحویل هم‌زمان ویزا', 'پرونده خانوادگی', 'نمونه ویزای موفق', 'دیاکو'],
   },
   {
     id: 'globe-09',
@@ -71,6 +98,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'اخذ ویزای اقامت اروپا برای زوج متقاضی',
     subtitle: 'با نظارت مستقیم مشاوران ارشد دیاکو',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['ویزای اقامت اروپا', 'اقامت زوجین', 'مشاوران ارشد دیاکو', 'روادید شنگن', 'سفارت'],
   },
   {
     id: 'globe-10',
@@ -78,6 +108,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'دریافت موفق ویزای زوج جوان متقاضی',
     subtitle: 'سالن تشریفات تحویل ویزا · دیاکو',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['ویزای زوج جوان', 'تشریفات تحویل ویزا', 'اقامت شنگن', 'مشاوره حقوقی مهاجرت', 'دیاکو'],
   },
   {
     id: 'globe-11',
@@ -85,6 +118,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'اخذ اقامت و ویزای کامل خانواده چهارنفره',
     subtitle: 'ثبت رکورد صدور ویزای هم‌زمان خانواده',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['اقامت خانواده چهارنفره', 'صدور ویزای هم‌زمان', 'اقامت اتحادیه اروپا', 'پرونده موفق', 'دیاکو'],
   },
   {
     id: 'globe-12',
@@ -92,6 +128,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'پرونده‌های موفق ویزای شنگن و اقامت',
     subtitle: 'هلدینگ بین‌المللی مهاجرتی دیاکو',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['ویزای شنگن', 'اقامت اروپا', 'هلدینگ بین‌المللی دیاکو', 'تحویل پاسپورت ویزا', 'موفقیت پرونده'],
   },
   {
     id: 'globe-13',
@@ -99,6 +138,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'تحویل ویزای اقامت اروپا برای خانواده چهارنفره',
     subtitle: 'تضمین شفافیت مراحل قانونی تا دریافت ویزا',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['اقامت خانواده چهارنفره', 'شفافیت حقوقی', 'ویزای اقامت اروپا', 'تحویل روادید', 'دیاکو'],
   },
   {
     id: 'globe-14',
@@ -106,6 +148,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'تحویل پاسپورت و ویزای صادره زوج متقاضی',
     subtitle: 'پرونده تاییدشده اقامت در اتحادیه اروپا',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['پاسپورت ویزاشده', 'اقامت اتحادیه اروپا', 'تحویل ویزای زوجین', 'پرونده تاییدشده', 'دیاکو'],
   },
   {
     id: 'globe-15',
@@ -113,6 +158,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'اخذ ویزای اقامت تمکن مالی و شنگن زوجین',
     subtitle: 'ارزیابی تخصصی و دفاعیه حقوقی پرونده',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['ویزای تمکن مالی', 'شنگن زوجین', 'دفاعیه حقوقی پرونده', 'اقامت اروپا', 'دیاکو'],
   },
   {
     id: 'globe-16',
@@ -120,6 +168,9 @@ const GLOBE_VISA_ITEMS: GlobeVisaItem[] = [
     title: 'دریافت موفق روادید و ویزای اروپایی',
     subtitle: 'تحویل حضوری در دفتر مرکزی دیاکو',
     aspect: 'square',
+    width: 960,
+    height: 960,
+    tags: ['روادید اروپایی', 'ویزای شنگن و اقامت', 'دفتر مرکزی دیاکو', 'تحویل حضوری', 'پرونده موفق'],
   },
 ];
 
@@ -146,7 +197,6 @@ function buildFibonacciSphere(count: number): SpherePoint[] {
 export const VisaGlobeSection: React.FC = () => {
   const [rotation, setRotation] = useState<{ rx: number; ry: number }>({ rx: 0.14, ry: 0 });
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [stageWidth, setStageWidth] = useState<number>(
@@ -178,16 +228,33 @@ export const VisaGlobeSection: React.FC = () => {
 
   const basePoints = useMemo(() => buildFibonacciSphere(GLOBE_VISA_ITEMS.length), []);
 
+  const galleryJsonLd = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'ImageGallery',
+      name: 'کره چرخان ویزاهای صادره دیاکو',
+      description: 'مجموعه تصاویر واقعی تحویل ویزاهای شنگن و اقامت اروپا در هلدینگ مهاجرتی دیاکو',
+      numberOfItems: GLOBE_VISA_ITEMS.length,
+      associatedMedia: GLOBE_VISA_ITEMS.map((item) => ({
+        '@type': 'ImageObject',
+        name: item.title,
+        caption: `${item.title} — ${item.subtitle}`,
+        contentUrl: item.src,
+        encodingFormat: 'image/webp',
+        width: item.width,
+        height: item.height,
+        keywords: item.tags.join(', '),
+      })),
+    }),
+    []
+  );
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mq.matches);
-    if (mq.matches) {
-      setIsPaused(true);
-    }
     const onChange = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);
-      if (e.matches) setIsPaused(true);
     };
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
@@ -215,7 +282,8 @@ export const VisaGlobeSection: React.FC = () => {
       lastTime = now;
 
       const d = dragState.current;
-      const shouldAutoSpin = !isPaused && hoveredId === null && !d.active && selectedIndex === null;
+      const shouldAutoSpin =
+        !prefersReducedMotion && hoveredId === null && !d.active && selectedIndex === null;
 
       if (d.active) {
         // Controlled directly by pointer move
@@ -226,7 +294,7 @@ export const VisaGlobeSection: React.FC = () => {
         }));
         d.velX *= 0.92;
         d.velY *= 0.92;
-      } else if (shouldAutoSpin && !prefersReducedMotion) {
+      } else if (shouldAutoSpin) {
         setRotation((prev) => ({
           rx: 0.14 * Math.cos(now * 0.00035),
           ry: prev.ry + dt * 0.24,
@@ -238,7 +306,7 @@ export const VisaGlobeSection: React.FC = () => {
 
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [isPaused, hoveredId, selectedIndex, prefersReducedMotion]);
+  }, [hoveredId, selectedIndex, prefersReducedMotion]);
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -260,9 +328,6 @@ export const VisaGlobeSection: React.FC = () => {
   }, [selectedIndex]);
 
   const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLElement).closest('button[data-globe-control="true"]')) {
-      return;
-    }
     dragState.current = {
       active: true,
       startX: e.clientX,
@@ -326,36 +391,27 @@ export const VisaGlobeSection: React.FC = () => {
 
   const projectedItems = GLOBE_VISA_ITEMS.map((item, idx) => {
     const p = basePoints[idx];
-    // Rotate around Y axis
     const x1 = p.x * cosY - p.z * sinY;
     const z1 = p.x * sinY + p.z * cosY;
-    // Rotate around X axis
     const y2 = p.y * cosX - z1 * sinX;
     const z2 = p.y * sinX + z1 * cosX;
 
-    // Depth factor in [0, 1] from back (-1) to front (+1)
     const depth = (z2 + 1) / 2;
     const screenX = x1 * radiusX;
     const screenY = y2 * radiusY;
-    const depthScale = 0.56 + depth * 0.58; // 0.56 (back) -> 1.14 (front)
-    const depthOpacity = 0.28 + depth * 0.72; // 0.28 (back) -> 1.0 (front)
+    const depthScale = 0.56 + depth * 0.58;
+    const depthOpacity = 0.28 + depth * 0.72;
 
     return {
       item,
       idx,
       screenX,
       screenY,
-      z2,
       depth,
       depthScale,
       depthOpacity,
     };
   });
-
-  const hoveredItem = useMemo(
-    () => GLOBE_VISA_ITEMS.find((i) => i.id === hoveredId) ?? null,
-    [hoveredId]
-  );
 
   const activeModalItem = selectedIndex !== null ? GLOBE_VISA_ITEMS[selectedIndex] : null;
 
@@ -366,6 +422,8 @@ export const VisaGlobeSection: React.FC = () => {
       dir="rtl"
       className="relative overflow-hidden bg-gradient-to-b from-[#061a21] via-[#07212b] to-[#07242e] py-16 sm:py-22 text-slate-200 border-t border-white/10"
     >
+      <script type="application/ld+json">{JSON.stringify(galleryJsonLd)}</script>
+
       {/* Subtle architectural glow */}
       <div
         aria-hidden="true"
@@ -375,18 +433,12 @@ export const VisaGlobeSection: React.FC = () => {
       <div className="relative container mx-auto px-4 md:px-8">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-bold tracking-wide text-amber-300">
-            گالری تعاملی سه‌بعدی پرونده‌های موفق · ۱۶ ویزای تحویل‌شده اخیر
-          </p>
           <h2
             id="visa-sphere-heading"
             className="mt-3 text-2xl sm:text-4xl md:text-5xl font-black leading-tight text-white"
           >
             کره چرخان ویزاهای صادره دیاکو
           </h2>
-          <p className="mt-3 text-xs sm:text-sm leading-relaxed text-slate-300 max-w-2xl mx-auto">
-            نشانگر ماوس را روی هر تصویر نگه دارید تا چرخش کره متوقف و تصویر بزرگ شود؛ برای چرخش دستی کره را بکشید یا برای مشاهده تمام‌صفحه روی آن کلیک کنید.
-          </p>
           <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-l from-[#fed871] to-[#f5a623]" />
         </div>
 
@@ -470,6 +522,8 @@ export const VisaGlobeSection: React.FC = () => {
             return (
               <div
                 key={item.id}
+                itemScope
+                itemType="https://schema.org/ImageObject"
                 style={{
                   transform: `translate3d(calc(-50% + ${screenX.toFixed(1)}px), calc(-50% + ${screenY.toFixed(1)}px), 0) scale(${effectiveScale.toFixed(3)})`,
                   opacity: isHovered ? 1 : hoveredId ? Math.max(0.18, depthOpacity * 0.55) : depthOpacity,
@@ -477,6 +531,10 @@ export const VisaGlobeSection: React.FC = () => {
                 }}
                 className="absolute left-1/2 top-1/2 will-change-transform transition-[opacity,filter] duration-200"
               >
+                <meta itemProp="name" content={item.title} />
+                <meta itemProp="caption" content={`${item.title} — ${item.subtitle}`} />
+                <meta itemProp="encodingFormat" content="image/webp" />
+                <meta itemProp="keywords" content={item.tags.join(', ')} />
                 <button
                   type="button"
                   onMouseEnter={() => setHoveredId(item.id)}
@@ -506,9 +564,15 @@ export const VisaGlobeSection: React.FC = () => {
                     </div>
                   ) : (
                     <img
+                      itemProp="contentUrl"
                       src={item.src}
-                      alt={`${item.title} — ${item.subtitle}`}
+                      alt={`${item.title} — ${item.subtitle} (${item.tags.slice(0, 3).join('، ')})`}
+                      title={`${item.title} | ${item.tags.join(' · ')}`}
+                      width={item.width}
+                      height={item.height}
+                      data-tags={item.tags.join(', ')}
                       loading="lazy"
+                      decoding="async"
                       draggable={false}
                       referrerPolicy="no-referrer"
                       onError={() => setFailedImages((prev) => ({ ...prev, [item.id]: true }))}
@@ -533,68 +597,6 @@ export const VisaGlobeSection: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Interactive Caption & Sphere Controls Bar */}
-        <div className="mx-auto mt-6 flex max-w-4xl flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl border border-white/10 bg-[#08222b]/80 px-5 py-3.5 backdrop-blur-md">
-          <div className="text-center sm:text-right min-h-[2.25rem] flex flex-col justify-center">
-            {hoveredItem ? (
-              <>
-                <p className="text-xs sm:text-sm font-bold text-white">{hoveredItem.title}</p>
-                <p className="text-[11px] text-amber-300">{hoveredItem.subtitle}</p>
-              </>
-            ) : (
-              <>
-                <p className="text-xs sm:text-sm font-bold text-white">
-                  پرونده‌های واقعی اخذ ویزا و اقامت اروپا
-                </p>
-                <p className="text-[11px] text-slate-300">
-                  روی هر کارت متوقف شوید تا بزرگ شود یا برای مشاهده تصویر کامل کلیک کنید
-                </p>
-              </>
-            )}
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-2 shrink-0">
-            <button
-              type="button"
-              data-globe-control="true"
-              onClick={() =>
-                setRotation((prev) => ({ ...prev, ry: prev.ry - 0.55 }))
-              }
-              className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200 transition hover:bg-white/10 hover:text-white cursor-pointer"
-              aria-label="چرخش کره به راست"
-            >
-              چرخش ←
-            </button>
-            <button
-              type="button"
-              data-globe-control="true"
-              onClick={() => setIsPaused((p) => !p)}
-              className="rounded-xl border border-amber-400/40 bg-amber-400/15 px-3.5 py-2 text-xs font-bold text-amber-200 transition hover:bg-amber-400 hover:text-[#082833] cursor-pointer"
-            >
-              {isPaused || hoveredId ? 'ادامه چرخش کره' : 'توقف چرخش'}
-            </button>
-            <button
-              type="button"
-              data-globe-control="true"
-              onClick={() =>
-                setRotation((prev) => ({ ...prev, ry: prev.ry + 0.55 }))
-              }
-              className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-slate-200 transition hover:bg-white/10 hover:text-white cursor-pointer"
-              aria-label="چرخش کره به چپ"
-            >
-              → چرخش
-            </button>
-            <button
-              type="button"
-              data-globe-control="true"
-              onClick={() => setSelectedIndex(0)}
-              className="rounded-xl bg-[#f5a623] px-3.5 py-2 text-xs font-black text-[#082833] transition hover:brightness-105 cursor-pointer"
-            >
-              مشاهده گالری کامل
-            </button>
-          </div>
         </div>
       </div>
 
@@ -630,13 +632,22 @@ export const VisaGlobeSection: React.FC = () => {
               </button>
             </div>
 
-            <div className="relative flex items-center justify-center bg-[#04141a] p-3 sm:p-5">
+            <div className="relative flex flex-col items-center justify-center bg-[#04141a] p-3 sm:p-5">
               <img
                 src={activeModalItem.src}
                 alt={`${activeModalItem.title} — ${activeModalItem.subtitle}`}
+                title={`${activeModalItem.title} | ${activeModalItem.tags.join(' · ')}`}
+                width={activeModalItem.width}
+                height={activeModalItem.height}
+                data-tags={activeModalItem.tags.join(', ')}
+                decoding="async"
                 referrerPolicy="no-referrer"
-                className="max-h-[70vh] w-auto rounded-2xl object-contain shadow-xl"
+                className="max-h-[66vh] w-auto rounded-2xl object-contain shadow-xl"
               />
+              <p className="mt-3 text-center text-[11px] text-slate-400">
+                <span className="font-semibold text-amber-300/90">تگ‌های تصویر: </span>
+                {activeModalItem.tags.join(' · ')}
+              </p>
             </div>
 
             <div className="flex items-center justify-between border-t border-white/10 px-5 py-3 bg-[#071f27]">
@@ -651,7 +662,7 @@ export const VisaGlobeSection: React.FC = () => {
               >
                 → تصویر قبلی
               </button>
-              <span className="text-xs font-bold text-slate-300">
+              <span className="text-xs font-bold text-slate-300 tabular-nums">
                 {selectedIndex + 1} / {GLOBE_VISA_ITEMS.length}
               </span>
               <button

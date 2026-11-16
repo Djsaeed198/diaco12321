@@ -138,7 +138,7 @@ export const AcademicUKPage: React.FC<Props> = ({
     title: 'ویزای تحصیلی بریتانیا ۲۰۲۶ | UK Student Route، تمکن مالی جدید £1,570 و Graduate Route',
     description:
       'راهنمای کامل ویزای تحصیلی انگلستان ۲۰۲۶: الزامات مالی از ۳۰ نوامبر ۲۰۲۶ (لندن £1,570/ماه)، هزینه ویزا £558، IHS £776، حق کار ۲۰ ساعت، Graduate Route ۲ ساله و مسیر Skilled Worker. مشاوره دیاکو.',
-    canonical: '/guides/academic-uk',
+    canonical: '/academic-uk',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -156,7 +156,7 @@ export const AcademicUKPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/academic-uk#article',
+          '@id': 'https://www.dia-co.ir/academic-uk#article',
           headline: 'راهنمای جامع ویزای تحصیلی بریتانیا ۲۰۲۶ — UK Student Route، الزامات مالی و Graduate Route',
           description:
             'بررسی الزامات مالی جدید از ۳۰ نوامبر ۲۰۲۶، هزینه‌های ویزا و IHS، حق کار ۲۰ ساعت، تغییرات Graduate Route و مسیر Skilled Worker.',
@@ -183,8 +183,8 @@ export const AcademicUKPage: React.FC<Props> = ({
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تحصیل در دانشگاه', item: 'https://www.dia-co.ir/academic' },
-            { '@type': 'ListItem', position: 3, name: 'بریتانیا', item: 'https://www.dia-co.ir/guides/academic-uk' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تحصیلی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'بریتانیا', item: 'https://www.dia-co.ir/academic-uk' },
           ],
         },
         {

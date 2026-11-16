@@ -32,7 +32,7 @@ export const LanguageHungaryPage: React.FC<Props> = ({
     title: 'کالج زبان در مجارستان ۲۰۲۶ | شهریه اقتصادی و ویزا شینگن',
     description:
       'راهنمای ثبت‌نام دوره‌های زبان انگلیسی در مجارستان ۲۰۲۶؛ شهریه ارزان، نرخ قبولی بالای ویزای شینگن سفارت، هزینه زندگی پایین در بوداپست و اعزام با دیاکو.',
-    canonical: '/guides/language-course-hungary',
+    canonical: '/language-hungary',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -49,7 +49,7 @@ export const LanguageHungaryPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/language-course-hungary#article',
+          '@id': 'https://www.dia-co.ir/language-hungary#article',
           headline: 'راهنمای ثبت‌نام دوره‌های زبان انگلیسی در مجارستان و اخذ ویزای شینگن ۲۰۲۶',
           description:
             'بررسی شهریه‌های اقتصادی ۲,۸۰۰ تا ۴,۵۰۰ یورویی، پروسه اخذ ویزای تایپ D در سفارت مجارستان تهران و هزینه‌های زندگی در بوداپست.',
@@ -75,7 +75,7 @@ export const LanguageHungaryPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/language-course-hungary#howto',
+          '@id': 'https://www.dia-co.ir/language-hungary#howto',
           name: 'مراحل ثبت‌نام در کالج زبان مجارستان و دریافت ویزا',
           description: 'مسیر گام‌به‌گام از رزرو دوره تا صدور کارت اقامت دانشجویی در بوداپست',
           step: [
@@ -107,7 +107,7 @@ export const LanguageHungaryPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/language-course-hungary#faq',
+          '@id': 'https://www.dia-co.ir/language-hungary#faq',
           mainEntity: [
             {
               '@type': 'Question',

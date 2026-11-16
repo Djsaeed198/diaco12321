@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logoImg from '../assets/images/diaco-small.png';
+import logoImg from '../assets/images/diaco-small.webp';
 
 interface Props {
   className?: string;

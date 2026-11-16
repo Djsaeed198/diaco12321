@@ -25,7 +25,7 @@ const BRAND = {
   phoneDisplay: '+۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶',
 } as const;
 
-const CANONICAL_URL = `${BRAND.origin}/guides/academic-austria-medical`;
+const CANONICAL_URL = `${BRAND.origin}/academic-austria-medical`;
 
 /* ============================================================
    2. داده‌ها (بر اساس 2026 رسمی)
@@ -74,10 +74,10 @@ const FAQS = [
 const INTERNAL_LINKS = [
   { href: '/academic-austria', title: 'تحصیل در دانشگاه‌های اتریش', desc: 'راهنمای کامل پذیرش' },
   { href: '/academic-austria-medical', title: 'پزشکی اتریش (MedAT)', desc: 'همین صفحه' },
-  { href: '/language-austria', title: 'دوره زبان آلمانی', desc: 'آمادگی C1' },
+  { href: '/language-college-visa', title: 'دوره زبان و کالج', desc: 'آمادگی C1' },
   { href: '/ausbildung-germany', title: 'آوسبیلدونگ آلمان', desc: 'مسیر جایگزین' },
-  { href: '/assessment', title: 'ارزیابی رایگان', desc: 'سنجش شانس' },
-  { href: '/contact', title: 'مشاوره با وکلای وین', desc: 'تماس مستقیم' },
+  { href: '/?assessment=1', title: 'ارزیابی رایگان', desc: 'سنجش شانس' },
+  { href: '/contact-us', title: 'مشاوره با وکلای وین', desc: 'تماس مستقیم' },
 ];
 
 /* ============================================================
@@ -167,7 +167,7 @@ export const AcademicAustriaMedicalPage: React.FC<Props> = ({
   useSeo({
     title: 'پزشکی اتریش ۲۰۲۶ | MedAT + سهمیه ۵٪ و شهریه €۷۵۲',
     description: 'راهنمای کامل پذیرش پزشکی و دندانپزشکی اتریش ۲۰۲۶: آزمون MedAT در ۳ جولای، سهمیه ۵٪ غیر EU، شهریه €۷۵۲.۹۲/ترم، زبان C1، ساختار BMS/KFF/TV/SEK با دیاکو.',
-    canonical: '/guides/academic-austria-medical',
+    canonical: '/academic-austria-medical',
     ogType: 'article',
     ogImage: HERO_IMAGE.src,
     keywords: ['تحصیل پزشکی در اتریش ۲۰۲۶', 'آزمون MedAT', 'MedUni Wien', 'سهمیه ۵ درصد MedAT', 'شهریه پزشکی اتریش', 'BMS KFF TV SEK', 'دوره آمادگی MedAT وین'],

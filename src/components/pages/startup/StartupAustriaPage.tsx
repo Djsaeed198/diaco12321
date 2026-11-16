@@ -337,7 +337,7 @@ export const StartupAustriaPage: React.FC<Props> = ({
     title: 'ویزای استارتاپ اتریش ۲۰۲۶ | شرایط، هزینه و راهنمای کامل دیاکو',
     description:
       'راهنمای جامع ویزای استارتاپ اتریش (Rot-Weiß-Rot – Karte) در سال ۲۰۲۶. بررسی شرایط امتیازدهی، سرمایه اولیه ۵۰ هزار یورو، مراحل ثبت شرکت و مشاوره تخصصی هلدینگ دیاکو.',
-    canonical: 'https://www.dia-co.ir/austria-startup-visa',
+    canonical: 'https://www.dia-co.ir/startup-austria',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&h=600&q=80',
     keywords: [
@@ -354,7 +354,7 @@ export const StartupAustriaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/austria-startup-visa/#article',
+          '@id': 'https://www.dia-co.ir/startup-austria/#article',
           headline: 'ویزای استارتاپ اتریش ۲۰۲۶ | شرایط، امتیازات، هزینه و راهنمای کامل',
           description:
             'راهنمای جامع ویزای استارتاپ اتریش (Rot-Weiß-Rot – Karte) در سال ۲۰۲۶. بررسی شرایط امتیازدهی، سرمایه اولیه ۵۰ هزار یورو، مراحل ثبت شرکت و مشاوره تخصصی هلدینگ دیاکو.',
@@ -390,12 +390,12 @@ export const StartupAustriaPage: React.FC<Props> = ({
           ],
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': 'https://www.dia-co.ir/austria-startup-visa',
+            '@id': 'https://www.dia-co.ir/startup-austria',
           },
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/austria-startup-visa/#howto',
+          '@id': 'https://www.dia-co.ir/startup-austria/#howto',
           name: 'مراحل گام‌به‌گام ثبت استارتاپ و دریافت ویزای استارتاپ اتریش (۲۰۲۶)',
           totalTime: 'P5M',
           step: processSteps.map((s, i) => ({
@@ -407,7 +407,7 @@ export const StartupAustriaPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/austria-startup-visa/#faq',
+          '@id': 'https://www.dia-co.ir/startup-austria/#faq',
           mainEntity: faqs.map((f) => ({
             '@type': 'Question',
             name: f.q,
@@ -422,7 +422,7 @@ export const StartupAustriaPage: React.FC<Props> = ({
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'صفحه اصلی', item: 'https://www.dia-co.ir/' },
             { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی دیاکو', item: 'https://www.dia-co.ir/services' },
-            { '@type': 'ListItem', position: 3, name: 'ویزای استارتاپ اتریش', item: 'https://www.dia-co.ir/austria-startup-visa' },
+            { '@type': 'ListItem', position: 3, name: 'ویزای استارتاپ اتریش', item: 'https://www.dia-co.ir/startup-austria' },
           ],
         },
       ],

@@ -33,7 +33,7 @@ export const LanguageDenmarkPage: React.FC<Props> = ({
     title: 'دوره زبان و فولک‌هایسکول دانمارک ۲۰۲۶ | اسکاندیناوی',
     description:
       'راهنمای تحصیل دوره‌های زبان و مدارس عالی محلی (Folkehøjskole) در دانمارک ۲۰۲۶؛ تجربه زندگی اسکاندیناوی، یادگیری زبان دانمارکی و ویزای اقامت با دیاکو.',
-    canonical: '/guides/language-course-denmark',
+    canonical: '/language-denmark',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -50,7 +50,7 @@ export const LanguageDenmarkPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/language-course-denmark#article',
+          '@id': 'https://www.dia-co.ir/language-denmark#article',
           headline: 'راهنمای تحصیل در دوره‌های زبان و مدارس عالی محلی دانمارک (Folkehøjskole) ۲۰۲۶',
           description:
             'بررسی اقامت موقت در دانمارک، تحصیل در سیستم منحصر‌به‌فرد فولک‌هایسکول به همراه خوابگاه و تغذیه، بدون نیاز به مدرک زبان اولیه.',
@@ -76,7 +76,7 @@ export const LanguageDenmarkPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/language-course-denmark#howto',
+          '@id': 'https://www.dia-co.ir/language-denmark#howto',
           name: 'مراحل ثبت‌نام در مدارس هایسکول دانمارک و اخذ اقامت',
           description: 'مراحل پذیرش از مدارس تایید شده وزارت آموزش دانمارک تا صدور مجوز اقامت SIRI',
           step: [
@@ -108,7 +108,7 @@ export const LanguageDenmarkPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/language-course-denmark#faq',
+          '@id': 'https://www.dia-co.ir/language-denmark#faq',
           mainEntity: [
             {
               '@type': 'Question',

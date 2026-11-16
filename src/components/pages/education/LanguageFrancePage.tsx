@@ -33,7 +33,7 @@ export const LanguageFrancePage: React.FC<Props> = ({
     title: 'دوره زبان فرانسه در فرانسه ۲۰۲۶ | کالج‌های FLE و اقامت',
     description:
       'راهنمای دوره‌های زبان فرانسوی در پاریس و لیون ۲۰۲۶؛ ثبت‌نام کالج‌های معتبر FLE، فرایند کامپوس فرانس، کمک‌هزینه مسکن CAF و ۶۰٪ اجازه کار دانشجویی با دیاکو.',
-    canonical: '/guides/language-course-france',
+    canonical: '/language-france',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -50,7 +50,7 @@ export const LanguageFrancePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/language-course-france#article',
+          '@id': 'https://www.dia-co.ir/language-france#article',
           headline: 'راهنمای جامع دوره‌های زبان فرانسوی در فرانسه و دریافت ویزای VLS-TS ۲۰۲۶',
           description:
             'بررسی مراحل ثبت‌نام در کالج‌های مورد تایید Qualité FLE، وقت سفارت و کامپوس فرانس، استفاده از کمک‌هزینه مسکن دولتی CAF و ورود به دانشگاه‌های فرانسه.',
@@ -76,7 +76,7 @@ export const LanguageFrancePage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/language-course-france#howto',
+          '@id': 'https://www.dia-co.ir/language-france#howto',
           name: 'مراحل اخذ پذیرش کالج زبان و ویزای تحصیلی فرانسه',
           description: 'مراحل گام‌به‌گام از انتخاب کالج تا دریافت ویزا و فعال‌سازی CAF در فرانسه',
           step: [
@@ -108,7 +108,7 @@ export const LanguageFrancePage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/language-course-france#faq',
+          '@id': 'https://www.dia-co.ir/language-france#faq',
           mainEntity: [
             {
               '@type': 'Question',

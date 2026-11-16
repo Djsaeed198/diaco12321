@@ -25,7 +25,7 @@ const BRAND = {
   phoneDisplay: '+۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶',
 } as const;
 
-const CANONICAL_URL = `${BRAND.origin}/guides/academic-canada`;
+const CANONICAL_URL = `${BRAND.origin}/academic-canada`;
 
 /* ============================================================
    2. داده‌های رسمی 2026
@@ -42,32 +42,32 @@ const HERO_IMAGE = {
 };
 
 const KEY_FACTS = [
-  { value: '۴۰۸,۰۰۰', label: 'سقف کل学签 ۲۰۲۶', color: 'text-amber-300' },
-  { value: '۱۸۰,۰۰۰', label: '学签 با PAL (本科/学院)', color: 'text-red-300' },
+  { value: '۴۰۸,۰۰۰', label: 'سقف کل ویزای تحصیلی ۲۰۲۶', color: 'text-amber-300' },
+  { value: '۱۸۰,۰۰۰', label: 'سهمیه با PAL (کارشناسی/کالج)', color: 'text-red-300' },
   { value: 'CAD ۲۳,۴۴۸', label: 'تمکن مالی سالانه (مجرد)', color: 'text-emerald-400' },
   { value: '۲۴ ساعت', label: 'کار دانشجویی/هفته', color: 'text-sky-300' },
 ];
 
 const PAL_CATEGORIES = [
-  { category: '硕士 / 博士 (公立DLI)', pal: '❌ 不需要', cap: '不占配额', note: '2026.1.1起豁免；预计发放49,000份' },
-  { category: '本科 / 学院 (College)', pal: '✅ 需要', cap: '占配额', note: '预计发放180,000份（处理上限309,670份）' },
-  { category: '中小学 (K-12)', pal: '❌ 不需要', cap: '不占配额', note: '预计发放115,000份' },
-  { category: '同一DLI续签', pal: '❌ 不需要', cap: '不占配额', note: '同级别续签豁免' },
+  { category: 'ارشد / دکتری (DLI دولتی)', pal: '❌ نیاز ندارد', cap: 'خارج از سهمیه', note: 'معاف از ۱ ژانویه ۲۰۲۶؛ پیش‌بینی ۴۹,۰۰۰ مجوز' },
+  { category: 'کارشناسی / کالج (College)', pal: '✅ نیاز دارد', cap: 'مشمول سهمیه', note: 'پیش‌بینی ۱۸۰,۰۰۰ صدور (سقف بررسی ۳۰۹,۶۷۰ پرونده)' },
+  { category: 'مدارس (K-12)', pal: '❌ نیاز ندارد', cap: 'خارج از سهمیه', note: 'پیش‌بینی ۱۱۵,۰۰۰ مجوز' },
+  { category: 'تمدید در همان DLI', pal: '❌ نیاز ندارد', cap: 'خارج از سهمیه', note: 'معاف برای تمدید در همان مقطع و مؤسسه' },
 ];
 
 const FUNDS_BREAKDOWN = [
-  { label: '生活费 (单身)', value: 'CAD ۲۳,۴۴۸ / سال', note: '2026.9.1起；此前为22,895' },
-  { label: '生活费 (配偶陪同)', value: 'CAD ۲۹,۱۹۲ / سال', note: '每位家庭成员递增' },
-  { label: '学费', value: '因大学/专业而异', note: '需在生活费之外单独证明' },
-  { label: '往返机票', value: '需单独证明', note: '生活费+学费之外' },
-  { label: 'GIC最低金额', value: 'CAD ۲۳,۴۴۸', note: '参与银行出具的投资凭证' },
+  { label: 'هزینه زندگی (مجرد)', value: 'CAD ۲۳,۴۴۸ / سال', note: 'از ۱ سپتامبر ۲۰۲۶ (پیش از آن: ۲۲,۸۹۵)' },
+  { label: 'هزینه زندگی (با همراهی همسر)', value: 'CAD ۲۹,۱۹۲ / سال', note: 'افزایش به ازای هر عضو خانواده' },
+  { label: 'شهریه دانشگاه/کالج', value: 'متغیر بر اساس رشته و دانشگاه', note: 'باید جدا از هزینه زندگی اثبات شود' },
+  { label: 'بلیط رفت‌وبرگشت', value: 'اثبات جداگانه', note: 'علاوه بر شهریه و هزینه زندگی' },
+  { label: 'حداقل مبلغ GIC', value: 'CAD ۲۳,۴۴۸', note: 'گواهی سپرده از بانک‌های مشارکت‌کننده کانادا' },
 ];
 
 const PGWP_RULES = [
-  { program: '8个月–不足2年', pgwp: '与课程等长', language: '大学 CLB 7 / 学院 CLB 5' },
-  { program: '2年及以上', pgwp: '最长3年', language: '大学 CLB 7 / 学院 CLB 5' },
-  { program: '硕士 (8个月+)', pgwp: '最长3年', language: 'CLB 7' },
-  { program: '博士 (8个月+)', pgwp: '最长3年', language: 'CLB 7' },
+  { program: '۸ ماه تا کمتر از ۲ سال', pgwp: 'معادل طول دوره', language: 'دانشگاه CLB 7 / کالج CLB 5' },
+  { program: '۲ سال و بالاتر', pgwp: 'حداکثر ۳ سال', language: 'دانشگاه CLB 7 / کالج CLB 5' },
+  { program: 'کارشناسی ارشد (۸ ماه+)', pgwp: 'حداکثر ۳ سال', language: 'CLB 7' },
+  { program: 'دکتری (۸ ماه+)', pgwp: 'حداکثر ۳ سال', language: 'CLB 7' },
 ];
 
 const FingerprintIcon = ({ className }: { className?: string }) => (
@@ -77,18 +77,18 @@ const FingerprintIcon = ({ className }: { className?: string }) => (
 );
 
 const VISA_REQUIREMENTS = [
-  { label: '学签处理费', value: 'CAD ۱۵۰', icon: FileCheck2, color: 'text-amber-300' },
-  { label: '生物识别费', value: 'CAD ۸۵', icon: FingerprintIcon, color: 'text-amber-300' },
-  { label: 'GIC / 资金证明', value: 'CAD ۲۳,۴۴۸+', icon: Banknote, color: 'text-emerald-300' },
-  { label: 'PAL (如适用)', value: '由省份签发', icon: FileText, color: 'text-sky-300' },
-  { label: '语言考试', value: 'IELTS / CELPIP / TEF', icon: Languages, color: 'text-sky-300' },
-  { label: '体检 (如适用)', value: '指定诊所', icon: HeartPulse, color: 'text-rose-300' },
+  { label: 'هزینه بررسی Study Permit', value: 'CAD ۱۵۰', icon: FileCheck2, color: 'text-amber-300' },
+  { label: 'هزینه بیومتریک', value: 'CAD ۸۵', icon: FingerprintIcon, color: 'text-amber-300' },
+  { label: 'GIC / تمکن مالی', value: 'CAD ۲۳,۴۴۸+', icon: Banknote, color: 'text-emerald-300' },
+  { label: 'نامه تایید استانی (PAL)', value: 'صادره از استان (در صورت نیاز)', icon: FileText, color: 'text-sky-300' },
+  { label: 'آزمون زبان', value: 'IELTS / CELPIP / TEF', icon: Languages, color: 'text-sky-300' },
+  { label: 'معاینه پزشکی (در صورت نیاز)', value: 'کلینیک‌های معتمد IRCC', icon: HeartPulse, color: 'text-rose-300' },
 ];
 
 const TIMELINE = [
   { step: '۱', title: 'دریافت پذیرش (LOA)', detail: 'از DLI معتبر — حداقل ۸ ماه', time: '۲–۴ ماه' },
-  { step: '۲', title: 'دریافت PAL (如需要)', detail: '本科/学院需要；硕博免PAL', time: '۲–۸ هفته' },
-  { step: '۳', title: 'آماده‌سازی GIC و مدارک مالی', detail: 'CAD ۲۳,۴۴۸+ +学费+机票', time: '۲–۴ هفته' },
+  { step: '۲', title: 'دریافت PAL (در صورت نیاز)', detail: 'الزامی برای کارشناسی و کالج؛ ارشد و دکتری معاف از PAL', time: '۲–۸ هفته' },
+  { step: '۳', title: 'آماده‌سازی GIC و مدارک مالی', detail: 'CAD ۲۳,۴۴۸+ به‌همراه شهریه و بلیط رفت‌وبرگشت', time: '۲–۴ هفته' },
   { step: '۴', title: 'ثبت درخواست Study Permit', detail: 'آنلاین از طریق IRCC', time: '۱ روز' },
   { step: '۵', title: 'دریافت تصمیم', detail: '۸۰٪ در ۲۸ روز یا کمتر', time: '۲۸ روز' },
   { step: '۶', title: 'ورود به کانادا و ثبت‌نام', detail: 'فعال‌سازی study permit در مرز', time: '—' },
@@ -98,9 +98,9 @@ const INTERNAL_LINKS = [
   { href: '/academic-austria', title: 'تحصیل در اتریش', desc: 'شهریه €۷۵۲ و VWU' },
   { href: '/academic-austria-medical', title: 'پزشکی اتریش (MedAT)', desc: 'سهمیه ۵٪ و آزمون ورودی' },
   { href: '/startup-canada', title: 'استارت‌آپ کانادا', desc: 'مسیر کارآفرینی' },
-  { href: '/assessment', title: 'ارزیابی رایگان', desc: 'سنجش شانس پذیرش' },
-  { href: '/contact', title: 'مشاوره با وکلای دیاکو', desc: 'تماس مستقیم' },
-  { href: '/guides/immigration-timeline', title: 'جدول زمانی مهاجرت', desc: 'برنامه‌ریزی گام‌به‌گام' },
+  { href: '/online-consult', title: 'مشاوره و ارزیابی آنلاین', desc: 'سنجش شانس پذیرش' },
+  { href: '/contact-us', title: 'مشاوره با وکلای دیاکو', desc: 'تماس مستقیم' },
+  { href: '/immigration-timeline', title: 'جدول زمانی مهاجرت', desc: 'برنامه‌ریزی گام‌به‌گام' },
 ];
 
 const TESTIMONIALS = [
@@ -115,7 +115,7 @@ const FAQS = [
   { q: 'PGWP در ۲۰۲۶ چقدر اعتبار دارد؟', a: 'دوره ۸ ماه تا ۲ سال: معادل طول دوره; ۲ سال و بالاتر: تا ۳ سال; کارشناسی ارشد و دکتری ۸ ماه به بالا: تا ۳ سال. زبان: CLB 7 برای دانشگاه، CLB 5 برای کالج.' },
   { q: 'دانشجو چند ساعت در هفته می‌تواند کار کند؟', a: '۲۴ ساعت در هفته در طول ترم (از نوامبر ۲۰۲۴ به‌طور دائم); در تعطیلات رسمی می‌تواند تمام‌وقت کار کند (حداکثر ۱۸۰ روز در سال).' },
   { q: 'زمان پردازش Study Permit چقدر است؟', a: 'طبق اعلام IRCC (فوریه ۲۰۲۶): ۸۰٪ درخواست‌های جدید در ۲۸ روز یا کمتر پردازش شده‌اند. تمدیدها ۹۰ روز.' },
-  { q: 'مسیر PR از طریق تحصیل در کانادا چگونه است؟', a: 'پس از PGWP و ۱ سال کار ماهر (TEER 0–3)، واجد شرایط CEC در Express Entry می‌شوید. امتیاز CRS فعلی CEC حدود ۵۰۷–۵۱۴ است. PNP نیز ۶۰۰ امتیاز تضمینی اضافه می‌کند.' },
+  { q: 'مسیر PR از طریق تحصیل در کانادا چگونه است؟', a: 'پس از PGWP و ۱ سال کار ماهر (TEER 0–3)، واجد شرایط CEC در Express Entry می‌شوید. امتیاز CRS فعلی CEC حدود ۵۰۷–۵۱۴ است و نامزدی استانی (PNP) ۶۰۰ امتیاز به امتیاز متقاضی اضافه می‌کند.' },
 ];
 
 /* ============================================================
@@ -186,8 +186,8 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
 
   useSeo({
     title: 'تحصیل در کانادا ۲۰۲۶ | Study Permit + PAL + PGWP',
-    description: 'راهنمای کامل کانادا ۲۰۲۶: سقف ۴۰۸,۰۰۰学签، PAL豁免硕博، تمکن مالی CAD ۲۳,۴۴۸، کار ۲۴ ساعت، PGWP تا ۳ سال و مسیر PR با دیاکو.',
-    canonical: '/guides/academic-canada',
+    description: 'راهنمای کامل کانادا ۲۰۲۶: سقف ۴۰۸,۰۰۰ ویزای تحصیلی، معافیت ارشد و دکتری از PAL، تمکن مالی CAD ۲۳,۴۴۸، کار ۲۴ ساعت، PGWP تا ۳ سال و مسیر PR با دیاکو.',
+    canonical: '/academic-canada',
     ogType: 'article',
     ogImage: HERO_IMAGE.src,
     keywords: ['تحصیل در کانادا ۲۰۲۶', 'Study Permit Canada', 'PAL کانادا', 'PGWP ۲۰۲۶', 'تمکن مالی کانادا ۲۳۴۴۸', 'Express Entry CEC', 'IRCC Study Permit'],
@@ -226,7 +226,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
           <nav aria-label="مسیر صفحه" className="flex items-center gap-2 text-xs text-slate-300">
             <a href="/" className="hover:text-amber-300">خانه</a>
             <span>/</span>
-            <a href="/academic" className="hover:text-amber-300">تحصیل در دانشگاه</a>
+            <a href="/services" className="hover:text-amber-300">تحصیل در دانشگاه</a>
             <span>/</span>
             <span className="text-amber-300 font-bold">کانادا</span>
           </nav>
@@ -253,7 +253,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
               </h1>
 
               <p className="speakable-summary text-sm md:text-base text-slate-200 leading-relaxed mb-6 text-justify" itemProp="description">
-                <strong className="text-amber-300">خلاصه:</strong> کانادا در ۲۰۲۶ سقف <strong className="text-white">۴۰۸,۰۰۰学签</strong> دارد. از ۱ ژانویه ۲۰۲۶، <strong className="text-emerald-300">硕士 و博士 در DLI دولتی از PAL معاف‌اند</strong> —本科 و学院 همچنان به PAL نیاز دارند (۱۸۰,۰۰۰份). تمکن مالی: <strong className="text-amber-300">CAD ۲۳,۴۴۸/سال</strong> (مجرد، از ۲۰۲۶.۹.۱). کار دانشجویی: <strong className="text-sky-300">۲۴ ساعت/هفته</strong>. PGWP: تا <strong className="text-white">۳ سال</strong>. مسیر PR: CEC با CRS <strong className="text-white">۵۰۷–۵۱۴</strong>.
+                <strong className="text-amber-300">خلاصه:</strong> کانادا در ۲۰۲۶ سقف <strong className="text-white">۴۰۸,۰۰۰ ویزای تحصیلی</strong> دارد. از ۱ ژانویه ۲۰۲۶، <strong className="text-emerald-300">مقاطع کارشناسی ارشد و دکتری در DLI دولتی از PAL معاف‌اند</strong> — دوره کارشناسی و کالج همچنان به PAL نیاز دارند (۱۸۰,۰۰۰ مجوز). تمکن مالی: <strong className="text-amber-300">CAD ۲۳,۴۴۸/سال</strong> (مجرد، از سپتامبر ۲۰۲۶). کار دانشجویی: <strong className="text-sky-300">۲۴ ساعت/هفته</strong>. PGWP: تا <strong className="text-white">۳ سال</strong>. مسیر PR: CEC با CRS <strong className="text-white">۵۰۷–۵۱۴</strong>.
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
@@ -296,7 +296,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
                     <Building2 className="h-4 w-4" /> IRCC — اداره مهاجرت، پناهندگی و شهروندی کانادا
                   </div>
                   <p className="text-[11px] text-slate-300 mt-1">
-                    SOP آکادمیک قوی، GIC CAD ۲۳,۴۴۸ و انتخاب DLI با تضمین PGWP
+                    SOP آکادمیک قوی، GIC با مبلغ CAD ۲۳,۴۴۸ و انتخاب DLI واجد شرایط PGWP
                   </p>
                 </figcaption>
               </figure>
@@ -313,17 +313,17 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
               <AlertTriangle className="h-6 w-6 text-red-400 shrink-0 mt-0.5" />
               <div>
                 <h2 className="text-xl md:text-2xl font-black text-white mb-2">
-                  تغییر بزرگ ۲۰۲۶:硕博免PAL، سقف ۴۰۸,۰۰۰学签
+                  تغییر بزرگ ۲۰۲۶: معافیت ارشد و دکتری از PAL و سقف ۴۰۸,۰۰۰ ویزای تحصیلی
                 </h2>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  این مهم‌ترین تغییر برای متقاضیان ایرانی است. اگر硕士 یا دکتری می‌خوانید، مسیر شما ساده‌تر شده.
+                  این مهم‌ترین تغییر برای متقاضیان ایرانی است. اگر در مقطع کارشناسی ارشد یا دکتری تحصیل می‌کنید، مسیر شما ساده‌تر شده است.
                 </p>
               </div>
             </div>
 
             <div className="overflow-x-auto mb-6">
               <table className="w-full text-right text-xs md:text-sm">
-                <caption className="sr-only">دسته‌بندی PAL و سقف学签 ۲۰۲۶</caption>
+                <caption className="sr-only">دسته‌بندی PAL و سقف ویزای تحصیلی کانادا ۲۰۲۶</caption>
                 <thead>
                   <tr className="border-b border-white/15 text-slate-300">
                     <th scope="col" className="py-3 px-3">دسته</th>
@@ -347,9 +347,9 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {[
-                { value: '۴۰۸,۰۰۰', label: 'سقف کل学签 ۲۰۲۶', note: '155K جدید + 253K تمدید' },
-                { value: '۳۰۹,۶۷۰', label: 'حداکثر پردازش PAL通道', note: 'پیش‌بینی 180K صدور' },
-                { value: '۱۸۰,۰۰۰', label: '学签 با PAL (本科/学院)', note: 'توزیع استانی بر اساس جمعیت' },
+                { value: '۴۰۸,۰۰۰', label: 'سقف کل ویزای تحصیلی ۲۰۲۶', note: '۱۵۵ هزار جدید + ۲۵۳ هزار تمدید' },
+                { value: '۳۰۹,۶۷۰', label: 'حداکثر بررسی در مسیر PAL', note: 'پیش‌بینی ۱۸۰ هزار صدور' },
+                { value: '۱۸۰,۰۰۰', label: 'ویزاهای با PAL (کارشناسی/کالج)', note: 'توزیع استانی بر اساس جمعیت' },
               ].map((s) => (
                 <div key={s.label} className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
                   <div className="text-lg font-black text-amber-300">{s.value}</div>
@@ -360,7 +360,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
             </div>
 
             <p className="text-[11px] text-slate-400 text-center mt-4">
-              منبع: IRCC — 2026 Provincial/Territorial Allocations (25 Nov 2025)[reference:9]
+              منبع: IRCC — 2026 Provincial/Territorial Allocations (canada.ca)
             </p>
           </div>
         </section>
@@ -379,7 +379,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
                   چقدر پول لازم است؟ (CAD ۲۳,۴۴۸)
                 </h2>
                 <p className="text-sm text-slate-300 leading-relaxed mb-4 text-justify">
-                  از ۱ سپتامبر ۲۰۲۶، IRCC حداقل生活费 را به <strong className="text-amber-300">CAD ۲۳,۴۴۸/سال</strong> افزایش داده (قبلاً ۲۲,۸۹۵). این مبلغ <strong className="text-white">جدا از学费 و بلیط</strong> است.
+                  از ۱ سپتامبر ۲۰۲۶، IRCC حداقل هزینه زندگی مورد نیاز را به <strong className="text-amber-300">CAD ۲۳,۴۴۸/سال</strong> افزایش داده (پیش از آن: ۲۲,۸۹۵). این مبلغ <strong className="text-white">جدا از شهریه دانشگاه و هزینه بلیط</strong> است.
                 </p>
 
                 <div className="space-y-2.5">
@@ -407,7 +407,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
                     className="w-full h-auto object-cover"
                   />
                   <figcaption className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">
-                    GIC حداقل CAD ۲۳,۴۴۸ +学费 + بلیط — از ۲۰۲۶.۹.۱
+                    GIC حداقل CAD ۲۳,۴۴۸ + شهریه + بلیط رفت‌وبرگشت — از سپتامبر ۲۰۲۶
                   </figcaption>
                 </figure>
 
@@ -441,7 +441,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
                   className="w-full h-auto object-cover"
                 />
                 <div className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">
-                  PGWP: 2年+ = 3 سال |硕士 8个月+ = 3 سال
+                  PGWP: دوره ۲ سال به بالا = ۳ سال | کارشناسی ارشد ۸ ماه+ = ۳ سال
                 </div>
               </div>
 
@@ -467,7 +467,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
 
                 <div className="mt-4 p-3 rounded-xl bg-sky-500/10 border border-sky-400/20">
                   <p className="text-[11px] text-sky-200 leading-relaxed">
-                    <strong>نکته:</strong> برای PGWP، باید حداقل <strong className="text-white">۸ ماه</strong>全日制 در DLI معتبر تحصیل کرده باشید. لیست رشته‌های واجد شرایط PGWP در ۲۰۲۶ ثابت (فریز) شده است.
+                    <strong>نکته:</strong> برای PGWP، باید حداقل <strong className="text-white">۸ ماه</strong> به‌صورت تمام‌وقت در یک DLI معتبر تحصیل کرده باشید. لیست رشته‌های واجد شرایط PGWP در ۲۰۲۶ تثبیت شده است.
                   </p>
                 </div>
               </div>
@@ -556,7 +556,7 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
 
             <div className="mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-400/20 text-center">
               <p className="text-[11px] text-emerald-200">
-                <strong>پردازش سریع:</strong> ۸۰٪ درخواست‌های جدید در <strong className="text-white">۲۸ روز</strong> یا کمتر (IRCC، فوریه ۲۰۲۶)[reference:10]
+                <strong>پردازش سریع:</strong> ۸۰٪ درخواست‌های جدید در <strong className="text-white">۲۸ روز</strong> یا کمتر (بر اساس داده‌های IRCC، فوریه ۲۰۲۶)
               </p>
             </div>
           </div>
@@ -573,26 +573,26 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
 
             <div className="space-y-4 text-sm leading-8 text-slate-300 text-justify">
               <p>
-                کانادا در ۲۰۲۶ با تغییرات بنیادینی در سیستم学签 مواجه است. سقف کل学签 به <strong className="text-amber-300">۴۰۸,۰۰۰份</strong> کاهش یافته (۷٪ کمتر از ۲۰۲۵)[reference:11]. اما یک خبر خوب برای متقاضیان تحصیلات تکمیلی: از ۱ ژانویه ۲۰۲۶، دانشجویان硕士 و دکتری در DLI دولتی <strong className="text-emerald-300">از ارائه PAL معاف‌اند</strong> و سقف学签 شامل آن‌ها نمی‌شود[reference:12]. این تصمیم برای جذب استعدادهای برتر گرفته شده است.
+                کانادا در ۲۰۲۶ با تغییرات بنیادینی در سیستم ویزای تحصیلی مواجه است. سقف کل ویزاهای تحصیلی به <strong className="text-amber-300">۴۰۸,۰۰۰ مجوز</strong> کاهش یافته (۷٪ کمتر از ۲۰۲۵). اما یک خبر خوب برای متقاضیان تحصیلات تکمیلی: از ۱ ژانویه ۲۰۲۶، دانشجویان کارشناسی ارشد و دکتری در DLI دولتی <strong className="text-emerald-300">از ارائه PAL معاف‌اند</strong> و سقف سهمیه شامل آن‌ها نمی‌شود. این تصمیم برای جذب استعدادهای برتر گرفته شده است.
               </p>
 
               <h3 className="text-lg font-black text-white mt-6 mb-3">
                 PAL چیست و چه کسانی به آن نیاز دارند؟
               </h3>
               <p>
-                PAL (Provincial Attestation Letter) یک نامه تاییدیه استانی است که ثابت می‌کند سهمیه学签 آن استان برای شما رزرو شده. برای ۲۰۲۶:
+                PAL (Provincial Attestation Letter) یک نامه تاییدیه استانی است که ثابت می‌کند سهمیه ویزای تحصیلی آن استان برای شما رزرو شده است. برای ۲۰۲۶:
               </p>
               <ul className="space-y-1.5 pr-5 list-disc marker:text-amber-500">
-                <li><strong className="text-white">硕士 و博士 (DLI دولتی):</strong> نیازی به PAL ندارند — ۴۹,۰۰۰份 پیش‌بینی شده[reference:13].</li>
-                <li><strong className="text-white">本科 و学院 (College):</strong> نیاز به PAL دارند — ۱۸۰,۰۰۰份 پیش‌بینی شده، با توزیع استانی (انتاریو ۷۰,۰۷۴، بریتیش کلمبیا ۲۴,۷۸۶، کبک ۳۹,۴۷۴)[reference:14].</li>
-                <li><strong className="text-white">K-12 و续签同校:</strong> معاف از PAL — ۱۱۵,۰۰۰ + ۶۴,۰۰۰份[reference:15].</li>
+                <li><strong className="text-white">کارشناسی ارشد و دکتری (DLI دولتی):</strong> نیازی به PAL ندارند — ۴۹,۰۰۰ مجوز پیش‌بینی شده است.</li>
+                <li><strong className="text-white">کارشناسی و کالج (College):</strong> نیاز به PAL دارند — ۱۸۰,۰۰۰ مجوز پیش‌بینی شده، با توزیع استانی (انتاریو ۷۰,۰۷۴، بریتیش کلمبیا ۲۴,۷۸۶، کبک ۳۹,۴۷۴).</li>
+                <li><strong className="text-white">مدارس K-12 و تمدید در همان مؤسسه:</strong> معاف از PAL — ۱۱۵,۰۰۰ + ۶۴,۰۰۰ مجوز.</li>
               </ul>
 
               <h3 className="text-lg font-black text-white mt-6 mb-3">
                 تمکن مالی: CAD ۲۳,۴۴۸ (افزایش یافته)
               </h3>
               <p>
-                از ۱ سپتامبر ۲۰۲۶، حداقل生活费 برای Study Permit به <strong className="text-amber-300">CAD ۲۳,۴۴۸ در سال</strong> افزایش یافته (قبلاً ۲۲,۸۹۵)[reference:16]. این مبلغ <strong className="text-white">جدا از学费 و بلیط</strong> است. برای متقاضی متأهل، این مبلغ به CAD ۲۹,۱۹۲ افزایش می‌یابد[reference:17]. GIC (Guaranteed Investment Certificate) از بانک‌های کانادایی باید حداقل این مبلغ را پوشش دهد.
+                از ۱ سپتامبر ۲۰۲۶، حداقل هزینه زندگی برای Study Permit به <strong className="text-amber-300">CAD ۲۳,۴۴۸ در سال</strong> افزایش یافته (قبلاً ۲۲,۸۹۵). این مبلغ <strong className="text-white">جدا از شهریه و بلیط</strong> است. برای متقاضی متأهل، این مبلغ به CAD ۲۹,۱۹۲ افزایش می‌یابد. GIC (Guaranteed Investment Certificate) از بانک‌های کانادایی باید حداقل این مبلغ را پوشش دهد.
               </p>
 
               <h3 className="text-lg font-black text-white mt-6 mb-3">
@@ -602,24 +602,24 @@ export const AcademicCanadaPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
                 پس از فارغ‌التحصیلی از یک برنامه حداقل ۸ ماهه در DLI واجد شرایط، می‌توانید PGWP دریافت کنید:
               </p>
               <ul className="space-y-1.5 pr-5 list-disc marker:text-amber-500">
-                <li><strong className="text-white">۸ ماه تا کمتر از ۲ سال:</strong> PGWP با طول برابر برنامه[reference:18].</li>
-                <li><strong className="text-white">۲ سال یا بیشتر:</strong> PGWP تا <strong className="text-amber-300">۳ سال</strong>[reference:19].</li>
-                <li><strong className="text-white">硕士 یا دکتری (۸ ماه+):</strong> PGWP تا ۳ سال، بدون توجه به طول برنامه[reference:20].</li>
+                <li><strong className="text-white">۸ ماه تا کمتر از ۲ سال:</strong> PGWP با طول برابر برنامه.</li>
+                <li><strong className="text-white">۲ سال یا بیشتر:</strong> PGWP تا <strong className="text-amber-300">۳ سال</strong>.</li>
+                <li><strong className="text-white">کارشناسی ارشد یا دکتری (۸ ماه+):</strong> PGWP تا ۳ سال، بدون توجه به طول برنامه.</li>
               </ul>
               <p>
-                از نظر زبان: برای大学 CLB 7 و برای学院 CLB 5 لازم است[reference:21]. لیست رشته‌های واجد شرایط PGWP در ۲۰۲۶ ثابت شده است[reference:22].
+                از نظر زبان: برای دانشگاه CLB 7 و برای کالج CLB 5 لازم است. لیست رشته‌های واجد شرایط PGWP در ۲۰۲۶ تثبیت شده است.
               </p>
 
               <h3 className="text-lg font-black text-white mt-6 mb-3">
                 از PGWP تا PR: CEC با CRS ۵۰۷–۵۱۴
               </h3>
               <p>
-                پس از حداقل ۱ سال کار ماهر (TEER 0–3) با PGWP، واجد شرایط <strong className="text-white">Canadian Experience Class (CEC)</strong> در Express Entry می‌شوید. CRS فعلی برای CEC حدود <strong className="text-amber-300">۵۰۷–۵۱۴</strong> است[reference:23]. گزینه‌های تقویت CRS:
+                پس از حداقل ۱ سال کار ماهر (TEER 0–3) با PGWP، واجد شرایط <strong className="text-white">Canadian Experience Class (CEC)</strong> در Express Entry می‌شوید. CRS فعلی برای CEC حدود <strong className="text-amber-300">۵۰۷–۵۱۴</strong> است. گزینه‌های تقویت CRS:
               </p>
               <ul className="space-y-1.5 pr-5 list-disc marker:text-amber-500">
-                <li><strong className="text-white">تحصیل کانادایی:</strong> 15–30 امتیاز اضافه[reference:24].</li>
-                <li><strong className="text-white">PNP استانی:</strong> +600 امتیاز — عملاً PR را تضمین می‌کند[reference:25].</li>
-                <li><strong className="text-white">زبان فرانسه:</strong> تا 50 امتیاز اضافه؛ دراوهای فرانسه با CRS ۳۷۹–۴۲۸[reference:26].</li>
+                <li><strong className="text-white">تحصیل کانادایی:</strong> ۱۵–۳۰ امتیاز اضافه.</li>
+                <li><strong className="text-white">نامزدی استانی (PNP):</strong> +۶۰۰ امتیاز بسیار تعیین‌کننده برای دریافت دعوت‌نامه PR در استخر Express Entry.</li>
+                <li><strong className="text-white">زبان فرانسه:</strong> تا ۵۰ امتیاز اضافه؛ دراوهای فرانسه با CRS ۳۷۹–۴۲۸.</li>
               </ul>
 
               <h3 className="text-lg font-black text-white mt-6 mb-3">

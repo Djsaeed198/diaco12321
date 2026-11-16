@@ -76,7 +76,7 @@ export const SuccessCasesPage: React.FC<Props> = ({
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/10 border border-amber-400/30 px-3.5 py-1 text-xs font-bold text-amber-300 mb-4 backdrop-blur-sm">
               <Award className="w-3.5 h-3.5 text-amber-400" />
-              <span>کارنامه درخشان و مستند بیش از ۲۰ سال فعالیت تخصصی در قلب اروپا</span>
+              <span>کارنامه درخشان و مستند بیش از ۱۱ سال فعالیت تخصصی در اروپا (تأسیس ۱۳۹۴)</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
@@ -115,7 +115,7 @@ export const SuccessCasesPage: React.FC<Props> = ({
               تحلیل و درس‌آموخته‌های حقوقی
             </span>
             <h2 className="text-xl sm:text-3xl font-black text-white mt-3 mb-3">
-              کالبدشکافی ۲،۰۰۰ پرونده موفق: چه عواملی منجر به قبولی قطعی ویزا می‌شود؟
+              کالبدشکافی ۲,۱۵۰+ پرونده موفق: چه عواملی منجر به قبولی ویزا می‌شود؟
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl mx-auto">
               بررسی تفاوت‌های یک پرونده بدون نقص با پرونده‌های پرریسک از دیدگاه آفیسر سفارت و قاضی اداره اقامت اروپا.
@@ -165,7 +165,7 @@ export const SuccessCasesPage: React.FC<Props> = ({
               {[
                 {
                   q: 'آیا کارت اقامت صادرشده در اتریش یا آلمان در تمام اروپا معتبر است؟',
-                  a: 'بله، کارت اقامت شنگن (Aufenthaltstitel) به شما و خانواده اجازه تردد آزادانه، بدون نیاز به ویزا در تمام ۲۷ کشور حوزه شنگن را می‌دهد.',
+                  a: 'بله، کارت اقامت شنگن (Aufenthaltstitel) به شما و خانواده اجازه تردد آزادانه، بدون نیاز به ویزا در تمام ۲۹ کشور حوزه شنگن را می‌دهد.',
                 },
                 {
                   q: 'در صورت داشتن ریجکتی قبلی، آیا امکان اخذ ویزای مجدد وجود دارد؟',

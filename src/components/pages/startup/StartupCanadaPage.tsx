@@ -40,7 +40,7 @@ export const StartupCanadaPage: React.FC<Props> = ({
     title: 'ویزای استارت‌آپ کانادا ۲۰۲۶ | اخذ مستقیم اقامت دائم PR',
     description:
       'راهنمای کامل استارت‌آپ ویزای کانادا (SUV)؛ اخذ نامه حمایتی LOS از انکوباتورهای تاییدشده، اقامت دائم مستقیم برای کل خانواده و بدون شرط سنی با دیاکو.',
-    canonical: '/guides/startup-canada',
+    canonical: '/startup-canada',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -57,7 +57,7 @@ export const StartupCanadaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/startup-canada#article',
+          '@id': 'https://www.dia-co.ir/startup-canada#article',
           headline: 'راهنمای جامع ویزای استارت‌آپ کانادا ۲۰۲۶: شرایط قبولی و اقامت دائم',
           description:
             'بررسی فرآیند برنامه ویزای استارت‌آپ فدرال کانادا (Start-up Visa Program)، نحوه اخذ Letter of Support و اخذ کارت اقامت دائم مستقیم برای متقاضی اصلی و اعضای تیم.',
@@ -83,7 +83,7 @@ export const StartupCanadaPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/startup-canada#howto',
+          '@id': 'https://www.dia-co.ir/startup-canada#howto',
           name: 'مراحل اقدام برای ویزای استارت‌آپ کانادا (SUV)',
           description: 'فرایند قانونی گام‌به‌گام از آماده‌سازی پیچ‌دک تا صدور کارت PR کانادا',
           step: [
@@ -115,7 +115,7 @@ export const StartupCanadaPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/startup-canada#faq',
+          '@id': 'https://www.dia-co.ir/startup-canada#faq',
           mainEntity: [
             {
               '@type': 'Question',

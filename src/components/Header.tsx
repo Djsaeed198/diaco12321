@@ -255,7 +255,7 @@ export const DIACO_COUNTRIES: {
     name: 'اتریش',
     flag: '🇦🇹',
     badge: 'دفتر مرکزی وین',
-    desc: 'مقر اصلی وکلای دیاکو در Kärntner Ring 5-7 وین — ۱۱ روش مهاجرتی فعال',
+    desc: 'مقر اصلی وکلای دیاکو در Ausstellungsstraße 50/2.OG وین — ۱۱ روش مهاجرتی فعال',
     page: 'financial-austria',
   },
   {
@@ -473,8 +473,8 @@ export const COUNTRY_DETAILS: Record<string, CountryDetail> = {
     badge: 'دفتر مرکزی وین',
     portalUrl: 'https://otrish-iran.ir',
     portalLabel: 'پرتال تخصصی Otrish-Iran.ir',
-    headline: 'دفتر مرکزی اروپایی دیاکو در وین: Kärntner Ring 5-7, 1010 Wien',
-    subheadline: 'جامع‌ترین خدمات اقامت، ویزا، خرید ملک و شرکت در اتریش با بیش از ۲۰ سال سابقه درخشان',
+    headline: 'دفتر مرکزی اروپایی دیاکو در وین: Ausstellungsstraße 50/2.OG, 1020 Wien',
+    subheadline: 'جامع‌ترین خدمات اقامت، ویزا، خرید ملک و شرکت در اتریش با بیش از ۱۱ سال سابقه رسمی (از ۱۳۹۴ / ۲۰۱۵)',
     lawyerBadge: '✓ وکیل رسمی کانون وکلای اتریش',
     methods: AUSTRIA_METHODS,
   },
@@ -492,7 +492,7 @@ export const COUNTRY_DETAILS: Record<string, CountryDetail> = {
       {
         page: 'german-blue-card',
         title: 'بلوکارت آلمان ۲۰۲۶ (EU Blue Card)',
-        tag: 'حداقل حقوق €۴۸,۳۰۰',
+        tag: 'آستانه ۲۰۲۶: €۵۰,۷۰۰ (STEM €۴۵,۹۳۴)',
         desc: 'اقامت کاری نخبگان و متخصصان دانشگاهی با اقامت دائم ۲۱ ماهه و الحاق همزمان همسر و فرزندان',
         icon: '🇩🇪',
       },
@@ -547,7 +547,7 @@ export const COUNTRY_DETAILS: Record<string, CountryDetail> = {
     badge: 'دفتر رسمی آتن',
     portalUrl: 'https://greece-iran.ir',
     portalLabel: 'پرتال تخصصی Greece-Iran.ir',
-    headline: 'دفتر رسمی دیاکو در آتن (Kolonaki) — مجری گلدن ویزای یونان',
+    headline: 'دفتر رسمی دیاکو در آتن (Glyfada) — مجری گلدن ویزای یونان',
     subheadline: 'اخذ اقامت دائم اروپا از طریق سرمایه‌گذاری ملکی و ثبت شرکت با حضور وکلای مقیم آتن',
     lawyerBadge: '✓ عضو کانون وکلای آتن',
     methods: [
@@ -1273,8 +1273,8 @@ export const Header: React.FC<Props> = ({
             <span className="flex items-center gap-1 text-amber-300 font-bold">
               <span className="h-1.5 w-1.5 rounded-full bg-[#f5a623] animate-pulse" />
               {currentLang === 'fa'
-                ? 'هلدینگ مهاجرتی دیاکو — با بیش از ۲۰ سال تجربه موفق در امور مهاجرت'
-                : 'Diaco Migration Holding — Over 20 Years of Proven European Legal Experience'}
+                ? 'هلدینگ مهاجرتی دیاکو — بیش از ۱۱ سال سابقه رسمی (از ۱۳۹۴)، ۳۵ وکیل همکار و ۲,۱۵۰+ پرونده موفق'
+                : 'Diaco Migration Holding — Over 11 Years of Proven Legal Experience (Est. 2015)'}
             </span>
             <span className="text-white/20">|</span>
             <span className="text-slate-400">

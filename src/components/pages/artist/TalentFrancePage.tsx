@@ -26,7 +26,7 @@ export const TalentFrancePage: React.FC<Props> = ({
     title: 'ویزای تالنت فرانسه ۲۰۲۶ | ۴ سال اقامت + تله ۵۰۷ ساعت',
     description:
       'پاسپورت تلنت هنری فرانسه ۲۰۲۶: €۱,۳۰۶.۹۱/ماه (۷۰٪ SMIC) با ۵۱٪ از هنر، کارت ۴ ساله، هزینه €۳۵۰. اما تله پنهان: ۵۰۷ ساعت intermittence برای تمدید. داستان واقعی Gangbé Brass Band و راهنمای کامل با دیاکو.',
-    canonical: '/guides/talent-france',
+    canonical: '/talent-france',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
@@ -47,7 +47,7 @@ export const TalentFrancePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/talent-france#article',
+          '@id': 'https://www.dia-co.ir/talent-france#article',
           headline:
             'پاسپورت تلنت هنری فرانسه ۲۰۲۶: چرا ۴ سال کافی نیست و تله ۵۰۷ ساعت چیست',
           description:
@@ -77,7 +77,7 @@ export const TalentFrancePage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/talent-france#howto',
+          '@id': 'https://www.dia-co.ir/talent-france#howto',
           name: 'مراحل دریافت و حفظ پاسپورت تلنت هنری فرانسه',
           description: 'فرآیند گام‌به‌گام از درخواست اولیه تا تمدید موفق',
           totalTime: 'P6M',
@@ -116,7 +116,7 @@ export const TalentFrancePage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/talent-france#faq',
+          '@id': 'https://www.dia-co.ir/talent-france#faq',
           mainEntity: [
             {
               '@type': 'Question',
@@ -331,10 +331,10 @@ export const TalentFrancePage: React.FC<Props> = ({
               <p className="text-sm text-slate-300 leading-relaxed mb-4 text-justify">گروه موسیقی <strong className="text-white">Gangbé Brass Band</strong> از بنین، از سال ۲۰۲۲ با ویزای Passeport Talent در فرانسه زندگی می‌کرد. شش نوازنده، خانواده‌هایشان، اجراهای منظم در جشنواره‌ها.</p>
               <div className="space-y-3 mb-4">
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                  <p className="text-[11px] text-slate-300 leading-relaxed"><strong className="text-white">چه شد؟</strong> در ۱۵ جولای ۲۰۲۶، هر شش نفر OQTF (دستور خروج از خاک فرانسه) دریافت کردند. دلیل: چند جشنواره به‌دلیل قطع بودجه لغو شد، درآمد کاهش یافت، و گروه نتوانست <strong className="text-rose-300">۵۰۷ ساعت intermittence</strong> لازم برای تمدید را اثبات کند. آنها فقط ۲۰۰ ساعت完成了.</p>
+                  <p className="text-[11px] text-slate-300 leading-relaxed"><strong className="text-white">چه شد؟</strong> در ۱۵ جولای ۲۰۲۶، هر شش نفر OQTF (دستور خروج از خاک فرانسه) دریافت کردند. دلیل: چند جشنواره به‌دلیل قطع بودجه لغو شد، درآمد کاهش یافت، و گروه نتوانست <strong className="text-rose-300">۵۰۷ ساعت intermittence</strong> لازم برای تمدید را اثبات کند. آنها فقط ۲۰۰ ساعت کار هنری ثبت‌شده داشتند.</p>
                 </div>
                 <div className="p-3 rounded-xl bg-white/5 border border-white/10">
-                  <p className="text-[11px] text-slate-300 leading-relaxed"><strong className="text-white"> irony:</strong> کنسولگری فرانسه در بنین خودشان به این نوازندگان پیشنهاد داده بود که «پاسپورت تلنت» بگیرند — چون استعداد برجسته‌ای داشتند. اما هیچ‌کس به آنها نگفته بود که ۵۰۷ ساعت شرط تمدید است.</p>
+                  <p className="text-[11px] text-slate-300 leading-relaxed"><strong className="text-white">نکته تلخ:</strong> کنسولگری فرانسه در بنین خودشان به این نوازندگان پیشنهاد داده بود که «پاسپورت تلنت» بگیرند — چون استعداد برجسته‌ای داشتند. اما هیچ‌کس به آنها نگفته بود که ۵۰۷ ساعت شرط تمدید است.</p>
                 </div>
               </div>
               <div className="p-4 rounded-2xl bg-red-500/10 border border-red-400/20">

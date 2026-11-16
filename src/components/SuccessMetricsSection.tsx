@@ -44,7 +44,7 @@ const METRICS: MetricItem[] = [
     targetValue: 2150,
     prefix: '+',
     suffix: '',
-    description: 'بیش از یک دهه فعالیت رسمی و پیگیری بدون واسطه در اتریش و اروپا',
+    description: 'بیش از ۱۱ سال سابقه رسمی (تأسیس ۱۳۹۴ / ۲۰۱۵) و ۳۵ وکیل همکار بدون واسطه در اتریش و اروپا',
     icon: '🏛️',
     color: '#38bdf8',
     percentage: 94,
@@ -64,19 +64,19 @@ const METRICS: MetricItem[] = [
 ];
 
 const CATEGORY_RATES = [
-  { name: 'اقامت تمکن مالی اتریش (سهمیه‌ای)', rate: 99.1, count: '۲۸۰+ پرونده' },
-  { name: 'کارت قرمز-سفید-قرمز و نیروی ماهر', rate: 97.5, count: '۱۴۰+ پرونده' },
-  { name: 'کارت آبی آلمان (Blue Card)', rate: 98.2, count: '۱۲۰+ پرونده' },
-  { name: 'گلدن ویزای سرمایه‌گذاری یونان و اسپانیا', rate: 100, count: '۸۵+ پرونده' },
-  { name: 'پذیرش دانشگاهی و ویزای تحصیلی', rate: 96.8, count: '۱۹۰+ پرونده' },
+  { name: 'اقامت تمکن مالی اتریش (سهمیه‌ای)', rate: 99.1, count: '۷۸۰+ پرونده' },
+  { name: 'کارت قرمز-سفید-قرمز و نیروی ماهر', rate: 97.5, count: '۴۱۰+ پرونده' },
+  { name: 'کارت آبی آلمان (Blue Card)', rate: 98.2, count: '۳۶۰+ پرونده' },
+  { name: 'گلدن ویزای سرمایه‌گذاری یونان و اسپانیا', rate: 98.8, count: '۲۸۰+ پرونده' },
+  { name: 'پذیرش دانشگاهی و ویزای تحصیلی', rate: 96.8, count: '۳۲۰+ پرونده' },
 ];
 
 export const SuccessMetricsSection: React.FC = () => {
   const [counts, setCounts] = useState<Record<string, number>>({
-    'visas-granted': 0,
-    'approval-rate': 0,
-    'total-residencies': 0,
-    'avg-time': 0,
+    'visas-granted': 520,
+    'approval-rate': 98.4,
+    'total-residencies': 2150,
+    'avg-time': 4.2,
   });
 
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -112,10 +112,10 @@ export const SuccessMetricsSection: React.FC = () => {
       const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
 
       setCounts({
-        'visas-granted': Math.floor(easeProgress * 520),
-        'approval-rate': +(easeProgress * 98.4).toFixed(1),
-        'total-residencies': Math.floor(easeProgress * 2150),
-        'avg-time': +(easeProgress * 4.2).toFixed(1),
+        'visas-granted': Math.floor(380 + easeProgress * (520 - 380)),
+        'approval-rate': +(75 + easeProgress * (98.4 - 75)).toFixed(1),
+        'total-residencies': Math.floor(1500 + easeProgress * (2150 - 1500)),
+        'avg-time': +(3.2 + easeProgress * (4.2 - 3.2)).toFixed(1),
       });
 
       if (progress < 1) {
@@ -213,7 +213,7 @@ export const SuccessMetricsSection: React.FC = () => {
                     <div
                       className="h-full rounded-full transition-all duration-1000 ease-out"
                       style={{
-                        width: hasAnimated ? `${item.percentage}%` : '0%',
+                        width: `${item.percentage}%`,
                         backgroundColor: item.color,
                         boxShadow: `0 0 10px ${item.color}80`,
                       }}
@@ -236,7 +236,7 @@ export const SuccessMetricsSection: React.FC = () => {
                   <span>نرخ موفقیت و تعداد پرونده‌های صادرشده به تفکیک روش:</span>
                 </h3>
                 <span className="text-xs text-amber-300 font-bold hidden sm:inline">
-                  مبنای سال جاری
+                  جمع کل پرونده‌های ثبت‌شده (۲,۱۵۰+)
                 </span>
               </div>
 
@@ -257,7 +257,7 @@ export const SuccessMetricsSection: React.FC = () => {
                       <div
                         className="h-full rounded-full bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] transition-all duration-1000"
                         style={{
-                          width: hasAnimated ? `${cat.rate}%` : '0%',
+                          width: `${cat.rate}%`,
                           transitionDelay: `${idx * 150}ms`,
                         }}
                       />
@@ -287,7 +287,7 @@ export const SuccessMetricsSection: React.FC = () => {
                     stroke="#f5a623"
                     strokeWidth="8"
                     strokeDasharray={2 * Math.PI * 40}
-                    strokeDashoffset={hasAnimated ? 2 * Math.PI * 40 * (1 - 0.984) : 2 * Math.PI * 40}
+                    strokeDashoffset={2 * Math.PI * 40 * (1 - 0.984)}
                     strokeLinecap="round"
                     fill="transparent"
                     style={{ transition: 'stroke-dashoffset 2s ease-out' }}
@@ -295,14 +295,14 @@ export const SuccessMetricsSection: React.FC = () => {
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                   <span className="text-2xl font-black text-white">
-                    {hasAnimated ? toPersianDigits('98.4') : '۰'}٪
+                    {toPersianDigits('98.4')}٪
                   </span>
                   <span className="text-[9px] font-bold text-amber-300">قبولی کلی</span>
                 </div>
               </div>
 
               <h4 className="mt-4 text-sm font-black text-white">
-                تضمین قراردادهای حقوقی و تعهد مرحله‌ای
+                شفافیت کامل قراردادهای حقوقی و پیگیری مرحله‌ای
               </h4>
               <p className="mt-1 text-xs text-slate-300 leading-5">
                 تاییدیه رسمی وکلای مقیم وین در کلیه پرونده‌های تمکن مالی و کاری با پشتیبانی مستمر تا تحویل اقامت.
@@ -310,7 +310,7 @@ export const SuccessMetricsSection: React.FC = () => {
 
               <div className="mt-4 flex items-center justify-center gap-2 pt-2 border-t border-white/10 text-[11px] text-emerald-400 font-bold">
                 <span>✓</span>
-                <span>صفر ریجکتی در پرونده‌های دارای ارزیابی مثبت اولیه</span>
+                <span>بررسی حقوقی دو مرحله‌ای پیش از ثبت پرونده در سفارت یا MA35</span>
               </div>
             </div>
           </div>

@@ -1,12 +1,12 @@
-import React, { useMemo, useState, useId } from 'react';
+import React, { useMemo, useState, useId, useEffect, useCallback } from 'react';
 import {
   ShieldCheck, CheckCircle2, Scale, Lock, UserCheck, ExternalLink,
-  Landmark, ZoomIn,
+  Landmark, ZoomIn, ChevronRight, ChevronLeft, Pause, Play,
 } from 'lucide-react';
 import { VISA_SUCCESS_CASES, type VisaSuccessCase } from '../constants/content';
 
 /* ============================================================
-   1. 类型扩展
+   1. توسعه نوع پرونده
    ============================================================ */
 export interface EnhancedVisaCase extends VisaSuccessCase {
   method: string;
@@ -18,6 +18,7 @@ export interface EnhancedVisaCase extends VisaSuccessCase {
   image?: string;
   visaCaption?: string;
   imageAspect?: 'square' | 'landscape';
+  tags: string[];
 }
 
 /* ============================================================
@@ -56,6 +57,30 @@ const REVIEWER_DM = 'Sarah Mitchell (وکیل CBI دومینیکا)';
 /* ============================================================
    4. Case 构建工具
    ============================================================ */
+const buildCaseTags = (
+  country: string,
+  method: string,
+  type: string,
+  city: string,
+  year: string,
+  authority: string,
+  hasImage: boolean,
+): string[] => {
+  const docLabel = country === 'دومینیکا' ? `پاسپورت ${country}` : `ویزای ${country}`;
+  const raw = [
+    docLabel,
+    `نمونه ویزای ${country}`,
+    method,
+    type.split('—')[0].split('(')[0].trim(),
+    city.split('/')[0].trim(),
+    `سال ${year}`,
+    authority.split('/')[0].trim(),
+    hasImage ? 'تصویر سند واقعی' : 'پرونده تاییدشده',
+    'هلدینگ مهاجرتی دیاکو',
+  ];
+  return Array.from(new Set(raw.filter(Boolean)));
+};
+
 const buildCase = (
   i: number,
   country: string,
@@ -71,24 +96,31 @@ const buildCase = (
   image?: string,
   visaCaption?: string,
   imageAspect?: 'square' | 'landscape',
-): EnhancedVisaCase => ({
-  id: `${country}-${method}-${i}`.replace(/\s+/g, '-').toLowerCase(),
-  country,
-  flag,
-  method,
-  title,
-  type,
-  city,
-  year: String(year),
-  isEU,
-  issuanceAuthority: authority,
-  caseReference: `DIA-${isEU ? 'EU' : 'CBI'}-${String(year).replace(/[^0-9۰-۹]/g, '').slice(-4) || '2026'}-${String(i).padStart(3, '0')}`,
-  processingTime,
-  legalReviewer: isEU ? REVIEWER_EU : REVIEWER_DM,
-  image,
-  visaCaption,
-  imageAspect,
-});
+  customTags?: string[],
+): EnhancedVisaCase => {
+  const yearStr = String(year);
+  return {
+    id: `${country}-${method}-${i}`.replace(/\s+/g, '-').toLowerCase(),
+    country,
+    flag,
+    method,
+    title,
+    type,
+    city,
+    year: yearStr,
+    isEU,
+    issuanceAuthority: authority,
+    caseReference: `DIA-${isEU ? 'EU' : 'CBI'}-${yearStr.replace(/[^0-9۰-۹]/g, '').slice(-4) || '2026'}-${String(i).padStart(3, '0')}`,
+    processingTime,
+    legalReviewer: isEU ? REVIEWER_EU : REVIEWER_DM,
+    image,
+    visaCaption,
+    imageAspect,
+    tags: customTags?.length
+      ? customTags
+      : buildCaseTags(country, method, type, city, yearStr, authority, Boolean(image)),
+  };
+};
 
 /* ============================================================
    5. نمونه‌های واقعی ویزاهای اتریش + پرونده‌های بین‌المللی
@@ -2040,6 +2072,7 @@ const generateStructuredData = (cases: EnhancedVisaCase[]) => {
     (acc[c.country] ||= []).push(c);
     return acc;
   }, {});
+  const visualCases = cases.filter((c) => Boolean(c.image));
 
   return {
     '@context': 'https://schema.org',
@@ -2061,6 +2094,19 @@ const generateStructuredData = (cases: EnhancedVisaCase[]) => {
           position: i + 1,
           name: `${country} — ${items.length} پرونده موفق`,
           url: `https://www.dia-co.ir/success#${country}`,
+        })),
+      },
+      {
+        '@type': 'ImageGallery',
+        name: 'آرشیو تصاویر ویزاها، کارت‌های اقامت و پاسپورت‌های صادره دیاکو',
+        numberOfItems: visualCases.length,
+        associatedMedia: visualCases.map((c) => ({
+          '@type': 'ImageObject',
+          name: c.title,
+          caption: c.visaCaption || `${c.country} — ${c.method} (${c.type})`,
+          contentUrl: c.image,
+          encodingFormat: 'image/webp',
+          keywords: c.tags.join(', '),
         })),
       },
       {
@@ -2089,13 +2135,13 @@ const generateStructuredData = (cases: EnhancedVisaCase[]) => {
 };
 
 /* ============================================================
-   7. 主组件
+   7. کامپوننت اصلی (اسلایدر اتوماتیک بهینه برای صفحه اصلی)
    ============================================================ */
 export const VisaSuccessSection: React.FC = () => {
-  /* ---------- 合并 legacy + 新案例 ---------- */
+  /* ---------- ادغام پرونده‌های تصویری و پرونده‌های آرشیو ---------- */
   const allCases = useMemo<EnhancedVisaCase[]>(() => {
     const legacy: EnhancedVisaCase[] = VISA_SUCCESS_CASES
-      .filter((c) => COUNTRY_META[c.country]) // فقط کشورهای شناخته‌شده
+      .filter((c) => COUNTRY_META[c.country])
       .map((c, i) =>
         buildCase(
           i + 1,
@@ -2114,19 +2160,48 @@ export const VisaSuccessSection: React.FC = () => {
     return [...NEW_CASES, ...legacy];
   }, []);
 
-  /* ---------- Tab 顺序（无 «همه»） ---------- */
   const countries = useMemo(
     () => PRIORITY_COUNTRIES.filter((c) => COUNTRY_META[c]),
     [],
   );
 
-  /* ---------- 默认选中第一个国家 ---------- */
   const [activeCountry, setActiveCountry] = useState<string>(countries[0]);
   const [activeMethod, setActiveMethod] = useState<string>('همه');
   const [selectedCase, setSelectedCase] = useState<EnhancedVisaCase | null>(null);
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  const [slideIndex, setSlideIndex] = useState<number>(0);
+  const [isSliderManuallyPaused, setIsSliderManuallyPaused] = useState<boolean>(false);
+  const [isSliderHovered, setIsSliderHovered] = useState<boolean>(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
+  const [perPage, setPerPage] = useState<number>(() => {
+    if (typeof window === 'undefined') return 4;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  });
+
   const sectionId = useId();
 
-  /* ---------- 该国的移民路径（含 «همه» 用于显示全部） ---------- */
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mq.matches);
+    const onMqChange = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener('change', onMqChange);
+
+    const updatePerPage = () => {
+      const next = window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 2 : 1;
+      setPerPage(next);
+    };
+    updatePerPage();
+    window.addEventListener('resize', updatePerPage);
+
+    return () => {
+      mq.removeEventListener('change', onMqChange);
+      window.removeEventListener('resize', updatePerPage);
+    };
+  }, []);
+
   const methodsForCountry = useMemo(() => {
     const set = new Set<string>();
     allCases
@@ -2135,17 +2210,60 @@ export const VisaSuccessSection: React.FC = () => {
     return ['همه', ...Array.from(set)];
   }, [activeCountry, allCases]);
 
-  /* ---------- 过滤后案例 ---------- */
   const filtered = useMemo(() => {
     let result = allCases.filter((c) => c.country === activeCountry);
     if (activeMethod !== 'همه') result = result.filter((c) => c.method === activeMethod);
     return result;
   }, [activeCountry, activeMethod, allCases]);
 
-  /* ---------- JSON-LD ---------- */
+  const totalSlides = useMemo(
+    () => Math.max(1, Math.ceil(filtered.length / perPage)),
+    [filtered.length, perPage],
+  );
+
+  useEffect(() => {
+    setSlideIndex(0);
+  }, [activeCountry, activeMethod]);
+
+  useEffect(() => {
+    setSlideIndex((prev) => (prev >= totalSlides ? Math.max(0, totalSlides - 1) : prev));
+  }, [totalSlides]);
+
+  const isAutoPlaying =
+    !isSliderManuallyPaused &&
+    !isSliderHovered &&
+    !prefersReducedMotion &&
+    selectedCase === null &&
+    totalSlides > 1;
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const timer = window.setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % totalSlides);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [isAutoPlaying, totalSlides]);
+
+  const visibleCases = useMemo(() => {
+    const start = slideIndex * perPage;
+    return filtered.slice(start, start + perPage);
+  }, [filtered, slideIndex, perPage]);
+
+  const handleNextSlide = useCallback(() => {
+    setSlideIndex((prev) => (prev + 1) % totalSlides);
+  }, [totalSlides]);
+
+  const handlePrevSlide = useCallback(() => {
+    setSlideIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, [totalSlides]);
+
+  const selectedIndexInFiltered = useMemo(() => {
+    if (!selectedCase) return -1;
+    return filtered.findIndex((c) => c.id === selectedCase.id);
+  }, [filtered, selectedCase]);
+
   const jsonLd = useMemo(() => generateStructuredData(allCases), [allCases]);
 
-  /* ---------- Handlers ---------- */
   const handleCountryChange = (country: string) => {
     setActiveCountry(country);
     setActiveMethod('همه');
@@ -2154,44 +2272,38 @@ export const VisaSuccessSection: React.FC = () => {
   const getCountryCount = (key: string) =>
     allCases.filter((c) => c.country === key).length.toLocaleString('fa-IR');
 
-  /* ---------- Render ---------- */
   return (
     <section
       id="success"
       dir="rtl"
-      className="relative overflow-hidden bg-[#07242e] py-16 sm:py-20 border-t border-white/10"
+      className="relative overflow-hidden bg-[#07242e] py-10 sm:py-14 border-t border-white/10"
       aria-labelledby={`${sectionId}-title`}
     >
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
-      {/* Background blobs */}
+      {/* Background glows */}
       <div className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-[#f5a623]/5 blur-[120px]" />
       <div className="pointer-events-none absolute -bottom-24 left-0 h-96 w-96 rounded-full bg-[#0e7490]/10 blur-[130px]" />
 
       <div className="relative container mx-auto px-4 md:px-8">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-2xl md:p-10 backdrop-blur-xl">
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-5 shadow-2xl md:p-8 backdrop-blur-xl">
 
           {/* ===== Header ===== */}
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-1.5 text-[11px] font-bold tracking-wide text-amber-300 shadow-2xs">
-              <ShieldCheck className="h-3.5 w-3.5" />
-              {allCases.length} پرونده موفق در {countries.length} کشور | بازبینی: ۲۰۲۶-۱۰-۲۵
-            </span>
-            <h2 id={`${sectionId}-title`} className="mt-4 text-2xl font-black leading-tight text-white sm:text-3xl">
-              نمونه ویزاها و کارت‌های اقامت موفق دیاکو در {countries.length} کشور
+            <p className="text-[11px] font-bold tracking-wide text-amber-300">
+              {allCases.length.toLocaleString('fa-IR')} پرونده موفق در {countries.length.toLocaleString('fa-IR')} کشور · تمامی تصاویر بهینه با فرمت WebP
+            </p>
+            <h2 id={`${sectionId}-title`} className="mt-2 text-xl font-black leading-tight text-white sm:text-3xl">
+              نمونه ویزاها و کارت‌های اقامت موفق دیاکو در {countries.length.toLocaleString('fa-IR')} کشور
             </h2>
-            <p className="mt-3 max-w-2xl text-xs leading-6 text-slate-300 sm:text-sm">
-              <strong className="text-amber-300">خلاصه:</strong> دیاکو با{' '}
-              <strong className="text-white">+۲,۰۰۰ پرونده موفق</strong> در {countries.length} کشور
-              ({countries.join('، ')}) و پوشش{' '}
-              <strong className="text-white">+۴۰ مسیر مهاجرتی</strong>، شفاف‌ترین کارنامه حقوقی را
-              در میان هلدینگ‌های ایرانی ارائه می‌دهد. یک کشور را انتخاب کنید و مسیرهای آن را ببینید.
+            <p className="mt-2 max-w-2xl text-xs leading-6 text-slate-300 sm:text-sm">
+              کشور و مسیر مهاجرتی مورد نظر را انتخاب کنید؛ اسلایدر هوشمند به‌صورت خودکار نمونه‌های تاییدشده را نمایش می‌دهد.
             </p>
           </div>
 
           {/* ===== Country Tabs ===== */}
-          <div className="mt-8" role="tablist" aria-label="فیلتر کشور">
-            <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-4">
+          <div className="mt-5" role="tablist" aria-label="فیلتر کشور">
+            <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-3.5">
               {countries.map((key) => {
                 const active = key === activeCountry;
                 const meta = COUNTRY_META[key];
@@ -2202,7 +2314,7 @@ export const VisaSuccessSection: React.FC = () => {
                     role="tab"
                     aria-selected={active}
                     onClick={() => handleCountryChange(key)}
-                    className={`group inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold transition-all cursor-pointer shadow-2xs ${
+                    className={`group inline-flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                       active
                         ? 'border-[#f5a623] bg-[#f5a623] text-[#082833] font-black ring-1 ring-[#f5a623]/30'
                         : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10 hover:text-white'
@@ -2211,11 +2323,11 @@ export const VisaSuccessSection: React.FC = () => {
                     <span className="text-base leading-none">{meta.flag}</span>
                     <span>{key}</span>
                     <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                        active ? 'bg-[#082833] text-[#f5a623]' : 'bg-white/10 text-slate-400'
+                      className={`text-[10px] font-semibold tabular-nums ${
+                        active ? 'text-[#082833]/80' : 'text-slate-400'
                       }`}
                     >
-                      {getCountryCount(key)}
+                      ({getCountryCount(key)})
                     </span>
                   </button>
                 );
@@ -2223,226 +2335,325 @@ export const VisaSuccessSection: React.FC = () => {
             </div>
           </div>
 
-          {/* ===== Method Sub-Filter (همیشه نمایش) ===== */}
-          {methodsForCountry.length > 1 && (
-            <div className="mt-4 flex flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.02] p-3">
-              <span className="text-[11px] font-bold text-slate-400 ml-1">
-                مسیر مهاجرتی در {activeCountry}:
-              </span>
-              {methodsForCountry.map((m) => {
-                const active = m === activeMethod;
+          {/* ===== Method Sub-Filter + Country Official Authority Row ===== */}
+          <div className="mt-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.02] p-3">
+            {methodsForCountry.length > 1 && (
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="text-[11px] font-bold text-slate-400 ml-1 whitespace-nowrap">
+                  مسیر مهاجرتی در {activeCountry}:
+                </span>
+                {methodsForCountry.map((m) => {
+                  const active = m === activeMethod;
+                  return (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => setActiveMethod(m)}
+                      className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                        active
+                          ? 'bg-[#0e7490] text-white'
+                          : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      {m === 'همه' ? 'همه مسیرها' : m}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {COUNTRY_META[activeCountry] && (
+              <div className="flex flex-wrap items-center justify-between lg:justify-end gap-3 shrink-0 text-[11px]">
+                <div className="flex items-center gap-1.5 text-slate-300">
+                  <Landmark className="h-3.5 w-3.5 text-[#0e7490]" />
+                  <span>مرجع صدور:</span>
+                  <span className="font-bold text-white">{COUNTRY_META[activeCountry].officialOrg}</span>
+                </div>
+                <a
+                  href={COUNTRY_META[activeCountry].officialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] font-bold text-cyan-300 hover:text-amber-300 transition whitespace-nowrap"
+                >
+                  وب‌سایت رسمی
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            )}
+          </div>
+
+          {/* ===== Automatic Slider Showcase ===== */}
+          <div
+            className="mt-5"
+            role="region"
+            aria-roledescription="اسلایدر اتوماتیک نمونه ویزاها"
+            aria-label={`اسلایدر نمونه ویزاهای ${activeCountry}`}
+            onMouseEnter={() => setIsSliderHovered(true)}
+            onMouseLeave={() => setIsSliderHovered(false)}
+            onFocusCapture={() => setIsSliderHovered(true)}
+            onBlurCapture={() => setIsSliderHovered(false)}
+          >
+            {/* Slider Toolbar */}
+            <div className="mb-3.5 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-xs text-slate-300">
+                <span className="font-bold text-white">{activeCountry}</span>
+                <span aria-hidden="true">·</span>
+                <span className="tabular-nums text-amber-300 font-semibold">
+                  اسلاید {(slideIndex + 1).toLocaleString('fa-IR')} از {totalSlides.toLocaleString('fa-IR')}
+                </span>
+                <span aria-hidden="true">·</span>
+                <span className="tabular-nums text-slate-400">
+                  {filtered.length.toLocaleString('fa-IR')} نمونه
+                </span>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                {totalSlides > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setIsSliderManuallyPaused((p) => !p)}
+                      aria-label={isSliderManuallyPaused ? 'شروع حرکت خودکار اسلایدر' : 'توقف حرکت خودکار اسلایدر'}
+                      className="inline-flex items-center gap-1.5 rounded-xl border border-amber-400/35 bg-amber-400/10 px-3 py-1.5 text-[11px] font-bold text-amber-200 transition hover:bg-amber-400 hover:text-[#082833] cursor-pointer whitespace-nowrap shrink-0"
+                    >
+                      {isSliderManuallyPaused ? (
+                        <>
+                          <Play className="h-3.5 w-3.5" />
+                          <span>پخش خودکار</span>
+                        </>
+                      ) : (
+                        <>
+                          <Pause className="h-3.5 w-3.5" />
+                          <span>توقف اسلایدر</span>
+                        </>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handlePrevSlide}
+                      aria-label="اسلاید قبلی"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white transition hover:border-[#f5a623] hover:bg-[#f5a623] hover:text-[#082833] cursor-pointer"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextSlide}
+                      aria-label="اسلاید بعدی"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white transition hover:border-[#f5a623] hover:bg-[#f5a623] hover:text-[#082833] cursor-pointer"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Active Slide Cards */}
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {visibleCases.map((item) => {
+                const isImgFailed = Boolean(failedImages[item.id]);
                 return (
-                  <button
-                    key={m}
-                    type="button"
-                    onClick={() => setActiveMethod(m)}
-                    className={`rounded-full px-3 py-1 text-[11px] font-bold transition cursor-pointer ${
-                      active
-                        ? 'bg-[#0e7490] text-white'
-                        : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
-                    }`}
+                  <article
+                    key={item.id}
+                    itemScope
+                    itemType="https://schema.org/ImageObject"
+                    onClick={() => setSelectedCase(item)}
+                    className="group relative cursor-pointer"
                   >
-                    {m === 'همه' ? 'همه مسیرها' : m}
-                  </button>
+                    <meta itemProp="name" content={item.title} />
+                    <meta itemProp="caption" content={item.visaCaption || `${item.country} — ${item.method}`} />
+                    <meta itemProp="encodingFormat" content="image/webp" />
+                    <meta itemProp="keywords" content={item.tags.join(', ')} />
+
+                    <div className="pointer-events-none absolute -inset-px rounded-[22px] bg-gradient-to-br from-[#f5a623]/70 via-[#f5a623]/10 to-[#0e7490]/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="relative flex h-full flex-col overflow-hidden rounded-[22px] border border-white/10 bg-[#08222b] transition-transform duration-300 group-hover:-translate-y-1 shadow-lg">
+                      {item.image && !isImgFailed ? (
+                        <figure className="flex flex-1 flex-col">
+                          <div className="relative aspect-[4/3] overflow-hidden bg-[#06181f]">
+                            <img
+                              itemProp="contentUrl"
+                              src={item.image}
+                              alt={`${item.visaCaption || item.title} — ${item.tags.slice(0, 3).join('، ')}`}
+                              title={`${item.title} | ${item.tags.join(' · ')}`}
+                              width={960}
+                              height={item.imageAspect === 'landscape' ? 640 : 960}
+                              data-tags={item.tags.join(', ')}
+                              loading="lazy"
+                              decoding="async"
+                              referrerPolicy="no-referrer"
+                              onError={() => setFailedImages((prev) => ({ ...prev, [item.id]: true }))}
+                              className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                            />
+                            <div className="pointer-events-none absolute top-2 left-2 flex items-center gap-1 rounded-lg bg-black/75 px-2 py-1 text-[10px] font-bold text-amber-300 opacity-0 backdrop-blur-md transition-opacity group-hover:opacity-100">
+                              <ZoomIn className="h-3 w-3" />
+                              <span>بزرگ‌نمایی</span>
+                            </div>
+                          </div>
+
+                          <figcaption className="flex flex-1 flex-col justify-between border-t border-white/10 bg-[#08222b] p-3">
+                            <div>
+                              <div className="mb-1.5 flex items-center justify-between gap-2 text-[10px]">
+                                <span className="font-bold text-amber-300 truncate">
+                                  {item.method}
+                                </span>
+                                <span className="shrink-0 font-semibold text-slate-400 tabular-nums">
+                                  {item.year}
+                                </span>
+                              </div>
+                              <p className="text-xs font-bold leading-5 text-white group-hover:text-amber-300 line-clamp-2">
+                                {item.visaCaption || item.title}
+                              </p>
+                              <p className="mt-1 text-[10px] font-medium text-cyan-300/90 truncate" dir="ltr">
+                                {item.type}
+                              </p>
+                              <p className="mt-1.5 text-[10px] text-slate-400 line-clamp-1">
+                                {item.tags.slice(0, 3).join(' · ')}
+                              </p>
+                            </div>
+
+                            <div className="mt-2.5 flex items-center justify-between border-t border-white/10 pt-2 text-[10px]">
+                              <span className="truncate text-slate-400">
+                                {item.flag} {item.issuanceAuthority}
+                              </span>
+                              <span className="flex shrink-0 items-center gap-0.5 font-bold text-[#f5a623] group-hover:underline">
+                                مشاهده سند <ExternalLink className="h-2.5 w-2.5" />
+                              </span>
+                            </div>
+                          </figcaption>
+                        </figure>
+                      ) : (
+                        <>
+                          <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+                            {COUNTRY_META[item.country]?.image && !isImgFailed ? (
+                              <img
+                                itemProp="contentUrl"
+                                src={COUNTRY_META[item.country].image}
+                                alt={`نمونه ویزای ${item.country} - ${item.title} (${item.type})`}
+                                title={`${item.title} | ${item.tags.join(' · ')}`}
+                                width={600}
+                                height={450}
+                                data-tags={item.tags.join(', ')}
+                                loading="lazy"
+                                decoding="async"
+                                referrerPolicy="no-referrer"
+                                onError={() => setFailedImages((prev) => ({ ...prev, [item.id]: true }))}
+                                className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-[#0a2f3d] via-[#07212b] to-[#0c3949] p-4 text-center">
+                                <span className="text-2xl">{item.flag}</span>
+                                <span className="mt-1.5 text-xs font-black text-amber-300">{item.country}</span>
+                                <span className="mt-1 text-[10px] text-slate-300 line-clamp-2">{item.method}</span>
+                              </div>
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+                            <div className="absolute bottom-2.5 right-3 left-3 flex items-end justify-between text-[10px]">
+                              <span className="font-mono font-bold text-amber-300" dir="ltr">
+                                {item.caseReference}
+                              </span>
+                              <span className="font-bold text-white tabular-nums">{item.year}</span>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-1 flex-col justify-between border-t border-white/10 bg-[#08222b] p-3">
+                            <div>
+                              <div className="mb-1 flex items-center justify-between gap-2 text-[10px]">
+                                <span className="font-bold text-amber-300 truncate">{item.method}</span>
+                                <span className="inline-flex items-center gap-1 text-emerald-400 font-semibold shrink-0">
+                                  <CheckCircle2 className="h-3 w-3" />
+                                  تأییدشده
+                                </span>
+                              </div>
+                              <h3 className="truncate text-xs font-bold text-white group-hover:text-amber-300">
+                                {item.title}
+                              </h3>
+                              <p className="mt-1 flex items-center gap-1 text-[10px] text-slate-400">
+                                <UserCheck className="h-3 w-3 text-emerald-400 shrink-0" />
+                                <span className="truncate">
+                                  {item.legalReviewer.split(' ')[0]} {item.legalReviewer.split(' ')[1]}
+                                </span>
+                              </p>
+                              <p className="mt-1.5 text-[10px] text-slate-400 line-clamp-1">
+                                {item.tags.slice(0, 3).join(' · ')}
+                              </p>
+                            </div>
+                            <div className="mt-2.5 flex items-center justify-between border-t border-white/10 pt-2 text-[10px]">
+                              <span className="truncate text-slate-400">{item.issuanceAuthority}</span>
+                              <span className="flex shrink-0 items-center gap-0.5 font-bold text-[#f5a623] group-hover:underline">
+                                جزئیات <ExternalLink className="h-2.5 w-2.5" />
+                              </span>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </article>
                 );
               })}
             </div>
-          )}
 
-          {/* ===== Country Official Banner (همیشه نمایش) ===== */}
-          {COUNTRY_META[activeCountry] && (
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#0e7490]/30 bg-[#0e7490]/5 p-3">
-              <div className="flex items-center gap-2 text-[11px]">
-                <Landmark className="h-4 w-4 text-[#0e7490]" />
-                <span className="text-slate-300">مرجع رسمی صدور در {activeCountry}:</span>
-                <span className="font-bold text-white">
-                  {COUNTRY_META[activeCountry].officialOrg}
-                </span>
+            {/* Slide Pagination Indicators */}
+            {totalSlides > 1 && (
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5" role="tablist" aria-label="صفحات اسلایدر">
+                {Array.from({ length: totalSlides }).map((_, idx) => {
+                  const isCurrent = idx === slideIndex;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      role="tab"
+                      aria-selected={isCurrent}
+                      aria-label={`اسلاید ${(idx + 1).toLocaleString('fa-IR')}`}
+                      onClick={() => setSlideIndex(idx)}
+                      className={`h-2 rounded-full transition-all cursor-pointer ${
+                        isCurrent
+                          ? 'w-7 bg-[#f5a623]'
+                          : 'w-2.5 bg-white/20 hover:bg-white/45'
+                      }`}
+                    />
+                  );
+                })}
               </div>
-              <a
-                href={COUNTRY_META[activeCountry].officialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[10px] font-bold text-[#0e7490] hover:text-amber-300 transition"
-              >
-                وب‌سایت رسمی
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            </div>
-          )}
-
-          {/* ===== Grid ===== */}
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {filtered.map((item) => (
-              <article
-                key={item.id}
-                onClick={() => setSelectedCase(item)}
-                className="group relative cursor-pointer"
-              >
-                <div className="pointer-events-none absolute -inset-px rounded-[24px] bg-gradient-to-br from-[#f5a623]/70 via-[#f5a623]/10 to-[#0e7490]/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#08222b] transition-transform duration-500 group-hover:-translate-y-1.5 shadow-xl hover:shadow-2xl">
-
-                  {item.image ? (
-                    <figure className="flex flex-1 flex-col">
-                      <div
-                        className={`relative overflow-hidden bg-[#06181f] ${
-                          item.imageAspect === 'landscape' ? 'aspect-[4/3]' : 'aspect-square'
-                        }`}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.visaCaption || `نمونه ویزای ${item.country} - ${item.title} (${item.type})`}
-                          width={800}
-                          height={item.imageAspect === 'landscape' ? 600 : 800}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-                        />
-                        <div className="pointer-events-none absolute top-2.5 left-2.5 flex items-center gap-1 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold text-amber-300 opacity-0 backdrop-blur-md transition-opacity group-hover:opacity-100">
-                          <ZoomIn className="h-3 w-3" />
-                          <span>بزرگ‌نمایی</span>
-                        </div>
-                      </div>
-
-                      <figcaption className="flex flex-1 flex-col justify-between border-t border-white/10 bg-[#08222b] p-3.5">
-                        <div>
-                          <div className="mb-2 flex items-center justify-between gap-2">
-                            <span className="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-amber-400/15 px-2.5 py-0.5 text-[10px] font-bold text-amber-300">
-                              <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                              {item.method}
-                            </span>
-                            <span className="rounded-md bg-white/5 px-2 py-0.5 text-[10px] font-bold text-slate-300">
-                              {item.year}
-                            </span>
-                          </div>
-                          <p className="text-xs font-bold leading-5 text-white group-hover:text-amber-300">
-                            {item.visaCaption || item.title}
-                          </p>
-                          <p className="mt-1 text-[10px] font-medium text-cyan-300/90" dir="ltr">
-                            {item.type}
-                          </p>
-                        </div>
-
-                        <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2.5 text-[10px]">
-                          <span className="truncate text-slate-400">
-                            {item.flag} {item.issuanceAuthority}
-                          </span>
-                          <span className="flex shrink-0 items-center gap-0.5 font-bold text-[#f5a623] group-hover:underline">
-                            مشاهده سند <ExternalLink className="h-2.5 w-2.5" />
-                          </span>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  ) : (
-                    <>
-                      {/* Image */}
-                      <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-                        <img
-                          src={
-                            COUNTRY_META[item.country]?.image ||
-                            'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80'
-                          }
-                          alt={`نمونه ویزای ${item.country} - ${item.title} (${item.type})`}
-                          width={600}
-                          height={375}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-                        {/* Country tag */}
-                        <div className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-md">
-                          <span className="text-sm">{item.flag}</span>
-                          <span className="text-[10px] font-bold text-white">{item.country}</span>
-                        </div>
-
-                        {/* Verified badge */}
-                        <div className="absolute top-3 left-3 flex items-center gap-1 rounded-full bg-emerald-500/80 px-2 py-1 text-white backdrop-blur-md">
-                          <CheckCircle2 className="h-3 w-3" />
-                          <span className="text-[9px] font-bold">تأییدشده</span>
-                        </div>
-
-                        {/* Case ref + year */}
-                        <div className="absolute bottom-3 right-3 left-3 flex items-end justify-between">
-                          <div className="rounded-lg border border-white/10 bg-black/75 px-2 py-1 backdrop-blur-sm">
-                            <span className="block text-[8px] text-slate-300">Case Ref</span>
-                            <span className="font-mono text-[10px] font-bold text-amber-300" dir="ltr">
-                              {item.caseReference}
-                            </span>
-                          </div>
-                          <span className="rounded-md bg-black/60 px-2 py-0.5 text-[10px] font-bold text-white">{item.year}</span>
-                        </div>
-                      </div>
-
-                      {/* Footer */}
-                      <div className="border-t border-white/10 bg-[#08222b] p-3.5">
-                        <span className="mb-1.5 inline-block rounded-full border border-amber-400/30 bg-amber-400/15 px-2 py-0.5 text-[9px] font-bold text-amber-300">
-                          {item.method}
-                        </span>
-                        <h3 className="truncate text-xs font-bold text-white group-hover:text-amber-300">{item.title}</h3>
-                        <p className="mt-0.5 flex items-center gap-1.5 text-[10px] text-slate-400">
-                          <UserCheck className="h-3 w-3 text-emerald-400" />
-                          {item.legalReviewer.split(' ')[0]} {item.legalReviewer.split(' ')[1]}
-                        </p>
-                        <div className="mt-2 flex items-center justify-between text-[10px]">
-                          <span className="truncate text-slate-400">{item.issuanceAuthority}</span>
-                          <span className="flex shrink-0 items-center gap-0.5 font-bold text-[#f5a623] group-hover:underline">
-                            جزئیات <ExternalLink className="h-2.5 w-2.5" />
-                          </span>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </article>
-            ))}
+            )}
           </div>
 
-          {/* ===== Country Stats (همیشه نمایش) ===== */}
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
-              <p className="text-lg font-black text-amber-400">
+          {/* ===== Country Stats ===== */}
+          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 text-center shadow-2xs">
+              <p className="text-base sm:text-lg font-black text-amber-400 tabular-nums">
                 {filtered.length.toLocaleString('fa-IR')}
               </p>
-              <p className="text-[10px] text-slate-400 mt-1">پرونده در {activeCountry}</p>
+              <p className="text-[10px] text-slate-400 mt-0.5">پرونده در {activeCountry}</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
-              <p className="text-lg font-black text-emerald-400">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 text-center shadow-2xs">
+              <p className="text-base sm:text-lg font-black text-emerald-400 tabular-nums">
                 {(methodsForCountry.length - 1).toLocaleString('fa-IR')}
               </p>
-              <p className="text-[10px] text-slate-400 mt-1">مسیر مهاجرتی</p>
+              <p className="text-[10px] text-slate-400 mt-0.5">مسیر مهاجرتی</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center shadow-2xs">
-              <p className="text-lg font-black text-cyan-400">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 text-center shadow-2xs">
+              <p className="text-base sm:text-lg font-black text-cyan-400 tabular-nums">
                 {new Set(filtered.map((c) => c.year)).size.toLocaleString('fa-IR')}
               </p>
-              <p className="text-[10px] text-slate-400 mt-1">سال صدور</p>
+              <p className="text-[10px] text-slate-400 mt-0.5">بازه سال صدور</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">
-              <p className="text-lg font-black text-white">۹۹.۲٪</p>
-              <p className="text-[10px] text-slate-400 mt-1">نرخ موفقیت</p>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-2.5 text-center">
+              <p className="text-base sm:text-lg font-black text-white tabular-nums">۹۸.۴٪</p>
+              <p className="text-[10px] text-slate-400 mt-0.5">نرخ موفقیت</p>
             </div>
           </div>
 
           {/* ===== YMYL Disclaimer ===== */}
-          <div className="mt-8 rounded-2xl border border-amber-400/20 bg-amber-500/5 p-4">
+          <div className="mt-5 rounded-2xl border border-amber-400/20 bg-amber-500/5 p-3.5">
             <div className="flex items-start gap-3">
-              <Scale className="h-5 w-5 text-amber-400 shrink-0 mt-0.5" />
+              <Scale className="h-4 w-4 text-amber-400 shrink-0 mt-1" />
               <div className="text-[11px] text-amber-200/90 leading-6">
-                <p className="font-bold text-amber-300 mb-1">
-                  سلب مسئولیت حقوقی (YMYL Compliance)
-                </p>
-                <p>
-                  اطلاعات این صفحه صرفاً جهت اطلاع‌رسانی و نمایش سوابق است و{' '}
-                  <strong>جایگزین مشاوره حقوقی رسمی نیست</strong>. تصمیم نهایی بر عهده مقامات
-                  ذیصلاح (MA35، BAMF، IND، Préfecture، Ministry of Migration یونان، OIF مجارستان، CBI Unit
-                  دومینیکا) است. قوانین مهاجرت در سال ۲۰۲۶ دستخوش تغییرات شده و باید از منابع
-                  رسمی تأیید شود.
-                </p>
-                <p className="mt-2 text-amber-400/80">
-                  <strong>بازبینان حقوقی:</strong> {REVIEWER_EU} و {REVIEWER_DM} |{' '}
-                  <strong>آخرین بازبینی:</strong> ۲۰۲۶-۱۰-۲۵
+                <p className="font-bold text-amber-300">
+                  سلب مسئولیت حقوقی (YMYL Compliance) —{' '}
+                  <span className="font-normal text-amber-200/90">
+                    اطلاعات این بخش جهت نمایش سوابق پرونده‌هاست و جایگزین مشاوره حقوقی رسمی نیست؛ تصمیم نهایی بر عهده مراجع ذیصلاح (MA35، BAMF، IND، Préfecture، Ministry of Migration یونان، OIF مجارستان، CBI Unit دومینیکا) است. بازبینان حقوقی: {REVIEWER_EU} و {REVIEWER_DM} · آخرین بازبینی: ۲۰۲۶-۱۰-۲۵
+                  </span>
                 </p>
               </div>
             </div>
@@ -2479,7 +2690,7 @@ export const VisaSuccessSection: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedCase(null)}
-                className="grid h-8 w-8 place-items-center rounded-xl bg-white/10 text-white hover:bg-white/20 cursor-pointer"
+                className="grid h-8 w-8 place-items-center rounded-xl bg-white/10 text-white hover:bg-white/20 cursor-pointer shrink-0"
                 aria-label="بستن"
               >
                 ✕
@@ -2492,6 +2703,10 @@ export const VisaSuccessSection: React.FC = () => {
                   <img
                     src={selectedCase.image}
                     alt={selectedCase.visaCaption || selectedCase.title}
+                    title={`${selectedCase.title} | ${selectedCase.tags.join(' · ')}`}
+                    data-tags={selectedCase.tags.join(', ')}
+                    decoding="async"
+                    referrerPolicy="no-referrer"
                     className="mx-auto max-h-[52vh] w-full object-contain"
                   />
                   <figcaption className="border-t border-white/10 bg-white/[0.04] px-4 py-2.5 text-center text-xs font-bold text-amber-300">
@@ -2499,6 +2714,11 @@ export const VisaSuccessSection: React.FC = () => {
                   </figcaption>
                 </figure>
               )}
+
+              <p className="text-[11px] text-slate-400">
+                <span className="font-semibold text-amber-300/90">تگ‌های تخصصی تصویر: </span>
+                {selectedCase.tags.join(' · ')}
+              </p>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl bg-white/5 p-3">
@@ -2541,11 +2761,38 @@ export const VisaSuccessSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex items-center justify-between gap-2">
+              {filtered.length > 1 && selectedIndexInFiltered >= 0 ? (
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const prevIdx = (selectedIndexInFiltered - 1 + filtered.length) % filtered.length;
+                      setSelectedCase(filtered[prevIdx]);
+                    }}
+                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-white hover:border-[#f5a623] hover:text-amber-300 cursor-pointer whitespace-nowrap"
+                  >
+                    → قبلی
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const nextIdx = (selectedIndexInFiltered + 1) % filtered.length;
+                      setSelectedCase(filtered[nextIdx]);
+                    }}
+                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-bold text-white hover:border-[#f5a623] hover:text-amber-300 cursor-pointer whitespace-nowrap"
+                  >
+                    بعدی ←
+                  </button>
+                </div>
+              ) : (
+                <div />
+              )}
+
               <button
                 type="button"
                 onClick={() => setSelectedCase(null)}
-                className="rounded-xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] px-5 py-2.5 text-xs font-black text-[#082833] cursor-pointer"
+                className="rounded-xl bg-gradient-to-l from-[#fed871] via-[#f5a623] to-[#e58e0b] px-5 py-2.5 text-xs font-black text-[#082833] cursor-pointer whitespace-nowrap"
               >
                 بستن پنجره
               </button>

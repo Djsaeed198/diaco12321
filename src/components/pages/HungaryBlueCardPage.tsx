@@ -60,7 +60,7 @@ export const HungaryBlueCardPage: React.FC<Props> = ({
     title: 'بلوکارت مجارستان ۲۰۲۶ | حقوق ۱,۰۰۱,۰۴۸ فورینت و اقامت ۳ ساله',
     description:
       'راهنمای جامع بلوکارت مجارستان ۲۰۲۶ (EU Kék Kártya)؛ حداقل حقوق ماهانه ۱,۰۰۱,۰۴۸ فورینت (≈۲,۵۶۵ یورو)، مالیات بر درآمد ۱۵٪، مسیر اقامت دائم ۳ ساله، خانواده و مشاغل پرتقاضا. ارزیابی فوری.',
-    canonical: '/guides/blue-card-hungary',
+    canonical: '/hungary-blue-card',
     ogType: 'article',
     ogImage: 'https://www.dia-co.ir/og-services-work.jpg',
     keywords: [
@@ -78,7 +78,7 @@ export const HungaryBlueCardPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-hungary#article',
+          '@id': 'https://www.dia-co.ir/hungary-blue-card#article',
           headline:
             'راهنمای جامع بلوکارت مجارستان ۲۰۲۶: حداقل حقوق، مالیات ۱۵٪ و مسیر اقامت دائم',
           description:
@@ -114,7 +114,7 @@ export const HungaryBlueCardPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-hungary#howto',
+          '@id': 'https://www.dia-co.ir/hungary-blue-card#howto',
           name: 'مراحل دریافت بلوکارت مجارستان در ۲۰۲۶',
           description:
             'راهنمای گام‌به‌گام اخذ EU Kék Kártya از طریق OIF و سفارت مجارستان.',
@@ -148,7 +148,7 @@ export const HungaryBlueCardPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-hungary#faq',
+          '@id': 'https://www.dia-co.ir/hungary-blue-card#faq',
           mainEntity: [
             {
               '@type': 'Question',
@@ -250,7 +250,7 @@ export const HungaryBlueCardPage: React.FC<Props> = ({
     {
       id: 'hu-doc-2',
       title:
-        'مدرک تحصیلی高等教育 (لیسانس یا بالاتر) یا حداقل ۵ سال تجربه حرفه‌ای سطح بالا',
+        'مدرک تحصیلی آموزش عالی (لیسانس یا بالاتر) یا حداقل ۵ سال تجربه حرفه‌ای سطح بالا',
       desc: 'ترجمه رسمی به انگلیسی یا مجاری از طریق دارالترجمه رسمی یا اداره OFFI بوداپست.',
       required: true,
     },

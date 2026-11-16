@@ -32,7 +32,7 @@ export const VisaComparatorPage: React.FC<Props> = ({
     title: 'مقایسه‌گر انواع ویزا و کارت‌های اقامت شینگن ۲۰۲۶ | ویزای D یا C؟',
     description:
       'مقایسه حقوقی انواع ویزای شینگن و اقامت‌های اروپایی؛ تفاوت ویزای تایپ D ملی با ویزای تایپ C توریستی، کارت‌های اقامت موقت Aufenthaltsbewilligung و اقامت دائم با تحلیل وکلای دیاکو.',
-    canonical: '/guides/visa-comparator',
+    canonical: '/visa-comparator',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
@@ -48,7 +48,7 @@ export const VisaComparatorPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/visa-comparator#article',
+          '@id': 'https://www.dia-co.ir/visa-comparator#article',
           headline: 'راهنمای جامع مقایسه انواع ویزاها و مجوزهای اقامتی اروپا در سال ۲۰۲۶',
           description:
             'بررسی ابعاد قانونی ویزای ملی تایپ D، ویزای توریستی تایپ C، کارت‌های اقامت هوشمند و شرایط تبدیل آنها به شهروندی دائم.',

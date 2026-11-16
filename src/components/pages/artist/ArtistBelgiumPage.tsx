@@ -80,7 +80,7 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
     title: 'کارت هنرمندی بلژیک ۲۰۲۶ | Kunstwerkattest + Professional Card + درآمد €۱۳,۵۴۶',
     description:
       'راهنمای کامل هنرمندان بلژیک ۲۰۲۶: تفاوت Kunstwerkattest و Professional Card، درآمد €۱۳,۵۴۶ در ۵ سال یا €۵,۴۱۸ در ۲ سال، حقوق €۳,۰۸۶ برای هنرمندان نمایشی، پردازش ۴–۵ ماه و مسیر ۵ ساله تا اقامت دائم. مشاوره دیاکو.',
-    canonical: '/guides/artist-belgium',
+    canonical: '/artist-belgium',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1559113202-c916b8e44373?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -99,7 +99,7 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/artist-belgium#article',
+          '@id': 'https://www.dia-co.ir/artist-belgium#article',
           headline: 'راهنمای جامع هنرمندان بلژیک ۲۰۲۶: Kunstwerkattest، Professional Card و درآمد €۱۳,۵۴۶',
           description:
             'بررسی دو لایه مجوز هنرمندان بلژیک: Kunstwerkattest (تأیید حرفه‌ای بودن) و Professional Card (مجوز اقامت/کار). شرایط درآمد ۵ ساله €۱۳,۵۴۶ یا ۲ ساله €۵,۴۱۸، حقوق €۳,۰۸۶ برای هنرمندان نمایشی، پردازش ۴–۵ ماه و مسیر ۵ ساله تا اقامت دائم.',
@@ -143,8 +143,8 @@ export const ArtistBelgiumPage: React.FC<Props> = ({
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'هنرمندان و نخبگان', item: 'https://www.dia-co.ir/artists' },
-            { '@type': 'ListItem', position: 3, name: 'بلژیک', item: 'https://www.dia-co.ir/guides/artist-belgium' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و هنرمندان', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'بلژیک', item: 'https://www.dia-co.ir/artist-belgium' },
           ],
         },
       ],

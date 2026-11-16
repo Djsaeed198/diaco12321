@@ -65,7 +65,7 @@ export const FinancialAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
     title: 'اقامت تمکن مالی اتریش ۲۰۲۶ | NAG §44 + درآمد €۲,۶۱۶ + سهمیه محدود',
     description:
       'راهنمای کامل اقامت خودحمایتی اتریش ۲۰۲۶ طبق NAG §44: حداقل درآمد €۲,۶۱۶.۷۸/ماه (مجرد)، €۴,۱۲۸.۲۴ (زوج) + €۴۰۳.۷۶ هر فرزند، سهمیه ۲۸۵–۳۸۵ نفری، زبان A1، بیمه و مسیر ۵ ساله تا اقامت دائم. مشاوره دفتر وین دیاکو.',
-    canonical: '/guides/financial-austria',
+    canonical: '/financial-austria',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -79,7 +79,7 @@ export const FinancialAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/financial-austria#article',
+          '@id': 'https://www.dia-co.ir/financial-austria#article',
           headline: 'راهنمای جامع اقامت تمکن مالی اتریش ۲۰۲۶: NAG §44، درآمد دو برابر ASVG و سهمیه محدود',
           description: 'بررسی NAG §44، حداقل درآمد €۲,۶۱۶.۷۸ (مجرد) و €۴,۱۲۸.۲۴ (زوج) + €۴۰۳.۷۶ هر فرزند، سهمیه ۲۸۵–۳۸۵ نفری Privatier، زبان A1، بیمه جامع و مسیر ۵ ساله تا Daueraufenthalt-EU.',
           image: ['https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80'],
@@ -106,13 +106,13 @@ export const FinancialAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تمکن مالی', item: 'https://www.dia-co.ir/financial' },
-            { '@type': 'ListItem', position: 3, name: 'اتریش', item: 'https://www.dia-co.ir/guides/financial-austria' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تمکن مالی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'اتریش', item: 'https://www.dia-co.ir/financial-austria' },
           ],
         },
         {
           '@type': ['Service', 'LegalService'],
-          '@id': 'https://www.dia-co.ir/guides/financial-austria#service',
+          '@id': 'https://www.dia-co.ir/financial-austria#service',
           name: 'خدمات اخذ اقامت تمکن مالی اتریش (NAG §44)',
           serviceType: 'اقامت خودحمایتی و تمکن مالی بدون اشتغال اتریش',
           description: 'پرونده‌سازی تخصصی، ثبت در اولین ثانیه‌های سهمیه سالانه Privatier اتریش و نظارت وکلای مقیم وین.',

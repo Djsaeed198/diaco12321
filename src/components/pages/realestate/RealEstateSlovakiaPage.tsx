@@ -35,7 +35,7 @@ export const RealEstateSlovakiaPage: React.FC<Props> = ({
     title: 'خرید ملک در اسلوواکی ۲۰۲۶ | سرمایه‌گذاری ملکی در براتیسلاوا و اقامت اروپا',
     description:
       'راهنمای حقوقی خرید ملک در اسلوواکی ۲۰۲۶؛ تملک ۱۰۰٪ مسکونی و تجاری در براتیسلاوا (در فاصله ۵۰ کیلومتری وین)، بازدهی اجاره‌ای پایدار، ثبت کاداستر (Kataster) و اخذ اقامت تجاری با دیاکو.',
-    canonical: '/guides/realestate-slovakia',
+    canonical: '/realestate-slovakia',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1541849546-216549ae216d?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateSlovakiaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-slovakia#article',
+          '@id': 'https://www.dia-co.ir/realestate-slovakia#article',
           headline: 'راهنمای جامع خرید ملک و سرمایه‌گذاری املاک در اسلوواکی ۲۰۲۶',
           description:
             'بررسی بازار پویای املاک براتیسلاوا در همسایگی وین، قوانین تملک قطعی برای خریداران بین‌المللی، فرآیند محضر اسناد رسمی و ثبت در دفتر کاداستر اسلوواکی (Kataster nehnuteľností).',

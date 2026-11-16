@@ -66,7 +66,7 @@ export const FinancialFrancePage: React.FC<Props> = ({ onBackToHome, onOpenAsses
     title: 'اقامت تمکن مالی فرانسه ۲۰۲۶ | ویزای Visiteur + SMIC + کارت اقامت ۱۰ ساله',
     description:
       'راهنمای کامل اقامت تمکن مالی فرانسه ۲۰۲۶ (ویزای Visiteur): حداقل درآمد معادل SMIC (~€۱,۸۵۰/ماه)، مسکن معتبر، بیمه خصوصی، بدون نیاز به کار، مسیر ۵ ساله تا کارت اقامت ۱۰ ساله و تابعیت. مشاوره تخصصی دیاکو.',
-    canonical: '/guides/financial-france',
+    canonical: '/financial-france',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -80,7 +80,7 @@ export const FinancialFrancePage: React.FC<Props> = ({ onBackToHome, onOpenAsses
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/financial-france#article',
+          '@id': 'https://www.dia-co.ir/financial-france#article',
           headline: 'راهنمای جامع اقامت تمکن مالی فرانسه ۲۰۲۶: ویزای Visiteur، SMIC و کارت اقامت ۱۰ ساله',
           description: 'بررسی CESEDA، آستانه درآمد SMIC (~€۱,۸۵۰/ماه)، مسکن معتبر، بیمه خصوصی، فرآیند VLS-TS، تأیید OFII، تمدید سالانه در Préfecture و مسیر ۵ ساله تا Carte de résident.',
           image: ['https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80'],
@@ -107,8 +107,8 @@ export const FinancialFrancePage: React.FC<Props> = ({ onBackToHome, onOpenAsses
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تمکن مالی', item: 'https://www.dia-co.ir/financial' },
-            { '@type': 'ListItem', position: 3, name: 'فرانسه', item: 'https://www.dia-co.ir/guides/financial-france' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تمکن مالی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'فرانسه', item: 'https://www.dia-co.ir/financial-france' },
           ],
         },
       ],

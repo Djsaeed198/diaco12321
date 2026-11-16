@@ -35,7 +35,7 @@ export const RealEstateFrancePage: React.FC<Props> = ({
     title: 'خرید ملک در فرانسه ۲۰۲۶ | سرمایه‌گذاری املاک در پاریس و نیس با وکلای دیاکو',
     description:
       'راهنمای حقوقی خرید ملک در فرانسه ۲۰۲۶؛ فرآیند رسمی از طریق نوتار (Notaire)، مالیات اسناد رسمی، استعلامات شهری (Diagnostics) و اخذ اقامت بلندمدت شینگن با دیاکو.',
-    canonical: '/guides/realestate-france',
+    canonical: '/realestate-france',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateFrancePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-france#article',
+          '@id': 'https://www.dia-co.ir/realestate-france#article',
           headline: 'راهنمای جامع خرید ملک و سرمایه‌گذاری املاک در فرانسه ۲۰۲۶',
           description:
             'بررسی مراحل قانونی خرید ملک در فرانسه شامل قرارداد مقدماتی (Compromis de Vente)، دوره انصراف ۱۰ روزه قانونی، انتقال وجه از طریق حساب معتمد نوتار و دریافت سند قطعی (Acte de Vente).',

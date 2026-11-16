@@ -35,7 +35,7 @@ export const NomadHungaryPage: React.FC<Props> = ({
     title: 'دیجیتال نوماد مجارستان ۲۰۲۶ | ویزای وایت کارت بوداپست (White Card)',
     description:
       'راهنمای کامل کارت سفید مجارستان ۲۰۲۶ (White Card) برای کارمندان دورکار و فریلنسرها؛ درآمد حداقل ۳,۰۰۰ یورو در ماه، زندگی اقتصادی در قلب اروپا و سفر بدون ویزا در حوزه شینگن با دیاکو.',
-    canonical: '/guides/nomad-hungary',
+    canonical: '/nomad-hungary',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const NomadHungaryPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/nomad-hungary#article',
+          '@id': 'https://www.dia-co.ir/nomad-hungary#article',
           headline: 'راهنمای جامع دیجیتال نوماد و وایت کارت مجارستان ۲۰۲۶',
           description:
             'بررسی قانون مهاجرت جدید مجارستان برای دارندگان وایت کارت، شرط درآمد ۳,۰۰۰ یورویی، مالیات بر درآمد و اعتبار ۱+۱ ساله با تردد در کل اتحادیه اروپا.',

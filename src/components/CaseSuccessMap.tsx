@@ -61,25 +61,25 @@ export const CLUSTERS: ClusterData[] = [
     regionFa: 'اتریش، مجارستان، اسلواکی و چک',
     flag: '🇦🇹',
     primaryCountries: ['اتریش', 'مجارستان', 'اسلواکی'],
-    casesCount: 940,
-    approvalRate: 99.4,
+    casesCount: 840,
+    approvalRate: 98.9,
     avgMonths: 3.8,
-    office: 'دفتر مستقیم وکالت دیاکو: Ausstellungsstraße 50, 1020 Wien',
+    office: 'دفتر مستقیم وکالت دیاکو: Ausstellungsstraße 50/2.OG, 1020 Wien',
     coords: { x: 550, y: 360 },
     accentColor: '#f5a623',
     breakdown: [
-      { name: 'تمکن مالی (NAG §44)', value: 420, color: '#f5a623' },
-      { name: 'کارت قرمز-سفید-قرمز (RWR)', value: 270, color: '#38bdf8' },
-      { name: 'تحصیلی دانشگاه وین', value: 160, color: '#10b981' },
-      { name: 'بلوکارت و سرمایه‌گذاری', value: 90, color: '#a855f7' },
+      { name: 'تمکن مالی (NAG §44)', value: 380, color: '#f5a623' },
+      { name: 'کارت قرمز-سفید-قرمز (RWR)', value: 240, color: '#38bdf8' },
+      { name: 'تحصیلی دانشگاه وین', value: 140, color: '#10b981' },
+      { name: 'بلوکارت و سرمایه‌گذاری', value: 80, color: '#a855f7' },
     ],
     yearlyTrend: [
       { year: '۲۰۲۱', cases: 85 },
       { year: '۲۰۲۲', cases: 160 },
       { year: '۲۰۲۳', cases: 290 },
-      { year: '۲۰۲۴', cases: 540 },
-      { year: '۲۰۲۵', cases: 790 },
-      { year: '۲۰۲۶', cases: 940 },
+      { year: '۲۰۲۴', cases: 520 },
+      { year: '۲۰۲۵', cases: 710 },
+      { year: '۲۰۲۶', cases: 840 },
     ],
     topCities: ['وین (Wien)', 'گراتس (Graz)', 'سالزبورگ (Salzburg)', 'لینتس (Linz)'],
     description:
@@ -98,25 +98,25 @@ export const CLUSTERS: ClusterData[] = [
     regionFa: 'آلمان، سوئیس و هلند',
     flag: '🇩🇪',
     primaryCountries: ['آلمان', 'هلند'],
-    casesCount: 540,
+    casesCount: 480,
     approvalRate: 98.2,
     avgMonths: 4.6,
     office: 'دپارتمان وکلای مقیم برلین، مونیخ و فرانکفورت',
     coords: { x: 475, y: 275 },
     accentColor: '#38bdf8',
     breakdown: [
-      { name: 'بلوکارت آلمان (Blue Card)', value: 290, color: '#38bdf8' },
-      { name: 'کارت شانس کاریابی (Chancenkarte)', value: 130, color: '#f5a623' },
-      { name: 'معادل‌سازی پزشکان (Approbation)', value: 80, color: '#10b981' },
+      { name: 'بلوکارت آلمان (Blue Card)', value: 255, color: '#38bdf8' },
+      { name: 'کارت شانس کاریابی (Chancenkarte)', value: 115, color: '#f5a623' },
+      { name: 'معادل‌سازی پزشکان (Approbation)', value: 70, color: '#10b981' },
       { name: 'استارت‌آپ و نیروی ماهر هلند', value: 40, color: '#a855f7' },
     ],
     yearlyTrend: [
       { year: '۲۰۲۱', cases: 45 },
       { year: '۲۰۲۲', cases: 110 },
       { year: '۲۰۲۳', cases: 210 },
-      { year: '۲۰۲۴', cases: 350 },
-      { year: '۲۰۲۵', cases: 460 },
-      { year: '۲۰۲۶', cases: 540 },
+      { year: '۲۰۲۴', cases: 320 },
+      { year: '۲۰۲۵', cases: 410 },
+      { year: '۲۰۲۶', cases: 480 },
     ],
     topCities: ['برلین (Berlin)', 'مونیخ (München)', 'فرانکفورت (Frankfurt)', 'هامبورگ (Hamburg)'],
     description:
@@ -135,24 +135,24 @@ export const CLUSTERS: ClusterData[] = [
     regionFa: 'یونان و جزایر دریای اژه',
     flag: '🇬🇷',
     primaryCountries: ['یونان'],
-    casesCount: 310,
-    approvalRate: 100,
+    casesCount: 290,
+    approvalRate: 99.1,
     avgMonths: 2.5,
     office: 'دفتر رسمی هلدینگ دیاکو در آتن: Grigoriou Lampraki 58, Glyfada',
     coords: { x: 705, y: 535 },
     accentColor: '#10b981',
     breakdown: [
-      { name: 'گلدن ویزای سرمایه‌گذاری ملکی', value: 210, color: '#10b981' },
-      { name: 'تمکن مالی مستقل (FIP)', value: 70, color: '#f5a623' },
+      { name: 'گلدن ویزای سرمایه‌گذاری ملکی', value: 195, color: '#10b981' },
+      { name: 'تمکن مالی مستقل (FIP)', value: 65, color: '#f5a623' },
       { name: 'دیجیتال نومد و خوداشتغالی', value: 30, color: '#38bdf8' },
     ],
     yearlyTrend: [
       { year: '۲۰۲۱', cases: 20 },
       { year: '۲۰۲۲', cases: 65 },
       { year: '۲۰۲۳', cases: 130 },
-      { year: '۲۰۲۴', cases: 205 },
-      { year: '۲۰۲۵', cases: 270 },
-      { year: '۲۰۲۶', cases: 310 },
+      { year: '۲۰۲۴', cases: 195 },
+      { year: '۲۰۲۵', cases: 250 },
+      { year: '۲۰۲۶', cases: 290 },
     ],
     topCities: ['آتن (Athens)', 'گلیفادا (Glyfada)', 'پیرائوس (Piraeus)', 'تسالونیکی (Thessaloniki)'],
     description:
@@ -171,25 +171,25 @@ export const CLUSTERS: ClusterData[] = [
     regionFa: 'اسپانیا و پرتغال',
     flag: '🇪🇸',
     primaryCountries: ['اسپانیا', 'پرتغال'],
-    casesCount: 400,
-    approvalRate: 97.8,
+    casesCount: 320,
+    approvalRate: 97.7,
     avgMonths: 4.8,
     office: 'دپارتمان حقوقی مادرید، بارسلونا و لیسبون',
     coords: { x: 235, y: 485 },
     accentColor: '#f97316',
     breakdown: [
-      { name: 'اقامت غیرانتفاعی (Non-Lucrative)', value: 200, color: '#f97316' },
-      { name: 'ویزای تمکن مالی D7 پرتغال', value: 100, color: '#f5a623' },
-      { name: 'دیجیتال نومد اسپانیا و پرتغال', value: 60, color: '#38bdf8' },
-      { name: 'گلدن ویزای سرمایه‌گذاری', value: 40, color: '#10b981' },
+      { name: 'اقامت غیرانتفاعی (Non-Lucrative)', value: 160, color: '#f97316' },
+      { name: 'ویزای تمکن مالی D7 پرتغال', value: 80, color: '#f5a623' },
+      { name: 'دیجیتال نومد اسپانیا و پرتغال', value: 50, color: '#38bdf8' },
+      { name: 'گلدن ویزای سرمایه‌گذاری', value: 30, color: '#10b981' },
     ],
     yearlyTrend: [
       { year: '۲۰۲۱', cases: 30 },
-      { year: '۲۰۲۲', cases: 85 },
-      { year: '۲۰۲۳', cases: 170 },
-      { year: '۲۰۲۴', cases: 270 },
-      { year: '۲۰۲۵', cases: 350 },
-      { year: '۲۰۲۶', cases: 400 },
+      { year: '۲۰۲۲', cases: 80 },
+      { year: '۲۰۲۳', cases: 150 },
+      { year: '۲۰۲۴', cases: 225 },
+      { year: '۲۰۲۵', cases: 280 },
+      { year: '۲۰۲۶', cases: 320 },
     ],
     topCities: ['مادرید (Madrid)', 'بارسلونا (Barcelona)', 'لیسبون (Lisbon)', 'پورتو (Porto)'],
     description:
@@ -208,25 +208,25 @@ export const CLUSTERS: ClusterData[] = [
     regionFa: 'فرانسه، ایتالیا، دانمارک و لتونی',
     flag: '🇫🇷',
     primaryCountries: ['فرانسه', 'ایتالیا', 'دانمارک'],
-    casesCount: 280,
-    approvalRate: 97.4,
+    casesCount: 220,
+    approvalRate: 97.0,
     avgMonths: 4.2,
     office: 'شبکه وکلای همکار در پاریس، میلان و کپنهاگ',
     coords: { x: 360, y: 350 },
     accentColor: '#a855f7',
     breakdown: [
-      { name: 'پاسپورت تلنت فرانسه (Talent)', value: 110, color: '#a855f7' },
-      { name: 'بورسیه استانی DSU ایتالیا', value: 90, color: '#10b981' },
-      { name: 'معادل‌سازی کادر درمان دانمارک', value: 50, color: '#38bdf8' },
-      { name: 'ثبت شرکت و اقامت لتونی', value: 30, color: '#f5a623' },
+      { name: 'پاسپورت تلنت فرانسه (Talent)', value: 85, color: '#a855f7' },
+      { name: 'بورسیه استانی DSU ایتالیا', value: 70, color: '#10b981' },
+      { name: 'معادل‌سازی کادر درمان دانمارک', value: 40, color: '#38bdf8' },
+      { name: 'ثبت شرکت و اقامت لتونی', value: 25, color: '#f5a623' },
     ],
     yearlyTrend: [
       { year: '۲۰۲۱', cases: 25 },
-      { year: '۲۰۲۲', cases: 60 },
-      { year: '۲۰۲۳', cases: 120 },
-      { year: '۲۰۲۴', cases: 185 },
-      { year: '۲۰۲5', cases: 240 },
-      { year: '۲۰۲۶', cases: 280 },
+      { year: '۲۰۲۲', cases: 55 },
+      { year: '۲۰۲۳', cases: 105 },
+      { year: '۲۰۲۴', cases: 155 },
+      { year: '۲۰۲۵', cases: 195 },
+      { year: '۲۰۲۶', cases: 220 },
     ],
     topCities: ['پاریس (Paris)', 'میلان (Milan)', 'رم (Rome)', 'کپنهاگ (Copenhagen)'],
     description:
@@ -270,21 +270,21 @@ export const CaseSuccessMap: React.FC<CaseSuccessMapProps> = ({
     const map = new Map<string, number>();
     CLUSTERS.forEach((c) => {
       c.breakdown.forEach((b) => {
-        const cat = b.name.includes('تمکن')
+        const cat = b.name.includes('تمکن') || b.name.includes('غیرانتفاعی')
           ? 'تمکن مالی (خودحمایتی)'
           : b.name.includes('بلوکارت') || b.name.includes('کار') || b.name.includes('RWR')
           ? 'کاری و بلوکارت نخبگان'
-          : b.name.includes('گلدن') || b.name.includes('ملک') || b.name.includes('سرمایه‌گذاری')
+          : b.name.includes('گلدن') || b.name.includes('ملک') || b.name.includes('سرمایه‌گذاری') || b.name.includes('شرکت')
           ? 'سرمایه‌گذاری ملکی و گلدن ویزا'
           : 'پذیرش تحصیلی، تلنت و کادر درمان';
         map.set(cat, (map.get(cat) || 0) + b.value);
       });
     });
     return [
-      { name: 'تمکن مالی (خودحمایتی)', value: map.get('تمکن مالی (خودحمایتی)') || 760, color: '#f5a623' },
-      { name: 'کاری و بلوکارت نخبگان', value: map.get('کاری و بلوکارت نخبگان') || 740, color: '#38bdf8' },
-      { name: 'سرمایه‌گذاری ملکی و گلدن ویزا', value: map.get('سرمایه‌گذاری ملکی و گلدن ویزا') || 560, color: '#10b981' },
-      { name: 'پذیرش تحصیلی، تلنت و درمان', value: map.get('پذیرش تحصیلی، تلنت و درمان') || 410, color: '#a855f7' },
+      { name: 'تمکن مالی (خودحمایتی)', value: map.get('تمکن مالی (خودحمایتی)') || 685, color: '#f5a623' },
+      { name: 'کاری و بلوکارت نخبگان', value: map.get('کاری و بلوکارت نخبگان') || 730, color: '#38bdf8' },
+      { name: 'سرمایه‌گذاری ملکی و گلدن ویزا', value: map.get('سرمایه‌گذاری ملکی و گلدن ویزا') || 250, color: '#10b981' },
+      { name: 'پذیرش تحصیلی، تلنت و درمان', value: map.get('پذیرش تحصیلی، تلنت و درمان') || 485, color: '#a855f7' },
     ];
   }, []);
 

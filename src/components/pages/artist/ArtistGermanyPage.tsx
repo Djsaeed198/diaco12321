@@ -51,7 +51,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
     title: 'ویزای هنرمندان برلین ۲۰۲۶ | حقیقت پنهان Freiberufler + اقامت ۵ ساله',
     description:
       'برلین دیگر بهشت آسان هنرمندان نیست. راهنمای واقعی ویزای Freiberufler ۲۰۲۶: قانون §21 Abs.5، درآمد حداقلی €۱,۱۰۰–۱,۵۰۰، پسانداز €۹,۰۰۰–۱۵,۰۰۰، KSK ۴.۹٪، تمدید سختگیرانه و اقامت دائم ۵ ساله (نه ۳ سال) با دیاکو.',
-    canonical: '/guides/artist-germany',
+    canonical: '/artist-germany',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1200&q=80',
@@ -72,7 +72,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/artist-germany#article',
+          '@id': 'https://www.dia-co.ir/artist-germany#article',
           headline:
             'حقیقت ویزای هنرمندان برلین ۲۰۲۶: چرا «۳ سال تا اقامت دائم» یک افسانه است و واقعیت چیست',
           description:
@@ -105,7 +105,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/artist-germany#howto',
+          '@id': 'https://www.dia-co.ir/artist-germany#howto',
           name: 'مراحل واقعی دریافت ویزای هنرمندان برلین',
           description: 'فرآیند گام‌به‌گام با در نظر گرفتن سختگیری‌های ۲۰۲۶',
           totalTime: 'P6M',
@@ -149,7 +149,7 @@ export const ArtistGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/artist-germany#faq',
+          '@id': 'https://www.dia-co.ir/artist-germany#faq',
           mainEntity: [
             {
               '@type': 'Question',

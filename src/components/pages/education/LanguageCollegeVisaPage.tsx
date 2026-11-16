@@ -691,7 +691,7 @@ export const LanguageCollegeVisaPage: React.FC<Props> = ({
             <p className="text-slate-400 leading-5">آمادگی آلمانی در دانشگاه وین و تبدیل به اقامت دانشجویی.</p>
           </a>
           <a
-            href="/netherlands-study-visa"
+            href="/academic-netherlands"
             onClick={handleLinkNav('academic-netherlands')}
             className="rounded-2xl border border-white/10 bg-white/[0.03] hover:border-amber-400/40 p-4 transition block"
           >

@@ -308,7 +308,7 @@ export const GermanyNursingAssistantVisaPage: React.FC<Props> = ({
             <span className="hidden sm:inline text-slate-600">|</span>
             <div>
               <span className="text-slate-400">دفتر اجرایی: </span>
-              <strong className="text-amber-300">دفتر وین، مونیخ و تهران</strong>
+              <strong className="text-amber-300">دفتر مرکزی وین و تهران (با شبکه وکلای همکار در آلمان)</strong>
             </div>
           </div>
 

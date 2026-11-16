@@ -110,7 +110,7 @@ const detailedTestimonials = [
 ];
 
 const faqs = [
-  { q: 'حداقل درآمد برای ویزای دیجیتال نوماد اسپانیا در ۲۰۲۶ چقدر است؟', a: 'بر اساس SMI ۲۰۲۶ (€۱,۲۲۱ در ۱۴ پرداخت = €۱۷,۰۹۴ سالانه)، آستانه ۲۰۰٪ معادل €۲,۸۴۹ ناخالص در ماه است. برخی منابع رسمی رقم €۲,۷۶۲ را نیز اعلام کرده‌اند؛ توصیه می‌کنیم قبل از اقدام آخرین رقم را از کنسولگری یا UGE استعلام کنید. برای همسر +€۱,۰۶۸ و برای هر فرزند +€۳۵۶ اضافه می‌شود.' },
+  { q: 'حداقل درآمد برای ویزای دیجیتال نوماد اسپانیا در ۲۰۲۶ چقدر است؟', a: 'بر اساس شاخص رسمی SMI سال ۲۰۲۶ (€۱,۲۲۱ در ۱۴ پرداخت معادل €۱۷,۰۹۴ سالانه)، آستانه ۲۰۰٪ برابر با €۲,۸۴۹ ناخالص در ماه است (منبع: inclusion.gob.es). برای همسر +€۱,۰۶۸ (۷۵٪ SMI) و برای هر فرزند +€۳۵۶ (۲۵٪ SMI) اضافه می‌شود.' },
   { q: 'آیا ویزای نوماد اسپانیا به‌طور خودکار رژیم بکهام را فعال می‌کند؟', a: 'خیر. این دو فرآیند جداگانه هستند. باید فرم Modelo 149 را ظرف ۶ ماه از ثبت‌نام در تأمین اجتماعی (Seguridad Social) به اداره مالیات (AEAT) ارائه دهید. در غیر این صورت مشمول نرخ تصاعدی IRPF (تا ۴۷٪) خواهید شد.' },
   { q: 'نرخ مالیات بکهام چقدر است؟', a: '۲۴٪ ثابت برای درآمدهای تا سقف €۶۰۰,۰۰۰ در سال. درآمدهای بالاتر از این سقف مشمول ۴۷٪ می‌شوند. این رژیم تا ۶ سال (سال ورود + ۵ سال بعد) قابل استفاده است.' },
   { q: 'آیا می‌توانم مشتری اسپانیایی داشته باشم؟', a: 'برای فریلنسرها بله، اما حداکثر ۲۰٪ از کل فعالیت حرفه‌ای. برای کارمندان، کار برای کارفرمای اسپانیایی مجاز نیست. ۸۰٪ درآمد باید از خارج اسپانیا باشد.' },
@@ -122,9 +122,9 @@ const faqs = [
 ];
 
 const relatedArticles = [
-  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/guides/jobseeker-austria-2027', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR Card' },
-  { title: 'کارت شانس آلمان ۲۰۲۷', href: '/guides/jobseeker-germany', desc: '۶ امتیاز + ۲۰ ساعت کار + مسیر بلوکارت' },
-  { title: 'ویزای جستجوی کار دانمارک', href: '/guides/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
+  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/jobseeker-austria', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR Card' },
+  { title: 'کارت شانس آلمان ۲۰۲۷', href: '/jobseeker-germany', desc: '۶ امتیاز + ۲۰ ساعت کار + مسیر بلوکارت' },
+  { title: 'ویزای جستجوی کار دانمارک', href: '/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
 ];
 
 export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -136,7 +136,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
     title: 'ویزای دیجیتال نوماد اسپانیا ۲۰۲۶ | درآمد €۲,۸۴۹ + مالیات بکهام ۲۴٪',
     description:
       'راهنمای کامل ویزای دیجیتال نوماد اسپانیا ۲۰۲۶: حداقل درآمد €۲,۸۴۹ در ماه (۲۰۰٪ SMI)، همسر +€۱,۰۶۸ و فرزند +€۳۵۶، رژیم مالیاتی بکهام ۲۴٪ تا €۶۰۰k، اقامت ۳ ساله از داخل اسپانیا (UGE) و مسیر ۵ ساله تا اقامت دائم. مشاوره دیاکو.',
-    canonical: '/guides/nomad-spain',
+    canonical: '/nomad-spain',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -150,7 +150,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/nomad-spain#article',
+          '@id': 'https://www.dia-co.ir/nomad-spain#article',
           headline: 'راهنمای جامع ویزای دیجیتال نوماد اسپانیا ۲۰۲۶: درآمد €۲,۸۴۹، بکهام ۲۴٪ و اقامت ۳ ساله',
           description: 'تحلیل کامل Ley 28/2022 و Ley 14/2013: آستانه درآمد ۲۰۰٪ SMI (€۲,۸۴۹)، بکهام ۲۴٪ تا €۶۰۰k، مسیر UGE ۳ ساله، تغییرات ۲۰۲۶ برای فریلنسرها و مسیر اقامت دائم ۵ ساله.',
           image: ['https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80'],
@@ -177,8 +177,8 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'دیجیتال نوماد', item: 'https://www.dia-co.ir/nomad' },
-            { '@type': 'ListItem', position: 3, name: 'اسپانیا', item: 'https://www.dia-co.ir/guides/nomad-spain' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'دیجیتال نوماد اسپانیا', item: 'https://www.dia-co.ir/nomad-spain' },
           ],
         },
       ],
@@ -186,7 +186,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
   });
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText('+34 600 000 000');
+    navigator.clipboard.writeText('+43 688 976 3256');
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2000);
   };
@@ -292,7 +292,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
               </button>
               <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-xs sm:text-sm font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
                 <PhoneCall className="h-4 w-4 text-emerald-400" />
-                دفتر مادرید: +۳۴ ۶۰۰ ۰۰۰ ۰۰۰
+                دفتر مرکزی وین: +۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶
                 {copiedPhone && <span className="text-emerald-400 text-[10px] font-bold">کپی شد!</span>}
               </button>
             </div>
@@ -391,9 +391,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
             </div>
             <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/20 mb-4">
               <p className="text-[11px] text-amber-200 leading-relaxed">
-                <strong>نکته مهم:</strong> برخی منابع رسمی در سال ۲۰۲۶ رقم €۲,۷۶۲ را نیز اعلام کرده‌اند.
-                این اختلاف ناشی از روش محاسبه (۱۲ یا ۱۴ پرداخت) است. توصیه می‌کنیم قبل از اقدام، آخرین رقم
-                را از کنسولگری یا UGE استعلام کنید. برای سال ۲۰۲۷ نیز با افزایش SMI، این آستانه بالاتر خواهد رفت.
+                <strong>نکته مهم:</strong> مبنای رسمی کنونی UGE بر اساس تعدیل SMI سال ۲۰۲۶، دقیقاً <strong>€۲,۸۴۹ ناخالص در ماه</strong> (معادل ۲۰۰٪ حداقل دستمزد بر مبنای ۱۴ پرداخت سالانه) طبق پورتال رسمی inclusion.gob.es است. پیش از ثبت درخواست، گواهی درآمد و کسر بیمه را منطبق با همین سقف تنظیم کنید.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -816,7 +814,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
           <Sparkles className="h-8 w-8 text-teal-400 mx-auto mb-4" />
           <h2 className="text-xl md:text-2xl font-black mb-2">مسیر شما به اسپانیا از اینجا شروع می‌شود</h2>
           <p className="text-xs md:text-sm text-slate-300 max-w-2xl mx-auto mb-6">
-            وکلای مقیم مادرید دیاکو پرونده شما را از ابتدا تا دریافت کارت اقامت همراهی می‌کنند: ارزیابی رایگان،
+            تیم حقوقی دیاکو با همکاری وکلای همکار در اسپانیا پرونده شما را از ابتدا تا دریافت کارت اقامت همراهی می‌کند: ارزیابی رایگان،
             بررسی مدارک، برنامه‌ریزی مالیاتی بکهام و پیگیری TIE.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -825,7 +823,7 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
             </button>
             <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3 text-xs md:text-sm font-bold hover:bg-white/10 inline-flex items-center gap-2">
               <Copy className="h-4 w-4 text-teal-400" />
-              {copiedPhone ? 'شماره کپی شد!' : 'دفتر مادرید: +۳۴ ۶۰۰ ۰۰۰ ۰۰۰'}
+              {copiedPhone ? 'شماره کپی شد!' : 'دفتر مرکزی وین: +۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶'}
             </button>
           </div>
         </div>
@@ -856,7 +854,8 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
             <div>
               <h4 className="font-bold mb-3">تماس با ما</h4>
               <ul className="space-y-2 text-xs text-slate-400">
-                <li>دفتر مادرید: +۳۴ ۶۰۰ ۰۰۰ ۰۰۰</li>
+                <li>دفتر مرکزی وین: +۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶</li>
+                <li>دفتر تهران: ۰۲۱-۹۱۶۹۳۹۵۵</li>
                 <li>واتساپ: ۰۹۱۹۷۳۴۰۸۲۹</li>
                 <li>ایمیل: info@dia-co.ir</li>
               </ul>
@@ -864,9 +863,9 @@ export const NomadSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment
             <div>
               <h4 className="font-bold mb-3">شبکه‌های اجتماعی</h4>
               <div className="flex items-center gap-3 text-xs text-slate-400">
-                <a href="https://instagram.com" className="hover:text-teal-300" aria-label="اینستاگرام">اینستاگرام</a>
-                <a href="https://wa.me/34600000000" className="hover:text-teal-300" aria-label="واتساپ">واتساپ</a>
-                <a href="https://t.me" className="hover:text-teal-300" aria-label="تلگرام">تلگرام</a>
+                <a href="https://instagram.com/diacoholding" className="hover:text-teal-300" aria-label="اینستاگرام">اینستاگرام</a>
+                <a href="https://wa.me/436889763256" className="hover:text-teal-300" aria-label="واتساپ">واتساپ</a>
+                <a href="https://t.me/diacoholding" className="hover:text-teal-300" aria-label="تلگرام">تلگرام</a>
               </div>
               <p className="text-[10px] text-slate-500 mt-4">© ۲۰۲۶ دیاکو. تمامی حقوق محفوظ است.</p>
             </div>

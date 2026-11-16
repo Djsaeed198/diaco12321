@@ -1,5 +1,4 @@
 import express from 'express';
-import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
@@ -84,7 +83,7 @@ function normalizeAndValidatePrivateKey(rawKey: string | undefined): string | nu
   try {
     crypto.createPrivateKey(key);
     return key;
-  } catch (cryptoErr) {
+  } catch {
     console.warn('[Google Sheets Auth] Warning: Private key cannot be decoded by OpenSSL. Check GOOGLE_PRIVATE_KEY format.');
     return null;
   }
@@ -99,41 +98,80 @@ function sanitizeCell(value: unknown): string {
   return /^[=+\-@]/.test(v) ? `'${v}` : v;
 }
 
+function base64UrlEncode(input: string | Buffer): string {
+  return Buffer.from(input)
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
+async function getServiceAccountAccessToken(clientEmail: string, privateKey: string): Promise<string> {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const header = base64UrlEncode(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
+  const claimSet = base64UrlEncode(
+    JSON.stringify({
+      iss: clientEmail,
+      scope: 'https://www.googleapis.com/auth/spreadsheets',
+      aud: 'https://oauth2.googleapis.com/token',
+      exp: nowSec + 3600,
+      iat: nowSec,
+    }),
+  );
+  const signingInput = `${header}.${claimSet}`;
+  const signer = crypto.createSign('RSA-SHA256');
+  signer.update(signingInput);
+  const signature = base64UrlEncode(signer.sign(privateKey));
+  const assertion = `${signingInput}.${signature}`;
+
+  const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion,
+    }),
+  });
+  if (!tokenRes.ok) {
+    throw new Error(`OAuth token exchange failed (${tokenRes.status})`);
+  }
+  const tokenData = (await tokenRes.json()) as { access_token?: string };
+  if (!tokenData.access_token) {
+    throw new Error('OAuth token response missing access_token');
+  }
+  return tokenData.access_token;
+}
+
+interface LightweightSheetsClient {
+  appendRow: (spreadsheetId: string, range: string, values: string[][]) => Promise<void>;
+}
+
 /**
- * Helper to obtain an authenticated Google Sheets client.
- * Supports:
- *  1. Service Account JSON file (via GOOGLE_SERVICE_ACCOUNT_KEY_PATH)
- *  2. Direct environment variables (GOOGLE_SERVICE_ACCOUNT_EMAIL/GOOGLE_SA_CLIENT_EMAIL & GOOGLE_PRIVATE_KEY/GOOGLE_SA_PRIVATE_KEY)
+ * Helper to obtain a lightweight authenticated Google Sheets client without bundling googleapis.
  */
-async function getGoogleSheetsClient() {
+async function getGoogleSheetsClient(): Promise<{ sheets: LightweightSheetsClient; spreadsheetId: string } | null> {
   const spreadsheetId =
     process.env.GOOGLE_SHEETS_SPREADSHEET_ID ||
     process.env.SPREADSHEET_ID ||
     FIXED_SPREADSHEET_ID;
 
-  // 1. Check if a service account key file path is provided
+  let clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_CLIENT_EMAIL;
+  let rawPrivateKey = process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY;
+
   const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
   if (keyPath && fs.existsSync(keyPath)) {
     try {
-      const auth = new google.auth.GoogleAuth({
-        keyFile: keyPath,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-      });
-      return {
-        sheets: google.sheets({ version: 'v4', auth }),
-        spreadsheetId,
+      const json = JSON.parse(fs.readFileSync(keyPath, 'utf8')) as {
+        client_email?: string;
+        private_key?: string;
       };
+      clientEmail = json.client_email || clientEmail;
+      rawPrivateKey = json.private_key || rawPrivateKey;
     } catch (fileErr) {
       console.warn('[Google Sheets] Service account key file load failed:', fileErr);
       return null;
     }
   }
-
-  // 2. Check if credentials are provided directly in env
-  const clientEmail =
-    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || process.env.GOOGLE_SA_CLIENT_EMAIL;
-  const rawPrivateKey =
-    process.env.GOOGLE_PRIVATE_KEY || process.env.GOOGLE_SA_PRIVATE_KEY;
 
   if (clientEmail && rawPrivateKey) {
     const validPrivateKey = normalizeAndValidatePrivateKey(rawPrivateKey);
@@ -141,20 +179,28 @@ async function getGoogleSheetsClient() {
       return null;
     }
 
-    try {
-      const auth = new google.auth.JWT({
-        email: clientEmail,
-        key: validPrivateKey,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-      });
-      return {
-        sheets: google.sheets({ version: 'v4', auth }),
-        spreadsheetId,
-      };
-    } catch (jwtErr) {
-      console.warn('[Google Sheets] Failed to initialize JWT auth:', jwtErr);
-      return null;
-    }
+    const capturedEmail = clientEmail;
+    const sheets: LightweightSheetsClient = {
+      async appendRow(targetSpreadsheetId: string, range: string, values: string[][]) {
+        const accessToken = await getServiceAccountAccessToken(capturedEmail, validPrivateKey);
+        const encodedRange = encodeURIComponent(range);
+        const res = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${encodeURIComponent(targetSpreadsheetId)}/values/${encodedRange}:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ values }),
+          },
+        );
+        if (!res.ok) {
+          throw new Error(`Sheets append failed (${res.status})`);
+        }
+      },
+    };
+    return { sheets, spreadsheetId };
   }
 
   return null;
@@ -165,7 +211,7 @@ async function getGoogleSheetsClient() {
  */
 async function appendEmailToGoogleSheet(
   spreadsheetId: string,
-  sheets: ReturnType<typeof google.sheets>,
+  sheets: LightweightSheetsClient,
   email: string,
   topic: string = 'عمومی'
 ) {
@@ -189,25 +235,9 @@ async function appendEmailToGoogleSheet(
   ];
 
   try {
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: `${DEFAULT_SHEET_TAB}!A:F`,
-      valueInputOption: 'USER_ENTERED',
-      insertDataOption: 'INSERT_ROWS',
-      requestBody: {
-        values,
-      },
-    });
+    await sheets.appendRow(spreadsheetId, `${DEFAULT_SHEET_TAB}!A:F`, values);
   } catch {
-    await sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: 'A:F',
-      valueInputOption: 'USER_ENTERED',
-      insertDataOption: 'INSERT_ROWS',
-      requestBody: {
-        values,
-      },
-    });
+    await sheets.appendRow(spreadsheetId, 'A:F', values);
   }
 }
 

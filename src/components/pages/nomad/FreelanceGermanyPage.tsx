@@ -35,7 +35,7 @@ export const FreelanceGermanyPage: React.FC<Props> = ({
     title: 'ویزای فریلنسری آلمان ۲۰۲۶ | اقامت آزادکاری و مشاغل مستقل (Freiberufler)',
     description:
       'راهنمای جامع ویزای فریلنسری آلمان ۲۰۲۶ طبق بند ۵ ماده ۲۱ قانون اقامت آلمان (AufenthG §21 Abs. 5)؛ تفاوت Freiberufler و Gewerbe، تهیه بیزینس پلن، نامه‌های قصد همکاری و معافیت از مالیات تجاری با دیاکو.',
-    canonical: '/guides/freelance-germany',
+    canonical: '/freelance-germany',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const FreelanceGermanyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/freelance-germany#article',
+          '@id': 'https://www.dia-co.ir/freelance-germany#article',
           headline: 'راهنمای جامع ویزای فریلنسری و اقامت خوداشتغالی آلمان ۲۰۲۶',
           description:
             'تحلیل تخصصی ماده ۲۱ قانون اقامت آلمان برای مشاغل آزاد (پزشکان، مهندسان، مترجمان، برنامه‌نویسان و هنرمندان)، تمکن مالی، نامه‌های همکاری و مسیر اقامت دائم ۳ ساله.',

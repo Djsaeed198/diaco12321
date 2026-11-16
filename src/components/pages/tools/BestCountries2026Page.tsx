@@ -446,7 +446,7 @@ export const BestCountries2026Page: React.FC<Props> = ({
                 وجود بیش از ۲,۱۰۰ رشته انگلیسی‌زبان و ویزای یک‌ساله جستجوی کار پس از تحصیل (Zoekjaar) در هلند و شهریه‌های اقتصادی دانشگاه‌های دولتی اتریش در کنار استانداردهای بالای زندگی، این دو کشور را در صدر مقاصد تحصیلی قرار داده‌اند.
               </p>
               <div className="flex flex-wrap gap-2 pt-2 text-xs">
-                <a href="/netherlands-study-visa" onClick={handleLinkNav('academic-netherlands')} className="text-amber-300 hover:underline font-bold">
+                <a href="/academic-netherlands" onClick={handleLinkNav('academic-netherlands')} className="text-amber-300 hover:underline font-bold">
                   مهاجرت تحصیلی به هلند ۲۰۲۶ ↗
                 </a>
                 <span>•</span>

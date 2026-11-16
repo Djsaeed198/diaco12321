@@ -47,7 +47,7 @@ export const MedicalGermanyPage: React.FC<Props> = ({
     title: 'مهاجرت کادر درمان به آلمان ۲۰۲۶ | اخذ آپروباسیون و کار',
     description:
       'راهنمای جامع مهاجرت پزشکان، دندانپزشکان و پرستاران به آلمان ۲۰۲۶؛ شرایط آزمون FSP زبان تخصصی پزشکی، معادل‌سازی Approbation، ویزای کادر درمان و اقامت با دیاکو.',
-    canonical: '/guides/medical-germany-approbation',
+    canonical: '/medical-germany',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -65,7 +65,7 @@ export const MedicalGermanyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/medical-germany-approbation#article',
+          '@id': 'https://www.dia-co.ir/medical-germany#article',
           headline: 'راهنمای جامع مهاجرت کادر درمان و اخذ Approbation در آلمان ۲۰۲۶',
           description:
             'بررسی کامل مراحل معادل‌سازی مدرک پزشکی و دندانپزشکی در آلمان، آزمون زبان تخصصی FSP C1، دریافت پروانه طبابت دائم Approbation و حقوق کادر درمان.',
@@ -91,7 +91,7 @@ export const MedicalGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/medical-germany-approbation#howto',
+          '@id': 'https://www.dia-co.ir/medical-germany#howto',
           name: 'مراحل دریافت پروانه طبابت آپروباسیون در آلمان',
           description: 'گام‌های رسمی معادل‌سازی مدرک پزشکی و اشتغال در بیمارستان‌های آلمان',
           step: [
@@ -123,7 +123,7 @@ export const MedicalGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/medical-germany-approbation#faq',
+          '@id': 'https://www.dia-co.ir/medical-germany#faq',
           mainEntity: [
             {
               '@type': 'Question',

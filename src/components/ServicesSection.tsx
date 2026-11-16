@@ -847,9 +847,9 @@ export const ServicesSection: React.FC<Props> = ({
           <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-6 sm:flex-row sm:justify-between">
             <div className="flex items-center gap-6">
               {[
-                { value: '۱۰۰٪', label: 'تضمین حقوقی قرارداد' },
-                { value: '+۲،۰۰۰', label: 'پرونده اقامتی موفق' },
-                { value: '۱۰+ سال', label: 'سابقه مداوم در اروپا' },
+                { value: 'قرارداد رسمی', label: 'تعهدات حقوقی مکتوب و شفاف' },
+                { value: '+۲،۱۵۰', label: 'پرونده اقامتی موفق' },
+                { value: '۱۱+ سال', label: 'سابقه رسمی (از ۱۳۹۴ / ۲۰۱۵)' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <p className="text-base font-black text-[#f5a623] sm:text-lg">{stat.value}</p>

@@ -31,7 +31,7 @@ interface Props {
   onNavigateToCountry?: (countryKey: string) => void;
 }
 
-// ✅ داده‌های ۲۰۲۶:配额限制 + Positive List 路径
+// ✅ داده‌های ۲۰۲۶: محدودیت سهمیه + مسیر Positive List
 const QUOTA_STATUS = {
   doctorsNursesZero: true,
   quotaStart: '2025-12-15',
@@ -54,17 +54,17 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
 }) => {
   // ==================== SEO + AIO ====================
   useSeo({
-    title: 'مهاجرت کادر درمان به دانمارک ۲۰۲۶ | Positive List و配额 محدودیت',
+    title: 'مهاجرت کادر درمان به دانمارک ۲۰۲۶ | Positive List و محدودیت سهمیه',
     description:
-      'راهنمای ۲۰۲۶ مهاجرت پزشکان و پرستاران به دانمارک؛ هشدار配额 صفر授权 (تا ۳۱ دسامبر ۲۰۲۶)، مسیر جایگزین Positive List، آزمون Prøve i Dansk 3 (نمره ۱۰ شفاهی)، حقوق KBU ۲۴,۷۴۲ DKK خالص و مسیر اقامت دائم. ارزیابی فوری.',
-    canonical: '/guides/medical-denmark-authorization',
+      'راهنمای ۲۰۲۶ مهاجرت پزشکان و پرستاران به دانمارک؛ هشدار سهمیه صفر مجوز طبابت (تا ۳۱ دسامبر ۲۰۲۶)، مسیر جایگزین Positive List، آزمون Prøve i Dansk 3 (نمره ۱۰ شفاهی)، حقوق KBU ۲۴,۷۴۲ DKK خالص و مسیر اقامت دائم. ارزیابی فوری.',
+    canonical: '/medical-denmark',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80',
     keywords: [
       'مهاجرت پزشکان به دانمارک ۲۰۲۶',
       'Positive List دانمارک کادر درمان',
-      '配额授权 دانمارک صفر ۲۰۲۶',
+      'سهمیه مجوز طبابت دانمارک صفر ۲۰۲۶',
       'Prøve i Dansk 3 نمره شفاهی ۱۰',
       'حقوق پزشک KBU دانمارک ۲۰۲۶',
       'Styrelsen for Patientsikkerhed kvote',
@@ -76,11 +76,11 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/medical-denmark-authorization#article',
+          '@id': 'https://www.dia-co.ir/medical-denmark#article',
           headline:
-            'راهنمای ۲۰۲۶ مهاجرت کادر درمان به دانمارک:配额 صفر授权 و مسیر جایگزین Positive List',
+            'راهنمای ۲۰۲۶ مهاجرت کادر درمان به دانمارک: سهمیه صفر مجوز طبابت و مسیر جایگزین Positive List',
           description:
-            'تحلیل کامل تغییرات ۲۰۲۶ شامل配额 صفر برای授权 پزشکان و پرستاران، مسیرهای جایگزین SIRI، آزمون زبان Prøve i Dansk 3 با نمره شفاهی ۱۰، و حقوق واقعی KBU و متخصص.',
+            'تحلیل کامل تغییرات ۲۰۲۶ شامل سهمیه صفر برای مجوز کار و طبابت پزشکان و پرستاران، مسیرهای جایگزین SIRI، آزمون زبان Prøve i Dansk 3 با نمره شفاهی ۱۰، و حقوق واقعی KBU و متخصص.',
           image: [
             'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80',
             'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80',
@@ -118,10 +118,10 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/medical-denmark-authorization#howto',
+          '@id': 'https://www.dia-co.ir/medical-denmark#howto',
           name: 'مسیر جایگزین ۲۰۲۶: دریافت اقامت کاری کادر درمان دانمارک از طریق Positive List',
           description:
-            'با配额 صفر授权، مسیر عملی ۲۰۲۶ دریافت پیشنهاد شغلی از کارفرمای دانمارکی و اقدام از طریق Positive List است.',
+            'با سهمیه صفر مجوز طبابت، مسیر عملی ۲۰۲۶ دریافت پیشنهاد شغلی از کارفرمای دانمارکی و اقدام از طریق Positive List است.',
           totalTime: 'P6M',
           step: [
             {
@@ -139,27 +139,27 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
             {
               '@type': 'HowToStep',
               position: 3,
-              name: 'ورود به دانمارک و شروع فرآیند授权 از داخل کشور',
+              name: 'ورود به دانمارک و شروع فرآیند مجوز طبابت از داخل کشور',
               text: 'پس از دریافت اقامت، فرآیند Evalueringsansættelse (۱۲ ماه برای پزشکان، ۶ ماه برای پرستاران) و آزمون زبان Prøve i Dansk 3 آغاز می‌شود.',
             },
             {
               '@type': 'HowToStep',
               position: 4,
-              name: 'دریافت授权 دائم و اقامت بلندمدت',
-              text: 'پس از تکمیل ارزیابی بالینی و قبولی در آزمون زبان با نمرات تعیین‌شده،授权 دائم صادر و مسیر اقامت دائم هموار می‌شود.',
+              name: 'دریافت مجوز دائم و اقامت بلندمدت',
+              text: 'پس از تکمیل ارزیابی بالینی و قبولی در آزمون زبان با نمرات تعیین‌شده، مجوز دائم طبابت صادر و مسیر اقامت دائم هموار می‌شود.',
             },
           ],
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/medical-denmark-authorization#faq',
+          '@id': 'https://www.dia-co.ir/medical-denmark#faq',
           mainEntity: [
             {
               '@type': 'Question',
-              name: 'آیا در سال ۲۰۲۶ می‌توان بدون پیشنهاد شغلی برای授权 پزشکی یا پرستاری دانمارک اقدام کرد؟',
+              name: 'آیا در سال ۲۰۲۶ می‌توان بدون پیشنهاد شغلی برای مجوز پزشکی یا پرستاری دانمارک اقدام کرد؟',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'خیر. از ۱۵ دسامبر ۲۰۲۵ تا ۳۱ دسامبر ۲۰۲۶،配额 درخواست授权 برای پزشکان و پرستاران توسط Styrelsen for Patientsikkerhed صفر تعیین شده است. بنابراین امکان دریافت اقامت صرفاً با هدف کسب授权 وجود ندارد. مسیر عملی، دریافت پیشنهاد شغلی و اقدام از طریق Positive List یا سایر طرح‌های کاری SIRI است.',
+                text: 'خیر. از ۱۵ دسامبر ۲۰۲۵ تا ۳۱ دسامبر ۲۰۲۶، سهمیه درخواست مجوز طبابت برای پزشکان و پرستاران توسط Styrelsen for Patientsikkerhed صفر تعیین شده است. بنابراین امکان دریافت اقامت صرفاً با هدف کسب مجوز وجود ندارد. مسیر عملی، دریافت پیشنهاد شغلی و اقدام از طریق Positive List یا سایر طرح‌های کاری SIRI است.',
               },
             },
             {
@@ -199,7 +199,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
               name: 'آیا همسر و خانواده کادر درمان در ۲۰۲۶ می‌توانند همراهی کنند؟',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'بله، اما با محدودیت. افرادی که تحت طرح配额授权 قرار می‌گیرند، اعضای خانواده همراه آن‌ها نیز نمی‌توانند بر همان اساس اقامت بگیرند. با این حال، اگر اقامت از طریق Positive List یا سایر طرح‌های کاری SIRI دریافت شود، الحاق خانواده معمولاً امکان‌پذیر است و همسر حق کار دارد.',
+                text: 'بله، اما با محدودیت. افرادی که تحت طرح سهمیه مجوز طبابت قرار می‌گیرند، اعضای خانواده همراه آن‌ها نیز نمی‌توانند بر همان اساس اقامت بگیرند. با این حال، اگر اقامت از طریق Positive List یا سایر طرح‌های کاری SIRI دریافت شود، الحاق خانواده معمولاً امکان‌پذیر است و همسر حق کار دارد.',
               },
             },
           ],
@@ -283,8 +283,8 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
   // ==================== FAQS ====================
   const FAQS = [
     {
-      q: 'آیا در ۲۰۲۶ می‌توان بدون پیشنهاد شغلی برای授权 پزشکی یا پرستاری دانمارک اقدام کرد؟',
-      a: 'خیر. از ۱۵ دسامبر ۲۰۲۵ تا ۳۱ دسامبر ۲۰۲۶، Styrelsen for Patientsikkerhed配额 درخواست授权 برای پزشکان و پرستاران را صفر کرده است. در این دوره، امکان دریافت اقامت با هدف صرف کسب授权 وجود ندارد و درخواست‌ها رد می‌شوند. مسیر عملی، دریافت پیشنهاد شغلی و اقدام از طریق Positive List یا سایر طرح‌های کاری SIRI است.',
+      q: 'آیا در ۲۰۲۶ می‌توان بدون پیشنهاد شغلی برای مجوز پزشکی یا پرستاری دانمارک اقدام کرد؟',
+      a: 'خیر. از ۱۵ دسامبر ۲۰۲۵ تا ۳۱ دسامبر ۲۰۲۶، Styrelsen for Patientsikkerhed سهمیه درخواست مجوز طبابت برای پزشکان و پرستاران را صفر کرده است. در این دوره، امکان دریافت اقامت با هدف صرف کسب مجوز وجود ندارد و درخواست‌ها رد می‌شوند. مسیر عملی، دریافت پیشنهاد شغلی و اقدام از طریق Positive List یا سایر طرح‌های کاری SIRI است.',
     },
     {
       q: 'مسیرهای جایگزین SIRI برای کادر درمان در ۲۰۲۶ کدامند؟',
@@ -304,7 +304,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
     },
     {
       q: 'آیا خانواده کادر درمان در ۲۰۲۶ می‌توانند همراهی کنند؟',
-      a: 'اگر اقامت از طریق طرح配额授权 باشد، اعضای خانواده نیز نمی‌توانند بر همان اساس اقامت بگیرند. اما اگر اقامت از طریق Positive List یا سایر طرح‌های کاری SIRI دریافت شود، الحاق خانواده معمولاً امکان‌پذیر است و همسر حق کار دارد. بنابراین انتخاب مسیر Positive List نه‌تنها از نظر شغلی، بلکه از نظر خانوادگی نیز مزیت دارد.',
+      a: 'اگر اقامت از طریق طرح سهمیه مجوز طبابت باشد، اعضای خانواده نیز نمی‌توانند بر همان اساس اقامت بگیرند. اما اگر اقامت از طریق Positive List یا سایر طرح‌های کاری SIRI دریافت شود، الحاق خانواده معمولاً امکان‌پذیر است و همسر حق کار دارد. بنابراین انتخاب مسیر Positive List نه‌تنها از نظر شغلی، بلکه از نظر خانوادگی نیز مزیت دارد.',
     },
   ];
 
@@ -351,12 +351,12 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* ========== هشدار配额 — AIO/Banner ========== */}
+      {/* ========== هشدار سهمیه — AIO/Banner ========== */}
       <div className="bg-amber-500/10 border-b border-amber-500/30 px-4 py-2.5">
         <div className="container mx-auto max-w-5xl flex items-start gap-2 text-[11px] text-amber-200">
           <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>
-            <strong>هشدار ۲۰۲۶:</strong>配额授权 پزشکان و پرستاران از ۱۵ دسامبر
+            <strong>هشدار ۲۰۲۶:</strong> سهمیه مجوز طبابت پزشکان و پرستاران از ۱۵ دسامبر
             ۲۰۲۵ تا ۳۱ دسامبر ۲۰۲۶ صفر است. مسیر عملی، دریافت پیشنهاد شغلی از
             طریق Positive List است. جزئیات در ادامه.
           </span>
@@ -374,7 +374,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
                   مسیر جایگزین Positive List — ۲۰۲۶
                 </span>
                 <span className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] text-slate-300">
-                 配额授权: صفر تا ۳۱ دسامبر ۲۰۲۶
+                 سهمیه مجوز طبابت: صفر تا ۳۱ دسامبر ۲۰۲۶
                 </span>
               </div>
 
@@ -395,10 +395,10 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
                 </div>
                 برخلاف سال‌های گذشته،{' '}
                 <strong className="text-amber-300">
-                  مسیر بدون پیشنهاد شغلی برای授权 پزشک یا پرستار در ۲۰۲۶ بسته
+                  مسیر بدون پیشنهاد شغلی برای مجوز طبابت پزشک یا پرستار در ۲۰۲۶ بسته
                   است
                 </strong>{' '}
-                (配额 صفر تا ۳۱ دسامبر). مسیر عملی، دریافت پیشنهاد شغلی از
+                (سهمیه صفر تا ۳۱ دسامبر). مسیر عملی، دریافت پیشنهاد شغلی از
                 بیمارستان یا کلینیک دانمارکی و اقدام از طریق{' '}
                 <strong>Positive List</strong> است. حقوق خالص KBU حدود{' '}
                 <strong className="text-emerald-300">۲۴,۷۴۲ DKK</strong> و
@@ -483,7 +483,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-right">
               <span className="text-[10px] text-rose-300 font-bold">
-               配额授权 (تا ۳۱ دسامبر)
+               سهمیه مجوز طبابت (تا ۳۱ دسامبر)
               </span>
               <div className="text-xl font-black text-white mt-1">صفر</div>
               <p className="text-[10px] text-slate-400 mt-0.5">
@@ -605,36 +605,36 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
             هر آنچه باید درباره کادر درمان دانمارک در ۲۰۲۶ بدانید
           </h2>
           <p className="text-center text-xs text-slate-400 mb-10 max-w-2xl mx-auto">
-            تحلیل配额 صفر授权، مسیرهای جایگزین SIRI، آزمون زبان، حقوق واقعی و
+            تحلیل سهمیه صفر مجوز طبابت، مسیرهای جایگزین SIRI، آزمون زبان، حقوق واقعی و
             مسیر اقامت دائم.
           </p>
 
           <div className="space-y-10">
-            {/* بخش ۱ — هشدار配额 */}
+            {/* بخش ۱ — هشدار سهمیه */}
             <article className="rounded-3xl border border-amber-500/30 bg-amber-500/[0.06] p-6 md:p-8">
               <div className="flex items-center gap-2 mb-4">
                 <AlertTriangle className="h-5 w-5 text-amber-400" />
                 <h3 className="text-lg font-black text-amber-200">
-                  ۱. تغییر حیاتی ۲۰۲۶:配额授权 صفر شد
+                  ۱. تغییر حیاتی ۲۰۲۶: سهمیه مجوز طبابت صفر شد
                 </h3>
               </div>
               <p className="speakable-answer text-xs leading-7 text-amber-100/85 text-justify">
                 مهم‌ترین تغییر سال ۲۰۲۶ در مهاجرت کادر درمان دانمارک،{' '}
                 <strong>
-                  تعیین配额 صفر برای درخواست‌های授权 پزشکان و پرستاران
+                  تعیین سهمیه صفر برای درخواست‌های مجوز طبابت پزشکان و پرستاران
                 </strong>{' '}
-                توسط Styrelsen for Patientsikkerhed است. این配额 از{' '}
+                توسط Styrelsen for Patientsikkerhed است. این سهمیه از{' '}
                 <strong>۱۵ دسامبر ۲۰۲۵</strong> آغاز شده و تا{' '}
                 <strong>۳۱ دسامبر ۲۰۲۶</strong> ادامه دارد. در این بازه،
-                امکان دریافت اقامت با هدف صرف کسب授权 وجود ندارد و
+                امکان دریافت اقامت با هدف صرف کسب مجوز طبابت وجود ندارد و
                 درخواست‌های جدید رد می‌شوند. حتی درخواست‌های در جریان نیز
-                ممکن است تحت تأثیر قرار گیرند. این تغییر، مسیر سنتی “سفر به
-                دانمارک برای یادگیری زبان و سپس دریافت授权” را برای
+                ممکن است تحت تأثیر قرار گیرند. این تغییر، مسیر سنتی «سفر به
+                دانمارک برای یادگیری زبان و سپس دریافت مجوز» را برای
                 ۲۰۲۶ عملاً بسته است.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {[
-                  '配额: صفر (۰)',
+                  'سهمیه: صفر (۰)',
                   'بازه: ۱۵ دسامبر ۲۰۲۵ – ۳۱ دسامبر ۲۰۲۶',
                   'درخواست‌های در جریان نیز رد می‌شوند',
                   'اعضای خانواده همراه نیز محدود می‌شوند',
@@ -677,7 +677,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
                 </h3>
               </div>
               <p className="text-xs leading-7 text-slate-300 text-justify">
-                با بسته شدن مسیر授权 بدون پیشنهاد شغلی، کادر درمان باید از
+                با بسته شدن مسیر مجوز طبابت بدون پیشنهاد شغلی، کادر درمان باید از
                 طریق طرح‌های کاری SIRI اقدام کنند. چهار مسیر اصلی وجود دارد:{' '}
                 <strong>Positive List</strong> (برای مشاغل کمبود نیرو مانند
                 پرستاری و پزشکی)، <strong>Pay Limit Scheme</strong> (حقوق
@@ -864,7 +864,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
               </div>
               <p className="text-xs leading-7 text-slate-300 text-justify">
                 یکی از مهم‌ترین تفاوت‌های مسیرها در ۲۰۲۶ این است که افرادی
-                که تحت طرح配额授权 قرار می‌گیرند،{' '}
+                که تحت طرح سهمیه مجوز طبابت قرار می‌گیرند،{' '}
                 <strong className="text-rose-300">
                   اعضای خانواده همراه آن‌ها نیز نمی‌توانند بر همان اساس اقامت
                   بگیرند
@@ -988,7 +988,7 @@ export const MedicalDenmarkPage: React.FC<Props> = ({
               مسیر جایگزین ۲۰۲۶ را با دیاکو برنامه‌ریزی کنید
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto mb-6 leading-6">
-              با بسته شدن مسیر授权 بدون پیشنهاد شغلی، دریافت پیشنهاد شغلی از
+              با بسته شدن مسیر مجوز طبابت بدون پیشنهاد شغلی، دریافت پیشنهاد شغلی از
               طریق Positive List اولویت اول است. تیم دیاکو پرونده شما را از
               جاب‌آفر تا Evalueringsansættelse و آزمون زبان همراهی می‌کند.
             </p>

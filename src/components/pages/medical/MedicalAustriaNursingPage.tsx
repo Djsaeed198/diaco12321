@@ -53,7 +53,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
     title: 'مهاجرت پرستاران به اتریش ۲۰۲۶ | حقوق ۳,۳۴۶ € و RWR کارت',
     description:
       'راهنمای جامع مهاجرت پرستاران به اتریش ۲۰۲۶؛ حقوق ۳,۳۴۶–۳,۵۸۶ € (۱۴ نوبت)، دریافت RWR کارت پیش از پایان Nostrifizierung، دوره ۹ ماهه FH Campus Wien، زبان B2 و مسیر اقامت دائم ۲۱ ماهه. ارزیابی فوری.',
-    canonical: '/guides/nursing-austria-nostrifizierung',
+    canonical: '/medical-austria-nursing',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1200&q=80',
@@ -73,7 +73,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/nursing-austria-nostrifizierung#article',
+          '@id': 'https://www.dia-co.ir/medical-austria-nursing#article',
           headline:
             'راهنمای جامع مهاجرت پرستاران به اتریش ۲۰۲۶: حقوق، Nostrifizierung و RWR کارت',
           description:
@@ -116,7 +116,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/nursing-austria-nostrifizierung#howto',
+          '@id': 'https://www.dia-co.ir/medical-austria-nursing#howto',
           name: 'مراحل مهاجرت پرستار به اتریش در ۲۰۲۶',
           description:
             'فرآیند گام‌به‌گام از ارزیابی مدرک تا دریافت RWR کارت و اقامت دائم.',
@@ -157,7 +157,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/nursing-austria-nostrifizierung#faq',
+          '@id': 'https://www.dia-co.ir/medical-austria-nursing#faq',
           mainEntity: [
             {
               '@type': 'Question',
@@ -617,9 +617,9 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
                 <strong className="text-amber-300">
                   ۴۰,۰۰۰ پرستار دیپلمه (DGKP)
                 </strong>{' '}
-                نیاز خواهد داشت[reference:2]. این کمبود، پرستاران را در فهرست
+                نیاز خواهد داشت. این کمبود، پرستاران را در فهرست
                 سراسری مشاغل کمبود نیرو (Mangelberufsliste 2026) قرار داده و
-                مسیر دریافت RWR کارت را هموار کرده است[reference:3]. برخلاف
+                مسیر دریافت RWR کارت را هموار کرده است. برخلاف
                 آلمان که فرآیند معادل‌سازی گاه چند سال طول می‌کشد، اتریش با
                 دوره ۹ ماهه FH Campus Wien و امکان دریافت RWR کارت پیش از
                 تکمیل Nostrifizierung، مسیر را به‌طور قابل‌توجهی کوتاه کرده
@@ -685,7 +685,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
                 هستند. در سال ۲۰۲۶، حقوق پایه DGKP بدون پاداش از{' '}
                 <strong>۳,۲۱۰.۹۶ €</strong> و با Pflegebonus از{' '}
                 <strong>۳,۳۴۶.۴۶ €</strong> آغاز می‌شود و برای پرستاران
-                باتجربه تا <strong>۳,۵۸۶.۳۹ €</strong> در ماه می‌رسد[reference:4].
+                باتجربه تا <strong>۳,۵۸۶.۳۹ €</strong> در ماه می‌رسد.
                 حق شیفت شب، اضافه کار و کار در روزهای تعطیل معمولاً حدود ۳۰۰
                 € در ماه به این مبلغ اضافه می‌کند.
               </p>
@@ -744,13 +744,13 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
                   دوره ۹ ماهه شامل زبان آلمانی تا سطح B1، ماژول‌های علوم
                   پرستاری، سیستم سلامت اتریش و جهت‌گیری اجتماعی
                 </strong>{' '}
-                برای پرستاران دیپلمه از کشورهای ثالث ارائه می‌شود[reference:5].
+                برای پرستاران دیپلمه از کشورهای ثالث ارائه می‌شود.
                 مهم‌ترین تسهیل ۲۰۲۶ این است که{' '}
                 <strong className="text-amber-300">
                   RWR کارت می‌تواند پیش از تکمیل کامل Nostrifizierung صادر شود
                 </strong>
-                ，به پرستاران اجازه می‌دهد پیش از دریافت تأییدیه نهایی، وارد
-                اتریش شوند و در دوره شرکت کنند[reference:6]. این تغییر
+                و به پرستاران اجازه می‌دهد پیش از دریافت تأییدیه نهایی، وارد
+                اتریش شوند و در دوره شرکت کنند. این تغییر
                 برنامه‌ریزی مهاجرت را به‌طور قابل‌توجهی قابل‌پیش‌بینی‌تر
                 کرده است.
               </p>
@@ -803,7 +803,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
                 <strong>Gesundheitsberuferegister</strong> و کار مستقل به‌عنوان
                 DGKP، مدرک <strong className="text-purple-300">B2</strong>{' '}
                 زبان آلمانی از مؤسسات معتبر مانند ÖSD، Goethe، telc یا
-                دانشگاه وین الزامی است[reference:7]. مدارک زبان باید توسط
+                دانشگاه وین الزامی است. مدارک زبان باید توسط
                 مترجم رسمی به آلمانی ترجمه شوند و صرفاً گواهی حضور در دوره
                 کافی نیست. برای پرستاران دستیار (Pflegeassistenz)، سطح B1
                 نیز پذیرفته می‌شود، اما برای DGKP که هدف اصلی این صفحه است،
@@ -861,7 +861,7 @@ export const MedicalAustriaNursingPage: React.FC<Props> = ({
               <p className="text-xs leading-7 text-emerald-100/85 text-justify">
                 از ۱ ژانویه ۲۰۲۶، پرستاران در اتریش رسماً به‌عنوان{' '}
                 <strong>کارگران سنگین (Schwerarbeiter)</strong> شناخته
-                می‌شوند[reference:8]. این وضعیت امکان بازنشستگی زودتر (حدود
+                می‌شوند. این وضعیت امکان بازنشستگی زودتر (حدود
                 ۶۰ سال) را فراهم می‌کند و نشان‌دهنده به‌رسمیت شناختن فشار
                 جسمی و روانی بالای حرفه پرستاری است. برای پرستاران
                 بین‌المللی، این مزیت جذابیت بلندمدت اتریش را در مقایسه با

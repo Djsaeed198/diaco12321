@@ -35,7 +35,7 @@ export const RealEstateGreecePage: React.FC<Props> = ({
     title: 'گلدن ویزای یونان ۲۰۲۶ | اقامت ۵ ساله اروپا با خرید ملک ۲۵۰ تا ۸۰۰ هزار یورو',
     description:
       'راهنمای کامل خرید ملک و گلدن ویزای یونان ۲۰۲۶؛ قوانین جدید منطقه‌بندی (۲۵۰ هزار یورو در مناطق تبدیل تجاری به مسکونی، ۴۰۰ و ۸۰۰ هزار یورو در آتن و سالونیک)، اقامت دائم ۳ نسل خانواده با دفتر آتن دیاکو.',
-    canonical: '/guides/realestate-greece',
+    canonical: '/realestate-greece',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateGreecePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-greece#article',
+          '@id': 'https://www.dia-co.ir/realestate-greece#article',
           headline: 'راهنمای جامع خرید ملک و گلدن ویزای یونان ۲۰۲۶: مبالغ جدید و فرصت‌های ۲۵۰ هزار یورویی',
           description:
             'بررسی قانون اصلاحات گلدن ویزای یونان، فرصت‌های ۲۵۰,۰۰۰ یورویی تبدیل صنعتی به مسکونی (Commercial Conversion)، مناطق ۴۰۰ هزار و ۸۰۰ هزار یورویی آتن و جزایر، اقامت ۵ ساله قابل تمدید با حضور دفتر گلیفادا دیاکو.',
@@ -78,7 +78,7 @@ export const RealEstateGreecePage: React.FC<Props> = ({
         },
         {
           '@type': ['Service', 'LegalService'],
-          '@id': 'https://www.dia-co.ir/guides/realestate-greece#service',
+          '@id': 'https://www.dia-co.ir/realestate-greece#service',
           name: 'خدمات خرید ملک و گلدن ویزای یونان',
           serviceType: 'اقامت سرمایه‌گذاری ملکی و گلدن ویزای یونان (Greece Golden Visa)',
           description: 'مشاوره خرید ملک با استعلامات رسمی ثبتی و صدور کارت اقامت دائم ۵ ساله ۳ نسل با حضور وکلای مقیم دفتر آتن دیاکو.',

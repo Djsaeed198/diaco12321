@@ -35,7 +35,7 @@ export const RealEstateLatviaPage: React.FC<Props> = ({
     title: 'خرید ملک در لتونی ۲۰۲۶ | گلدن ویزای ۲۵۰,۰۰۰ یورویی حوزه بالتیک و شینگن',
     description:
       'راهنمای کامل خرید ملک و اقامت لتونی ۲۰۲۶ طبق قانون مهاجرت لتونی (Immigration Law)؛ خرید ملک مسکونی ۲۵۰,۰۰۰ یورو در ریگا یا یورمالا، ۵٪ عوارض دولتی، اقامت ۵ ساله شینگن برای خانواده با دیاکو.',
-    canonical: '/guides/realestate-latvia',
+    canonical: '/realestate-latvia',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1548705085-101173833344?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateLatviaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-latvia#article',
+          '@id': 'https://www.dia-co.ir/realestate-latvia#article',
           headline: 'راهنمای جامع خرید ملک و اخذ اقامت شینگن در لتونی ۲۰۲۶',
           description:
             'تحلیل قانون سرمایه‌گذاری ملکی لتونی (Section 23 of Immigration Law)، شروط ارزش کاداستر، هزینه ۵٪ عوارض خزانه دولت لتونی، و همراهی همسر و فرزندان زیر ۱۸ سال.',

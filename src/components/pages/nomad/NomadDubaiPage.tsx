@@ -35,7 +35,7 @@ export const NomadDubaiPage: React.FC<Props> = ({
     title: 'ویزای کار از راه دور دبی ۲۰۲۶ | اقامت دیجیتال نوماد امارات (Virtual Working Visa)',
     description:
       'راهنمای کامل ویزای دورکاری دبی ۲۰۲۶ (Dubai Virtual Working Programme)؛ حداقل درآمد ۳,۵۰۰ دلار در ماه، مالیات بر درآمد صفر درصد، دریافت آی‌دی کارت امارات (Emirates ID) و افتتاح حساب بانکی بین‌المللی با دیاکو.',
-    canonical: '/guides/nomad-dubai',
+    canonical: '/nomad-dubai',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
@@ -53,7 +53,7 @@ export const NomadDubaiPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/nomad-dubai#article',
+          '@id': 'https://www.dia-co.ir/nomad-dubai#article',
           headline: 'راهنمای جامع ویزای کار از راه دور و دیجیتال نوماد دبی ۲۰۲۶',
           description:
             'بررسی برنامه دورکاری دبی، شرایط درآمد ماهانه ۳,۵۰۰ دلاری، فیش حقوقی و قرارداد کارفرمایی خارجی، مزایای افتتاح حساب در بانک‌های اماراتی و صدور Emirates ID یک‌ساله قابل تمدید.',

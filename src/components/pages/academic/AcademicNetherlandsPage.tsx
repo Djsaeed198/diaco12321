@@ -170,7 +170,7 @@ export const AcademicNetherlandsPage: React.FC<Props> = ({
     title: 'مهاجرت تحصیلی به هلند ۲۰۲۶ | شرایط پذیرش، هزینه و ویزا | دیاکو',
     description:
       'راهنمای جامع مهاجرت تحصیلی به هلند در سال ۲۰۲۶. بررسی شرایط اخذ پذیرش دانشگاه‌های هلند، هزینه‌های تحصیل و زندگی، ویزای همراه و مشاوره تخصصی هلدینگ دیاکو.',
-    canonical: 'https://www.dia-co.ir/netherlands-study-visa',
+    canonical: 'https://www.dia-co.ir/academic-netherlands',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&h=600&q=80',
@@ -189,7 +189,7 @@ export const AcademicNetherlandsPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/netherlands-study-visa/#article',
+          '@id': 'https://www.dia-co.ir/academic-netherlands/#article',
           headline: 'مهاجرت تحصیلی به هلند ۲۰۲۶ | شرایط پذیرش، هزینه و ویزا',
           description:
             'راهنمای جامع مهاجرت تحصیلی به هلند در سال ۲۰۲۶. بررسی شرایط اخذ پذیرش دانشگاه‌های هلند، هزینه‌های تحصیل و زندگی، ویزای همراه و مشاوره تخصصی هلدینگ دیاکو.',
@@ -206,7 +206,7 @@ export const AcademicNetherlandsPage: React.FC<Props> = ({
           },
           reviewedBy: {
             '@type': 'Organization',
-            name: 'دفتر اجرایی دیاکو در اروپا (Budapest / Vienna)',
+            name: 'دفتر مرکزی هلدینگ دیاکو در وین (اتریش)',
             url: 'https://www.dia-co.ir/',
           },
           publisher: {
@@ -219,12 +219,12 @@ export const AcademicNetherlandsPage: React.FC<Props> = ({
           citation: ['https://www.studyinholland.nl/', 'https://ind.nl/en'],
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': 'https://www.dia-co.ir/netherlands-study-visa',
+            '@id': 'https://www.dia-co.ir/academic-netherlands',
           },
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/netherlands-study-visa/#faq',
+          '@id': 'https://www.dia-co.ir/academic-netherlands/#faq',
           mainEntity: faqs.map((f) => ({
             '@type': 'Question',
             name: f.q,
@@ -240,7 +240,7 @@ export const AcademicNetherlandsPage: React.FC<Props> = ({
               '@type': 'ListItem',
               position: 3,
               name: 'مهاجرت تحصیلی به هلند',
-              item: 'https://www.dia-co.ir/netherlands-study-visa',
+              item: 'https://www.dia-co.ir/academic-netherlands',
             },
           ],
         },

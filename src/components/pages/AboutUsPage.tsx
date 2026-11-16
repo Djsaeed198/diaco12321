@@ -32,9 +32,9 @@ export const AboutUsPage: React.FC<Props> = ({
   onNavigateToPage,
 }) => {
   useSeo({
-    title: 'درباره هلدینگ بین‌المللی دیاکو | بیش از ۲۰ سال سابقه و دفاتر وین و آتن',
+    title: 'درباره هلدینگ بین‌المللی دیاکو | بیش از ۱۱ سال سابقه (تأسیس ۱۳۹۴) و دفاتر وین و آتن',
     description:
-      'آشنایی با هلدینگ مهاجرتی دیاکو؛ سابقه بیش از ۲۰ سال در حقوق بین‌الملل، دفاتر رسمی در وین (Kärntner Ring) و آتن، معرفی وکلای پایه یک دادگستری اتریش و آلمان و استانداردهای منشور اخلاقی.',
+      'آشنایی با هلدینگ مهاجرتی دیاکو؛ تأسیس ۲۰۱۵ (۱۳۹۴)، دفاتر رسمی در وین (Ausstellungsstraße 50/2.OG)، آتن (Glyfada) و تهران، معرفی تیم حقوقی همکار در اروپا و منشور اخلاقی.',
     keywords: [
       'درباره هلدینگ مهاجرتی دیاکو',
       'دفتر دیاکو در وین اتریش',
@@ -49,7 +49,7 @@ export const AboutUsPage: React.FC<Props> = ({
       '@context': 'https://schema.org',
       '@type': 'AboutPage',
       name: 'درباره هلدینگ بین‌المللی مهاجرتی دیاکو',
-      description: 'پیشگام خدمات حقوقی، اقامت و مهاجرت به اتحادیه اروپا با بیش از دو دهه تجربه.',
+      description: 'خدمات حقوقی، اقامت و مهاجرت به اتحادیه اروپا با بیش از ۱۱ سال سابقه رسمی (تأسیس ۲۰۱۵ / ۱۳۹۴)، ۳۵ وکیل همکار و ۲,۱۵۰+ پرونده موفق.',
       url: 'https://www.dia-co.ir/about-us',
     },
   });
@@ -78,7 +78,7 @@ export const AboutUsPage: React.FC<Props> = ({
               <DiacoLogo size={52} />
               <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-bold text-amber-300 backdrop-blur-sm">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>با بیش از ۲ دهه تجربه درخشان در حقوق مهاجرت و اقامت شنگن</span>
+                <span>تأسیس ۱۳۹۴ (۲۰۱۵) — بیش از ۱۱ سال سابقه رسمی در حقوق مهاجرت و اقامت شنگن</span>
               </span>
             </div>
 
@@ -87,18 +87,18 @@ export const AboutUsPage: React.FC<Props> = ({
             </h1>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl mb-6">
-              هلدینگ بین‌المللی دیاکو با بیش از ۲۰ سال سابقه و با تکیه بر وکلای پایه یک مستقر در وین، آتن، مونیخ و تهران، پلی استوار میان متقاضیان و مراجع قانونی اتحادیه اروپا است. رویکرد ما بر پایه شفافیت مطلق، پرهیز از وعده‌های واهی و پیگیری مستقیم در دادگستری‌های اروپایی است.
+              هلدینگ بین‌المللی دیاکو با بیش از ۱۱ سال سابقه رسمی (از سال ۱۳۹۴ / ۲۰۱۵) و تکیه بر دفاتر وین، آتن و تهران به همراه ۳۵ وکیل و مشاور حقوقی همکار در ۱۱ کشور اروپایی، پیگیری مستقیم و قانونی پرونده‌های اقامتی را در مراجع اتحادیه اروپا بر عهده دارد. رویکرد ما بر پایه شفافیت قرارداد، استناد به منابع رسمی و پرهیز از وعده‌های غیرواقعی است.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-300 border-t border-white/10">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>عضویت رسمی در کانون‌های وکلای اروپا (RDB اتریش و BRAK آلمان)</span>
+                <span>همکاری مستقیم با وکلای عضو کانون‌های وکلای اتریش و آلمان</span>
               </div>
               <span className="text-white/20">•</span>
               <div className="flex items-center gap-1.5">
                 <Users className="w-4 h-4 text-amber-400" />
-                <span>بیش از ۲,۰۰۰ پرونده موفق و رضایت ۱۰۰٪ متقاضیان</span>
+                <span>بیش از ۲,۱۵۰ پرونده اقامتی موفق ثبت‌شده</span>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export const AboutUsPage: React.FC<Props> = ({
               منشور اخلاقی و استانداردهای حرفه‌ای هلدینگ دیاکو
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl mx-auto">
-              تعهداتی که دیاکو را از بیش از ۹۰ درصد موسسات فعال در حوزه مهاجرت متمایز ساخته است.
+              تعهدات اجرایی و حقوقی شفاف که زیربنای اعتماد ۲,۱۵۰+ متقاضی در طول بیش از ۱۱ سال فعالیت رسمی دیاکو بوده است.
             </p>
           </div>
 

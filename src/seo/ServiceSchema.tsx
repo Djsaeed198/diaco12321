@@ -73,9 +73,10 @@ export const ServiceSchema: React.FC<ServiceSchemaProps> = ({
     { code: 'ES', name: 'Spain' },
   ],
   ratingValue = '4.9',
-  reviewCount = '485',
+  reviewCount,
   reviews = DEFAULT_REVIEWS,
 }) => {
+  const resolvedReviewCount = reviewCount !== undefined ? String(reviewCount) : String(reviews.length);
   const schema = {
     '@context': 'https://schema.org',
     '@type': ['Service', 'LegalService'],
@@ -124,7 +125,7 @@ export const ServiceSchema: React.FC<ServiceSchemaProps> = ({
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: String(ratingValue),
-      reviewCount: String(reviewCount),
+      reviewCount: resolvedReviewCount,
       bestRating: '5',
       worstRating: '1',
     },

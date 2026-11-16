@@ -119,7 +119,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
       '@type': 'HowToStep',
       name: `${m.phaseTitle} - ${m.actionTitle}`,
       text: m.applicantTasks.concat(m.diacoTasks).join('. '),
-      url: `https://www.dia-co.ir/guides/immigration-timeline#${selectedCountryId}-${currentPathway.id}-step-${m.stepNumber}`,
+      url: `https://www.dia-co.ir/immigration-timeline#${selectedCountryId}-${currentPathway.id}-step-${m.stepNumber}`,
     }));
 
     const faqEntities = currentPathway.faqs.map((f) => ({
@@ -136,7 +136,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': `https://www.dia-co.ir/guides/immigration-timeline#${selectedCountryId}-${currentPathway.id}`,
+          '@id': `https://www.dia-co.ir/immigration-timeline#${selectedCountryId}-${currentPathway.id}`,
           headline: `تایم‌لاین گام‌به‌گام و زمان‌بندی دقیق ${currentPathway.title} در ${currentCountry.name} (نسخه ۲۰۲۶)`,
           description: `بررسی تحلیلی مراحل اداری، مدارک لازم، مدت زمان صدور ویزا در سفارت، زمان دریافت کارت اقامت دائم و پاسپورت در روش ${currentPathway.title} توسط هلدینگ بین‌المللی دیاکو.`,
           image: [countryHeroImages[selectedCountryId] || 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80'],
@@ -159,7 +159,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': `https://www.dia-co.ir/guides/immigration-timeline#howto-${selectedCountryId}-${currentPathway.id}`,
+          '@id': `https://www.dia-co.ir/immigration-timeline#howto-${selectedCountryId}-${currentPathway.id}`,
           name: `مراحل و زمان‌بندی اخذ اقامت ${currentCountry.name} از طریق ${currentPathway.title}`,
           description: currentPathway.shortDesc,
           totalTime: currentPathway.totalDuration,
@@ -167,7 +167,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': `https://www.dia-co.ir/guides/immigration-timeline#faq-${selectedCountryId}-${currentPathway.id}`,
+          '@id': `https://www.dia-co.ir/immigration-timeline#faq-${selectedCountryId}-${currentPathway.id}`,
           mainEntity: faqEntities,
         },
       ],
@@ -177,7 +177,7 @@ export const ImmigrationTimelinePage: React.FC<Props> = ({
   useSeo({
     title: `تایم‌لاین زمان‌بندی ${currentPathway.title} ${currentCountry.name} ۲۰۲۶ | هلدینگ دیاکو`,
     description: `جدول کامل مراحل زمانی ${currentPathway.title} در ${currentCountry.name}؛ از ترجمه و لگالایز تا مصاحبه سفارت، تایید ${currentPathway.responsibleAuthority}، صدور کارت اقامت دائم و پاسپورت با نظارت مستقیم وکلای دیاکو.`,
-    canonical: `/guides/immigration-timeline?country=${selectedCountryId}&pathway=${currentPathway.id}`,
+    canonical: '/immigration-timeline',
     ogType: 'article',
     ogImage: countryHeroImages[selectedCountryId] || 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80',
     keywords: [

@@ -35,7 +35,7 @@ export const JobSeekerNorwayPage: React.FC<Props> = ({
     title: 'ویزای جستجوی کار نروژ ۲۰۲۶ | اقامت ۶ ماهه کاریابی اسکاندیناوی (Skilled Job Seeker)',
     description:
       'راهنمای کامل ویزای کاریابی نروژ ۲۰۲۶ برای نیروهای ماهر (Skilled Worker Job Seeker)؛ مدارک دانشگاهی مورد تایید اداره مهاجرت نروژ (UDI)، اثبات تمکن مالی کرون نروژ و تبدیل به اقامت دائم کاری با دیاکو.',
-    canonical: '/guides/jobseeker-norway',
+    canonical: '/jobseeker-norway',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const JobSeekerNorwayPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/jobseeker-norway#article',
+          '@id': 'https://www.dia-co.ir/jobseeker-norway#article',
           headline: 'راهنمای جامع ویزای جستجوی کار نروژ ۲۰۲۶ ویژه نیروهای متخصص',
           description:
             'بررسی قوانین اداره مهاجرت نروژ (UDI) برای متقاضیان ماهر، شروط تمکن مالی ۶ ماهه به کرون نروژ (NOK) و فرآیند تبدیل به اقامت کاری پایدار پس از اخذ جاب‌آفر.',

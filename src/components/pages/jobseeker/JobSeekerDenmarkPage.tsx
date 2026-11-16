@@ -128,9 +128,9 @@ const faqs = [
 ];
 
 const relatedArticles = [
-  { title: 'ویزای جستجوی کار اتریش', href: '/guides/jobseeker-austria', desc: '۷۰ امتیاز + قانون ماندن ۲۰۲۶' },
-  { title: 'اقامت تمکن مالی اتریش (Privatier)', href: '/guides/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
-  { title: 'ویزای غیرانتفاعی اسپانیا', href: '/guides/financial-spain', desc: '۴۰۰٪ IPREM + اقامت دائم ۵ ساله' },
+  { title: 'ویزای جستجوی کار اتریش', href: '/jobseeker-austria', desc: '۷۰ امتیاز + قانون ماندن ۲۰۲۶' },
+  { title: 'اقامت تمکن مالی اتریش (Privatier)', href: '/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
+  { title: 'ویزای غیرانتفاعی اسپانیا', href: '/financial-spain', desc: '۴۰۰٪ IPREM + اقامت دائم ۵ ساله' },
 ];
 
 export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -141,8 +141,8 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
   useSeo({
     title: 'ویزای جستجوی کار دانمارک ۲۰۲۶ | Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت',
     description:
-      'راهنمای کامل ویزای کار و جستجوی کار دانمارک ۲۰۲۶: طرح Pay Limit (۵۵۲,۰۰۰ کرون)، لیست‌های مثبت (۱۶۴ + ۶۳ عنوان شغلی)، قانون ۲ روزه پس از اخراج، اجازه ۶ ماهه جستجوی کار، حق کار همسر و مسیر ۸ ساله تا اقامت دائم. مشاوره دفتر کپنهاگ دیاکو.',
-    canonical: '/guides/jobseeker-denmark',
+      'راهنمای کامل ویزای کار و جستجوی کار دانمارک ۲۰۲۶: طرح Pay Limit (۵۵۲,۰۰۰ کرون)، لیست‌های مثبت (۱۶۴ + ۶۳ عنوان شغلی)، قانون ۲ روزه پس از اخراج، اجازه ۶ ماهه جستجوی کار، حق کار همسر و مسیر ۸ ساله تا اقامت دائم. مشاوره تخصصی تیم حقوقی دیاکو.',
+    canonical: '/jobseeker-denmark',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -156,7 +156,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/jobseeker-denmark#article',
+          '@id': 'https://www.dia-co.ir/jobseeker-denmark#article',
           headline: 'راهنمای جامع ویزای کار و جستجوی کار دانمارک ۲۰۲۶: Pay Limit، لیست‌های مثبت و مسیر اقامت دائم',
           description: 'تحلیل کامل طرح‌های SIRI دانمارک: Pay Limit (۵۵۲,۰۰۰ کرون)، لیست‌های مثبت (۱۶۴ تحصیلات عالی + ۶۳ مهارتی)، قانون ۲ روزه پس از اخراج، اجازه ۶ ماهه جستجوی کار و مسیر ۸ ساله تا اقامت دائم.',
           image: ['https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=1200&q=80'],
@@ -183,8 +183,8 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'ویزای جستجوی کار', item: 'https://www.dia-co.ir/jobseeker' },
-            { '@type': 'ListItem', position: 3, name: 'دانمارک', item: 'https://www.dia-co.ir/guides/jobseeker-denmark' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'دانمارک', item: 'https://www.dia-co.ir/jobseeker-denmark' },
           ],
         },
       ],
@@ -192,7 +192,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
   });
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText('+45 00 00 00 00');
+    navigator.clipboard.writeText('+43 688 976 3256');
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2000);
   };
@@ -286,7 +286,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
               </button>
               <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-xs sm:text-sm font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
                 <PhoneCall className="h-4 w-4 text-emerald-400" />
-                تماس با دفتر کپنهاگ
+                تماس با دفتر مرکزی وین
                 {copiedPhone && <span className="text-emerald-400 text-[10px] font-bold">کپی شد!</span>}
               </button>
             </div>
@@ -714,7 +714,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
           <Sparkles className="h-8 w-8 text-red-400 mx-auto mb-4" />
           <h2 className="text-xl md:text-2xl font-black mb-2">همین امروز واجد شرایط بودن خود را بررسی کنید</h2>
           <p className="text-xs md:text-sm text-slate-300 max-w-2xl mx-auto mb-6">
-            دفتر کپنهاگ دیاکو پروفایل شما را با طرح Pay Limit، لیست‌های مثبت و قانون ۲ روزه پس از از دست دادن شغل تطبیق می‌دهد
+            تیم حقوقی دیاکو پروفایل شما را با طرح Pay Limit، لیست‌های مثبت و قانون ۲ روزه پس از از دست دادن شغل تطبیق می‌دهد
             و پرونده شما را از ابتدا تا انتها آماده می‌کند.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -723,7 +723,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
             </button>
             <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3 text-xs md:text-sm font-bold hover:bg-white/10 inline-flex items-center gap-2">
               <Copy className="h-4 w-4 text-red-400" />
-              {copiedPhone ? 'شماره کپی شد!' : 'دفتر کپنهاگ: +۴۵ XX XX XX XX'}
+              {copiedPhone ? 'شماره کپی شد!' : 'دفتر مرکزی وین: +43 688 976 3256'}
             </button>
           </div>
         </div>
@@ -753,7 +753,8 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
             <div>
               <h4 className="font-bold mb-3">تماس با ما</h4>
               <ul className="space-y-2 text-xs text-slate-400">
-                <li>دفتر کپنهاگ: +۴۵ XX XX XX XX</li>
+                <li dir="ltr" className="text-right">دفتر وین: +43 688 976 3256</li>
+                <li dir="ltr" className="text-right">دفتر تهران: 021 9169 3955</li>
                 <li>واتساپ: ۰۹۱۹۷۳۴۰۸۲۹</li>
                 <li>ایمیل: info@dia-co.ir</li>
               </ul>
@@ -762,7 +763,7 @@ export const JobSeekerDenmarkPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
               <h4 className="font-bold mb-3">شبکه‌های اجتماعی</h4>
               <div className="flex items-center gap-3 text-xs text-slate-400">
                 <a href="https://instagram.com" className="hover:text-red-300" aria-label="اینستاگرام">اینستاگرام</a>
-                <a href="https://wa.me/4599999999" className="hover:text-red-300" aria-label="واتساپ">واتساپ</a>
+                <a href="https://wa.me/989197340829" className="hover:text-red-300" aria-label="واتساپ">واتساپ</a>
                 <a href="https://t.me" className="hover:text-red-300" aria-label="تلگرام">تلگرام</a>
               </div>
               <p className="text-[10px] text-slate-500 mt-4">© ۲۰۲۶ دیاکو. تمامی حقوق محفوظ است.</p>

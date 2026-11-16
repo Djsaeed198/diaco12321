@@ -35,7 +35,7 @@ export const JobSeekerPortugalPage: React.FC<Props> = ({
     title: 'ویزای جستجوی کار پرتغال ۲۰۲۶ | ویزای کاریابی ۱۲۰ روزه (Portugal Job Seeker Visa)',
     description:
       'راهنمای کامل ویزای جستجوی کار پرتغال ۲۰۲۶ (Visto de procura de trabalho)؛ اعتبار ۱۲۰ روزه با تمدید ۶۰ روزه، ثبت‌نام در سامانه اشتغال پرتغال (IEFP)، تمکن مالی ۳ ماهه و تبدیل به اقامت کاری با دیاکو.',
-    canonical: '/guides/jobseeker-portugal',
+    canonical: '/jobseeker-portugal',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const JobSeekerPortugalPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/jobseeker-portugal#article',
+          '@id': 'https://www.dia-co.ir/jobseeker-portugal#article',
           headline: 'راهنمای جامع ویزای کاریابی پرتغال ۲۰۲۶: فرآیند IEFP و اخذ اقامت شینگن',
           description:
             'بررسی قانون جدید مهاجرت پرتغال برای ویزای جستجوی کار ۱۲۰ روزه، تمکن مالی معادل ۳ برابر حداقل حقوق پرتغال (حدود ۲,۵۰۰ یورو) و اخذ اقامت ۲ ساله کاری در آژانس AIMA لیسبون.',

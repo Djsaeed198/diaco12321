@@ -35,7 +35,7 @@ export const RealEstateHungaryPage: React.FC<Props> = ({
     title: 'گلدن ویزای مجارستان ۲۰۲۶ | اقامت ۱۰ ساله سرمایه‌گذاری ملکی (Guest Investor)',
     description:
       'راهنمای رسمی برنامه جدید گلدن ویزای مجارستان ۲۰۲۶ (Guest Investor Program)؛ خرید ملک مسکونی ۵۰۰,۰۰۰ یورو یا صندوق املاک ۲۵۰,۰۰۰ یورو، اخذ کارت اقامت ۱۰ ساله شینگن برای خانواده با دیاکو.',
-    canonical: '/guides/realestate-hungary',
+    canonical: '/realestate-hungary',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateHungaryPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-hungary#article',
+          '@id': 'https://www.dia-co.ir/realestate-hungary#article',
           headline: 'راهنمای جامع برنامه جدید گلدن ویزای مجارستان ۲۰۲۶ (Guest Investor Program)',
           description:
             'بررسی قانون مهاجرت جدید مجارستان، کارت اقامت ۱۰ ساله قابل تمدید برای ۱۰ سال دیگر، گزینه‌های سرمایه‌گذاری صندوق املاک ۲۵۰,۰۰۰ یورو و ملک مسکونی ۵۰۰,۰۰۰ یورو در بوداپست.',

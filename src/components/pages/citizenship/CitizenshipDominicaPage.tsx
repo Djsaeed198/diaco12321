@@ -65,7 +65,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
     title: 'پاسپورت دومینیکا ۲۰۲۶ | هزینه ۲۰۰,۰۰۰ $ و ۱۴۵ کشور',
     description:
       'راهنمای رسمی شهروندی دومینیکا ۲۰۲۶؛ EDF از ۲۰۰,۰۰۰ $ (خانواده ۴ نفره ۲۵۰,۰۰۰ $)، سفر بدون ویزا به شینگن (رتبه ۲۹ هنلی)، Due Diligence ۷,۵۰۰ $ و پاسپورت ۱۰ ساله بدون نیاز به اقامت. ارزیابی فوری.',
-    canonical: '/guides/citizenship-dominica',
+    canonical: '/citizenship-dominica',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
@@ -84,7 +84,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-dominica#article',
+          '@id': 'https://www.dia-co.ir/citizenship-dominica#article',
           headline:
             'راهنمای جامع شهروندی و پاسپورت دومینیکا ۲۰۲۶: هزینه ۲۰۰,۰۰۰ دلار، شینگن و ۱۴۵ مقصد',
           description:
@@ -127,7 +127,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-dominica#howto',
+          '@id': 'https://www.dia-co.ir/citizenship-dominica#howto',
           name: 'مراحل دریافت شهروندی دومینیکا در ۲۰۲۶',
           description:
             'فرآیند گام‌به‌گام از انتخاب مسیر سرمایه‌گذاری تا دریافت پاسپورت بیومتریک.',
@@ -166,7 +166,7 @@ export const CitizenshipDominicaPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-dominica#faq',
+          '@id': 'https://www.dia-co.ir/citizenship-dominica#faq',
           mainEntity: [
             {
               '@type': 'Question',

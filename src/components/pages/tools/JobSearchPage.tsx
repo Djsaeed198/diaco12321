@@ -250,7 +250,7 @@ export const JobSearchPage: React.FC<Props> = ({
   useSeo({
     title: 'بانک مشاغل مورد نیاز و کاریابی در اروپا ۲۰۲۶ | هلدینگ بین‌المللی دیاکو',
     description:
-      'بانک جامع مشاغل دارای کسری نیرو در اتریش (Mangelberufe)، آلمان و دانمارک؛ حداقل حقوق بلوکارت ۲۰۲۶ (€۴۸,۳۰۰)، کاریابی به زبان انگلیسی و شرایط اخذ کارت قرمز-سفید-قرمز با نظارت وکلای دیاکو.',
+      'بانک جامع مشاغل دارای کسری نیرو در اتریش (Mangelberufe)، آلمان و دانمارک؛ حداقل حقوق بلوکارت آلمان ۲۰۲۶ (€۵۰,۷۰۰ عمومی / €۴۵,۹۳۴.۲۰ مشاغل کمبود نیرو)، کاریابی به زبان انگلیسی و شرایط اخذ کارت قرمز-سفید-قرمز با نظارت وکلای دیاکو.',
     keywords: [
       'مشاغل مورد نیاز اتریش ۲۰۲۶',
       'لیست مشاغل آلمان ۲۰۲۶',
@@ -352,7 +352,7 @@ export const JobSearchPage: React.FC<Props> = ({
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs text-slate-300 border-t border-white/10">
               <div className="flex items-center gap-1.5">
                 <Euro className="w-4 h-4 text-emerald-400" />
-                <span>حداقل حقوق بلوکارت ۲۰۲۶: <strong>€۴۸,۳۰۰ ناخالص سالانه</strong></span>
+                <span>حداقل حقوق بلوکارت آلمان ۲۰۲۶: <strong>€۵۰,۷۰۰ عمومی / €۴۵,۹۳۴.۲۰ کمبود نیرو</strong></span>
               </div>
               <span className="text-white/20">•</span>
               <div className="flex items-center gap-1.5">
@@ -622,7 +622,7 @@ export const JobSearchPage: React.FC<Props> = ({
               </div>
               <h3 className="text-base font-bold text-white">تطابق حداقل حقوق بلوکارت ۲۰۲۶</h3>
               <p className="text-xs text-slate-300 leading-relaxed">
-                طبق مصوبات جدید اتحادیه اروپا، حداقل حقوق ناخالص سالانه برای مشاغل معمولی به ۴۸,۳۰۰ یورو و برای مشاغل پرتقاضا (IT، ریاضی، علوم و پزشکی) به ۳۹,۶۸۲ یورو کاهش یافته تا اخذ ویزا تسهیل شود.
+                طبق مصوبات سال ۲۰۲۶ (make-it-in-germany.com)، حداقل حقوق ناخالص سالانه بلوکارت آلمان برای مشاغل عمومی ۵۰,۷۰۰ یورو و برای مشاغل پرتقاضا (STEM، پزشکی و IT) و فارغ‌التحصیلان اخیر ۴۵,۹۳۴.۲۰ یورو است.
               </p>
             </div>
 

@@ -36,7 +36,7 @@ export const MethodComparatorPage: React.FC<Props> = ({
     title: 'مقایسه‌گر جامع روش‌های مهاجرت به اروپا ۲۰۲۶ | بلوکارت، تمکن مالی یا تحصیلی؟',
     description:
       'مقایسه دقیق مزایا، معایب، هزینه‌ها و شرط حضور روش‌های مهاجرتی اروپا در سال ۲۰۲۶؛ جدول ماتریسی مقایسه تمکن مالی، بلوکارت، کارت قرمز-سفید-قرمز، ویزای طلایی و ثبت شرکت با تحلیل وکلای دیاکو.',
-    canonical: '/guides/method-comparator',
+    canonical: '/method-comparator',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
@@ -53,7 +53,7 @@ export const MethodComparatorPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/method-comparator#article',
+          '@id': 'https://www.dia-co.ir/method-comparator#article',
           headline: 'تحلیل ماتریسی و مقایسه جامع برترین مسیرهای اقامت اروپا در سال ۲۰۲۶',
           description:
             'بررسی ابعاد مالی، حقوقی و زمانی مسیرهای تمکن مالی، اقامت کاری نخبگان، تحصیل رایگان و گلدن ویزا به قلم کارشناسان ارشد هلدینگ مهاجرتی دیاکو.',
@@ -79,7 +79,7 @@ export const MethodComparatorPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/method-comparator#faq',
+          '@id': 'https://www.dia-co.ir/method-comparator#faq',
           mainEntity: [
             {
               '@type': 'Question',

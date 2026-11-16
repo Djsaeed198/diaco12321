@@ -44,7 +44,7 @@ export const SpainBlueCardPage: React.FC<Props> = ({
     title: 'بلوکارت اسپانیا ۲۰۲۶ | راهنمای اقامت کاری و حقوق دیاکو',
     description:
       'راهنمای جامع اخذ بلوکارت اسپانیا ۲۰۲۶؛ حداقل حقوق، معافیت زبان، کار در مادرید و بارسلونا، اقامت دائم و الحاق همسر زیر نظر وکلای هلدینگ دیاکو. ارزیابی فوری پرونده.',
-    canonical: '/guides/blue-card-spain',
+    canonical: '/spain-blue-card',
     ogType: 'article',
     ogImage: 'https://www.dia-co.ir/og-services-work.jpg',
     keywords: [

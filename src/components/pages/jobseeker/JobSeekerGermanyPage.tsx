@@ -119,16 +119,16 @@ const faqs = [
   { q: 'آیا برای Chancenkarte به مدرک زبان آلمانی نیاز دارم؟', a: 'حداقل باید یکی از این دو را داشته باشید: آلمانی A1 یا انگلیسی B2. آلمانی A1 یک امتیاز، A2 دو، B1 سه و B2 چهار امتیاز می‌دهد. انگلیسی B2 فقط یک امتیاز.' },
   { q: 'حساب مسدود (Sperrkonto) برای ۲۰۲۷ چقدر است؟', a: 'برای ۲۰۲۶ حدود €۱۳,۰۹۲ در سال (معادل €۱,۰۹۱ ماهانه) بود. برای ۲۰۲۷ معمولاً با شاخص‌بندی سالانه افزایش می‌یابد؛ مبلغ دقیق باید در زمان درخواست از سفارت یا سایت رسمی بررسی شود. تقریباً €۱۲,۳۲۴ تا €۱۳,۲۰۰ سالانه تخمین زده می‌شود.' },
   { q: 'چقدر می‌توانم در طول کارت شانس کار کنم؟', a: '۲۰ ساعت در هفته کار پاره‌وقت + ۲ هفته کار آزمایشی (Probearbeiten) در حوزه تخصصی. کار آزمایشی به شما امکان می‌دهد کارفرما را بشناسید.' },
-  { q: 'آیا می‌توانم بدون خروج از آلمان بلوکارت بگیرم؟', a: 'بله. با دریافت جاب‌آفر منطبق با تخصص و شرایط بلوکارت (حقوق حداقلی €۴۸,۳۰۰ در ۲۰۲۵ یا €۴۳,۷۵۹.۸۰ در مشاغل کمبود)، می‌توانید مستقیماً در Ausländerbehörde درخواست دهید.' },
+  { q: 'آیا می‌توانم بدون خروج از آلمان بلوکارت بگیرم؟', a: 'بله. با دریافت جاب‌آفر منطبق با تخصص و شرایط بلوکارت ۲۰۲۶ (حقوق حداقلی €۵۰,۷۰۰ عمومی یا €۴۵,۹۳۴.۲۰ در مشاغل کمبود نیرو و فارغ‌التحصیلان اخیر)، می‌توانید مستقیماً در Ausländerbehörde درخواست دهید.' },
   { q: 'آیا همسر و فرزندان می‌توانند همراه باشند؟', a: 'بله، همسر و فرزندان زیر ۱۸ سال می‌توانند ویزای همراه بگیرند. نیاز به اثبات تمکن مالی اضافه و بیمه درمانی دارند. همسر پس از ورود اجازه کار دارد.' },
   { q: 'مدت زمان پردازش ویزای Chancenkarte چقدر است؟', a: 'معمولاً ۴ تا ۸ هفته از زمان تکمیل مدارک. زمان سفارت + بررسی ZAB می‌تواند کل فرآیند را به ۴ تا ۶ ماه برساند.' },
   { q: 'آیا کارت شانس قابل تمدید است؟', a: 'در صورت نیاز به زمان بیشتر برای یافتن کار، در برخی موارد تمدید تا ۲ سال امکان‌پذیر است. اما معمولاً ۱ سال اول کافی است اگر فعالانه جستجو کنید.' },
 ];
 
 const relatedArticles = [
-  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/guides/jobseeker-austria-2027', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR Card' },
-  { title: 'ویزای جستجوی کار دانمارک', href: '/guides/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
-  { title: 'اقامت تمکن مالی اتریش', href: '/guides/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
+  { title: 'ویزای جستجوی کار اتریش ۲۰۲۶', href: '/jobseeker-austria', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR Card' },
+  { title: 'ویزای جستجوی کار دانمارک', href: '/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
+  { title: 'اقامت تمکن مالی اتریش', href: '/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
 ];
 
 export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -140,7 +140,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
     title: 'کارت شانس آلمان ۲۰۲۷ (Chancenkarte) | ۶ امتیاز + ۲۰ ساعت کار + مسیر بلوکارت',
     description:
       'راهنمای کامل کارت شانس آلمان ۲۰۲۷: حداقل ۶ امتیاز از جدول Chancenkarte، زبان آلمانی A1 یا انگلیسی B2، حساب مسدود، اجازه ۲۰ ساعت کار پاره‌وقت + ۲ هفته کار آزمایشی و تبدیل به بلوکارت بدون خروج از آلمان. مشاوره دیاکو.',
-    canonical: '/guides/jobseeker-germany',
+    canonical: '/jobseeker-germany',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -154,7 +154,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/jobseeker-germany#article',
+          '@id': 'https://www.dia-co.ir/jobseeker-germany#article',
           headline: 'راهنمای جامع کارت شانس آلمان ۲۰۲۷: ۶ امتیاز، ۲۰ ساعت کار و مسیر بلوکارت',
           description: 'تحلیل کامل Chancenkarte ۲۰۲۷: جدول ۶ امتیازی، شرایط زبان A1/B2، حساب مسدود، کار پاره‌وقت ۲۰ ساعته، ۲ هفته کار آزمایشی و تبدیل به بلوکارت بدون خروج از آلمان.',
           image: ['https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80'],
@@ -181,8 +181,8 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'ویزای جستجوی کار', item: 'https://www.dia-co.ir/jobseeker' },
-            { '@type': 'ListItem', position: 3, name: 'آلمان ۲۰۲۷', item: 'https://www.dia-co.ir/guides/jobseeker-germany' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی دیاکو', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'کارت شانس آلمان', item: 'https://www.dia-co.ir/jobseeker-germany' },
           ],
         },
       ],
@@ -190,7 +190,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
   });
 
   const handleCopyPhone = () => {
-    navigator.clipboard.writeText('+49 30 000 0000');
+    navigator.clipboard.writeText('+436889763256');
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2000);
   };
@@ -293,7 +293,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
               </button>
               <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3.5 text-xs sm:text-sm font-bold hover:bg-white/10 transition inline-flex items-center gap-2">
                 <PhoneCall className="h-4 w-4 text-emerald-400" />
-                دفتر برلین: +۴۹ ۳۰ ۰۰۰ ۰۰۰۰
+                دفتر وین (اتحادیه اروپا): ۴۳۶۸۸۹۷۶۳۲۵۶+
                 {copiedPhone && <span className="text-emerald-400 text-[10px] font-bold">کپی شد!</span>}
               </button>
             </div>
@@ -469,8 +469,8 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
             </div>
             <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-400/20">
               <p className="text-[11px] text-amber-200 leading-relaxed">
-                <strong>آستانه حقوق بلوکارت ۲۰۲۷:</strong> برای مشاغل عادی حدود €۴۸,۳۰۰ در سال و برای مشاغل کمبود (Mangelberufe)
-                و فارغ‌التحصیلان جدید حدود €۴۳,۷۵۹.۸۰ در سال. این مبالغ سالانه به‌روزرسانی می‌شوند.
+                <strong>آستانه حقوق بلوکارت ۲۰۲۶ (make-it-in-germany.com):</strong> برای مشاغل عادی €۵۰,۷۰۰ در سال و برای مشاغل کمبود نیرو (Mangelberufe/STEM)
+                و فارغ‌التحصیلان جدید €۴۵,۹۳۴.۲۰ در سال. این مبالغ سالانه به‌روزرسانی می‌شوند.
               </p>
             </div>
           </div>
@@ -786,7 +786,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
             </button>
             <button type="button" onClick={handleCopyPhone} className="rounded-2xl border border-white/20 bg-white/5 px-5 py-3 text-xs md:text-sm font-bold hover:bg-white/10 inline-flex items-center gap-2">
               <Copy className="h-4 w-4 text-emerald-400" />
-              {copiedPhone ? 'شماره کپی شد!' : 'دفتر برلین: +49 30 000 0000'}
+              {copiedPhone ? 'شماره کپی شد!' : 'دفتر مرکزی وین: +43 688 976 3256'}
             </button>
           </div>
         </div>
@@ -817,7 +817,8 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
             <div>
               <h4 className="font-bold mb-3">تماس با ما</h4>
               <ul className="space-y-2 text-xs text-slate-400">
-                <li>دفتر برلین: +۴۹ ۳۰ ۰۰۰ ۰۰۰۰</li>
+                <li dir="ltr" className="text-right">دفتر وین: +43 688 976 3256</li>
+                <li dir="ltr" className="text-right">دفتر تهران: 021 9169 3955</li>
                 <li>واتساپ: ۰۹۱۹۷۳۴۰۸۲۹</li>
                 <li>ایمیل: info@dia-co.ir</li>
               </ul>
@@ -826,7 +827,7 @@ export const JobSeekerGermanyPage: React.FC<Props> = ({ onBackToHome, onOpenAsse
               <h4 className="font-bold mb-3">شبکه‌های اجتماعی</h4>
               <div className="flex items-center gap-3 text-xs text-slate-400">
                 <a href="https://instagram.com" className="hover:text-emerald-300" aria-label="اینستاگرام">اینستاگرام</a>
-                <a href="https://wa.me/49300000000" className="hover:text-emerald-300" aria-label="واتساپ">واتساپ</a>
+                <a href="https://wa.me/989197340829" className="hover:text-emerald-300" aria-label="واتساپ">واتساپ</a>
                 <a href="https://t.me" className="hover:text-emerald-300" aria-label="تلگرام">تلگرام</a>
               </div>
               <p className="text-[10px] text-slate-500 mt-4">© ۲۰۲۷ دیاکو. تمامی حقوق محفوظ است.</p>

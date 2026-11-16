@@ -353,8 +353,11 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="rounded-2xl bg-amber-400/10 px-4 py-2 text-xs md:text-sm font-bold text-amber-300 border border-amber-400/30">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-2xl bg-amber-400/10 px-4 py-2 text-xs font-bold text-amber-300 border border-amber-400/30">
+              ۱۱+ سال سابقه رسمی (از ۱۳۹۴) · ۳۵ وکیل همکار · ۲,۱۵۰+ پرونده موفق
+            </span>
+            <span className="rounded-2xl bg-white/5 px-3.5 py-2 text-xs font-bold text-slate-200 border border-white/10">
               وین • آتن • تهران
             </span>
           </div>
@@ -744,9 +747,19 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
             <div className="mt-4 space-y-3 text-xs leading-5 text-slate-600">
               {CONTACT_DATA.offices.map((office) => (
                 <div key={office.country} className="border-b border-slate-100 pb-2.5 last:border-none last:pb-0">
-                  <p className="font-bold text-[#0b2933]">
-                    {office.country} ({office.city}):
-                  </p>
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-bold text-[#0b2933]">
+                      {office.country} ({office.city}):
+                    </p>
+                    <a
+                      href={office.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] font-bold text-cyan-700 hover:text-amber-700 hover:underline shrink-0"
+                    >
+                      نقشه گوگل ↗
+                    </a>
+                  </div>
                   <p className="mt-0.5 text-[11px] text-slate-500 leading-relaxed">{office.address}</p>
                 </div>
               ))}
@@ -856,7 +869,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
               </h4>
               <ul className="space-y-1.5 text-[11px] text-slate-300">
                 {[
-                  { page: 'german-blue-card', label: 'بلوکارت آلمان ۲۰۲۶ (حداقل حقوق €۴۸,۳۰۰)' },
+                  { page: 'german-blue-card', label: 'بلوکارت آلمان ۲۰۲۶ (آستانه €۵۰,۷۰۰ / STEM €۴۵,۹۳۴)' },
                   { page: 'jobseeker-germany', label: 'کارت شانس آلمان (Chancenkarte)' },
                   { page: 'medical-germany', label: 'پزشکان و کادر درمان آلمان' },
                   { page: 'germany-nursing-assistant-visa', label: 'ویزای کار کمک پرستاری آلمان (۲۰۲۶–۲۰۲۷)' },
@@ -904,7 +917,7 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
                   { page: 'citizenship-turkey', label: 'شهروندی ترکیه با سرمایه‌گذاری ملکی' },
                   { page: 'nomad-spain', label: 'ویزای دیجیتال نوماد اسپانیا' },
                   { page: 'migrate-with-1-billion-toman', label: 'مهاجرت با بودجه ۱ میلیارد تومان (۲۰۲۶–۲۰۲۷)' },
-                  { page: 'netherlands-study-visa', label: 'مهاجرت تحصیلی به هلند ۲۰۲۶' },
+                  { page: 'academic-netherlands', label: 'مهاجرت تحصیلی به هلند ۲۰۲۶' },
                 ].map((item) => (
                   <li key={item.page}>
                     <a
@@ -938,11 +951,6 @@ export const ContactFooter: React.FC<ContactFooterProps> = ({ onNavigateToPage, 
                   { page: 'germany-vs-austria-immigration-comparison', label: 'مقایسه آلمان یا اتریش (۶ معیار ۲۰۲۶–۲۰۲۷)' },
                   { page: 'easiest-countries-to-immigrate-2027', label: 'راحت‌ترین کشور برای مهاجرت ۲۰۲۷' },
                   { page: 'cheapest-european-countries-to-immigrate', label: 'ارزان‌ترین کشورهای اروپایی (۲۰۲۶–۲۰۲۷)' },
-                  { page: 'real-cost-of-immigration-hidden-fees', label: 'هزینه واقعی و هزینه‌های پنهان مهاجرت' },
-                  { page: 'why-my-visa-was-rejected-10-real-reasons', label: '۱۰ دلیل واقعی ریجکتی ویزا و رفع ریجکتی' },
-                  { page: 'why-some-wait-5-years-for-immigration-case-studies', label: 'چرا بعضی‌ها ۵ سال در صف می‌مانند؟ (۴ پرونده)' },
-                  { page: 'iranian-immigration-map-statistics', label: 'نقشه آماری مهاجرت ایرانیان (۲۰۲۵–۲۰۲۷)' },
-                  { page: 'visa-approval-rate-for-iranians-by-country', label: 'نرخ موفقیت ویزا به تفکیک کشور (۲۰۲۶–۲۰۲۷)' },
                   { page: 'single-vs-married-immigration-which-is-easier', label: 'مهاجرت مجردها در مقابل متأهل‌ها (۲۰۲۶–۲۰۲۷)' },
                   { page: 'immigration-for-artists-and-musicians', label: 'مهاجرت هنرمندان و اهالی موسیقی (۲۰۲۶–۲۰۲۷)' },
                   { page: 'best-digital-nomad-visas-income-tax-comparison', label: 'ویزای نومد دیجیتال و مقایسه مالیاتی (۲۰۲۶–۲۰۲۷)' },

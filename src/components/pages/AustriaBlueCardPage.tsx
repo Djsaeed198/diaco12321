@@ -24,15 +24,13 @@ interface Props {
   onNavigateToCountry?: (countryKey: 'germany' | 'spain' | 'italy' | 'austria' | 'hungary') => void;
 }
 
-// ✅ 2026 年奥地利蓝卡官方薪资阈值（migration.gv.at / AMS）
+// آستانه رسمی حقوق بلوکارت اتریش ۲۰۲۶ (migration.gv.at / AMS)
 const SALARY_THRESHOLDS_AUSTRIA_2026 = {
-  regularAnnual: 55678, // 全职雇员平均毛年薪，含 13/14 薪
+  regularAnnual: 55678, // حقوق ناخالص سالانه در ۱۴ پرداخت
   monthly14th: 3977, // €55,678 ÷ 14
 };
 
-// ============================================================
-// 🖼️ Unsplash 图片资源（维也纳主题，免费商用）
-// ============================================================
+// تصاویر صفحه (وین اتریش)
 const AUSTRIA_IMAGES = {
   hero: {
     src: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
@@ -58,9 +56,7 @@ const AUSTRIA_IMAGES = {
   },
 };
 
-// ============================================================
-// 🔍 AIO / SEO 结构化数据
-// ============================================================
+// داده‌های ساختاریافته AIO / SEO
 function buildAustriaStructuredData() {
   return {
     '@context': 'https://schema.org',
@@ -176,14 +172,14 @@ function buildAustriaStructuredData() {
           {
             '@type': 'ListItem',
             position: 2,
-            name: 'بلو کارت اتحادیه اروپا',
-            item: 'https://www.dia-co.ir/guides/eu-blue-card/',
+            name: 'خدمات مهاجرتی و بلوکارت اروپا',
+            item: 'https://www.dia-co.ir/services',
           },
           {
             '@type': 'ListItem',
             position: 3,
             name: 'بلوکارت اتریش ۲۰۲۶',
-            item: 'https://www.dia-co.ir/guides/blue-card-austria/',
+            item: 'https://www.dia-co.ir/austria-blue-card',
           },
         ],
       },
@@ -191,9 +187,7 @@ function buildAustriaStructuredData() {
   };
 }
 
-// ============================================================
-// 🧩 组件主体
-// ============================================================
+// بدنه اصلی کامپوننت
 export const AustriaBlueCardPage: React.FC<Props> = ({
   onBackToHome,
   onOpenAssessment,
@@ -203,7 +197,7 @@ export const AustriaBlueCardPage: React.FC<Props> = ({
     title: 'بلوکارت اتریش ۲۰۲۶ | حقوق ۵۵,۶۷۸ € و RWR Plus | دیاکو',
     description:
       'راهنمای بلوکارت اتریش ۲۰۲۶: حداقل حقوق €۵۵,۶۷۸ در ۱۴ پرداخت، بدون سیستم امتیاز، تبدیل به RWR Plus پس از ۲ سال و ۲۱ ماه اشتغال. محاسبه‌گر حقوق و چک‌لیست مدارک با دفتر وین دیاکو.',
-    canonical: '/guides/blue-card-austria',
+    canonical: '/austria-blue-card',
     ogType: 'article',
     ogImage: AUSTRIA_IMAGES.hero.src,
     keywords: [

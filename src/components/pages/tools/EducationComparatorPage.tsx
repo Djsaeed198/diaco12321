@@ -32,7 +32,7 @@ export const EducationComparatorPage: React.FC<Props> = ({
     title: 'مقایسه‌گر تحصیل در اروپا ۲۰۲۶ | اتریش، آلمان، ایتالیا یا اسپانیا؟',
     description:
       'مقایسه جامع شرایط تحصیل در دانشگاه‌های برتر اروپا؛ شهریه دانشگاه‌ها، بورسیه استانی ایتالیا DSU، تحصیل به زبان انگلیسی، کار دانشجویی و اقامت کاری پس از فارغ‌التحصیلی با نظارت دیاکو.',
-    canonical: '/guides/education-comparator',
+    canonical: '/education-comparator',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80',
@@ -49,7 +49,7 @@ export const EducationComparatorPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/education-comparator#article',
+          '@id': 'https://www.dia-co.ir/education-comparator#article',
           headline: 'تحلیل مقایسه‌ای تحصیل در برترین مقاصد دانشگاهی اروپا در سال ۲۰۲۶',
           description:
             'بررسی فرصت‌های تحصیلی، بورسیه‌های تحصیلی فول‌فاند، شرایط پذیرش مقاطع کارشناسی و ارشد و آینده اقامتی نخبگان توسط دپارتمان آکادمیک هلدینگ دیاکو.',

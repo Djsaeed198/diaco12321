@@ -423,7 +423,7 @@ export const AfterArrivalPage: React.FC<Props> = ({
       'مدارس ایرانی در وین',
       'هلدینگ دیاکو وین',
     ],
-    canonical: 'https://www.dia-co.ir/after-arrival-services-europe',
+    canonical: '/after-arrival',
     ogImage: AFTER_ARRIVAL_IMAGES.hero.src,
     ogType: 'article',
     jsonLd: buildStructuredData(),
@@ -505,9 +505,9 @@ export const AfterArrivalPage: React.FC<Props> = ({
               {/* برچسب‌های آمار اعتماد */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                 {[
-                  { value: '۱۰۰٪', label: 'تضمین حقوقی قرارداد مسکن' },
+                  { value: 'رسمی', label: 'تنظیم حقوقی قرارداد مسکن' },
                   { value: '۳ روز', label: 'مهلت قانونی ثبت Meldezettel' },
-                  { value: '۲،۰۰۰+', label: 'خانواده مستقر شده در اتریش' },
+                  { value: '۲,۱۵۰+', label: 'پرونده اقامتی و استقرار موفق' },
                   { value: '۲۴/۷', label: 'همراهی وکیل در وین' },
                 ].map((s) => (
                   <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-3 text-center">

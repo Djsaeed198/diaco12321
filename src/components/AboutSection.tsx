@@ -86,13 +86,13 @@ const STATS: StatItem[] = [
   {
     icon: Award,
     label: 'سابقه فعالیت',
-    value: '۱۰+ سال',
-    note: 'از سال ۱۳۹۴ تاکنون',
+    value: '۱۱+ سال',
+    note: 'تأسیس ۱۳۹۴ (۲۰۱۵)',
   },
   {
     icon: FileCheck2,
     label: 'پرونده موفق',
-    value: '۲,۰۰۰+',
+    value: '۲,۱۵۰+',
     note: 'تأییدشده توسط وکلای اتریش',
   },
   {
@@ -149,7 +149,7 @@ const COMPARISON_ROWS = [
 const FAQS: FAQEntry[] = [
   {
     q: 'هلدینگ مهاجرتی دیاکو چند سال سابقه فعالیت دارد؟',
-    a: 'دیاکو از سال ۱۳۹۴ (۲۰۱۵ میلادی) فعالیت خود را آغاز کرده و تا سال ۲۰۲۶ بیش از ۱۰ سال سابقه مستمر در حوزه مهاجرت، اقامت و سرمایه‌گذاری در اروپا دارد. در این مدت بیش از ۲,۰۰۰ پرونده موفق توسط تیم حقوقی ما مدیریت شده است.',
+    a: 'دیاکو از سال ۱۳۹۴ (۲۰۱۵ میلادی) فعالیت خود را آغاز کرده و تا سال ۲۰۲۶ بیش از ۱۱ سال سابقه مستمر و رسمی در حوزه مهاجرت، اقامت و سرمایه‌گذاری در اروپا دارد. در این مدت بیش از ۲,۱۵۰ پرونده موفق توسط تیم ۳۵ وکیل و مشاور حقوقی ما مدیریت شده است.',
   },
   {
     q: 'دفاتر دیاکو در کدام کشورها فعال است؟',
@@ -187,7 +187,7 @@ const generateSchema = () => ({
       url: BRAND.origin,
       logo: { '@type': 'ImageObject', url: BRAND.logo, width: 512, height: 512 },
       description:
-        'هلدینگ مهاجرتی دیاکو؛ مجری تخصصی پرونده‌های اقامت، ویزا و سرمایه‌گذاری در ۱۱ کشور اروپایی با ۱۰+ سال سابقه و ۳۵ وکیل بین‌المللی.',
+        'هلدینگ مهاجرتی دیاکو؛ مجری تخصصی پرونده‌های اقامت، ویزا و سرمایه‌گذاری در ۱۱ کشور اروپایی با بیش از ۱۱ سال سابقه رسمی (از ۱۳۹۴)، ۳۵ وکیل همکار و ۲,۱۵۰+ پرونده موفق.',
       foundingDate: '2015',
       telephone: BRAND.phone,
       email: 'info@dia-co.ir',
@@ -195,7 +195,7 @@ const generateSchema = () => ({
       address: [
         {
           '@type': 'PostalAddress',
-          streetAddress: 'Ausstellungsstraße 50',
+          streetAddress: 'Ausstellungsstraße 50/2.OG',
           addressLocality: 'Wien',
           postalCode: '1020',
           addressCountry: 'AT',
@@ -225,7 +225,7 @@ const generateSchema = () => ({
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',
-        reviewCount: '1847',
+        reviewCount: '6',
         bestRating: '5',
       },
     },
@@ -235,12 +235,12 @@ const generateSchema = () => ({
       url: `${BRAND.origin}/#about`,
       name: 'درباره هلدینگ مهاجرتی دیاکو',
       description:
-        'معرفی هلدینگ مهاجرتی دیاکو — ۱۰+ سال سابقه، ۲,۰۰۰+ پرونده موفق، ۳۵ وکیل بین‌المللی در ۱۱ کشور اروپایی.',
+        'معرفی هلدینگ مهاجرتی دیاکو — بیش از ۱۱ سال سابقه رسمی (از ۱۳۹۴)، ۲,۱۵۰+ پرونده موفق، ۳۵ وکیل و مشاور حقوقی در ۱۱ کشور اروپایی.',
       isPartOf: { '@id': `${BRAND.origin}/#website` },
       about: { '@id': `${BRAND.origin}/#organization` },
       inLanguage: 'fa-IR',
       datePublished: '2025-01-01',
-      dateModified: new Date().toISOString().split('T')[0],
+      dateModified: '2026-11-16',
       speakable: {
         '@type': 'SpeakableSpecification',
         cssSelector: ['#about-heading', '.answer-first', '.speakable-summary'],
@@ -261,20 +261,26 @@ const generateSchema = () => ({
 /* ============================================================
    4. Hook: شمارش انیمیشنی
    ============================================================ */
-const useCountUp = (target: number, duration = 1600, start = false) => {
-  const [value, setValue] = useState(0);
+const useCountUp = (target: number, duration = 1200, start = false) => {
+  const [value, setValue] = useState(target);
 
   useEffect(() => {
     if (!start) return;
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      setValue(target);
+      return;
+    }
     let rafId = 0;
     const startTime = performance.now();
+    const startFrom = Math.max(1, Math.floor(target * 0.7));
 
     const tick = (now: number) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.floor(eased * target));
+      setValue(Math.floor(startFrom + eased * (target - startFrom)));
       if (progress < 1) rafId = requestAnimationFrame(tick);
+      else setValue(target);
     };
 
     rafId = requestAnimationFrame(tick);
@@ -312,9 +318,9 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
     return () => observer.disconnect();
   }, []);
 
-  const years = useCountUp(10, 1400, visible);
-  const cases = useCountUp(2000, 1800, visible);
-  const lawyers = useCountUp(35, 1400, visible);
+  const years = useCountUp(11, 1200, visible);
+  const cases = useCountUp(2150, 1400, visible);
+  const lawyers = useCountUp(35, 1200, visible);
 
   const jsonLd = useMemo(() => generateSchema(), []);
 
@@ -356,7 +362,7 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
                 id={`${sectionId}-heading`}
                 className="mt-4 text-2xl font-black leading-tight text-[#082833] sm:text-3xl md:text-4xl"
               >
-                یک دهه تخصص، همراهی مستمر و اعتماد ۲,۰۰۰+ متقاضی
+                بیش از ۱۱ سال تخصص، همراهی مستمر و اعتماد ۲,۱۵۰+ متقاضی
               </h2>
 
               {/* Answer-First برای AI Overviews */}
@@ -364,14 +370,13 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
                 <strong className="text-amber-800">خلاصه:</strong> هلدینگ مهاجرتی دیاکو
                 (Diaco Immigration Holding) از سال <strong>۱۳۹۴ (۲۰۱۵)</strong> در حوزه اقامت،
                 ویزا و سرمایه‌گذاری در اروپا فعالیت می‌کند. با{' '}
-                <strong>۲,۰۰۰+ پرونده موفق</strong>، <strong>۳۵ وکیل بین‌المللی</strong> و دفاتر
-                فعال در <strong>وین، آتن و تهران</strong>، دیاکو یکی از معتبرترین هلدینگ‌های
-                مهاجرتی ایران با تمرکز تخصصی روی ۱۱ کشور اروپایی است.
+                <strong>۲,۱۵۰+ پرونده موفق</strong>، <strong>۳۵ وکیل و مشاور حقوقی</strong> و دفاتر
+                فعال در <strong>وین، آتن و تهران</strong>، دیاکو یک هلدینگ تخصصی مهاجرت به اروپا با تمرکز بر ۱۱ کشور اروپایی است.
               </p>
 
               <div className="mt-4 space-y-3 text-justify text-sm leading-7 text-slate-600">
                 <p>
-                  هلدینگ بین‌المللی دیاکو با بیش از یک دهه تجربه مستمر در امور مهاجرتی، اقامتی و
+                  هلدینگ بین‌المللی دیاکو با بیش از ۱۱ سال تجربه مستمر در امور مهاجرتی، اقامتی و
                   سرمایه‌گذاری در اروپا، با همکاری <strong className="text-amber-700">۳۵ وکیل
                   رسمی و مشاور بین‌المللی</strong>، بستری امن و مطمئن برای تحقق اهداف مهاجرتی
                   هموطنان فراهم کرده است.
@@ -391,7 +396,7 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
                 {[
                   { icon: Award, label: 'سابقه فعالیت', value: `+${years} سال`, note: 'از ۱۳۹۴' },
                   { icon: FileCheck2, label: 'پرونده موفق', value: `+${cases.toLocaleString('fa-IR')}`, note: 'تأییدشده' },
-                  { icon: Users, label: 'وکلای بین‌المللی', value: `+${lawyers} وکیل`, note: 'مقیم اروپا' },
+                  { icon: Users, label: 'وکلای بین‌المللی', value: `${lawyers} وکیل`, note: 'مقیم اروپا' },
                   { icon: Globe, label: 'کشورهای فعال', value: '۱۱ کشور', note: 'اروپا و شنگن' },
                 ].map((item, idx) => {
                   const Icon = item.icon;
@@ -480,7 +485,7 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
                   هلدینگ مهاجرتی دیاکو
                 </h3>
                 <p className="relative mt-1 text-xs font-semibold text-amber-300/90">
-                  بزرگ‌ترین مجموعه تخصصی اقامت اتریش و شنگن
+                  مرکز تخصصی حقوق اقامت اتریش و اتحادیه اروپا
                 </p>
 
                 {/* دفاتر با تصویر */}
@@ -679,7 +684,7 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
                 رویکرد دیاکو به مهاجرت: چرا «وکیل مقیم» با «واسطه» تفاوت بنیادین دارد؟
               </h3>
               <p className="mt-2 text-xs text-slate-500">
-                تحلیل ۱۰ ساله از ۲,۰۰۰ پرونده موفق — توسط دپارتمان حقوقی دیاکو
+                تحلیل ۱۱ ساله از ۲,۱۵۰+ پرونده موفق — توسط دپارتمان حقوقی دیاکو
               </p>
             </header>
 
@@ -725,11 +730,11 @@ export const AboutSection: React.FC<Props> = ({ onOpenAssessment }) => {
 
               <blockquote className="my-4 rounded-2xl border-r-4 border-[#f5a623] bg-amber-50/60 p-4 text-sm italic">
                 <Quote className="mb-2 h-4 w-4 text-[#f5a623]" aria-hidden="true" />
-                «در ۱۰ سال گذشته، بیش از ۳۰۰ پرونده‌ای که توسط واسطه‌ها نیمه‌کاره رها شده
-                بود را نجات دادیم. در ۸۵٪ موارد، مشکل اصلی این بود که پرونده توسط
+                «در بیش از ۱۱ سال گذشته، بخش مهمی از پرونده‌هایی که توسط واسطه‌ها نیمه‌کاره رها شده
+                بود را با پیگیری حقوقی مستقیم نجات دادیم. در اغلب موارد، مشکل اصلی این بود که پرونده توسط
                 شخصی که مجوز رسمی نداشت پیگیری شده بود.»
                 <footer className="mt-2 text-[11px] font-bold not-italic text-amber-800">
-                  — دپارتمان حقوقی دیاکو، وین، ۲۰۲۵
+                  — دپارتمان حقوقی دیاکو، وین، ۲۰۲۶
                 </footer>
               </blockquote>
 

@@ -36,7 +36,7 @@ export const DocumentCheckerPage: React.FC<Props> = ({
     title: 'بررسی هوشمند مدارک مهاجرت و چک‌لیست سفارت ۲۰۲۶ | هلدینگ دیاکو',
     description:
       'چک‌لیست تعاملی مدارک مهاجرتی اروپا ۲۰۲۶؛ راهنمای تاییدیه ZAB آلمان، آپوستیل دادگستری، لگالایز سفارت اتریش، گردش حساب ارزی، قرارداد اجاره مسکن رسمی و مدرک زبان با نظارت وکلای دیاکو.',
-    canonical: '/guides/document-checker',
+    canonical: '/document-checker',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=1200&q=80',
@@ -54,7 +54,7 @@ export const DocumentCheckerPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/document-checker#article',
+          '@id': 'https://www.dia-co.ir/document-checker#article',
           headline: 'چک‌لیست هوشمند و استانداردهای حقوقی مدارک مهاجرت به اروپا در سال ۲۰۲۶',
           description:
             'بررسی تخصصی مدارک عمومی و اختصاصی ویزاهای اروپایی، فرآیند تاییدات قوه قضاییه و وزارت امور خارجه، لگالایز کنسولی و تایید صلاحیت در ادارات مهاجرت اروپا.',
@@ -80,7 +80,7 @@ export const DocumentCheckerPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/document-checker#howto',
+          '@id': 'https://www.dia-co.ir/document-checker#howto',
           name: 'مراحل آماده‌سازی و تایید مدارک مهاجرتی',
           step: [
             {
@@ -107,7 +107,7 @@ export const DocumentCheckerPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/document-checker#faq',
+          '@id': 'https://www.dia-co.ir/document-checker#faq',
           mainEntity: [
             {
               '@type': 'Question',

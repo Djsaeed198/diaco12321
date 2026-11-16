@@ -34,7 +34,7 @@ export const MedicalFinlandPage: React.FC<Props> = ({
     title: 'مهاجرت پزشکان به فنلاند ۲۰۲۶ | مجوز والویرا و کار اسکاندیناوی',
     description:
       'راهنمای مهاجرت پزشکان و کادر درمان به فنلاند ۲۰۲۶؛ مراحل تأییدیه سازمان Valvira، آزمون زبان فنلاندی یا سوئدی، کارورزی بالینی و حقوق عالی در هلدینگ دیاکو.',
-    canonical: '/guides/medical-finland-valvira',
+    canonical: '/medical-finland',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -51,7 +51,7 @@ export const MedicalFinlandPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/medical-finland-valvira#article',
+          '@id': 'https://www.dia-co.ir/medical-finland#article',
           headline: 'راهنمای مهاجرت پزشکان به فنلاند و مراحل مجوز سازمان Valvira ۲۰۲۶',
           description:
             'بررسی مسیر تأیید مدارک پزشکی خارج از اتحادیه اروپا توسط Valvira، آزمون ۳ مرحله‌ای دانشگاه تامپره، یادگیری زبان فنلاندی/سوئدی و درآمد پزشکان در فنلاند.',
@@ -77,7 +77,7 @@ export const MedicalFinlandPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/medical-finland-valvira#howto',
+          '@id': 'https://www.dia-co.ir/medical-finland#howto',
           name: 'مراحل دریافت پروانه طبابت در فنلاند (Valvira)',
           description: 'مراحل رسمی ورود پزشکان غیر اروپایی به سیستم بهداشت و درمان فنلاند',
           step: [
@@ -109,7 +109,7 @@ export const MedicalFinlandPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/medical-finland-valvira#faq',
+          '@id': 'https://www.dia-co.ir/medical-finland#faq',
           mainEntity: [
             {
               '@type': 'Question',

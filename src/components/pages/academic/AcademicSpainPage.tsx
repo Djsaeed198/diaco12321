@@ -124,7 +124,7 @@ export const AcademicSpainPage: React.FC<Props> = ({
     title: 'تحصیل در اسپانیا ۲۰۲۶ | دانشگاه بارسلونا (رتبه ۶۰) و کمپلوتنسه مادرید + آزمون PCE',
     description:
       'راهنمای کامل تحصیل در اسپانیا ۲۰۲۶: رتبه‌بندی QS دانشگاه‌های UB، UAB، UAM، UCM و UPF، شهریه دولتی، آزمون UNEDasiss PCE، حق کار ۳۰ ساعت در هفته و اقامت جستجوی کار ۲۴ ماهه. مشاوره دیاکو.',
-    canonical: '/guides/academic-spain',
+    canonical: '/academic-spain',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -142,7 +142,7 @@ export const AcademicSpainPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/academic-spain#article',
+          '@id': 'https://www.dia-co.ir/academic-spain#article',
           headline: 'راهنمای جامع تحصیل در دانشگاه‌های اسپانیا ۲۰۲۶ — UB، UAB، UAM، UCM و UPF',
           description:
             'بررسی رتبه‌بندی QS 2026، شهریه مناطق مختلف، آزمون PCE و UNEDasiss، حق کار ۳۰ ساعت و مجوز اقامت جستجوی کار ۲۴ ماهه.',
@@ -169,8 +169,8 @@ export const AcademicSpainPage: React.FC<Props> = ({
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تحصیل در دانشگاه', item: 'https://www.dia-co.ir/academic' },
-            { '@type': 'ListItem', position: 3, name: 'اسپانیا', item: 'https://www.dia-co.ir/guides/academic-spain' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تحصیلی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'اسپانیا', item: 'https://www.dia-co.ir/academic-spain' },
           ],
         },
         {

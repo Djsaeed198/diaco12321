@@ -118,7 +118,7 @@ export const AcademicHungaryPage: React.FC<Props> = ({
     title: 'تحصیل در مجارستان ۲۰۲۶ | پزشکی سملوایز، دبرسن، سگد و مهندسی BME',
     description:
       'راهنمای کامل تحصیل در مجارستان ۲۰۲۶: شهریه پزشکی سملوایز و دبرسن، آزمون ورودی زیست و شیمی، بورسیه Stipendium Hungaricum، هزینه زندگی و ویزای دانشجویی. مشاوره تخصصی دیاکو.',
-    canonical: '/guides/academic-hungary',
+    canonical: '/academic-hungary',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1549877452-9c387954fbc2?auto=format&fit=crop&w=1200&q=80',
@@ -138,7 +138,7 @@ export const AcademicHungaryPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/academic-hungary#article',
+          '@id': 'https://www.dia-co.ir/academic-hungary#article',
           headline: 'راهنمای جامع تحصیل پزشکی، دندانپزشکی و مهندسی در مجارستان ۲۰۲۶',
           description:
             'بررسی شهریه، آزمون ورودی، بورسیه و شرایط پذیرش دانشگاه‌های سملوایز، دبرسن، سگد، پچ و BME بوداپست.',
@@ -167,8 +167,8 @@ export const AcademicHungaryPage: React.FC<Props> = ({
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تحصیل در دانشگاه', item: 'https://www.dia-co.ir/academic' },
-            { '@type': 'ListItem', position: 3, name: 'مجارستان', item: 'https://www.dia-co.ir/guides/academic-hungary' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تحصیلی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'مجارستان', item: 'https://www.dia-co.ir/academic-hungary' },
           ],
         },
       ],

@@ -35,7 +35,7 @@ export const NomadCroatiaPage: React.FC<Props> = ({
     title: 'دیجیتال نوماد کرواسی ۲۰۲۶ | اقامت کار از راه دور ساحلی و معاف از مالیات',
     description:
       'راهنمای کامل مجوز اقامت موقت دیجیتال نوماد کرواسی ۲۰۲۶ (Digital Nomad Temporary Stay)؛ درآمد ماهانه ۲,۸۷۰ یورو، معافیت ۱۰۰٪ از مالیات بر درآمد محلی، عضویت کامل شینگن و منطقه یورو با دیاکو.',
-    canonical: '/guides/nomad-croatia',
+    canonical: '/nomad-croatia',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1555990538-154a4066c0d6?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const NomadCroatiaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/nomad-croatia#article',
+          '@id': 'https://www.dia-co.ir/nomad-croatia#article',
           headline: 'راهنمای جامع اقامت دیجیتال نوماد کرواسی ۲۰۲۶: سواحل آدریاتیک و معافیت مالیاتی',
           description:
             'بررسی قانون بیگانگان کرواسی (Aliens Act) برای دورکاران، حداقل درآمد ۲,۸۷۰ یورو، مزیت عضویت رسمی کرواسی در شینگن و نحوه درخواست آنلاین در پلیس کرواسی (MUP).',

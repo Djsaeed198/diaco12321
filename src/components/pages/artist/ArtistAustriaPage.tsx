@@ -24,7 +24,7 @@ const incomeRows = [
 const processSteps = [
   { step: '۱', title: 'آماده‌سازی پورتفولیو و مدارک', detail: 'پاسپورت، عکس، گواهی عدم سوءپیشینه (≤۳ ماه)، بیمه، مسکن، مدارک هنری', time: '۲–۴ ماه' },
   { step: '۲', title: 'اثبات درآمد یا Haftungserklärung', detail: '€۱,۳۰۸.۳۹/ماه خالص یا تعهد ضامن مقیم اتریش', time: '۱–۲ ماه' },
-  { step: '۳', title: 'مدرک A1 (یا豁免)', detail: 'گواهی ÖIF/ÖSD/TELC/Goethe — حداکثر ۱ سال اعتبار', time: '۱–۳ ماه' },
+  { step: '۳', title: 'مدرک A1 (یا معافیت)', detail: 'گواهی ÖIF/ÖSD/TELC/Goethe — حداکثر ۱ سال اعتبار', time: '۱–۳ ماه' },
   { step: '۴', title: 'ثبت درخواست و پرداخت €۲۱۸', detail: 'سفارت اتریش یا MA35 (در صورت حضور قانونی در اتریش)', time: '۱ روز' },
   { step: '۵', title: 'دریافت تصمیم', detail: 'حداکثر ۹۰ روز طبق §19a NAG (از ۷ اوت ۲۰۲۶)', time: 'تا ۹۰ روز' },
   { step: '۶', title: 'دریافت کارت اقامت', detail: 'حداکثر ۱۲ ماه اعتبار — قابل تمدید', time: '—' },
@@ -66,7 +66,7 @@ const testimonials = [
   {
     name: 'سارا موسوی',
     role: 'موسیقی‌دان — گراتس',
-    text: 'تیم دیاکو در豁免 زبان A1 (به‌خاطر مدرک دانشگاهی) و آماده‌سازی پورتفولیو بسیار کمک کرد. فرآیند MA35 بدون مشکل پیش رفت.',
+    text: 'تیم دیاکو در معافیت زبان A1 (به‌خاطر مدرک دانشگاهی) و آماده‌سازی پورتفولیو بسیار کمک کرد. فرآیند MA35 بدون مشکل پیش رفت.',
   },
 ];
 
@@ -81,8 +81,8 @@ export const ArtistAustriaPage: React.FC<Props> = ({
   useSeo({
     title: 'اقامت هنرمندی اتریش ۲۰۲۶ | NAG §43a + درآمد €۱,۳۰۸ + زبان A1',
     description:
-      'راهنمای کامل اقامت هنرمندان اتریش ۲۰۲۶ طبق NAG §43a: حداقل درآمد €۱,۳۰۸.۳۹/ماه، زبان A1 با豁免 برای دانشگاه‌دیدگان و هنرهای خاص، هزینه €۲۱۸، پردازش تا ۹۰ روز و مسیر ۵ ساله تا Daueraufenthalt-EU. مشاوره دفتر وین دیاکو.',
-    canonical: '/guides/artist-austria',
+      'راهنمای کامل اقامت هنرمندان اتریش ۲۰۲۶ طبق NAG §43a: حداقل درآمد €۱,۳۰۸.۳۹/ماه، زبان A1 با معافیت برای دانشگاه‌دیدگان و هنرهای خاص، هزینه €۲۱۸، پردازش تا ۹۰ روز و مسیر ۵ ساله تا Daueraufenthalt-EU. مشاوره دفتر وین دیاکو.',
+    canonical: '/artist-austria',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -90,7 +90,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
       'Niederlassungsbewilligung Künstler',
       'NAG §43a اتریش',
       'حداقل درآمد اقامت هنرمندان €۱۳۰۸',
-      'زبان A1 اقامت هنرمندی豁免',
+      'معافیت زبان A1 اقامت هنرمندی',
       'هزینه ۲۱۸ یورو اقامت هنرمند',
       'پردازش ۹۰ روز MA35',
       'هنرمند خوداشتغال اتریش قرارداد گالری',
@@ -101,10 +101,10 @@ export const ArtistAustriaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/artist-austria#article',
+          '@id': 'https://www.dia-co.ir/artist-austria#article',
           headline: 'راهنمای جامع اقامت هنرمندان اتریش ۲۰۲۶ (NAG §43a): درآمد €۱,۳۰۸ و شرایط زبان',
           description:
-            'بررسی کامل Niederlassungsbewilligung – Künstler طبق NAG §43a: حداقل درآمد €۱,۳۰۸.۳۹/ماه (۲۰۲۶)، زبان A1 با豁免، هزینه €۲۱۸، پردازش تا ۹۰ روز، تفاوت خوداشتغال و استخدامی، و مسیر ۵ ساله تا Daueraufenthalt-EU.',
+            'بررسی کامل Niederlassungsbewilligung – Künstler طبق NAG §43a: حداقل درآمد €۱,۳۰۸.۳۹/ماه (۲۰۲۶)، زبان A1 با معافیت، هزینه €۲۱۸، پردازش تا ۹۰ روز، تفاوت خوداشتغال و استخدامی، و مسیر ۵ ساله تا Daueraufenthalt-EU.',
           image: [
             'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80',
           ],
@@ -146,8 +146,8 @@ export const ArtistAustriaPage: React.FC<Props> = ({
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'هنرمندان و نخبگان', item: 'https://www.dia-co.ir/artists' },
-            { '@type': 'ListItem', position: 3, name: 'اتریش', item: 'https://www.dia-co.ir/guides/artist-austria' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و هنرمندان', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'اتریش', item: 'https://www.dia-co.ir/artist-austria' },
           ],
         },
       ],
@@ -220,7 +220,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
               وین پایتخت هنری اروپا، میزبان نقاشان، موسیقی‌دانان، بازیگران و طراحان بین‌المللی است.
               طبق <strong>NAG §43a</strong>، هنرمندان غیر اتحادیه اروپا می‌توانند با اثبات فعالیت هنری
               حرفه‌ای و درآمد حداقل <strong>€۱,۳۰۸.۳۹ در ماه</strong> (۲۰۲۶)، اقامت رسمی بگیرند.
-              زبان A1 معمولاً الزامی است، اما برای دانشگاه‌دیدگان و هنرهای خاص豁免 وجود دارد.
+              زبان A1 معمولاً الزامی است، اما برای دانشگاه‌دیدگان و هنرهای خاص معافیت وجود دارد.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
               {[
@@ -366,7 +366,7 @@ export const ArtistAustriaPage: React.FC<Props> = ({
       <section id="language" className="container mx-auto px-4 md:px-8 mb-16">
         <div className="bg-gradient-to-br from-sky-950/40 via-slate-900/60 to-[#061a21] border border-sky-400/20 rounded-3xl p-6 md:p-10">
           <h2 className="text-2xl md:text-3xl font-black mb-4 flex items-center gap-2">
-            <Languages className="h-6 w-6 text-sky-300" /> زبان A1 — با豁免
+            <Languages className="h-6 w-6 text-sky-300" /> زبان A1 — با معافیت
           </h2>
           <p className="text-sm text-slate-300 mb-4 text-justify">
             A1 از ÖIF/ÖSD/TELC/Goethe (حداکثر ۱ سال اعتبار) معمولاً الزامی است. دو استثنا:

@@ -74,7 +74,7 @@ export const CitizenshipSaoTomePage: React.FC<Props> = ({
     title: 'شهروندی سائوتومه ۲۰۲۶ | ۹۰,۰۰۰ $، ۹۶ مقصد و محدودیت‌ها',
     description:
       'راهنمای رسمی CBI سائوتومه ۲۰۲۶؛ دونیت ۹۰,۰۰۰ $، دسترسی ۹۶ مقصد (۲۴ بدون ویزا + ۷۲ eVisa/VoA)، تأیید ۲–۳ ماهه اما پاسپورت ۶ ماهه، محدودیت سه‌تابعیتی و توقف پاسپورت همراهان بزرگسال. ارزیابی فوری.',
-    canonical: '/guides/citizenship-sao-tome',
+    canonical: '/citizenship-sao-tome',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
@@ -93,7 +93,7 @@ export const CitizenshipSaoTomePage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-sao-tome#article',
+          '@id': 'https://www.dia-co.ir/citizenship-sao-tome#article',
           headline:
             'راهنمای جامع شهروندی سائوتومه و پرینسیپ ۲۰۲۶: ۹۰,۰۰۰ دلار، ۹۶ مقصد و محدودیت‌های جدید',
           description:
@@ -137,7 +137,7 @@ export const CitizenshipSaoTomePage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-sao-tome#howto',
+          '@id': 'https://www.dia-co.ir/citizenship-sao-tome#howto',
           name: 'مراحل دریافت شهروندی سائوتومه و پرینسیپ در ۲۰۲۶',
           description:
             'فرآیند گام‌به‌گام از انتخاب نماینده مجاز تا دریافت پاسپورت ۷ ساله بدون نیاز به سفر.',
@@ -182,7 +182,7 @@ export const CitizenshipSaoTomePage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-sao-tome#faq',
+          '@id': 'https://www.dia-co.ir/citizenship-sao-tome#faq',
           mainEntity: [
             {
               '@type': 'Question',

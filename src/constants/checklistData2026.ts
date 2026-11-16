@@ -503,9 +503,8 @@ export function getDetailedChecklist2026(
           isMandatory: true,
           issuingAuthority: 'کارفرمای رسمی',
           validity: 'حداقل ۶ تا ۱۲ ماه',
-          // ⚠️ هشدار: اعداد نیاز به تایید با BAMF
           officialNote2026:
-            '⚠️ آلمان ۲۰۲۵: €۴۸,۳۰۰ عمومی / €۴۳,۷۵۹.۸۰ مشاغل کمبود. اعداد ۲۰۲۶ باید از BAMF تأیید شود (شماره‌های €۵۰,۷۰۰ در نسخه قبلی ممکن است مربوط به ۲۰۲۶ باشد — تأیید کنید). اتریش: €۵۵,۶۷۸ سالانه (۲۰۲۶).',
+            '✅ آلمان ۲۰۲۶ (Make it in Germany): €۵۰,۷۰۰ ناخالص سالانه عمومی / €۴۵,۹۳۴.۲۰ مشاغل کمبود نیرو (STEM، IT، پزشکی و فارغ‌التحصیلان اخیر). اتریش ۲۰۲۶: €۵۵,۶۷۸ سالانه.',
           familyRelevant: 'all',
           translationRequired: true,
           apostilleRequired: true,
@@ -809,9 +808,8 @@ export function getDetailedChecklist2026(
           isMandatory: true,
           issuingAuthority: 'شرکت‌های بین‌المللی',
           validity: 'حداقل ۳–۶ ماه سابقه',
-          // ✅ اصلاح‌شده
           officialNote2026:
-            '✅ اسپانیا ۲۰۲۶: €۲,۷۶۲/ماه (۲۰۰٪ SMI ۱۴ پیمانه). ⚠️ رقم €۲,۸۴۹ در نسخه قبلی نادرست بود. یونان: €۳,۵۰۰/ماه. پرتغال: ۴ برابر حداقل دستمزد (≈€۳,۴۸۰/ماه ۲۰۲۶).',
+            '✅ اسپانیا ۲۰۲۶ (SMI = €۱,۲۲۱ در ۱۴ پرداخت): €۲,۸۴۹/ماه ناخالص برای متقاضی اصلی (۲۰۰٪ SMI)، همسر +€۱,۰۶۸ و هر فرزند +€۳۵۶. یونان: €۳,۵۰۰/ماه. پرتغال: ۴ برابر حداقل دستمزد (≈€۳,۴۸۰/ماه ۲۰۲۶).',
           familyRelevant: 'all',
           translationRequired: true,
           apostilleRequired: true,

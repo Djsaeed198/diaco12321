@@ -85,7 +85,7 @@ export const CitizenshipTurkeyPage: React.FC<Props> = ({
     title: 'شهروندی ترکیه ۲۰۲۶ | ملک ۴۰۰,۰۰۰ $، پاسپورت ۳–۶ ماهه و ۱۱۳ کشور',
     description:
       'راهنمای حقوقی ۲۰۲۶: ملک ۴۰۰,۰۰۰ $ با قید ۳ سال عدم فروش، مالیات تاپو ۴٪، گزارش ارزیابی SPK، پاسپورت برای همسر و فرزندان زیر ۱۸ سال، رتبه ۴۵ هنلی (۱۱۳ مقصد) و معافیت سربازی مردان ۲۲+. ارزیابی فوری.',
-    canonical: '/guides/citizenship-turkey',
+    canonical: '/citizenship-turkey',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80',
@@ -104,7 +104,7 @@ export const CitizenshipTurkeyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-turkey#article',
+          '@id': 'https://www.dia-co.ir/citizenship-turkey#article',
           headline:
             'راهنمای جامع شهروندی و پاسپورت ترکیه ۲۰۲۶: ملک ۴۰۰,۰۰۰ دلار، هزینه‌های واقعی و محدودیت‌ها',
           description:
@@ -146,7 +146,7 @@ export const CitizenshipTurkeyPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-turkey#howto',
+          '@id': 'https://www.dia-co.ir/citizenship-turkey#howto',
           name: 'مراحل دریافت شهروندی ترکیه از طریق خرید ملک در ۲۰۲۶',
           description:
             'فرآیند گام‌به‌گام از انتخاب ملک تا دریافت پاسپورت، شامل ارزیابی SPK، گواهی DAB و قید ۳ ساله تاپو.',
@@ -191,7 +191,7 @@ export const CitizenshipTurkeyPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/citizenship-turkey#faq',
+          '@id': 'https://www.dia-co.ir/citizenship-turkey#faq',
           mainEntity: [
             {
               '@type': 'Question',

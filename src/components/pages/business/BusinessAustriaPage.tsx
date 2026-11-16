@@ -16,7 +16,7 @@ interface Props {
 }
 
 /* ============================================================
-   1. 常量与数据
+   ۱. ثابت‌ها و داده‌های پایه
    ============================================================ */
 const BRAND = {
   name: 'هلدینگ مهاجرتی دیاکو',
@@ -24,12 +24,12 @@ const BRAND = {
   origin: 'https://www.dia-co.ir',
   logo: 'https://www.dia-co.ir/logo.png',
   phone: '+43 688 976 3256',
-  email: 'office@dia-co.ir',
+  email: 'info@dia-co.ir',
 } as const;
 
-const CANONICAL_URL = `${BRAND.origin}/guides/company-austria-gmbh`;
+const CANONICAL_URL = `${BRAND.origin}/business-austria`;
 
-/* ---------- 公司形式对比 ---------- */
+/* ---------- مقایسه ساختار شرکت‌ها ---------- */
 const COMPANY_TYPES = [
   {
     id: 'gmbh',
@@ -65,7 +65,7 @@ const COMPANY_TYPES = [
   },
 ];
 
-/* ---------- 税务数据 ---------- */
+/* ---------- داده‌های مالیاتی ---------- */
 const TAX_FACTS = [
   { label: 'مالیات بر درآمد شرکت (Körperschaftsteuer)', value: '23%', icon: Percent, note: 'نرخ ثابت برای همه سطوح درآمد' },
   { label: 'حداقل مالیات سالانه', value: '€500', icon: Banknote, note: 'معادل €۱۲۵ در هر فصل (حتی با زیان)' },
@@ -73,7 +73,7 @@ const TAX_FACTS = [
   { label: 'بار مالیاتی ترکیبی (سود + توزیع)', value: '≈44.2%', icon: Calculator, note: '23% + 27.5% روی مبلغ توزیع‌شده' },
 ];
 
-/* ---------- 流程步骤 ---------- */
+/* ---------- مراحل ثبت شرکت ---------- */
 const STEPS = [
   { step: '۱', title: 'مشاوره و انتخاب شکل حقوقی', desc: 'تعیین GmbH یا FlexCo بر اساس اهداف تجاری، ساختار سهام و برنامه رشد.', icon: Scale },
   { step: '۲', title: 'آماده‌سازی اساسنامه (Gesellschaftsvertrag)', desc: 'تنظیم اساسنامه با جزئیات سهام، مدیریت و اهداف شرکت.', icon: FileText },
@@ -85,7 +85,7 @@ const STEPS = [
   { step: '۸', title: 'ثبت‌نام مالیاتی (Finanzamt)', desc: 'دریافت شماره مالیاتی (Steuernummer) و ثبت برای مالیات بر ارزش افزوده (USt).', icon: Calculator },
 ];
 
-/* ---------- 成本明细 ---------- */
+/* ---------- جزئیات هزینه‌ها ---------- */
 const COSTS = [
   { item: 'سرمایه شرکت (Stammkapital)', amount: '€10,000', note: 'حداقل ۵۰٪ (€۵,۰۰۰) نقدی' },
   { item: 'هزینه اسناد رسمی (Notar)', amount: '€1,000 – €2,500', note: 'بسته به پیچیدگی اساسنامه' },
@@ -123,16 +123,16 @@ const FAQS = [
   },
 ];
 
-/* ---------- 内部链接 ---------- */
+/* ---------- لینک‌های داخلی ---------- */
 const INTERNAL_LINKS = [
-  { href: '/guides/austria-rwr-card-2026-reforms', title: 'کارت RWR اتریش', desc: 'راهنمای کامل اقامت کاری', icon: Briefcase },
-  { href: '/guides/austria-quotenkontingent-2026', title: 'تمکن مالی اتریش', desc: 'اقامت بدون کار', icon: LandmarkIcon },
-  { href: '/guides/austria-jobseeker-70-points-2026', title: 'ویزای جستجوی کار', desc: '۷۰ امتیاز نخبگان', icon: Rocket },
-  { href: '/guides/eu-blue-card-reform-2026', title: 'بلوکارت اروپا', desc: 'تحرک بین ۲۷ کشور', icon: Globe },
+  { href: '/austria-rwr', title: 'کارت RWR اتریش', desc: 'راهنمای کامل اقامت کاری', icon: Briefcase },
+  { href: '/financial-austria', title: 'تمکن مالی اتریش', desc: 'اقامت بدون کار', icon: LandmarkIcon },
+  { href: '/jobseeker-austria', title: 'ویزای جستجوی کار', desc: '۷۰ امتیاز نخبگان', icon: Rocket },
+  { href: '/austria-blue-card', title: 'بلوکارت اروپا در اتریش', desc: 'اقامت کاری متخصصان', icon: Globe },
 ];
 
 /* ============================================================
-   2. 结构化数据 (Schema.org)
+   ۲. داده‌های ساختاریافته (Schema.org)
    ============================================================ */
 const generateSchema = () => ({
   '@context': 'https://schema.org',
@@ -212,7 +212,7 @@ const generateSchema = () => ({
 });
 
 /* ============================================================
-   3. 主组件
+   ۳. کامپوننت اصلی
    ============================================================ */
 export const BusinessAustriaPage: React.FC<Props> = ({
   onBackToHome,
@@ -227,14 +227,14 @@ export const BusinessAustriaPage: React.FC<Props> = ({
   useSeo({
     title: 'ثبت شرکت در اتریش ۲۰۲۶ | GmbH و FlexCo + اقامت سرمایه‌گذاری',
     description: 'راهنمای کامل ثبت شرکت در اتریش ۲۰۲۶: حداقل سرمایه €۱۰,۰۰۰، مراحل ثبت GmbH و FlexCo، مالیات ۲۳٪، و مسیرهای اخذ اقامت از طریق سرمایه‌گذاری (€۱۰۰,۰۰۰) یا استارتاپ (€۳۰,۰۰۰).',
-    canonical: '/guides/company-austria-gmbh',
+    canonical: '/business-austria',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
     keywords: ['ثبت شرکت اتریش ۲۰۲۶', 'GmbH اتریش', 'FlexCo اتریش', 'اقامت سرمایه‌گذاری وین', 'RWR Card سرمایه‌گذاری', 'مالیات شرکت اتریش ۲۳٪'],
     jsonLd: generateSchema(),
   });
 
-  /* ---------- 阅读进度条 ---------- */
+  /* ---------- نوار پیشرفت مطالعه ---------- */
   useEffect(() => {
     const handleScroll = () => {
       const el = articleRef.current;
@@ -259,7 +259,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
 
   return (
     <div dir="rtl" className="min-h-screen bg-[#061a21] text-slate-100 font-sans">
-      {/* 阅读进度条 */}
+      {/* نوار پیشرفت مطالعه */}
       <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-black/20">
         <div
           className="h-full bg-gradient-to-l from-orange-400 to-amber-500 transition-[width] duration-150"
@@ -267,7 +267,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         />
       </div>
 
-      {/* ===== 面包屑 ===== */}
+      {/* ===== مسیر صفحه (Breadcrumb) ===== */}
       <div className="container mx-auto px-4 md:px-8 pt-6">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
           <button
@@ -365,7 +365,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
               </div>
             </div>
 
-            {/* 关键数据卡片 */}
+            {/* کارت‌های شاخص‌های کلیدی */}
             <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
               {[
                 { value: '€۱۰,۰۰۰', label: 'حداقل سرمایه', icon: Banknote },
@@ -384,7 +384,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         </section>
 
         {/* ============================================================
-            SECTION 2: 公司形式对比
+            SECTION 2: مقایسه قالب‌های شرکت
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -450,7 +450,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         </section>
 
         {/* ============================================================
-            SECTION 3: 税务概览
+            SECTION 3: ساختار مالیاتی
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -487,7 +487,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         </section>
 
         {/* ============================================================
-            SECTION 4: 注册步骤
+            SECTION 4: مراحل ثبت شرکت
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -519,7 +519,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         </section>
 
         {/* ============================================================
-            SECTION 5: 成本明细
+            SECTION 5: جزئیات هزینه‌ها
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -559,7 +559,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
         </section>
 
         {/* ============================================================
-            SECTION 6: 通过公司获取居留
+            SECTION 6: مسیر اقامت از طریق ثبت شرکت
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">
@@ -607,7 +607,7 @@ export const BusinessAustriaPage: React.FC<Props> = ({
                 <ul className="space-y-1.5 text-xs text-slate-300">
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="h-3 w-3 text-emerald-400 mt-1 shrink-0" />
-                    <span>حداقل <strong className="text-white">€۳۰,۰۰۰</strong> سرمایه (طبق sources) / ۵۰٪ سهام</span>
+                    <span>حداقل <strong className="text-white">€۳۰,۰۰۰</strong> سرمایه (بخش ۵۰ هزار یورو برای استارتاپ ثبتی) / ۵۰٪ سهام</span>
                   </li>
                   <li className="flex items-start gap-1.5">
                     <CheckCircle2 className="h-3 w-3 text-emerald-400 mt-1 shrink-0" />
@@ -626,13 +626,13 @@ export const BusinessAustriaPage: React.FC<Props> = ({
             </div>
 
             <p className="text-[11px] text-slate-500 mt-4">
-              * آستانه سرمایه برای مسیر استارتاپ در منابع مختلف بین €۳۰,۰۰۰ تا €۵۰,۰۰۰ ذکر شده است. برای اطلاعات دقیق ۲۰۲۶ با دفتر وین دیاکو تماس بگیرید.
+              * آستانه سرمایه برای مسیر استارتاپ در قوانین و دستورالعمل‌های اجرایی بین €۳۰,۰۰۰ تا €۵۰,۰۰۰ ذکر شده است. برای اطلاعات دقیق ۲۰۲۶ با دفتر وین دیاکو تماس بگیرید.
             </p>
           </div>
         </section>
 
         {/* ============================================================
-            SECTION 7: 内部链接
+            SECTION 7: لینک‌های داخلی
            ============================================================ */}
         <section className="py-14 border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-4xl">

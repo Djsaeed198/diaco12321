@@ -47,7 +47,7 @@ export const CostCalculatorPage: React.FC<Props> = ({
     title: 'محاسبه‌گر آنلاین هزینه‌های مهاجرت به اروپا ۲۰۲۶ | تمکن مالی، مسکن و ویزا',
     description:
       'محاسبه دقیق و شفاف هزینه‌های مهاجرت به اتریش، آلمان، اسپانیا، یونان و فرانسه؛ برآورد تمکن مالی بانکی، اجاره مسکن رسمی، عوارض سفارت، هزینه‌های حقوقی وکلای دیاکو با تبدیل زنده یورو به تومان.',
-    canonical: '/guides/cost-calculator',
+    canonical: '/cost-calculator',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80',
@@ -65,7 +65,7 @@ export const CostCalculatorPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/cost-calculator#article',
+          '@id': 'https://www.dia-co.ir/cost-calculator#article',
           headline: 'راهنمای جامع و محاسبه‌گر هزینه‌های واقعی مهاجرت به اروپا در سال ۲۰۲۶',
           description:
             'تحلیل هزینه‌های پنهان و آشکار مهاجرت به کشورهای پیشرو اروپایی؛ بودجه‌بندی استاندارد برای تمکن مالی، بلوکارت، پذیرش تحصیلی و سرمایه‌گذاری ملکی تحت نظارت وکلای دیاکو.',
@@ -91,7 +91,7 @@ export const CostCalculatorPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/cost-calculator#howto',
+          '@id': 'https://www.dia-co.ir/cost-calculator#howto',
           name: 'نحوه محاسبه و تامین بودجه مهاجرت به اروپا',
           step: [
             {
@@ -118,7 +118,7 @@ export const CostCalculatorPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/cost-calculator#faq',
+          '@id': 'https://www.dia-co.ir/cost-calculator#faq',
           mainEntity: [
             {
               '@type': 'Question',

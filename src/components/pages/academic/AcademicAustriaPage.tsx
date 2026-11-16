@@ -25,7 +25,7 @@ const BRAND = {
   phoneDisplay: '+۴۳ ۶۸۸ ۹۷۶ ۳۲۵۶',
 } as const;
 
-const CANONICAL_URL = `${BRAND.origin}/guides/academic-austria`;
+const CANONICAL_URL = `${BRAND.origin}/academic-austria`;
 
 /* ============================================================
    2. داده‌های رسمی 2026
@@ -74,7 +74,7 @@ const FAQS = [
   { q: 'هزینه کالج زبان VWU چقدر است؟', a: 'بسته به مسیر انتخاب‌شده متفاوت است: VWU مستقیم (OeAD) €۶۱۲/ترم، دانشگاه وین (Sprachenzentrum) €۱,۸۹۰/ترم، مؤسسات همکار €۱,۸۵۰ + €۴۰ مواد. دوره‌های دانشگاه وین شامل مواد آموزشی هستند. آزمون EPD در پایان هر ترم برگزار می‌شود.' },
   { q: 'تمکن مالی لازم برای ویزای تحصیلی اتریش در ۲۰۲۶ چقدر است؟', a: 'طبق استاندارد ۲۰۲۶: برای مجرد €۱,۳۰۸.۳۹ در ماه، برای متأهل €۲,۰۶۴.۱۲ و برای هر فرزند €۲۰۱.۸۸ اضافه می‌شود. مبلغ باید به‌صورت خالص (Netto) برای یک سال اثبات شود. بیمه درمانی با پوشش ≥ €۳۰,۰۰۰ الزامی است (ÖGK: €۷۸.۸۴/ماه).' },
   { q: 'آیا دانشجویان اتریش اجازه کار دارند؟', a: 'بله. دانشجویان غیر اتحادیه اروپا با ویزای Student می‌توانند تا ۲۰ ساعت در هفته کار کنند. کارفرما باید از AMS مجوز Beschäftigungsbewilligung بگیرد، اما آزمون بازار کار برای این ۲۰ ساعت حذف شده است. کار بیش از ۲۰ ساعت نیاز به مجوز جداگانه دارد.' },
-  { q: 'مهلت申請 دانشگاه وین و TU Wien برای ۲۰۲۶ چه زمانی است؟', a: 'Universität Wien: برای غیر EU، ۲۲ ژوئن تا ۳ آگوست ۲۰۲۶. TU Wien: مهلت ارسال درخواست کتبی تا ۱۵ جولای ۲۰۲۶، و مرحله VoR از ۱ آوریل تا ۵ سپتامبر ۲۰۲۶. توصیه: مدارک را حداقل ۳ ماه قبل آماده کنید.' },
+  { q: 'مهلت ارسال درخواست دانشگاه وین و TU Wien برای ۲۰۲۶ چه زمانی است؟', a: 'Universität Wien: برای غیر EU، ۲۲ ژوئن تا ۳ آگوست ۲۰۲۶. TU Wien: مهلت ارسال درخواست کتبی تا ۱۵ جولای ۲۰۲۶، و مرحله VoR از ۱ آوریل تا ۵ سپتامبر ۲۰۲۶. توصیه: مدارک را حداقل ۳ ماه قبل آماده کنید.' },
   { q: 'آیا مدرک دیپلم ایران برای پذیرش در اتریش کافی است؟', a: 'دیپلم ۱۲ ساله ایران با ریزنمرات و ترجمه سوگندخورده پذیرفته می‌شود. اما برای برخی رشته‌ها یا دانشگاه‌ها، اثبات صلاحیت تحصیلی (قبولی در کنکور یا مدرک پیش‌دانشگاهی) نیز لازم است. Universität Wien برای ایران، مدرک کنکور را به‌عنوان بخشی از مدارک الزامی درخواست می‌کند. مدارک باید دارای تأییدیه (Legalisation/Apostille) باشند.' },
 ];
 
@@ -83,8 +83,8 @@ const INTERNAL_LINKS = [
   { href: '/financial-austria', title: 'تمکن مالی اتریش', desc: 'اقامت بدون اجازه کار' },
   { href: '/language-austria', title: 'دوره زبان آلمانی', desc: 'آمادگی C1 در وین' },
   { href: '/ausbildung-germany', title: 'آوسبیلدونگ آلمان', desc: 'مسیر جایگزین' },
-  { href: '/assessment', title: 'ارزیابی رایگان', desc: 'سنجش شانس پذیرش' },
-  { href: '/contact', title: 'مشاوره با وکلای وین', desc: 'تماس مستقیم' },
+  { href: '/online-consult', title: 'مشاوره و ارزیابی آنلاین', desc: 'سنجش شانس پذیرش' },
+  { href: '/contact-us', title: 'مشاوره با وکلای وین', desc: 'تماس مستقیم' },
 ];
 
 /* ============================================================
@@ -157,7 +157,7 @@ export const AcademicAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsses
   useSeo({
     title: 'تحصیل در اتریش ۲۰۲۶ | شهریه €۷۵۲ + VWU و ویزا',
     description: 'راهنمای کامل تحصیل در دانشگاه‌های دولتی اتریش ۲۰۲۶: شهریه غیر EU €۷۵۲.۹۲/ترم، کالج زبان VWU (€۶۱۲–€۱,۸۹۰)، تمکن مالی €۱,۳۰۸/ماه، کار ۲۰ ساعته و مهلت‌های Universität Wien و TU Wien.',
-    canonical: '/guides/academic-austria',
+    canonical: '/academic-austria',
     ogType: 'article',
     ogImage: HERO_IMAGE.src,
     keywords: ['تحصیل در اتریش ۲۰۲۶', 'شهریه دانشگاه اتریش', 'پذیرش Universität Wien', 'کالج زبان VWU', 'تمکن مالی ویزای تحصیلی', 'کار دانشجویی اتریش', 'مهلت TU Wien ۲۰۲۶'],
@@ -370,7 +370,7 @@ export const AcademicAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsses
                     <div key={t.university} className="p-4 rounded-2xl bg-white/5 border border-white/10">
                       <div className="flex items-center gap-2 mb-2"><Landmark className="h-4 w-4 text-amber-400" /><span className="text-xs font-bold text-amber-300">{t.university}</span></div>
                       <ul className="space-y-1 text-[11px] text-slate-300">
-                        <li className="flex justify-between"><span>مهلت申请 (غیر EU)</span><span className="font-bold text-red-300">{t.deadline}</span></li>
+                        <li className="flex justify-between"><span>مهلت ارسال درخواست (غیر EU)</span><span className="font-bold text-red-300">{t.deadline}</span></li>
                         <li className="flex justify-between"><span>شروع ترم</span><span className="font-bold">{t.start}</span></li>
                         <li className="text-[10px] text-slate-400 pt-1">{t.note}</li>
                       </ul>
@@ -381,7 +381,7 @@ export const AcademicAustriaPage: React.FC<Props> = ({ onBackToHome, onOpenAsses
               </div>
               <div className="space-y-4">
                 <figure className="rounded-2xl overflow-hidden border border-white/10">
-                  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=75" alt="تقویم申请 دانشگاه وین و TU Wien ۲۰۲۶" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+                  <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=75" alt="تقویم اپلای دانشگاه وین و TU Wien ۲۰۲۶" width={800} height={533} loading="lazy" decoding="async" className="w-full h-auto object-cover" />
                   <figcaption className="p-3 bg-white/5 text-[10px] text-slate-400 text-center">Universität Wien: تا ۳ آگوست | TU Wien: تا ۱۵ جولای (غیر EU)</figcaption>
                 </figure>
                 <div className="p-4 rounded-xl bg-red-500/10 border border-red-400/20">

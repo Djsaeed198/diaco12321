@@ -51,7 +51,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
     title: 'بلوکارت ایتالیا ۲۰۲۶ | حقوق ۳۶,۳۰۰ € و اقامت ۳۰ روزه',
     description:
       'راهنمای رسمی بلوکارت ایتالیا ۲۰۲۶ (Carta Blu UE)؛ کف حقوق ۳۶,۳۰۰ € (مشاغل کمبود نیرو ۲۹,۰۰۰ €)، تأیید Nulla Osta در ۳۰ روز، معافیت کامل از Decreto Flussi، CIMEA و اقامت بلندمدت ۵ ساله. ارزیابی فوری.',
-    canonical: '/guides/blue-card-italy',
+    canonical: '/italy-blue-card',
     ogType: 'article',
     ogImage: 'https://www.dia-co.ir/og-services-work.jpg',
     keywords: [
@@ -70,7 +70,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-italy#article',
+          '@id': 'https://www.dia-co.ir/italy-blue-card#article',
           headline:
             'راهنمای جامع بلوکارت ایتالیا ۲۰۲۶: حقوق ۳۶,۳۰۰ €، Nulla Osta ۳۰ روزه و مسیر اقامت بلندمدت',
           description:
@@ -112,7 +112,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-italy#howto',
+          '@id': 'https://www.dia-co.ir/italy-blue-card#howto',
           name: 'مراحل دریافت بلوکارت ایتالیا در ۲۰۲۶',
           description:
             'راهنمای گام‌به‌گام Carta Blu UE از Nulla Osta تا Permesso di Soggiorno.',
@@ -146,7 +146,7 @@ export const ItalyBlueCardPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/blue-card-italy#faq',
+          '@id': 'https://www.dia-co.ir/italy-blue-card#faq',
           mainEntity: [
             {
               '@type': 'Question',

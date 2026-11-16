@@ -36,7 +36,7 @@ export const RealEstateAustriaPage: React.FC<Props> = ({
     title: 'خرید ملک در اتریش ۲۰۲۶ | سرمایه‌گذاری ملکی در وین و زالتسبورگ با وکلای محلی',
     description:
       'راهنمای حقوقی خرید ملک در اتریش ۲۰۲۶؛ تاییدیه کمیسیون اراضی شهرداری (Grundverkehrsbehörde)، استعلام دفتر ثبت اسناد (Grundbuch)، هزینه‌های جانبی و مالیات انتقال سند با نظارت دفتر وین دیاکو.',
-    canonical: '/guides/realestate-austria',
+    canonical: '/realestate-austria',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
@@ -53,7 +53,7 @@ export const RealEstateAustriaPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-austria#article',
+          '@id': 'https://www.dia-co.ir/realestate-austria#article',
           headline: 'راهنمای جامع خرید ملک و سرمایه‌گذاری املاک در اتریش ۲۰۲۶',
           description:
             'بررسی شرایط تملک املاک برای اتباع غیراروپایی در اتریش، نحوه اخذ مجوز کمیسیون استانی، ساختار مالیاتی (Grunderwerbsteuer ۳.۵٪) و همراهی وکیل در دفتر اسناد رسمی (Notar) وین.',

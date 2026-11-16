@@ -35,7 +35,7 @@ export const RealEstateTurkeyPage: React.FC<Props> = ({
     title: 'خرید ملک در ترکیه ۲۰۲۶ | اخذ شهروندی و پاسپورت با ملک ۴۰۰,۰۰۰ دلاری',
     description:
       'راهنمای کامل خرید ملک در ترکیه ۲۰۲۶؛ شرایط سند تاپو (Tapu)، قید ۳ سال عدم فروش، گزارش رسمی ارزیابی کارشناسی SPK، افتتاح حساب بانکی و صدور پاسپورت ترکیه برای کل خانواده با دیاکو.',
-    canonical: '/guides/realestate-turkey',
+    canonical: '/realestate-turkey',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const RealEstateTurkeyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/realestate-turkey#article',
+          '@id': 'https://www.dia-co.ir/realestate-turkey#article',
           headline: 'راهنمای جامع خرید ملک در ترکیه و اخذ شهروندی ۲۰۲۶',
           description:
             'بررسی قانون شهروندی ترکیه، حداقل مبلغ سرمایه‌گذاری ۴۰۰,۰۰۰ دلار، گواهی خرید ارز (DÖVİZ ALIM BELGESİ)، هزینه‌های ثبت تاپو و جدول زمانی ۳ تا ۶ ماهه صدور پاسپورت.',

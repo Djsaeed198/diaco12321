@@ -27,7 +27,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
     title: 'ویزای هنرمندان اسپانیا ۲۰۲۶ | UGE ۲۰ روزه یا Autónomo؟ تفاوت حیاتی',
     description:
       'اسپانیا یک ویزای هنری ندارد، دو مسیر دارد: UGE سریع (۲۰ روز، از داخل اسپانیا) برای پروژه‌های فرهنگی و Autónomo (۱-۳ ماه، فقط از کنسولگری) برای خوداشتغالی. راهنمای واقعی ۲۰۲۶ با دیاکو.',
-    canonical: '/guides/artist-spain',
+    canonical: '/artist-spain',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80',
@@ -48,7 +48,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/artist-spain#article',
+          '@id': 'https://www.dia-co.ir/artist-spain#article',
           headline:
             'ویزای هنرمندان اسپانیا ۲۰۲۶: چرا «یک ویزا» وجود ندارد و انتخاب اشتباه می‌تواند پرونده شما را نابود کند',
           description:
@@ -78,7 +78,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/artist-spain#howto',
+          '@id': 'https://www.dia-co.ir/artist-spain#howto',
           name: 'انتخاب مسیر صحیح برای هنرمندان اسپانیا',
           description: 'راهنمای گام‌به‌گام تصمیم‌گیری بین UGE و Autónomo',
           totalTime: 'P6M',
@@ -112,7 +112,7 @@ export const ArtistSpainPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/artist-spain#faq',
+          '@id': 'https://www.dia-co.ir/artist-spain#faq',
           mainEntity: [
             {
               '@type': 'Question',

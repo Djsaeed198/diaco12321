@@ -113,7 +113,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
     title: 'آوسبیلدونگ آلمان ۲۰۲۶ | حقوق ۱,۰۴۸ € و معافیت سپرکونتو',
     description:
       'راهنمای رسمی ۲۰۲۶: حداقل حقوق Ausbildung از ۷۲۴ € (سال اول)، اما برای معافیت از Sperrkonto به ۱,۰۴۸ € ناخالص (۸۲۲ € نت) نیاز است. پرستاری تا ۱,۴۹۰ €، IT تا ۱,۲۵۰ €. اقامت دائم پس از ۲ سال کار. ارزیابی فوری.',
-    canonical: '/guides/ausbildung-germany',
+    canonical: '/ausbildung-germany',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
@@ -132,7 +132,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/ausbildung-germany#article',
+          '@id': 'https://www.dia-co.ir/ausbildung-germany#article',
           headline:
             'راهنمای جامع آوسبیلدونگ آلمان ۲۰۲۶: حداقل حقوق ۷۲۴ €، آستانه معافیت ۱,۰۴۸ € و اقامت دائم ۲ ساله',
           description:
@@ -174,7 +174,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/ausbildung-germany#howto',
+          '@id': 'https://www.dia-co.ir/ausbildung-germany#howto',
           name: 'مراحل اخذ پذیرش و ویزای آوسبیلدونگ آلمان ۲۰۲۶',
           description:
             'مسیر رسمی از مدرک زبان B1/B2 تا دریافت قرارداد و ویزای ۱۶a.',
@@ -208,7 +208,7 @@ export const AusbildungGermanyPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/ausbildung-germany#faq',
+          '@id': 'https://www.dia-co.ir/ausbildung-germany#faq',
           mainEntity: [
             {
               '@type': 'Question',

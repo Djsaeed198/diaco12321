@@ -18,7 +18,7 @@ interface Props {
 }
 
 /* ============================================================
-   2026 官方数据
+   داده‌های رسمی IND ۲۰۲۶
    ============================================================ */
 const IND_2026 = {
   monthly: 1130.77,
@@ -47,7 +47,7 @@ const TOC_ITEMS = [
 ];
 
 /* ============================================================
-   城市数据
+   اطلاعات شهرهای هلند
    ============================================================ */
 const CITIES = [
   {
@@ -93,7 +93,7 @@ const CITIES = [
 ];
 
 /* ============================================================
-   生活成本明细
+   ریز هزینه‌های زندگی
    ============================================================ */
 const LIVING_COSTS = [
   { icon: Home, label: 'اجاره اتاق (WG)', value: '€۵۰۰ – €۹۰۰', color: 'text-orange-400' },
@@ -126,7 +126,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
     title: 'دوره زبان هلند ۲۰۲۶ | تمکن €۱,۱۳۰ و ویزای MVV',
     description:
       'راهنمای کامل دوره زبان و فاندیشن هلند ۲۰۲۶: تمکن IND €۱,۱۳۰.۷۷/ماه، شهریه €۵,۴۰۰–۹,۸۰۰، کار ۱۶ ساعت، Zoekjaar با حقوق €۳,۱۲۲، مقایسه ۴ شهر و داستان واقعی دانشجو. ارزیابی رایگان با دیاکو.',
-    canonical: '/guides/language-course-netherlands',
+    canonical: '/language-netherlands',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -139,7 +139,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/language-course-netherlands#article',
+          '@id': 'https://www.dia-co.ir/language-netherlands#article',
           headline: 'راهنمای جامع دوره زبان و فاندیشن هلند ۲۰۲۶: تمکن €۱,۱۳۰ و مسیر Zoekjaar',
           description:
             'راهنمای کامل دوره‌های آمادگی زبان انگلیسی در هلند، تمکن مالی IND (€۱,۱۳۰.۷۷/ماه)، اجازه کار ۱۶ ساعت، مسیر Zoekjaar با حقوق €۳,۱۲۲، مقایسه ۴ شهر و داستان واقعی.',
@@ -164,7 +164,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/language-course-netherlands#howto',
+          '@id': 'https://www.dia-co.ir/language-netherlands#howto',
           name: 'مراحل پذیرش دوره زبان و ویزای هلند ۲۰۲۶',
           description: 'از پذیرش مشروط تا دریافت MVV و کارت اقامت',
           totalTime: 'P6M',
@@ -178,7 +178,7 @@ export const LanguageNetherlandsPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/language-course-netherlands#faq',
+          '@id': 'https://www.dia-co.ir/language-netherlands#faq',
           mainEntity: [
             {
               '@type': 'Question',

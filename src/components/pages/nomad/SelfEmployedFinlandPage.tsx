@@ -35,7 +35,7 @@ export const SelfEmployedFinlandPage: React.FC<Props> = ({
     title: 'اقامت خوداشتغالی فنلاند ۲۰۲۶ | ویزای کارآفرینان و فریلنسرها (Entrepreneur RP)',
     description:
       'راهنمای کامل اقامت خوداشتغالی فنلاند ۲۰۲۶؛ تاییدیه دو مرحله‌ای مرکز ELY-keskus و اداره مهاجرت فنلاند (Migri)، زندگی در شادترین کشور جهان، آموزش رایگان فرزندان و اقامت دائم ۴ ساله با دیاکو.',
-    canonical: '/guides/selfemployed-finland',
+    canonical: '/selfemployed-finland',
     ogType: 'article',
     ogImage:
       'https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?auto=format&fit=crop&w=1200&q=80',
@@ -52,7 +52,7 @@ export const SelfEmployedFinlandPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/selfemployed-finland#article',
+          '@id': 'https://www.dia-co.ir/selfemployed-finland#article',
           headline: 'راهنمای جامع اقامت خوداشتغالی و کارآفرینی فنلاند ۲۰۲۶',
           description:
             'بررسی فرآیند ارزیابی اقتصادی کسب‌وکار توسط مرکز ELY، شرایط سودآوری بیزینس، اخذ اقامت دائم فنلاند پس از ۴ سال و پاسپورت معتبر فنلاند پس از ۵ سال.',

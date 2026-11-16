@@ -122,9 +122,9 @@ const faqs = [
 ];
 
 const relatedArticles = [
-  { title: 'ویزای جستجوی کار دانمارک', href: '/guides/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
-  { title: 'اقامت تمکن مالی اتریش (Privater)', href: '/guides/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
-  { title: 'ویزای غیرانتفاعی اسپانیا', href: '/guides/financial-spain', desc: '۴۰۰٪ IPREM + اقامت دائم ۵ ساله' },
+  { title: 'ویزای جستجوی کار دانمارک', href: '/jobseeker-denmark', desc: 'Pay Limit ۵۵۲,۰۰۰ کرون + لیست‌های مثبت' },
+  { title: 'اقامت تمکن مالی اتریش (Privatier)', href: '/financial-austria', desc: '۲,۶۱۶ یورو/ماه + سهمیه محدود' },
+  { title: 'ویزای غیرانتفاعی اسپانیا', href: '/financial-spain', desc: '۴۰۰٪ IPREM + اقامت دائم ۵ ساله' },
 ];
 
 export const JobSeekerAustria2027Page: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -136,7 +136,7 @@ export const JobSeekerAustria2027Page: React.FC<Props> = ({ onBackToHome, onOpen
     title: 'ویزای جستجوی کار اتریش ۲۰۲۷ | ۷۰ امتیاز + قانون ماندن تا صدور RWR Card',
     description:
       'راهنمای کامل ویزای ۶ ماهه Jobseeker اتریش ۲۰۲۷: ۷۰ امتیاز از ۱۰۰، جدول امتیازدهی AMS، اصلاحیه اوت ۲۰۲۶ برای ماندن در اتریش تا صدور RWR Card، هدف ۱۵,۰۰۰ RWR Card تا ۲۰۲۷ و مسیر اقامت دائم. مشاوره دفتر وین دیاکو.',
-    canonical: '/guides/jobseeker-austria-2027',
+    canonical: '/jobseeker-austria',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -150,7 +150,7 @@ export const JobSeekerAustria2027Page: React.FC<Props> = ({ onBackToHome, onOpen
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/jobseeker-austria-2027#article',
+          '@id': 'https://www.dia-co.ir/jobseeker-austria#article',
           headline: 'راهنمای جامع ویزای ۶ ماهه جستجوی کار اتریش ۲۰۲۷: ۷۰ امتیاز و قانون ماندن تا صدور RWR Card',
           description: 'تحلیل کامل سیستم امتیازدهی ۱۰۰ امتیازی اتریش برای ۲۰۲۷، اصلاحیه اوت ۲۰۲۶ برای ماندن در اتریش تا صدور RWR Card، هدف ۱۵,۰۰۰ RWR Card تا ۲۰۲۷ و مسیر اقامت دائم.',
           image: ['https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80'],
@@ -177,8 +177,8 @@ export const JobSeekerAustria2027Page: React.FC<Props> = ({ onBackToHome, onOpen
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'ویزای جستجوی کار', item: 'https://www.dia-co.ir/jobseeker' },
-            { '@type': 'ListItem', position: 3, name: 'اتریش ۲۰۲۷', item: 'https://www.dia-co.ir/guides/jobseeker-austria-2027' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'ویزای جستجوی کار اتریش', item: 'https://www.dia-co.ir/jobseeker-austria' },
           ],
         },
       ],

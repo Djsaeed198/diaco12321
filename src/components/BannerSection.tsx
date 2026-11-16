@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import bannerImg from '../assets/images/banner_diaco_master_v3.png';
+import bannerImg from '../assets/images/banner_diaco_master_v3.webp';
 
 interface Props {
   onOpenAssessment?: () => void;
@@ -21,7 +21,12 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
             <div className="relative group cursor-pointer" onClick={() => setImageModalOpen(true)}>
               <img
                 src={bannerImg}
-                alt="هلدینگ مهاجرتی دیاکو - با بیش از ۲۰ سال تجربه موفق"
+                alt="هلدینگ مهاجرتی دیاکو - ارزیابی هوشمند شانس ویزا و اقامت اتریش و اروپا"
+                width={1600}
+                height={600}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-auto object-cover max-h-[460px] sm:max-h-[500px] md:max-h-[560px] transition-transform duration-700 group-hover:scale-[1.01]"
               />
 
@@ -113,7 +118,7 @@ export const BannerSection: React.FC<Props> = ({ onOpenAssessment }) => {
                 </span>
                 <span className="flex items-center gap-1">
                   <span className="text-emerald-400">✓</span>
-                  <span>بیش از ۲۰ سال سابقه درخشان در صدور ویزا و اقامت اروپا</span>
+                  <span>بیش از ۱۱ سال سابقه رسمی (از ۱۳۹۴ / ۲۰۱۵)، ۳۵ وکیل همکار و ۲,۱۵۰+ پرونده اقامتی موفق</span>
                 </span>
               </div>
             </div>

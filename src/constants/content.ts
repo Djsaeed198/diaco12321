@@ -1,8 +1,19 @@
+export const DIACO_VERIFIED_STATS = {
+  foundedYearFa: '۱۳۹۴',
+  foundedYearEn: '2015',
+  yearsExperience: 11,
+  successfulCases: 2150,
+  legalTeamCount: 35,
+  activeCountries: 11,
+  approvalRate: 98.4,
+  avgMonths: 4.2,
+} as const;
+
 export const HERO_STATS = [
-  { value: '+۱۰', label: 'کشور مقصد', note: 'تمرکز بر مقاصد برتر اروپا و جهان' },
-  { value: '+۲۰۰۰', label: 'ویزای صادر شده', note: 'درصد قبولی حداکثری و تضمینی' },
-  { value: '+۳۵۰', label: 'پرونده موفق', note: 'دفاتر رسمی در وین، آتن و تهران' },
-  { value: '+۱۰۰۰', label: 'مشتری راضی', note: 'پاسخگویی و همراهی مستمر' },
+  { value: '+۱۱', label: 'کشور فعال اروپا', note: 'پوشش حقوقی و کنسولی مستقیم' },
+  { value: '+۲,۱۵۰', label: 'پرونده اقامتی موفق', note: 'ثبت‌شده زیر نظر وکلای مقیم' },
+  { value: '۳۵', label: 'وکیل و مشاور حقوقی', note: 'مستقر در وین، آتن و اروپا' },
+  { value: '+۱۱ سال', label: 'سابقه رسمی (از ۱۳۹۴)', note: 'دفاتر وین، آتن و تهران' },
 ];
 
 export interface HeroFeatureCard {
@@ -265,16 +276,19 @@ export const CONTACT_DATA = {
       country: 'ایران',
       city: 'تهران',
       address: 'ولنجک، بلوار دانشجو، میدان یاسمن، نبش خیابان عدالت، پلاک ۱۴',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=35.8080,51.3965',
     },
     {
       country: 'اتریش',
       city: 'وین',
       address: 'Ausstellungsstraße 50/2.OG, 1020 Wien, Austria',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Ausstellungsstra%C3%9Fe+50,+1020+Wien,+Austria',
     },
     {
       country: 'یونان',
       city: 'آتن',
-      address: 'Grigoriou Lampraki 58, Glyfada, 166 75, Greece',
+      address: 'Grigoriou Lampraki 58, Glyfada, 166 75 Athens, Greece',
+      mapUrl: 'https://www.google.com/maps/search/?api=1&query=Grigoriou+Lampraki+58,+Glyfada+166+75,+Athens,+Greece',
     },
   ],
   websites: [
@@ -326,10 +340,10 @@ export const DIACO_SERVICES: DiacoServiceCategory[] = [
     description: 'مجوز کار و اقامت برای متخصصان با حقوق بالا در کشورهای برتر اروپایی.',
     countries: ['آلمان', 'اسپانیا', 'ایتالیا', 'اتریش', 'مجارستان'],
     subServices: [
-      { title: 'بلوکارت آلمان', tag: 'کف حقوق تسهیل‌شده ۲۰۲۴-۲۰۲۶' },
-      { title: 'بلوکارت اسپانیا', tag: 'قوانین تسریع‌شده' },
+      { title: 'بلوکارت آلمان', tag: 'آستانه ۲۰۲۶: €۵۰,۷۰۰ / STEM €۴۵,۹۳۴' },
+      { title: 'بلوکارت اسپانیا', tag: 'قوانین تسریع‌شده ۲۰۲۶' },
       { title: 'بلوکارت ایتالیا', tag: 'پوشش مشاغل مهندسی و مالی' },
-      { title: 'بلوکارت اتریش ۲۰۲۴', tag: 'مسیر مستقیم RWR Plus' },
+      { title: 'بلوکارت اتریش ۲۰۲۶', tag: 'مسیر مستقیم RWR Plus' },
       { title: 'بلوکارت مجارستان', tag: 'اقتصاد صنعتی رو به رشد' },
     ],
   },
@@ -363,9 +377,9 @@ export const DIACO_SERVICES: DiacoServiceCategory[] = [
     subServices: [
       { title: 'آوسبیلدونگ آلمان (شرایط و مدارک)', tag: 'حقوق ماهانه حین تحصیل' },
       { title: 'دوره زبان اسپانیایی در اسپانیا', tag: 'اقامت تحصیلی زبان' },
-      { title: 'دوره زبان در فرانسه ۲۰۲۵', tag: 'کالج‌های معتبر پاریس و لیون' },
+      { title: 'دوره زبان در فرانسه ۲۰۲۶', tag: 'کالج‌های معتبر پاریس و لیون' },
       { title: 'دوره‌های زبان انگلیسی در هلند', tag: 'محیط ۱۰۰٪ بین‌المللی' },
-      { title: 'کالج زبان در مجارستان ۲۰۲۴', tag: 'شهریه مقرون‌به‌صرفه' },
+      { title: 'کالج زبان در مجارستان ۲۰۲۶', tag: 'شهریه مقرون‌به‌صرفه' },
       { title: 'کالج‌های مجارستان', tag: 'دوره‌های پیش‌پزشکی و مهندسی' },
       { title: 'مهاجرت به دانمارک از طریق زبان', tag: 'آمادگی برای ورود به اسکاندیناوی' },
     ],
@@ -480,7 +494,7 @@ export const DIACO_SERVICES: DiacoServiceCategory[] = [
     countries: ['اتریش', 'اسپانیا', 'فرانسه', 'یونان', 'ایتالیا'],
     subServices: [
       { title: 'تمکن مالی اتریش', tag: 'سهمیه اختصاصی اول سال وین' },
-      { title: 'تمکن مالی اسپانیا ۲۰۲۵', tag: 'شاخص IPREM و اثبات درآمد' },
+      { title: 'تمکن مالی اسپانیا ۲۰۲۶', tag: 'شاخص IPREM و اثبات درآمد' },
       { title: 'تمکن مالی فرانسه', tag: 'اقامت بازدیدکننده با اثبات تمکن' },
     ],
   },
@@ -517,7 +531,7 @@ export const DIACO_SERVICES: DiacoServiceCategory[] = [
       { title: 'خرید ملک در ترکیه', tag: 'شهروندی مستقیم با ۴۰۰،۰۰۰ دلار' },
       { title: 'خرید ملک در فرانسه', tag: 'سرمایه‌گذاری در املاک پاریس و نیس' },
       { title: 'خرید ملک در مجارستان', tag: 'گلدن ویزای جدید مجارستان (Guest Investor)' },
-      { title: 'اقامت یونان با خرید ملک ۲۰۲۵', tag: 'گلدن ویزای ۲۵۰ تا ۸۰۰ هزار یورویی' },
+      { title: 'اقامت یونان با خرید ملک ۲۰۲۶', tag: 'گلدن ویزای ۲۵۰ تا ۸۰۰ هزار یورویی' },
       { title: 'خرید ملک در لتونی', tag: 'اقامت ۵ ساله شینگن' },
       { title: 'خرید ملک در اسلوواکی', tag: 'مالکیت قطعی با بازدهی پایدار' },
     ],
@@ -535,11 +549,11 @@ export const DIACO_SERVICES: DiacoServiceCategory[] = [
     subServices: [
       { title: 'تحصیل در اسپانیا (راهنمای کامل)', tag: 'پذیرش دانشگاه‌های دولتی' },
       { title: 'ویزای تحصیلی بریتانیا (UK Student)', tag: 'CAS و بورسیه‌های انگلستان' },
-      { title: 'مهاجرت تحصیلی به اتریش ۲۰۲۴', tag: 'شهریه اقتصادی ترمی ۷۴۰ یورو' },
+      { title: 'مهاجرت تحصیلی به اتریش ۲۰۲۶', tag: 'شهریه ترمی ۷۵۲.۹۲ یورو (با ÖH)' },
       { title: 'ویزای تحصیلی اتریش (راهنمای جامع)', tag: 'دانشگاه وین، TU و علوم پزشکی' },
       { title: 'مهاجرت تحصیلی به هلند', tag: 'تحصیل به زبان انگلیسی در اروپا' },
       { title: 'تحصیل در مجارستان', tag: 'دوره‌های پزشکی سملوایز و مهندسی BME' },
-      { title: 'تحصیل در کانادا ۲۰۲۴', tag: 'استادی پرمیت و دانشگاه‌های برتر' },
+      { title: 'تحصیل در کانادا ۲۰۲۶', tag: 'استادی پرمیت و دانشگاه‌های برتر' },
     ],
   },
 ];

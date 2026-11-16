@@ -58,7 +58,7 @@ export const CollegesHungaryPage: React.FC<Props> = ({
     title: 'کالج‌های مجارستان ۲۰۲۶ | دوره‌های پیش‌پزشکی و مهندسی',
     description:
       'راهنمای کامل دوره‌های Pre-Med و Foundation در کالج‌های معتبر مجارستان (مک‌دانیل، دونا و اویچینا) ۲۰۲۶؛ آمادگی آزمون ورودی پزشکی سملوایز و دیاکو.',
-    canonical: '/guides/colleges-hungary-foundation',
+    canonical: '/colleges-hungary',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -75,7 +75,7 @@ export const CollegesHungaryPage: React.FC<Props> = ({
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/colleges-hungary-foundation#article',
+          '@id': 'https://www.dia-co.ir/colleges-hungary#article',
           headline: 'راهنمای جامع کالج‌های مجارستان و دوره‌های پیش‌پزشکی (Pre-Med) ۲۰۲۶',
           description:
             'بررسی شهریه‌ها، سیستم آموزشی، سرفصل‌های شیمی و زیست‌شناسی، و نرخ قبولی بالای ۹۰٪ در آزمون‌های ورودی سملوایز و سگد در هلدینگ دیاکو.',
@@ -101,7 +101,7 @@ export const CollegesHungaryPage: React.FC<Props> = ({
         },
         {
           '@type': 'HowTo',
-          '@id': 'https://www.dia-co.ir/guides/colleges-hungary-foundation#howto',
+          '@id': 'https://www.dia-co.ir/colleges-hungary#howto',
           name: 'مراحل قبولی در پزشکی اروپا از طریق کالج‌های مجارستان',
           description: 'مراحل ثبت‌نام در دوره Pre-Med تا قبولی قطعی در دانشگاه علوم پزشکی سملوایز',
           step: [
@@ -133,7 +133,7 @@ export const CollegesHungaryPage: React.FC<Props> = ({
         },
         {
           '@type': 'FAQPage',
-          '@id': 'https://www.dia-co.ir/guides/colleges-hungary-foundation#faq',
+          '@id': 'https://www.dia-co.ir/colleges-hungary#faq',
           mainEntity: [
             {
               '@type': 'Question',

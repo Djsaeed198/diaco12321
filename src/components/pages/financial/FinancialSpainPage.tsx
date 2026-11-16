@@ -134,9 +134,9 @@ const faqs = [
 ];
 
 const relatedArticles = [
-  { title: 'ویزای دیجیتال نوماد اسپانیا', href: '/guides/nomad-spain', desc: 'درآمد €۲,۸۴۹ + مالیات بکهام ۲۴٪' },
-  { title: 'دوره زبان در اسپانیا', href: '/guides/language-course-spain', desc: 'ویزای دانشجویی + راهنمای حق کار' },
-  { title: 'تحصیل در اسپانیا (دانشگاه)', href: '/guides/academic-spain', desc: 'آزمون PCE + شهریه دولتی' },
+  { title: 'ویزای دیجیتال نوماد اسپانیا', href: '/nomad-spain', desc: 'درآمد €۲,۸۴۹ + مالیات بکهام ۲۴٪' },
+  { title: 'دوره زبان در اسپانیا', href: '/language-spain', desc: 'ویزای دانشجویی + راهنمای حق کار' },
+  { title: 'تحصیل در اسپانیا (دانشگاه)', href: '/academic-spain', desc: 'آزمون PCE + شهریه دولتی' },
 ];
 
 export const FinancialSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -148,7 +148,7 @@ export const FinancialSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
     title: 'اقامت تمکن مالی اسپانیا ۲۰۲۶ | Residencia No Lucrativa + IPREM + €۲۸,۸۰۰',
     description:
       'راهنمای کامل اقامت غیرانتفاعی اسپانیا ۲۰۲۶: حداقل درآمد €۲,۴۰۰/ماه (۴۰۰٪ IPREM) یا €۲۸,۸۰۰ سالانه + €۶۰۰/ماه هر همراه، بیمه خصوصی بدون copago، TIE در ۳۰ روز، تمدید ۱+۲+۲ با ۸۰۰٪ IPREM، اقامت دائم ۵ ساله و تابعیت ۱۰ ساله. مشاوره دیاکو.',
-    canonical: '/guides/financial-spain',
+    canonical: '/financial-spain',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -163,7 +163,7 @@ export const FinancialSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/financial-spain#article',
+          '@id': 'https://www.dia-co.ir/financial-spain#article',
           headline: 'راهنمای جامع اقامت تمکن مالی اسپانیا ۲۰۲۶: Residencia No Lucrativa، IPREM و مسیر اقامت دائم',
           description: 'بررسی Art. 62 مقررات مهاجرت اسپانیا، ۴۰۰٪ IPREM (€۲,۴۰۰/ماه یا €۲۸,۸۰۰/سال)، ۱۰۰٪ IPREM هر همراه (€۶۰۰/ماه)، بیمه خصوصی بدون copago، TIE در ۳۰ روز، تمدید ۱+۲+۲ با ۸۰۰٪ IPREM (~€۵۷,۶۰۰) و تابعیت ۱۰ ساله.',
           image: ['https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1200&q=80'],
@@ -190,13 +190,13 @@ export const FinancialSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'تمکن مالی', item: 'https://www.dia-co.ir/financial' },
-            { '@type': 'ListItem', position: 3, name: 'اسپانیا', item: 'https://www.dia-co.ir/guides/financial-spain' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی و تمکن مالی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'اسپانیا', item: 'https://www.dia-co.ir/financial-spain' },
           ],
         },
         {
           '@type': ['Service', 'LegalService'],
-          '@id': 'https://www.dia-co.ir/guides/financial-spain#service',
+          '@id': 'https://www.dia-co.ir/financial-spain#service',
           name: 'خدمات اخذ اقامت غیرانتفاعی و تمکن مالی اسپانیا (Non-Lucrative Visa)',
           serviceType: 'اقامت خودحمایتی و غیرانتفاعی اسپانیا',
           description: 'ارزیابی اثبات شاخص مالی IPREM، بیمه بدون copago مجاز اسپانیا، اخذ ویزای کنسولگری و صدور کارت TIE.',
@@ -454,7 +454,7 @@ export const FinancialSpainPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
               <p className="text-[11px] text-red-200 leading-relaxed">
                 🚨 <strong>هشدار حقوقی:</strong> ویزای غیرانتفاعی <strong>بدون اجازه کار</strong> است. حتی کار ریموت
                 برای کارفرمای خارجی نیز با این ویزا سازگار نیست و می‌تواند به لغو اقامت منجر شود. برای کار ریموت،
-                ویزای <a href="/guides/nomad-spain" className="text-orange-300 underline hover:text-orange-200 font-bold">International Teleworker (Digital Nomad)</a> مسیر صحیح است.
+                ویزای <a href="/nomad-spain" className="text-orange-300 underline hover:text-orange-200 font-bold">International Teleworker (Digital Nomad)</a> مسیر صحیح است.
               </p>
             </div>
           </div>

@@ -131,9 +131,9 @@ const faqs = [
 ];
 
 const relatedArticles = [
-  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/guides/jobseeker-austria-2027', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR' },
-  { title: 'اقامت تمکن مالی اتریش', href: '/guides/financial-austria', desc: '€۲,۶۱۶/ماه + سهمیه محدود' },
-  { title: 'اقامت هنرمندان اتریش (NAG §43a)', href: '/guides/artist-austria', desc: '€۱,۳۰۸/ماه + زبان A1 با豁免' },
+  { title: 'ویزای جستجوی کار اتریش ۲۰۲۷', href: '/jobseeker-austria', desc: '۷۰ امتیاز + قانون ماندن تا صدور RWR' },
+  { title: 'اقامت تمکن مالی اتریش', href: '/financial-austria', desc: '€۲,۶۱۶/ماه + سهمیه محدود' },
+  { title: 'اقامت هنرمندان اتریش (NAG §43a)', href: '/artist-austria', desc: '€۱,۳۰۸/ماه + معافیت‌های قانونی زبان' },
 ];
 
 export const AustriaRwrCardPage: React.FC<Props> = ({ onBackToHome, onOpenAssessment }) => {
@@ -146,7 +146,7 @@ export const AustriaRwrCardPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
     title: 'کارت قرمز-سفید-قرمز اتریش ۲۰۲۶ | RWR Card + ۵۵ امتیاز + حقوق €۳,۴۶۵',
     description:
       'راهنمای کامل RWR Card اتریش ۲۰۲۶: حداقل ۵۵ امتیاز از ۹۰ برای مشاغل کمبود، حقوق پایه €۳,۴۶۵، ۵ دسته متقاضیان، لیست Mangelberufe ۲۰۲۶ (IT، مهندسی، پرستاری)، مسیر RWR Plus و اقامت دائم ۵ ساله. مشاوره دفتر وین دیاکو.',
-    canonical: '/guides/austria-rwr',
+    canonical: '/austria-rwr',
     ogType: 'article',
     ogImage: 'https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80',
     keywords: [
@@ -160,7 +160,7 @@ export const AustriaRwrCardPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
       '@graph': [
         {
           '@type': 'Article',
-          '@id': 'https://www.dia-co.ir/guides/austria-rwr#article',
+          '@id': 'https://www.dia-co.ir/austria-rwr#article',
           headline: 'راهنمای جامع کارت قرمز-سفید-قرمز اتریش ۲۰۲۶: ۵۵ امتیاز، حقوق €۳,۴۶۵ و مسیر ۵ ساله',
           description: 'بررسی کامل RWR Card اتریش تحت NAG §41: دو مسیر اصلی (مشاغل کمبود ۵۵/۹۰ و نخبگان ۷۰/۱۰۰)، حداقل حقوق €۳,۴۶۵، لیست Mangelberufe ۲۰۲۶، فرآیند MA35 و مسیر RWR Plus و اقامت دائم.',
           image: ['https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=1200&q=80'],
@@ -187,13 +187,13 @@ export const AustriaRwrCardPage: React.FC<Props> = ({ onBackToHome, onOpenAssess
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'خانه', item: 'https://www.dia-co.ir/' },
-            { '@type': 'ListItem', position: 2, name: 'اقامت کاری', item: 'https://www.dia-co.ir/work' },
-            { '@type': 'ListItem', position: 3, name: 'اتریش RWR', item: 'https://www.dia-co.ir/guides/austria-rwr' },
+            { '@type': 'ListItem', position: 2, name: 'خدمات مهاجرتی', item: 'https://www.dia-co.ir/services' },
+            { '@type': 'ListItem', position: 3, name: 'اتریش RWR', item: 'https://www.dia-co.ir/austria-rwr' },
           ],
         },
         {
           '@type': ['Service', 'LegalService'],
-          '@id': 'https://www.dia-co.ir/guides/austria-rwr#service',
+          '@id': 'https://www.dia-co.ir/austria-rwr#service',
           name: 'خدمات اخذ کارت قرمز-سفید-قرمز اتریش (RWR Card)',
           serviceType: 'اقامت کاری تخصصی و مهاجرت نخبگان اتریش',
           description: 'محاسبه امتیازات اداره کار اتریش (AMS)، تطبیق با لیست مشاغل کمبود و همراهی وکلای مقیم وین تا صدور RWR Plus.',
